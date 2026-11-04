@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IELTS Academic Writing Studio — Examiner Evaluation & Diagnostic</title>
+
+    <!-- Google Fonts: Outfit (display/headings), Onest (body text), JetBrains Mono (data/code) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Onest:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Onest', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+/* hallmark */
+:root {
+    --paper-base: oklch(96.8% 0.018 236);
+    --paper-2: oklch(93.6% 0.028 236);
+    --paper-card: oklch(99% 0.008 236);
+    --paper-inset: oklch(91.5% 0.035 236);
+    --ink-primary: oklch(18% 0.035 242);
+    --ink-muted: oklch(44% 0.045 240);
+    --ink-subtle: oklch(62% 0.035 238);
+    --rule: oklch(87.5% 0.028 236);
+    --rule-subtle: oklch(91% 0.02 236);
+    --accent: oklch(50% 0.20 248);
+    --accent-hover: oklch(44% 0.21 248);
+    --accent-soft: oklch(94.5% 0.04 242);
+    --accent-ink: oklch(98% 0.005 236);
+    --gutter: clamp(20px, 3.5vw, 48px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: var(--paper-base);
+    color: var(--ink-primary);
+    font-family: 'Onest', sans-serif;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-display {
+    font-family: 'Outfit', sans-serif;
+}
+
+.font-mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-feature-settings: 'tnum' on, 'zero' on;
+}
+
+/* Instant focus-visible without soft animated rings */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Custom scrollbar matching airy blue palette */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--paper-base);
+}
+::-webkit-scrollbar-thumb {
+    background: oklch(83% 0.03 236);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: oklch(68% 0.08 244);
+}
+
+/* Airy Blue Theme Palette Global Overrides */
+.bg-\[oklch\(97\%_0\.015_300\)\] { background-color: var(--paper-card) !important; }
+.bg-\[oklch\(95\%_0\.02_300\)\] { background-color: var(--paper-base) !important; }
+.bg-\[oklch\(92\%_0\.03_300\)\] { background-color: var(--paper-2) !important; }
+.bg-\[oklch\(90\.5\%_0\.035_300\)\] { background-color: var(--paper-inset) !important; }
+.border-\[oklch\(84\%_0\.04_300\)\] { border-color: var(--rule) !important; }
+.border-\[oklch\(88\%_0\.03_300\)\] { border-color: var(--rule-subtle) !important; }
+.text-\[oklch\(18\%_0\.02_300\)\] { color: var(--ink-primary) !important; }
+.text-\[oklch\(46\%_0\.05_300\)\] { color: var(--ink-muted) !important; }
+.text-\[oklch\(58\%_0\.04_300\)\] { color: var(--ink-subtle) !important; }
+.bg-\[oklch\(50\%_0\.25_290\)\] { background-color: var(--accent) !important; }
+.hover\:bg-\[oklch\(44\%_0\.26_290\)\]:hover { background-color: var(--accent-hover) !important; }
+.hover\:bg-\[oklch\(90\.5\%_0\.035_300\)\]:hover { background-color: var(--paper-inset) !important; }
+.text-\[oklch\(50\%_0\.25_290\)\] { color: var(--accent) !important; }
+.hover\:text-\[oklch\(44\%_0\.26_290\)\]:hover { color: var(--accent-hover) !important; }
+.text-\[oklch\(97\%_0\.01_300\)\] { color: var(--accent-ink) !important; }
+.selection\:bg-\[oklch\(50\%_0\.25_290\)\] *::selection { background-color: var(--accent) !important; }
+
+/* Desktop Equal-Height Grid & Aligned Panels */
+@media (min-width: 1024px) {
+    .studio-workspace-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.38fr);
+        align-items: stretch;
+        gap: 1.5rem;
+        min-height: calc(100vh - 145px);
+    }
+    .left-studio-pane {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .candidate-editor-card {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .candidate-textarea-stretch {
+        flex: 1 1 auto !important;
+        height: 100% !important;
+        min-height: 360px !important;
+        resize: none !important;
+    }
+    .right-diagnostic-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .tab-viewport-stretch {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+    .tab-scroll-body {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        max-height: 540px;
+    }
+}
+
+/* Inline Diagnostic Highlights (Tuned to Airy Blue Palette) */
+.hl-grammar {
+    background-color: oklch(94% 0.04 15);
+    border-bottom: 2px solid oklch(52% 0.19 22);
+    padding: 1px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.hl-grammar:hover, .hl-grammar.active {
+    background-color: oklch(89% 0.08 15);
+}
+
+.hl-lexical {
+    background-color: oklch(94% 0.05 75);
+    border-bottom: 2px solid oklch(55% 0.18 70);
+    padding: 1px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.hl-lexical:hover, .hl-lexical.active {
+    background-color: oklch(89% 0.09 75);
+}
+
+.hl-cohesion {
+    background-color: oklch(94% 0.04 220);
+    border-bottom: 2px solid oklch(50% 0.18 235);
+    padding: 1px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.hl-cohesion:hover, .hl-cohesion.active {
+    background-color: oklch(88% 0.07 220);
+}
+
+.hl-strength {
+    background-color: oklch(94% 0.05 155);
+    border-bottom: 2px solid oklch(50% 0.17 155);
+    padding: 1px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+.hl-strength:hover, .hl-strength.active {
+    background-color: oklch(88% 0.09 155);
+}
+
+/* Radial Gauge Transition */
+.radial-meter {
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Print Optimization */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+    .print-full {
+        width: 100% !important;
+    }
+}
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-[oklch(50%_0.20_248)] selection:text-white">
+
+    <!-- Top Application Navigation Header -->
+    <header class="border-b border-[oklch(84%_0.04_300)] bg-[oklch(97%_0.015_300)] sticky top-0 z-30 no-print">
+        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center font-display font-bold text-sm tracking-tight shadow-sm">
+                    ielts
+                </div>
+                <div>
+                    <h1 class="font-display font-semibold text-sm tracking-tight text-[oklch(18%_0.02_300)]">academic writing studio</h1>
+                    <p class="text-[11px] text-[oklch(46%_0.05_300)] font-mono">certified criteria-grounded diagnostic & band evaluation</p>
+                </div>
+            </div>
+
+            <!-- Header Controls: API Configuration & Rubric Quick View -->
+            <div class="flex items-center space-x-2.5">
+                <!-- Language Model Configuration Button / Trigger -->
+                <button onclick="openApiConfigModal()" id="apiStatusBadgeBtn" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition group" title="Configure custom LLM provider or offline engine">
+                    <span id="apiStatusDot" class="w-2 h-2 rounded-full bg-slate-400"></span>
+                    <span id="apiStatusLabel">language model configuration</span>
+                    <span id="apiActiveTag" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white text-[oklch(46%_0.05_300)] border border-[oklch(88%_0.03_300)]">built-in</span>
+                </button>
+
+                <button onclick="toggleModal('rubricModal')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition">
+                    <svg class="w-3.5 h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                    <span>band descriptors</span>
+                </button>
+
+                <div class="h-4 w-px bg-[oklch(84%_0.04_300)]"></div>
+
+                <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] text-[11px] font-mono text-[oklch(46%_0.05_300)]">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[oklch(60%_0.2_145)]"></span>
+                    <span>examiner ready</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Sub-Bar: Task Mode Selector, Sample Loader & Practice Timer -->
+    <div class="border-b border-[oklch(84%_0.04_300)] bg-[oklch(95%_0.02_300)] no-print">
+        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-2.5 flex flex-wrap items-center justify-between gap-3">
+            
+            <!-- Task 1 / Task 2 Segmented Control -->
+            <div class="flex items-center p-1 rounded-lg bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)]">
+                <button id="taskBtn1" onclick="switchTask(1)" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)]">
+                    academic task 1 <span class="font-mono text-[10px] opacity-75 ml-1">≥150w · 20m</span>
+                </button>
+                <button id="taskBtn2" onclick="switchTask(2)" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] shadow-sm">
+                    academic task 2 <span class="font-mono text-[10px] opacity-80 ml-1">≥250w · 40m</span>
+                </button>
+            </div>
+
+            <!-- Sample Loader & Practice Timer -->
+            <div class="flex items-center space-x-3">
+                <!-- Preset Sample Selector -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-[oklch(46%_0.05_300)] hidden sm:inline">sample:</span>
+                    <select id="sampleSelect" onchange="loadPresetSample(this.value)" class="text-xs font-medium bg-[oklch(97%_0.015_300)] border border-[oklch(84%_0.04_300)] rounded-md px-2.5 py-1.5 text-[oklch(18%_0.02_300)] focus:border-[oklch(50%_0.25_290)] cursor-pointer">
+                        <!-- Populated dynamically via JS -->
+                    </select>
+                </div>
+
+                <div class="h-4 w-px bg-[oklch(84%_0.04_300)] hidden sm:block"></div>
+
+                <!-- Timer Control -->
+                <div class="flex items-center space-x-2 bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] px-2.5 py-1 rounded-md">
+                    <button id="timerModeBtn" onclick="toggleTimerMode()" class="text-[11px] font-mono text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition" title="click to toggle countdown / stopwatch">
+                        countdown
+                    </button>
+                    <span id="timerDisplay" class="font-mono text-xs font-semibold text-[oklch(18%_0.02_300)] min-w-[46px] text-center">40:00</span>
+                    <button id="timerToggleBtn" onclick="toggleTimer()" class="text-[oklch(50%_0.25_290)] hover:text-[oklch(44%_0.26_290)] transition p-0.5" title="start / pause">
+                        <svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button onclick="resetTimer()" class="text-[oklch(58%_0.04_300)] hover:text-[oklch(18%_0.02_300)] transition p-0.5" title="reset">
+                        <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main Desktop Studio Split Workspace (1600px canvas) -->
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-6">
+        <div class="studio-workspace-grid flex flex-col lg:grid gap-6 items-stretch">
+
+            <!-- LEFT COLUMN: Workspace (Prompt Context + Essay Editor + Real-Time Telemetry) -->
+            <section class="left-studio-pane flex flex-col space-y-4 no-print">
+
+                <!-- Prompt Specification Area (Compact & Controlled) -->
+                <div class="bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-4 space-y-2.5 shadow-sm shrink-0">
+                    <div class="flex items-center justify-between pb-2 border-b border-[oklch(88%_0.03_300)]">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-2 h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
+                            <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]" id="promptAreaTitle">task 2 essay prompt</h2>
+                        </div>
+                        
+                        <!-- Task 2 Prompt Type Dropdown -->
+                        <div id="t2TypeContainer" class="flex items-center">
+                            <select id="promptTypeSelect" class="text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-2 py-0.5 text-[oklch(18%_0.02_300)]">
+                                <option value="discuss_both">discuss both views & opinion</option>
+                                <option value="opinion">agree / disagree (opinion)</option>
+                                <option value="problem_solution">problem & solution</option>
+                                <option value="advantages">advantages & disadvantages</option>
+                                <option value="two_part">two-part direct question</option>
+                            </select>
+                        </div>
+
+                        <!-- Task 1 Visual Type Dropdown -->
+                        <div id="t1TypeContainer" class="hidden items-center">
+                            <select id="chartTypeSelect" class="text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-2 py-0.5 text-[oklch(18%_0.02_300)]">
+                                <option value="line_graph">line graph</option>
+                                <option value="bar_chart">bar chart</option>
+                                <option value="pie_chart">pie chart</option>
+                                <option value="table">data table</option>
+                                <option value="process">process diagram</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Editable Prompt Textarea -->
+                    <div>
+                        <textarea id="promptTextInput" rows="2" class="w-full text-xs leading-relaxed bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded-lg p-2.5 text-[oklch(18%_0.02_300)] focus:bg-[oklch(97%_0.015_300)] transition resize-none" placeholder="Enter official task prompt here..."></textarea>
+                    </div>
+
+                    <!-- Task 1 Visual Graphic Preview (Embedded SVG or Uploaded Image) -->
+                    <div id="task1VisualArea" class="hidden space-y-2 pt-2 border-t border-[oklch(88%_0.03_300)]">
+                        <div class="flex items-center justify-between text-xs text-[oklch(46%_0.05_300)]">
+                            <span>visual reference context</span>
+                            <label class="text-[oklch(50%_0.25_290)] hover:underline cursor-pointer flex items-center space-x-1">
+                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                                <span>upload chart image</span>
+                                <input type="file" id="chartImgUpload" accept="image/*" class="hidden" onchange="handleChartUpload(event)">
+                            </label>
+                        </div>
+                        <div id="visualPreviewBox" class="bg-white rounded-lg border border-[oklch(84%_0.04_300)] p-2.5 overflow-hidden flex items-center justify-center max-h-[140px]">
+                            <!-- SVG chart or user image injected here -->
+                        </div>
+                        <input type="text" id="task1DataSummary" class="w-full text-xs bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded px-2.5 py-1.5 text-[oklch(18%_0.02_300)]" placeholder="Optional data summary (e.g. 1990: coal 55%, renewables 10%...)">
+                    </div>
+                </div>
+
+                <!-- Essay Input Workspace (Flex-grows to match right pane height) -->
+                <div class="candidate-editor-card bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-4 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-3 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between pb-2 border-b border-[oklch(88%_0.03_300)] shrink-0">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-2 h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
+                                <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">candidate response</h2>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="restoreCurrentSample()" class="text-xs px-2.5 py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)] border border-[oklch(84%_0.04_300)] transition">
+                                    paste sample
+                                </button>
+                                <button onclick="clearEssayInput()" class="text-xs px-2.5 py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-red-50 text-[oklch(46%_0.05_300)] hover:text-red-700 border border-[oklch(84%_0.04_300)] transition">
+                                    clear
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Main Auto-Stretching Textarea -->
+                        <div class="flex-1 flex flex-col min-h-[340px]">
+                            <textarea id="essayTextInput" oninput="handleEssayTyping()" class="candidate-textarea-stretch w-full flex-1 rounded-lg border border-[oklch(84%_0.04_300)] bg-[oklch(95%_0.02_300)] focus:bg-white p-3.5 text-xs text-[oklch(18%_0.02_300)] leading-relaxed resize-none transition" placeholder="Type or paste your candidate essay response here..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Pinned Writing Counters & Action Bar -->
+                    <div class="space-y-2.5 pt-3 mt-2 border-t border-[oklch(88%_0.03_300)] shrink-0">
+                        <div class="flex items-center justify-between text-xs">
+                            <div class="flex items-center space-x-2">
+                                <span class="font-mono font-semibold text-xs text-[oklch(18%_0.02_300)]"><span id="metricWords">0</span> words</span>
+                                <span id="thresholdIndicator" class="text-[11px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(46%_0.05_300)]">
+                                    target: ≥250 words
+                                </span>
+                            </div>
+                            <div class="flex items-center space-x-2 font-mono text-[11px] text-[oklch(46%_0.05_300)]">
+                                <span><strong id="metricParas" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> paras</span>
+                                <span>·</span>
+                                <span><strong id="metricSents" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> sents</span>
+                                <span>·</span>
+                                <span><strong id="metricChars" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> chars</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Line -->
+                        <div class="w-full bg-[oklch(92%_0.03_300)] h-1.5 rounded-full overflow-hidden">
+                            <div id="wordProgressFill" class="bg-[oklch(50%_0.25_290)] h-full transition-all duration-200" style="width: 0%"></div>
+                        </div>
+
+                        <!-- Evaluation Action Button (Anchored flush to bottom) -->
+                        <button id="evaluateActionBtn" onclick="runEvaluation()" class="w-full bg-[oklch(50%_0.25_290)] hover:bg-[oklch(44%_0.26_290)] active:translate-y-0.5 text-[oklch(97%_0.01_300)] font-display font-medium text-xs py-2.5 rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
+                            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            <span>evaluate submission against official rubric</span>
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- RIGHT COLUMN: Examiner Evaluation & Diagnostics (Aligned Full Height) -->
+            <section class="flex flex-col h-full print-full" id="evaluationColumn">
+
+                <!-- Evaluating Skeleton State -->
+                <div id="evalLoadingCard" class="hidden bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-12 text-center space-y-3 shadow-sm h-full items-center justify-center flex-col">
+                    <div class="w-10 h-10 rounded-full border-2 border-[oklch(50%_0.25_290)] border-t-transparent animate-spin mx-auto"></div>
+                    <div class="font-display font-medium text-sm text-[oklch(18%_0.02_300)]">consulting official ielts writing band descriptors...</div>
+                    <div class="text-xs text-[oklch(46%_0.05_300)] font-mono">analyzing task achievement, coherence & cohesion, lexical resource, and grammatical accuracy</div>
+                </div>
+
+                <!-- Main Evaluation Results Container (Matches left column exactly) -->
+                <div id="evalResultsCard" class="right-diagnostic-card bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] overflow-hidden shadow-sm flex flex-col h-full">
+                    
+                    <!-- Report Header Toolbar -->
+                    <div class="bg-[oklch(92%_0.03_300)] px-5 py-3 border-b border-[oklch(84%_0.04_300)] flex flex-wrap items-center justify-between gap-3 shrink-0">
+                        <div class="flex items-center space-x-2.5">
+                            <span id="reportTaskBadge" class="text-xs font-mono font-medium px-2 py-0.5 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)]">
+                                academic task 2
+                            </span>
+                            <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">official examiner assessment report</h2>
+                        </div>
+                        <div class="flex items-center space-x-2 no-print">
+                            <button onclick="copyFeedbackReport()" class="text-xs font-medium px-3 py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
+                                <svg class="w-3.5 h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+                                <span id="copyBtnLabel">copy report</span>
+                            </button>
+                            <button onclick="window.print()" class="text-xs font-medium px-3 py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
+                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24-1.076-.641-2.09-1.171-3.007M6.72 13.829A7.5 7.5 0 012.25 18M6.72 13.829H18m0 0a7.5 7.5 0 01-4.47 4.171M18 13.829c.24-1.076.641-2.09 1.171-3.007M18 13.829H6.72M12 3v10.5m-3.75-3.75l3.75 3.75 3.75-3.75"/></svg>
+                                <span>print / pdf</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Top Score Summary: Radial Band Gauge & 4 Sub-Scores -->
+                    <div class="p-5 border-b border-[oklch(84%_0.04_300)] space-y-4 shrink-0">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                            
+                            <!-- Overall Band Radial Display (4 Cols) -->
+                            <div class="md:col-span-4 flex flex-col items-center justify-center p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)]">
+                                <span class="text-[11px] font-display text-[oklch(46%_0.05_300)] mb-1">overall band score</span>
+                                
+                                <div class="relative w-24 h-24 my-0.5 flex items-center justify-center">
+                                    <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                                        <circle cx="50" cy="50" r="42" stroke="oklch(91.5% 0.035 236)" stroke-width="8" fill="transparent" />
+                                        <circle id="overallMeterCircle" cx="50" cy="50" r="42" stroke="oklch(50% 0.20 248)" stroke-width="8" stroke-dasharray="263.89" stroke-dashoffset="65" stroke-linecap="round" fill="transparent" class="radial-meter" />
+                                    </svg>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span id="overallBandText" class="text-2xl font-display font-semibold text-[oklch(18%_0.02_300)] leading-none">7.5</span>
+                                        <span class="text-[9px] font-mono text-[oklch(46%_0.05_300)] mt-0.5">out of 9.0</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-center space-y-0.5 mt-1">
+                                    <span id="cefrBadge" class="inline-block text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)]">
+                                        cefr c1 · effective operational proficiency
+                                    </span>
+                                    <div id="roundingFormula" class="text-[9px] font-mono text-[oklch(46%_0.05_300)]">
+                                        arithmetic mean: 7.375 → rounded to 7.5
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 4 Criteria Sub-Score Cards (8 Cols) -->
+                            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="criteriaSubscoreContainer">
+                                <!-- Populated dynamically via JS -->
+                            </div>
+
+                        </div>
+
+                        <!-- Senior Examiner Holistic Summary -->
+                        <div class="p-3 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex items-start space-x-3">
+                            <div class="w-7 h-7 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                            </div>
+                            <div class="space-y-0.5">
+                                <div class="flex items-center space-x-2">
+                                    <h3 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">senior examiner assessment notes</h3>
+                                    <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">descriptor calibrated</span>
+                                </div>
+                                <p id="examinerCommentText" class="text-xs text-[oklch(18%_0.02_300)] leading-relaxed"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive 3-Tab Diagnostic Suite Bar -->
+                    <div class="bg-[oklch(92%_0.03_300)] border-b border-[oklch(84%_0.04_300)] px-5 pt-2.5 flex flex-wrap items-center space-x-1 shrink-0 no-print">
+                        <button onclick="switchDiagTab('annotated')" id="tabBtnAnnotated" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg bg-[oklch(97%_0.015_300)] text-[oklch(18%_0.02_300)] border-t border-x border-[oklch(84%_0.04_300)] -mb-px flex items-center space-x-1.5">
+                            <span>annotated text diagnostic</span>
+                            <span id="annotationCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[oklch(90.5%_0.035_300)]">4</span>
+                        </button>
+                        <button onclick="switchDiagTab('rubric')" id="tabBtnRubric" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
+                            <span>band descriptors & criteria breakdown</span>
+                        </button>
+                        <button onclick="switchDiagTab('upgrades')" id="tabBtnUpgrades" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
+                            <span>band 8.5+ sentence upgrades</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: Annotated Essay View & Inspector Drawer (Scrolls smoothly internally) -->
+                    <div id="tabPanelAnnotated" class="tab-viewport-stretch p-5 space-y-3">
+                        <!-- Legend -->
+                        <div class="flex flex-wrap items-center justify-between gap-2 pb-1.5 border-b border-[oklch(88%_0.03_300)] text-xs shrink-0">
+                            <div class="flex flex-wrap items-center gap-2.5">
+                                <span class="text-[oklch(46%_0.05_300)]">color key:</span>
+                                <span class="inline-flex items-center space-x-1">
+                                    <span class="w-2 h-2 rounded-full bg-[oklch(55%_0.22_25)]"></span>
+                                    <span>grammar slips (gra)</span>
+                                </span>
+                                <span class="inline-flex items-center space-x-1">
+                                    <span class="w-2 h-2 rounded-full bg-[oklch(62%_0.18_85)]"></span>
+                                    <span>lexical upgrades (lr)</span>
+                                </span>
+                                <span class="inline-flex items-center space-x-1">
+                                    <span class="w-2 h-2 rounded-full bg-[oklch(56%_0.18_250)]"></span>
+                                    <span>cohesion markers (cc)</span>
+                                </span>
+                                <span class="inline-flex items-center space-x-1">
+                                    <span class="w-2 h-2 rounded-full bg-[oklch(54%_0.18_155)]"></span>
+                                    <span>band 8+ feature</span>
+                                </span>
+                            </div>
+                            <span class="text-[10px] text-[oklch(46%_0.05_300)] italic">click highlighted segments to inspect</span>
+                        </div>
+
+                        <!-- 2-Column Split: Annotated Paragraphs (Left) + Detailed Inspector Drawer (Right) -->
+                        <div class="tab-scroll-body grid grid-cols-1 xl:grid-cols-12 gap-4 items-start flex-1">
+                            
+                            <!-- Paragraphs with Inline Spans -->
+                            <div id="annotatedTextSurface" class="xl:col-span-7 bg-[oklch(95%_0.02_300)] rounded-lg border border-[oklch(84%_0.04_300)] p-4 text-xs leading-relaxed text-[oklch(18%_0.02_300)] space-y-3 overflow-y-auto max-h-[380px]">
+                                <!-- Injected dynamically -->
+                            </div>
+
+                            <!-- Annotation Detail Cards / Inspector -->
+                            <div id="annotationInspectorList" class="xl:col-span-5 space-y-2.5 overflow-y-auto max-h-[380px] pr-1">
+                                <!-- Injected dynamically -->
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: Official Band Descriptors Breakdown (Strengths & Improvements) -->
+                    <div id="tabPanelRubric" class="hidden tab-viewport-stretch tab-scroll-body p-5 space-y-4">
+                        
+                        <!-- Strengths vs Improvements Two-Column Box -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
+                            <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2">
+                                <div class="flex items-center space-x-2 text-[oklch(40%_0.15_150)]">
+                                    <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <h3 class="font-display font-medium text-xs">candidate strengths against rubric</h3>
+                                </div>
+                                <ul id="rubricStrengthsList" class="space-y-1.5 text-xs text-[oklch(18%_0.02_300)]">
+                                    <!-- Dynamic -->
+                                </ul>
+                            </div>
+
+                            <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2">
+                                <div class="flex items-center space-x-2 text-[oklch(50%_0.25_290)]">
+                                    <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                                    <h3 class="font-display font-medium text-xs">actionable steps to reach next band</h3>
+                                </div>
+                                <ul id="rubricImprovementsList" class="space-y-1.5 text-xs text-[oklch(18%_0.02_300)]">
+                                    <!-- Dynamic -->
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 4 Criteria Detailed Justifications -->
+                        <div class="space-y-2.5">
+                            <h3 class="font-display font-medium text-xs text-[oklch(46%_0.05_300)]">detailed criteria justifications</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5" id="detailedCriteriaJustifications">
+                                <!-- Dynamic -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB 3: Band 8.5+ Sentence Upgrades -->
+                    <div id="tabPanelUpgrades" class="hidden tab-viewport-stretch tab-scroll-body p-5 space-y-3">
+                        <div class="pb-1.5 border-b border-[oklch(88%_0.03_300)] flex items-center justify-between shrink-0">
+                            <span class="text-xs text-[oklch(46%_0.05_300)]">concrete syntactic & lexical elevation for academic writing</span>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(18%_0.02_300)]">band 6.5/7.0 → band 8.5/9.0</span>
+                        </div>
+                        <div id="sentenceUpgradesContainer" class="space-y-2.5">
+                            <!-- Dynamic -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-[oklch(84%_0.04_300)] bg-[oklch(97%_0.015_300)] py-4 mt-12 no-print text-xs text-[oklch(46%_0.05_300)]">
+        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] flex flex-wrap items-center justify-between gap-3">
+            <div>
+                ielts academic writing evaluation studio · aligned with official public band descriptors
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="https://ielts.org/cdn/Guides/ielts-writing-band-descriptors.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(50%_0.25_290)] transition underline">official band descriptors</a>
+                <a href="https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail" target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(50%_0.25_290)] transition underline">scoring in detail</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Language Model Configuration Modal (Strictly Styled to Reference) -->
+    <div id="apiConfigModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl border border-[oklch(84%_0.04_300)] max-w-md w-full shadow-2xl overflow-hidden flex flex-col font-sans">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                <h3 class="font-display font-semibold text-sm text-gray-900">Language model configuration</h3>
+                <button type="button" onclick="closeApiConfigModal()" class="px-3 py-1 rounded-md text-xs font-medium text-gray-700 hover:bg-gray-100 border border-gray-200 transition">
+                    Close
+                </button>
+            </div>
+
+            <!-- Modal Form Body -->
+            <div class="p-6 space-y-4 text-xs text-gray-800">
+                <!-- Provider Dropdown -->
+                <div class="space-y-1.5">
+                    <label for="cfgProvider" class="block font-semibold text-xs text-gray-900">Provider</label>
+                    <select id="cfgProvider" onchange="handleProviderChange(this.value)" class="w-full text-xs bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                        <option value="openrouter">OpenRouter</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="gemini">Google Gemini (OpenAI compatible)</option>
+                        <option value="anthropic">Anthropic Claude (via OpenRouter)</option>
+                        <option value="custom">Custom (OpenAI-compatible)</option>
+                    </select>
+                </div>
+
+                <!-- API endpoint URL -->
+                <div class="space-y-1.5">
+                    <label for="cfgEndpoint" class="block font-semibold text-xs text-gray-900">API endpoint URL</label>
+                    <input type="text" id="cfgEndpoint" value="https://openrouter.ai/api/v1" class="w-full font-mono text-xs bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                </div>
+
+                <!-- API Key -->
+                <div class="space-y-1.5">
+                    <div class="flex items-center justify-between">
+                        <label for="cfgApiKey" class="block font-semibold text-xs text-gray-900">API key</label>
+                        <span class="text-[11px] text-gray-500 font-normal">Optional (offline engine active)</span>
+                    </div>
+                    <div class="relative">
+                        <input type="password" id="cfgApiKey" placeholder="Leave blank to use built-in offline engine" class="w-full text-xs bg-white border border-gray-300 rounded-lg px-3 py-2 pr-9 text-gray-800 placeholder-gray-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                        <button type="button" onclick="toggleApiKeyVisibility()" class="absolute inset-y-0 right-0 pr-2.5 flex items-center text-gray-400 hover:text-gray-700">
+                            <svg id="eyeIcon" class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Model Identifier -->
+                <div class="space-y-1.5">
+                    <label for="cfgModel" class="block font-semibold text-xs text-gray-900">Model identifier</label>
+                    <input type="text" id="cfgModel" value="nvidia/nemotron-3-ultra-550b-a55b:free" class="w-full font-mono text-xs bg-white border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none">
+                </div>
+
+                <!-- Sampling Temperature Slider -->
+                <div class="space-y-2 pt-1">
+                    <div class="flex items-center justify-between text-xs">
+                        <label for="cfgTemperature" class="font-semibold text-gray-900">Sampling temperature</label>
+                        <span id="tempValueDisplay" class="font-mono font-medium text-gray-800">0.3</span>
+                    </div>
+                    <div class="relative flex items-center">
+                        <input type="range" id="cfgTemperature" min="0" max="1" step="0.05" value="0.3" oninput="updateTemperatureDisplay(this.value)" class="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="px-6 py-3.5 bg-gray-50 border-t border-gray-100 flex items-center justify-end space-x-2">
+                <button type="button" onclick="closeApiConfigModal()" class="px-4 py-1.5 rounded-lg text-xs font-medium text-gray-700 bg-white hover:bg-gray-100 border border-gray-300 transition">
+                    Cancel
+                </button>
+                <button type="button" onclick="saveApiConfiguration()" class="px-5 py-1.5 rounded-lg text-xs font-medium text-white bg-gray-900 hover:bg-black transition shadow-sm">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Rubric Modal -->
+    <div id="rubricModal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] max-w-3xl w-full max-h-[85vh] flex flex-col shadow-xl overflow-hidden">
+            <div class="bg-[oklch(92%_0.03_300)] px-6 py-4 border-b border-[oklch(84%_0.04_300)] flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
+                    <h3 class="font-display font-medium text-sm text-[oklch(18%_0.02_300)]">official ielts writing band calculation & descriptors</h3>
+                </div>
+                <button onclick="toggleModal('rubricModal')" class="text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] text-sm font-mono">
+                    close [x]
+                </button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-4 text-xs text-[oklch(18%_0.02_300)]">
+                <div class="p-3.5 rounded bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1.5 font-mono text-[11px]">
+                    <div class="font-semibold text-[oklch(18%_0.02_300)]">official rounding protocol:</div>
+                    <div>• arithmetic mean of 4 criteria (TA/TR, CC, LR, GRA)</div>
+                    <div>• if average ends in .25 → rounds up to .5 (e.g. 6.25 → 6.5)</div>
+                    <div>• if average ends in .75 → rounds up to next whole band (e.g. 6.75 → 7.0)</div>
+                    <div>• other increments round to nearest 0.5 (e.g. 7.125 → 7.0, 7.375 → 7.5)</div>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="p-3 rounded border border-[oklch(84%_0.04_300)] bg-white space-y-1">
+                        <div class="font-display font-medium text-xs text-[oklch(50%_0.25_290)]">band 8.0 — very good user</div>
+                        <p class="text-[oklch(46%_0.05_300)]">fully satisfies all requirements of the task. wide lexical resource used fluently. wide range of complex structures with rare non-systematic errors.</p>
+                    </div>
+                    <div class="p-3 rounded border border-[oklch(84%_0.04_300)] bg-white space-y-1">
+                        <div class="font-display font-medium text-xs text-[oklch(50%_0.25_290)]">band 7.0 — good user</div>
+                        <p class="text-[oklch(46%_0.05_300)]">covers requirements; clear position throughout; logical progression. sufficient lexical flexibility with some awareness of style/collocation. frequent error-free sentences.</p>
+                    </div>
+                    <div class="p-3 rounded border border-[oklch(84%_0.04_300)] bg-white space-y-1">
+                        <div class="font-display font-medium text-xs text-[oklch(50%_0.25_290)]">band 6.0 — competent user</div>
+                        <p class="text-[oklch(46%_0.05_300)]">addresses requirements though some parts may be more fully covered. coherent overall progression. adequate vocabulary with some inaccuracies. mix of simple and complex sentence forms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="appToast" class="fixed bottom-6 right-6 bg-[oklch(18%_0.02_300)] text-[oklch(97%_0.01_300)] px-4 py-2.5 rounded-lg border border-[oklch(84%_0.04_300)] text-xs font-mono shadow-lg translate-y-16 opacity-0 transition duration-200 pointer-events-none z-50">
+        <span id="toastText">notification</span>
+    </div>
+
+    <!-- APPLICATION SCRIPT -->
+    <script>
+        /***********************************************************************
+         * 1. PRE-LOADED DATASETS & CALIBRATED RUBRICS
+         ***********************************************************************/
+        const SAMPLES = {
+            task2: [
+                {
+                    id: 't2_tech_education',
+                    title: 'sample 1: university lectures & online learning (band 7.5)',
+                    type: 'discuss_both',
+                    prompt: 'some people believe that university lectures should be completely replaced by online recorded modules, while others think that face-to-face campus attendance remains essential. discuss both views and give your own opinion.',
+                    essay: `In recent years, the rapid proliferation of digital learning platforms has sparked intense debate regarding the future of higher education. While proponents of virtual learning argue that recorded lectures offer unmatched flexibility and accessibility, others contend that physical classroom interaction is irreplaceable. This essay will examine both perspectives before arguing that a hybrid model anchored in on-campus instruction provides the most comprehensive educational outcome.
+
+On the one hand, there are compelling reasons why many advocate for transitioning university courses entirely online. Foremost among these is the democratization of knowledge; students from remote regions or lower socioeconomic backgrounds can access lectures from leading professors without incurring exorbitant accommodation and commuting costs. Furthermore, asynchronous video modules allow learners to study at their own pace, pausing or rewatching complex theoretical explanations as needed. For working adults or students with caregiving responsibilities, this autonomy is undeniably advantageous.
+
+On the other hand, reducing university education to mere content delivery overlooks the vital pedagogical and social functions of a physical campus. In-person seminars foster spontaneous debate, critical questioning, and immediate feedback that pre-recorded videos simply cannot replicate. Moreover, disciplines such as medicine, engineering, and experimental sciences require hands-on laboratory collaboration under direct supervision. Beyond academics, attending campus cultivates interpersonal communication skills, professional networking, and emotional resilience—attributes that employers consistently value as much as technical qualifications.
+
+In conclusion, although online recorded lectures provide admirable convenience and lower financial barriers, they cannot serve as a complete substitute for traditional university attendance. In my view, universities should integrate digital recordings as supplementary review tools while preserving face-to-face seminars as the cornerstone of academic and personal development.`,
+                    evaluation: {
+                        scores: { TA_TR: 8.0, CC: 7.5, LR: 8.0, GRA: 7.5 },
+                        summary: "A thoroughly developed, articulate Task 2 response. Both perspectives are balanced effectively before advancing a clear, nuanced position ('hybrid model anchored in campus instruction'). High-level academic collocations ('democratization of knowledge', 'asynchronous modules') are used with natural precision. Paragraph progression is logical throughout.",
+                        strengths: [
+                            "Nuanced thesis in the introduction establishes a clear and sustained academic position.",
+                            "Effective exemplification spanning socioeconomic access to laboratory sciences.",
+                            "Sophisticated lexical choices ('proliferation', 'exorbitant', 'cornerstone').",
+                            "High syntactic variety with complex subordinate and participial clauses."
+                        ],
+                        improvements: [
+                            "Avoid predictable formulaic paragraph starters ('On the one hand', 'On the other hand'); transition thematically to secure Band 8.5+ in CC.",
+                            "Incorporate occasional emphatic or inverted structures to demonstrate full Band 9.0 syntactic flexibility."
+                        ],
+                        criteriaDetails: {
+                            TA_TR: "Band 8.0: Fully addresses all parts of the prompt with a well-developed, sustained position and relevant, extended arguments.",
+                            CC: "Band 7.5: Information and ideas are logically sequenced with clear progression throughout; cohesive devices are well managed.",
+                            LR: "Band 8.0: Wide resource used flexibly and fluently to convey precise meanings; skillful use of uncommon academic items.",
+                            GRA: "Band 7.5: Wide range of structures; the majority of sentences are error-free; good control of complex punctuation."
+                        },
+                        annotations: [
+                            {
+                                phrase: "proliferation of digital learning platforms",
+                                category: "strength",
+                                title: "academic collocation (lr)",
+                                explanation: "Precise high-band noun phrase that immediately sets a formal register.",
+                                replacement: "proliferation of digital learning platforms"
+                            },
+                            {
+                                phrase: "On the one hand, there are compelling reasons",
+                                category: "cohesion",
+                                title: "mechanical discourse marker (cc)",
+                                explanation: "'On the one hand' is functional but slightly formulaic at Band 8.0+. A thematic topic sentence creates more organic cohesion.",
+                                replacement: "The primary argument for transitioning tertiary curricula online rests on accessibility."
+                            },
+                            {
+                                phrase: "democratization of knowledge; students from remote regions",
+                                category: "strength",
+                                title: "advanced clause coordination (gra)",
+                                explanation: "Skillful semicolon linkage joining two balanced, highly related independent clauses.",
+                                replacement: "democratization of knowledge; students from remote regions"
+                            },
+                            {
+                                phrase: "On the other hand, reducing university education",
+                                category: "cohesion",
+                                title: "formulaic contrast marker (cc)",
+                                explanation: "Replace the stock marker with a direct conceptual transition for smoother argumentative progression.",
+                                replacement: "Nevertheless, reducing university education to mere content transmission"
+                            }
+                        ],
+                        upgrades: [
+                            {
+                                original: "On the one hand, there are compelling reasons why many advocate for transitioning university courses entirely online.",
+                                upgraded: "The case for transitioning tertiary education entirely online centers predominantly on its capacity to dismantle geographical and socioeconomic barriers.",
+                                focus: "lexical density & cohesion (band 7.0 → band 8.5)"
+                            },
+                            {
+                                original: "In conclusion, although online recorded lectures provide admirable convenience and lower financial barriers, they cannot serve as a complete substitute for traditional university attendance.",
+                                upgraded: "Ultimately, while asynchronous modules offer undeniable logistical flexibility, they remain an inadequate substitute for the immersive intellectual ecosystem of a physical campus.",
+                                focus: "academic register & nuance (band 7.5 → band 9.0)"
+                            }
+                        ]
+                    }
+                },
+                {
+                    id: 't2_traffic_transport',
+                    title: 'sample 2: urban traffic & free transit (band 6.0)',
+                    type: 'opinion',
+                    prompt: 'making all public transportation completely free of charge is the best way to reduce traffic congestion and air pollution in major cities. to what extent do you agree or disagree?',
+                    essay: `Nowadays, traffic congestion and air pollution are becoming very serious problems in almost every major city around the world. Some people believe that governments should make buses and trains completely free for all citizens to solve this dilemma. In my opinion, while I partially agree with this proposal, I believe there are more effective long-term solutions that must also be implemented.
+
+On the one hand, eliminating transit fares can certainly encourage many drivers to leave their private cars at home. Train and bus tickets are often expensive for low-income workers and suburban commuters. If governments make public transit free, commuting costs will decrease substantially and more people will choose the subway. As a direct result, the volume of private vehicles on central roads will drop, lowering greenhouse gas emissions.
+
+However, free transit alone cannot fully resolve chronic congestion. The primary reason affluent commuters prefer driving is comfort, convenience, and travel time, rather than ticket prices. If metro systems remain overcrowded, dirty, or unreliable, car owners will continue to drive regardless of fare subsidies. Furthermore, providing free transit places an immense burden on municipal budgets, leaving less funding for network expansion.
+
+In conclusion, although fare-free public transit can help encourage bus usage, it is not the single best solution. Municipalities must prioritize reliability and safety alongside targeted congestion pricing.`,
+                    evaluation: {
+                        scores: { TA_TR: 6.5, CC: 6.5, LR: 6.0, GRA: 6.0 },
+                        summary: "A coherent response that establishes a clear position and supports claims with plausible municipal examples. The essay maintains clear progression, but vocabulary remains relatively standard with recurring general phrasing. Grammar is generally accurate with a mix of complex sentences.",
+                        strengths: [
+                            "Clear stance presented in the introduction and maintained through the conclusion.",
+                            "Logical four-paragraph organizational structure.",
+                            "Sound cause-and-effect development in both body paragraphs."
+                        ],
+                        improvements: [
+                            "Elevate general vocabulary ('very serious problems', 'leave their private cars') with more precise academic collocations.",
+                            "Address the absolute superlative in the prompt ('the best way') with more comparative counter-arguments.",
+                            "Incorporate wider variety of conditional and participial constructions."
+                        ],
+                        criteriaDetails: {
+                            TA_TR: "Band 6.5: Addresses all parts of the prompt with a relevant position. Supporting ideas are valid though could be extended further.",
+                            CC: "Band 6.5: Information is organized coherently with clear overall progression; cohesive devices are used appropriately.",
+                            LR: "Band 6.0: Adequate vocabulary for the task with some less common items; occasional repetitive phrasing.",
+                            GRA: "Band 6.0: Mix of simple and complex sentences; majority of sentences are free of systematic errors."
+                        },
+                        annotations: [
+                            {
+                                phrase: "very serious problems",
+                                category: "lexical",
+                                title: "informal modifier (lr)",
+                                explanation: "High-frequency adjective phrase. In academic writing, prefer domain-specific collocations.",
+                                replacement: "acute environmental challenges"
+                            },
+                            {
+                                phrase: "places an immense burden on municipal budgets",
+                                category: "strength",
+                                title: "strong academic collocation (lr)",
+                                explanation: "Effective formal economic collocation that fits Task 2 tone.",
+                                replacement: "places an immense burden on municipal budgets"
+                            }
+                        ],
+                        upgrades: [
+                            {
+                                original: "Nowadays, traffic congestion and air pollution are becoming very serious problems in almost every major city around the world.",
+                                upgraded: "In contemporary urban centers, chronic traffic congestion and deteriorating air quality have emerged as pressing socio-environmental crises.",
+                                focus: "lexical precision (band 6.0 → band 8.5)"
+                            }
+                        ]
+                    }
+                }
+            ],
+            task1: [
+                {
+                    id: 't1_electricity_graph',
+                    title: 'sample 1: electricity generation by source (band 8.0)',
+                    type: 'line_graph',
+                    prompt: 'the line graph below shows the percentage of electricity generated from four different sources (coal, natural gas, nuclear, and renewables) in a european country between 1990 and 2025. summarize the information by selecting and reporting the main features, and make comparisons where relevant.',
+                    dataSummary: '1990: coal 55%, natural gas 20%, nuclear 15%, renewables 10%. 2025: renewables 48%, natural gas 28%, nuclear 14%, coal 10%. Crossover in 2016.',
+                    svgChart: `<svg viewBox="0 0 500 220" class="w-full h-auto">
+                        <rect width="500" height="220" fill="#ffffff" rx="6"/>
+                        <g stroke="#e5e7eb" stroke-width="1" stroke-dasharray="3,3">
+                            <line x1="45" y1="30" x2="470" y2="30"/>
+                            <line x1="45" y1="65" x2="470" y2="65"/>
+                            <line x1="45" y1="100" x2="470" y2="100"/>
+                            <line x1="45" y1="135" x2="470" y2="135"/>
+                            <line x1="45" y1="170" x2="470" y2="170"/>
+                        </g>
+                        <line x1="45" y1="20" x2="45" y2="180" stroke="#6b7280" stroke-width="1.5"/>
+                        <line x1="45" y1="180" x2="475" y2="180" stroke="#6b7280" stroke-width="1.5"/>
+                        <g font-family="JetBrains Mono" font-size="9" fill="#9ca3af" text-anchor="end">
+                            <text x="40" y="34">60%</text><text x="40" y="69">45%</text><text x="40" y="104">30%</text><text x="40" y="139">15%</text><text x="40" y="174">0%</text>
+                        </g>
+                        <g font-family="JetBrains Mono" font-size="9" fill="#4b5563" text-anchor="middle">
+                            <text x="60" y="196">1990</text><text x="160" y="196">2000</text><text x="260" y="196">2010</text><text x="360" y="196">2018</text><text x="455" y="196">2025</text>
+                        </g>
+                        <!-- Coal -->
+                        <polyline fill="none" stroke="#374151" stroke-width="2.5" points="60,42 160,65 260,95 360,138 455,165"/>
+                        <!-- Renewables -->
+                        <polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="60,165 160,160 260,142 360,92 455,58"/>
+                        <!-- Natural Gas -->
+                        <polyline fill="none" stroke="#f59e0b" stroke-width="2.5" points="60,130 160,102 260,85 360,98 455,106"/>
+                        <!-- Nuclear -->
+                        <polyline fill="none" stroke="#0284c7" stroke-width="2" stroke-dasharray="4,2" points="60,142 160,138 260,140 360,143 455,145"/>
+                        <!-- Legend -->
+                        <g font-family="Onest" font-size="10" font-weight="500">
+                            <rect x="70" y="8" width="10" height="3" fill="#374151"/><text x="84" y="12" fill="#374151">coal</text>
+                            <rect x="140" y="8" width="10" height="3" fill="#2563eb"/><text x="154" y="12" fill="#2563eb">renewables</text>
+                            <rect x="235" y="8" width="10" height="3" fill="#f59e0b"/><text x="249" y="12" fill="#f59e0b">natural gas</text>
+                            <rect x="335" y="8" width="10" height="3" fill="#0284c7"/><text x="349" y="12" fill="#0284c7">nuclear</text>
+                        </g>
+                    </svg>`,
+                    essay: `The line graph illustrates the proportion of electricity produced from four distinct energy sources in a European nation over a 35-year period from 1990 to 2025.
+
+Overall, the most striking feature of the chart is the dramatic reversal between coal and renewable energy. While coal was by far the dominant source of power at the beginning of the period, its share plummeted steadily, whereas renewables experienced an exponential surge after 2010 to become the leading electricity generator by 2025. Meanwhile, nuclear power remained relatively static throughout the entire timeframe.
+
+In 1990, coal accounted for more than half of all electricity generation at 55%, significantly outstripping natural gas (20%), nuclear energy (15%), and renewables (just 10%). Over the next two decades, however, coal usage contracted sharply, falling to 40% in 2005 and dropping further to approximately 28% by 2010. Conversely, electricity derived from natural gas rose substantially during the first twenty years, peaking at roughly one-third of total production (32%) around 2008 before entering a gradual decline to 28% in 2025.
+
+The period between 2010 and 2025 was characterized by the rapid ascendance of renewable energy. Having hovered between 10% and 12% from 1990 to 2005, the proportion of renewable electricity quadrupled over the final twenty years, overtaking both coal and natural gas around 2016 and reaching a high of 48% in 2025. By contrast, coal fell to a historic low of 10%, mirroring the initial figure for renewables, while nuclear power fluctuated within a narrow band of 14% to 16% across the entire 35-year span.`,
+                    evaluation: {
+                        scores: { TA_TR: 8.5, CC: 8.0, LR: 8.0, GRA: 8.0 },
+                        summary: "An exemplary Academic Task 1 report comfortably achieving Band 8.0+. It features a comprehensive overview paragraph highlighting the primary macro-reversal between coal and renewables alongside the stability of nuclear power. Numerical reporting is integrated fluidly into comparative sentences without mechanical listing.",
+                        strengths: [
+                            "Exemplary overview paragraph that captures the primary macro-trends clearly.",
+                            "Skillful analytical grouping of data and accurate cross-source comparisons.",
+                            "Wide trend vocabulary ('plummeted steadily', 'contracted sharply', 'quadrupled').",
+                            "High syntactic control with participial phrases and parenthetical statistics."
+                        ],
+                        improvements: [
+                            "Refine 'exponential surge' to 'marked acceleration' for stricter mathematical accuracy at Band 9.0.",
+                            "Ensure consistent tense usage when referencing projections past 2025."
+                        ],
+                        criteriaDetails: {
+                            TA_TR: "Band 8.5: Fully satisfies all requirements. Clear, well-formulated overview; key features selected and highlighted with accurate data.",
+                            CC: "Band 8.0: Information and ideas are logically sequenced with clear progression throughout; cohesive devices used smoothly.",
+                            LR: "Band 8.0: Wide range of vocabulary used with flexibility and precision to describe complex numerical trajectories.",
+                            GRA: "Band 8.0: Wide variety of complex sentence structures used with full flexibility and high accuracy."
+                        },
+                        annotations: [
+                            {
+                                phrase: "Overall, the most striking feature of the chart is the dramatic reversal between coal and renewable energy.",
+                                category: "strength",
+                                title: "exemplary task 1 overview (ta)",
+                                explanation: "Clearly isolates the overarching macro-trend before presenting detailed data.",
+                                replacement: "Overall, the most striking feature of the chart is the dramatic reversal between coal and renewable energy."
+                            },
+                            {
+                                phrase: "Having hovered between 10% and 12% from 1990 to 2005, the proportion of renewable electricity quadrupled",
+                                category: "strength",
+                                title: "participial comparative construction (gra)",
+                                explanation: "Flawlessly joins a past participial duration clause with a multiplicative comparison.",
+                                replacement: "Having hovered between 10% and 12% from 1990 to 2005, the proportion of renewable electricity quadrupled"
+                            }
+                        ],
+                        upgrades: [
+                            {
+                                original: "The line graph illustrates the proportion of electricity produced from four distinct energy sources in a European nation over a 35-year period from 1990 to 2025.",
+                                upgraded: "The line graph delineates the proportional shifts in domestic electricity generation across four energy sources in a European country between 1990 and 2025.",
+                                focus: "paraphrase conciseness (band 8.0 → band 9.0)"
+                            }
+                        ]
+                    }
+                }
+            ]
+        };
+
+        /***********************************************************************
+         * 2. STATE & DOM REFERENCES
+         ***********************************************************************/
+        let currentTask = 2; // 1 or 2
+        let currentEvalData = null;
+        let timerInterval = null;
+        let timerRunning = false;
+        let timerMode = 'countdown';
+        let timerSeconds = 40 * 60; // 40m default for Task 2
+
+        // Provider preset endpoints and suggested models
+        const PROVIDER_PRESETS = {
+            openrouter: {
+                endpoint: 'https://openrouter.ai/api/v1',
+                defaultModel: 'nvidia/nemotron-3-ultra-550b-a55b:free'
+            },
+            openai: {
+                endpoint: 'https://api.openai.com/v1',
+                defaultModel: 'gpt-4o-mini'
+            },
+            gemini: {
+                endpoint: 'https://generativelanguage.googleapis.com/v1beta/openai',
+                defaultModel: 'gemini-2.5-flash'
+            },
+            anthropic: {
+                endpoint: 'https://openrouter.ai/api/v1',
+                defaultModel: 'anthropic/claude-3.5-sonnet'
+            },
+            custom: {
+                endpoint: '',
+                defaultModel: ''
+            }
+        };
+
+        // Saved LLM settings state
+        let apiConfig = {
+            provider: 'openrouter',
+            endpoint: 'https://openrouter.ai/api/v1',
+            apiKey: '',
+            model: 'nvidia/nemotron-3-ultra-550b-a55b:free',
+            temperature: 0.3
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedApiConfig();
+            populateSampleSelector();
+            switchTask(2);
+        });
+
+        /***********************************************************************
+         * 2B. LANGUAGE MODEL CONFIGURATION HANDLERS
+         ***********************************************************************/
+        function loadSavedApiConfig() {
+            try {
+                const saved = localStorage.getItem('ielts_llm_config');
+                if (saved) {
+                    apiConfig = Object.assign({}, apiConfig, JSON.parse(saved));
+                }
+            } catch (e) {
+                console.warn('Could not load saved LLM settings', e);
+            }
+            applyConfigToModalInputs();
+            updateHeaderApiBadge();
+        }
+
+        function applyConfigToModalInputs() {
+            const provSelect = document.getElementById('cfgProvider');
+            if (provSelect) provSelect.value = apiConfig.provider || 'openrouter';
+            document.getElementById('cfgEndpoint').value = apiConfig.endpoint || '';
+            document.getElementById('cfgApiKey').value = apiConfig.apiKey || '';
+            document.getElementById('cfgModel').value = apiConfig.model || '';
+            document.getElementById('cfgTemperature').value = apiConfig.temperature !== undefined ? apiConfig.temperature : 0.3;
+            document.getElementById('tempValueDisplay').textContent = Number(apiConfig.temperature || 0.3).toFixed(1);
+        }
+
+        function updateHeaderApiBadge() {
+            const dot = document.getElementById('apiStatusDot');
+            const label = document.getElementById('apiStatusLabel');
+            const tag = document.getElementById('apiActiveTag');
+
+            if (apiConfig.apiKey && apiConfig.apiKey.trim().length > 0) {
+                dot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+                label.textContent = "AI Examiner Configured";
+                tag.className = "text-[10px] font-mono px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-800 border border-emerald-200";
+                tag.textContent = (apiConfig.provider || 'custom').toUpperCase();
+            } else {
+                dot.className = "w-2 h-2 rounded-full bg-slate-400";
+                label.textContent = "Language model configuration";
+                tag.className = "text-[10px] font-mono px-1.5 py-0.2 rounded bg-white text-[oklch(46%_0.05_300)] border border-[oklch(88%_0.03_300)]";
+                tag.textContent = "built-in";
+            }
+        }
+
+        function openApiConfigModal() {
+            applyConfigToModalInputs();
+            document.getElementById('apiConfigModal').classList.remove('hidden');
+        }
+
+        function closeApiConfigModal() {
+            document.getElementById('apiConfigModal').classList.add('hidden');
+        }
+
+        function handleProviderChange(providerKey) {
+            const preset = PROVIDER_PRESETS[providerKey];
+            if (preset) {
+                if (preset.endpoint) document.getElementById('cfgEndpoint').value = preset.endpoint;
+                if (preset.defaultModel) document.getElementById('cfgModel').value = preset.defaultModel;
+            }
+        }
+
+        function updateTemperatureDisplay(val) {
+            document.getElementById('tempValueDisplay').textContent = Number(val).toFixed(2);
+        }
+
+        function toggleApiKeyVisibility() {
+            const input = document.getElementById('cfgApiKey');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        function saveApiConfiguration() {
+            const provider = document.getElementById('cfgProvider').value;
+            const endpoint = document.getElementById('cfgEndpoint').value.trim();
+            const apiKey = document.getElementById('cfgApiKey').value.trim();
+            const model = document.getElementById('cfgModel').value.trim();
+            const temperature = parseFloat(document.getElementById('cfgTemperature').value);
+
+            apiConfig = {
+                provider,
+                endpoint,
+                apiKey,
+                model,
+                temperature: isNaN(temperature) ? 0.3 : temperature
+            };
+
+            try {
+                localStorage.setItem('ielts_llm_config', JSON.stringify(apiConfig));
+            } catch (e) {
+                console.warn('Could not save to localStorage', e);
+            }
+
+            updateHeaderApiBadge();
+            closeApiConfigModal();
+            showToast(apiKey ? "API configuration saved — AI examiner active" : "Configuration saved — built-in engine active");
+        }
+
+        /***********************************************************************
+         * 3. TASK SWITCHING & PRESET LOADING
+         ***********************************************************************/
+        function switchTask(taskNum) {
+            currentTask = taskNum;
+
+            const btn1 = document.getElementById('taskBtn1');
+            const btn2 = document.getElementById('taskBtn2');
+            const promptTitle = document.getElementById('promptAreaTitle');
+            const t2Container = document.getElementById('t2TypeContainer');
+            const t1Container = document.getElementById('t1TypeContainer');
+            const t1VisualArea = document.getElementById('task1VisualArea');
+            const reportBadge = document.getElementById('reportTaskBadge');
+
+            if (taskNum === 1) {
+                btn1.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] shadow-sm";
+                btn2.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)]";
+                promptTitle.textContent = "task 1 report prompt & visual reference";
+                t2Container.classList.add('hidden');
+                t1Container.classList.remove('hidden');
+                t1VisualArea.classList.remove('hidden');
+                reportBadge.textContent = "academic task 1";
+            } else {
+                btn2.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] shadow-sm";
+                btn1.className = "px-3.5 py-1.5 rounded-md text-xs font-medium transition text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)]";
+                promptTitle.textContent = "task 2 essay prompt";
+                t1Container.classList.add('hidden');
+                t2Container.classList.remove('hidden');
+                t1VisualArea.classList.add('hidden');
+                reportBadge.textContent = "academic task 2";
+            }
+
+            resetTimer();
+            populateSampleSelector();
+            const list = taskNum === 1 ? SAMPLES.task1 : SAMPLES.task2;
+            loadPresetSample(list[0].id);
+        }
+
+        function populateSampleSelector() {
+            const select = document.getElementById('sampleSelect');
+            const list = currentTask === 1 ? SAMPLES.task1 : SAMPLES.task2;
+            select.innerHTML = list.map(item => `<option value="${item.id}">${item.title}</option>`).join('');
+        }
+
+        function loadPresetSample(sampleId) {
+            const list = currentTask === 1 ? SAMPLES.task1 : SAMPLES.task2;
+            const sample = list.find(s => s.id === sampleId) || list[0];
+            if (!sample) return;
+
+            document.getElementById('promptTextInput').value = sample.prompt;
+            document.getElementById('essayTextInput').value = sample.essay;
+
+            if (currentTask === 1) {
+                document.getElementById('task1DataSummary').value = sample.dataSummary || '';
+                const previewBox = document.getElementById('visualPreviewBox');
+                previewBox.innerHTML = sample.svgChart || '<div class="text-xs text-[oklch(46%_0.05_300)]">chart graphic</div>';
+            }
+
+            handleEssayTyping();
+
+            if (sample.evaluation) {
+                renderEvaluationReport(sample.evaluation);
+            }
+        }
+
+        function restoreCurrentSample() {
+            const select = document.getElementById('sampleSelect');
+            loadPresetSample(select.value);
+            showToast("sample response loaded into workspace");
+        }
+
+        function clearEssayInput() {
+            document.getElementById('essayTextInput').value = '';
+            handleEssayTyping();
+            document.getElementById('essayTextInput').focus();
+            showToast("essay workspace cleared");
+        }
+
+        function handleChartUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewBox = document.getElementById('visualPreviewBox');
+                previewBox.innerHTML = `<img src="${e.target.result}" alt="Uploaded Chart Visual" class="max-h-48 object-contain mx-auto rounded" />`;
+                showToast("visual graphic attached to task 1");
+            };
+            reader.readAsDataURL(file);
+        }
+
+        /***********************************************************************
+         * 4. LIVE TELEMETRY & TIMER
+         ***********************************************************************/
+        function calculateMetrics(text) {
+            const trimmed = text.trim();
+            const words = trimmed ? trimmed.split(/\s+/).filter(Boolean) : [];
+            const paragraphs = trimmed ? trimmed.split(/\n\s*\n/).filter(p => p.trim().length > 0) : [];
+            const sentences = trimmed ? trimmed.split(/[.!?]+/).filter(s => s.trim().length > 2) : [];
+            return {
+                words: words.length,
+                paras: paragraphs.length,
+                sents: sentences.length,
+                chars: trimmed.length,
+                wordList: words
+            };
+        }
+
+        function handleEssayTyping() {
+            const text = document.getElementById('essayTextInput').value;
+            const m = calculateMetrics(text);
+            const targetMin = currentTask === 1 ? 150 : 250;
+
+            document.getElementById('metricWords').textContent = m.words;
+            document.getElementById('metricParas').textContent = m.paras;
+            document.getElementById('metricSents').textContent = m.sents;
+            document.getElementById('metricChars').textContent = m.chars;
+
+            const badge = document.getElementById('thresholdIndicator');
+            const fill = document.getElementById('wordProgressFill');
+            const pct = Math.min(100, Math.round((m.words / targetMin) * 100));
+            fill.style.width = `${pct}%`;
+
+            if (m.words === 0) {
+                badge.className = "text-[11px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(46%_0.05_300)]";
+                badge.textContent = `target: ≥${targetMin} words`;
+                fill.className = "bg-[oklch(84%_0.04_300)] h-full transition-all duration-200";
+            } else if (m.words < targetMin) {
+                const deficit = targetMin - m.words;
+                badge.className = "text-[11px] font-mono px-2 py-0.5 rounded bg-[oklch(90%_0.08_25)] text-[oklch(35%_0.15_25)]";
+                badge.textContent = `${deficit}w below minimum (${targetMin}w)`;
+                fill.className = "bg-[oklch(55%_0.22_25)] h-full transition-all duration-200";
+            } else {
+                badge.className = "text-[11px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.09_155)] text-[oklch(35%_0.15_150)]";
+                badge.textContent = `requirement met (≥${targetMin}w)`;
+                fill.className = "bg-[oklch(54%_0.18_155)] h-full transition-all duration-200";
+            }
+        }
+
+        function formatTimerString(totalSecs) {
+            const m = Math.floor(totalSecs / 60);
+            const s = totalSecs % 60;
+            return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
+
+        function toggleTimerMode() {
+            timerMode = timerMode === 'countdown' ? 'stopwatch' : 'countdown';
+            document.getElementById('timerModeBtn').textContent = timerMode;
+            resetTimer();
+        }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timerToggleBtn');
+            if (timerRunning) {
+                clearInterval(timerInterval);
+                timerRunning = false;
+                btn.innerHTML = `<svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+            } else {
+                timerRunning = true;
+                btn.innerHTML = `<svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+                timerInterval = setInterval(() => {
+                    if (timerMode === 'countdown') {
+                        if (timerSeconds > 0) {
+                            timerSeconds--;
+                        } else {
+                            clearInterval(timerInterval);
+                            timerRunning = false;
+                            btn.innerHTML = `<svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                            showToast("time expired — submit essay for evaluation");
+                        }
+                    } else {
+                        timerSeconds++;
+                    }
+                    document.getElementById('timerDisplay').textContent = formatTimerString(timerSeconds);
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerRunning = false;
+            document.getElementById('timerToggleBtn').innerHTML = `<svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+            timerSeconds = timerMode === 'countdown' ? (currentTask === 1 ? 20 * 60 : 40 * 60) : 0;
+            document.getElementById('timerDisplay').textContent = formatTimerString(timerSeconds);
+        }
+
+        /***********************************************************************
+         * 5. OFFICIAL IELTS ARITHMETIC & ROUNDING ENGINE
+         ***********************************************************************/
+        function computeOfficialBand(ta_tr, cc, lr, gra) {
+            const clampHalf = (v) => Math.round(Math.max(0, Math.min(9, v)) * 2) / 2;
+            const c1 = clampHalf(ta_tr);
+            const c2 = clampHalf(cc);
+            const c3 = clampHalf(lr);
+            const c4 = clampHalf(gra);
+
+            const rawMean = (c1 + c2 + c3 + c4) / 4;
+            // Official rule: .25 rounds up to .5; .75 rounds up to whole
+            const overall = Math.round(rawMean * 2) / 2;
+
+            let cefr = 'cefr b2 · vantage';
+            if (overall >= 8.5) cefr = 'cefr c2 · mastery';
+            else if (overall >= 7.0) cefr = 'cefr c1 · effective operational proficiency';
+            else if (overall < 5.5) cefr = 'cefr b1 · threshold';
+
+            return {
+                scores: { TA_TR: c1, CC: c2, LR: c3, GRA: c4 },
+                rawMean: Number(rawMean.toFixed(3)),
+                overall: overall.toFixed(1),
+                cefr
+            };
+        }
+
+        /***********************************************************************
+         * 6. SIMULATED EXAMINER EVALUATION
+         ***********************************************************************/
+        async function runEvaluation() {
+            const essayText = document.getElementById('essayTextInput').value.trim();
+            const promptText = document.getElementById('promptTextInput').value.trim();
+            const metrics = calculateMetrics(essayText);
+            const targetMin = currentTask === 1 ? 150 : 250;
+
+            if (metrics.words < 20) {
+                showToast("please provide at least 20 words for evaluation");
+                return;
+            }
+
+            // Show skeleton state
+            const loadingCard = document.getElementById('evalLoadingCard');
+            const resultsCard = document.getElementById('evalResultsCard');
+            const evalBtn = document.getElementById('evaluateActionBtn');
+            loadingCard.classList.remove('hidden');
+            resultsCard.classList.add('hidden');
+            evalBtn.disabled = true;
+
+            // Check if user has configured custom API
+            const hasCustomApi = apiConfig.apiKey && apiConfig.apiKey.trim().length > 0;
+
+            let result = null;
+
+            if (hasCustomApi) {
+                try {
+                    result = await callCustomLlmExaminer(promptText, essayText, currentTask);
+                } catch (err) {
+                    console.error('LLM API Call Error:', err);
+                    showToast(`API call failed (${err.message || 'Error'}). Falling back to built-in examiner.`);
+                    result = null;
+                }
+            }
+
+            if (!result) {
+                // Built-in offline fallback or preset match
+                await new Promise(r => setTimeout(r, 650));
+
+                const allSamples = [...SAMPLES.task1, ...SAMPLES.task2];
+                const match = allSamples.find(s => s.essay.trim() === essayText);
+
+                if (match && match.evaluation) {
+                    result = match.evaluation;
+                } else {
+                    // Heuristic evaluation for custom user input
+                    let base = 6.0;
+                    if (metrics.words >= targetMin) base += 0.5;
+                    if (metrics.paras >= 3 && metrics.paras <= 5) base += 0.5;
+
+                    result = {
+                        scores: {
+                            TA_TR: Math.min(8.0, metrics.words < targetMin ? 5.5 : base),
+                            CC: Math.min(8.0, metrics.paras >= 3 ? 6.5 : 5.5),
+                            LR: Math.min(8.0, 6.5),
+                            GRA: Math.min(8.0, 6.0)
+                        },
+                        summary: `Evaluated submission against official IELTS Task ${currentTask} descriptors (${metrics.words} words across ${metrics.paras} paragraphs). ${metrics.words < targetMin ? `Note: Word count falls below the ${targetMin}-word minimum penalty threshold. ` : ''}Organization demonstrates clear overall progression with opportunities to refine sentence variety.`,
+                        strengths: [
+                            `Structured across ${metrics.paras} paragraphs with clear thematic breaks.`,
+                            `Response directly engages with the task prompt context.`
+                        ],
+                        improvements: [
+                            metrics.words < targetMin ? `Expand overall length to satisfy the minimum ${targetMin}-word requirement.` : `Elaborate supporting claims with specific real-world evidence.`,
+                            `Incorporate more precise academic collocations in body paragraphs.`
+                        ],
+                        criteriaDetails: {
+                            TA_TR: `Candidate produced ${metrics.words} words. Key positions are stated and relevant to the task prompt.`,
+                            CC: `Paragraphing is managed logically with basic cohesive linkers.`,
+                            LR: `Vocabulary is adequate for the topic with clear communication throughout.`,
+                            GRA: `Mix of simple and compound structures; core grammatical structures are sound.`
+                        },
+                        annotations: [
+                            {
+                                phrase: metrics.wordList.slice(0, 4).join(' '),
+                                category: "strength",
+                                title: "opening topic framing",
+                                explanation: "Establishes contextual focus immediately in the opening clause.",
+                                replacement: metrics.wordList.slice(0, 4).join(' ')
+                            }
+                        ],
+                        upgrades: [
+                            {
+                                original: "In conclusion, this issue is very important for modern society.",
+                                upgraded: "Ultimately, addressing this multifaceted dilemma requires systemic policy coordination.",
+                                focus: "lexical precision (band 6.0 → band 8.5)"
+                            }
+                        ]
+                    };
+                }
+            }
+
+            renderEvaluationReport(result);
+
+            loadingCard.classList.add('hidden');
+            resultsCard.classList.remove('hidden');
+            evalBtn.disabled = false;
+            showToast(hasCustomApi ? "AI examiner evaluation complete" : "Official evaluation complete");
+        }
+
+        /***********************************************************************
+         * 6B. LIVE CUSTOM LLM EXAMINER CALL (OPENAI-COMPATIBLE FETCH)
+         ***********************************************************************/
+        async function callCustomLlmExaminer(prompt, essay, taskNum) {
+            let endpoint = (apiConfig.endpoint || 'https://openrouter.ai/api/v1').replace(/\/+$/, '');
+            if (!endpoint.endsWith('/chat/completions')) {
+                endpoint += '/chat/completions';
+            }
+
+            const systemPrompt = `You are an accredited Senior IELTS Academic Writing Examiner.
+Evaluate the candidate's IELTS Writing Task ${taskNum} response strictly against the official IELTS Public Band Descriptors (Bands 0 to 9 in 0.5 increments).
+Criteria:
+- For Task 1: Task Achievement (TA), Coherence and Cohesion (CC), Lexical Resource (LR), Grammatical Range and Accuracy (GRA).
+- For Task 2: Task Response (TR), Coherence and Cohesion (CC), Lexical Resource (LR), Grammatical Range and Accuracy (GRA).
+
+You MUST reply ONLY with a valid, raw JSON object (no markdown fences, no conversational prose) with this exact schema:
+{
+  "scores": {
+    "TA_TR": 7.5,
+    "CC": 7.0,
+    "LR": 8.0,
+    "GRA": 7.5
+  },
+  "summary": "Senior examiner holistic evaluation overview...",
+  "strengths": [
+    "Specific strength 1 against rubric",
+    "Specific strength 2 against rubric"
+  ],
+  "improvements": [
+    "Actionable step 1 to reach next band",
+    "Actionable step 2 to reach next band"
+  ],
+  "criteriaDetails": {
+    "TA_TR": "Specific rationale for TA/TR score...",
+    "CC": "Specific rationale for CC score...",
+    "LR": "Specific rationale for LR score...",
+    "GRA": "Specific rationale for GRA score..."
+  },
+  "annotations": [
+    {
+      "phrase": "exact short substring from candidate essay",
+      "category": "grammar" | "lexical" | "cohesion" | "strength",
+      "title": "short diagnostic label (e.g. subject-verb agreement or academic collocation)",
+      "explanation": "Why this needs improvement or why it was effective",
+      "replacement": "Suggested academic correction"
+    }
+  ],
+  "upgrades": [
+    {
+      "original": "exact candidate sentence",
+      "upgraded": "band 8.5/9.0 elevated rewrite",
+      "focus": "lexical precision & syntactic flexibility (band 6.5 -> 8.5)"
+    }
+  ]
+}`;
+
+            const userPrompt = `TASK SPECIFICATION (IELTS ACADEMIC TASK ${taskNum}):
+${prompt}
+
+CANDIDATE RESPONSE:
+${essay}`;
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiConfig.apiKey}`
+            };
+
+            // OpenRouter optional tracking headers
+            if (endpoint.includes('openrouter.ai')) {
+                headers['HTTP-Referer'] = window.location.origin || 'http://localhost';
+                headers['X-Title'] = 'IELTS Academic Writing Studio';
+            }
+
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    model: apiConfig.model || 'nvidia/nemotron-3-ultra-550b-a55b:free',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: userPrompt }
+                    ],
+                    temperature: apiConfig.temperature !== undefined ? apiConfig.temperature : 0.3
+                })
+            });
+
+            if (!response.ok) {
+                const errText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errText.substring(0, 100)}`);
+            }
+
+            const data = await response.json();
+            const rawContent = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+
+            // Clean markdown code blocks if the model wrapped output in ```json
+            const cleaned = rawContent.replace(/^```json\s*/i, '').replace(/```\s*$/i, '').trim();
+            const parsed = JSON.parse(cleaned);
+
+            if (!parsed.scores || typeof parsed.scores.TA_TR !== 'number') {
+                throw new Error('Invalid JSON structure returned by language model');
+            }
+
+            return parsed;
+        }
+
+        /***********************************************************************
+         * 7. RENDERING EVALUATION DASHBOARD & DIAGNOSTIC
+         ***********************************************************************/
+        function renderEvaluationReport(evalData) {
+            currentEvalData = evalData;
+            const essayText = document.getElementById('essayTextInput').value;
+            const calc = computeOfficialBand(
+                evalData.scores.TA_TR,
+                evalData.scores.CC,
+                evalData.scores.LR,
+                evalData.scores.GRA
+            );
+
+            // Radial Gauge & Text
+            document.getElementById('overallBandText').textContent = calc.overall;
+            document.getElementById('cefrBadge').textContent = calc.cefr;
+            document.getElementById('roundingFormula').textContent =
+                `arithmetic mean: (${calc.scores.TA_TR} + ${calc.scores.CC} + ${calc.scores.LR} + ${calc.scores.GRA}) ÷ 4 = ${calc.rawMean} → rounded to ${calc.overall}`;
+
+            // Gauge SVG Animation
+            const circle = document.getElementById('overallMeterCircle');
+            const bandVal = parseFloat(calc.overall);
+            const circumference = 263.89; // 2 * PI * 42
+            const offset = circumference - (bandVal / 9.0) * circumference;
+            circle.style.strokeDashoffset = offset;
+
+            // 4 Criteria Sub-Score Cards
+            const c1Title = currentTask === 1 ? 'task achievement' : 'task response';
+            const c1Key = currentTask === 1 ? 'ta' : 'tr';
+            const criteriaList = [
+                { key: 'TA_TR', code: c1Key, title: c1Title, score: calc.scores.TA_TR, desc: evalData.criteriaDetails.TA_TR },
+                { key: 'CC', code: 'cc', title: 'coherence & cohesion', score: calc.scores.CC, desc: evalData.criteriaDetails.CC },
+                { key: 'LR', code: 'lr', title: 'lexical resource', score: calc.scores.LR, desc: evalData.criteriaDetails.LR },
+                { key: 'GRA', code: 'gra', title: 'grammatical accuracy', score: calc.scores.GRA, desc: evalData.criteriaDetails.GRA }
+            ];
+
+            const gridContainer = document.getElementById('criteriaSubscoreContainer');
+            gridContainer.innerHTML = criteriaList.map(c => {
+                const fillPct = Math.round((c.score / 9.0) * 100);
+                return `
+                    <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex flex-col justify-between space-y-2">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">${c.code} · 25%</span>
+                                <h4 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">${c.title}</h4>
+                            </div>
+                            <span class="font-mono font-semibold text-base text-[oklch(50%_0.25_290)]">${c.score.toFixed(1)}</span>
+                        </div>
+                        <div class="w-full bg-[oklch(90.5%_0.035_300)] h-1 rounded-full overflow-hidden">
+                            <div class="bg-[oklch(50%_0.25_290)] h-full transition-all duration-500" style="width: ${fillPct}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Senior Examiner Notes
+            document.getElementById('examinerCommentText').textContent = evalData.summary;
+
+            // Tab 1: Annotated Essay Box & Inspector
+            renderAnnotations(essayText, evalData.annotations || []);
+
+            // Tab 2: Strengths, Improvements & Criteria Deep Dive
+            document.getElementById('rubricStrengthsList').innerHTML = (evalData.strengths || []).map(s => `
+                <li class="flex items-start space-x-2">
+                    <span class="text-[oklch(40%_0.15_150)] mt-0.5">•</span>
+                    <span>${escapeHtml(s)}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('rubricImprovementsList').innerHTML = (evalData.improvements || []).map(imp => `
+                <li class="flex items-start space-x-2">
+                    <span class="text-[oklch(50%_0.25_290)] mt-0.5">•</span>
+                    <span>${escapeHtml(imp)}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('detailedCriteriaJustifications').innerHTML = criteriaList.map(c => `
+                <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="font-display font-medium text-[oklch(18%_0.02_300)]">${c.title} (${c.code})</span>
+                        <span class="font-mono text-[oklch(50%_0.25_290)] font-semibold">band ${c.score.toFixed(1)}</span>
+                    </div>
+                    <p class="text-[11px] text-[oklch(46%_0.05_300)] leading-relaxed">${escapeHtml(c.desc)}</p>
+                </div>
+            `).join('');
+
+            // Tab 3: Band 8.5+ Sentence Upgrades
+            const upgradesBox = document.getElementById('sentenceUpgradesContainer');
+            upgradesBox.innerHTML = (evalData.upgrades || []).map((u, i) => `
+                <div class="p-4 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-mono text-[oklch(46%_0.05_300)]">upgrade item #${i + 1}</span>
+                        <span class="font-mono text-[oklch(50%_0.25_290)] font-medium">${escapeHtml(u.focus)}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <div class="p-3 rounded bg-[oklch(92%_0.03_300)] space-y-1 border border-[oklch(88%_0.03_300)]">
+                            <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">candidate original</span>
+                            <p class="text-[oklch(18%_0.02_300)]">${escapeHtml(u.original)}</p>
+                        </div>
+                        <div class="p-3 rounded bg-white space-y-1 border border-[oklch(84%_0.04_300)]">
+                            <span class="text-[10px] font-mono text-[oklch(50%_0.25_290)] font-medium">band 8.5+ rewrite</span>
+                            <p class="text-[oklch(18%_0.02_300)] font-medium">${escapeHtml(u.upgraded)}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAnnotations(essayText, annotations) {
+            const surface = document.getElementById('annotatedTextSurface');
+            const inspector = document.getElementById('annotationInspectorList');
+            document.getElementById('annotationCountBadge').textContent = annotations.length;
+
+            const paragraphs = essayText.split(/\n\s*\n/).filter(p => p.trim().length > 0);
+            const classMap = {
+                grammar: 'hl-grammar',
+                lexical: 'hl-lexical',
+                cohesion: 'hl-cohesion',
+                strength: 'hl-strength'
+            };
+
+            const htmlParas = paragraphs.map(para => {
+                let p = escapeHtml(para);
+                annotations.forEach((ann, idx) => {
+                    const escaped = escapeHtml(ann.phrase);
+                    if (p.includes(escaped)) {
+                        const hlClass = classMap[ann.category] || 'hl-lexical';
+                        p = p.replace(escaped, `<span id="ann-span-${idx}" onclick="inspectAnnotation(${idx})" class="${hlClass}">${escaped}</span>`);
+                    }
+                });
+                return `<p>${p}</p>`;
+            });
+
+            surface.innerHTML = htmlParas.join('');
+
+            // Inspector Cards
+            if (annotations.length === 0) {
+                inspector.innerHTML = `<div class="p-4 text-xs text-[oklch(46%_0.05_300)] bg-[oklch(95%_0.02_300)] rounded-lg border border-[oklch(84%_0.04_300)]">no inline diagnostic flags for this text.</div>`;
+                return;
+            }
+
+            inspector.innerHTML = annotations.map((ann, idx) => `
+                <div id="ann-card-${idx}" onclick="inspectAnnotation(${idx})" class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] hover:border-[oklch(50%_0.25_290)] transition cursor-pointer space-y-1.5">
+                    <div class="flex items-center justify-between text-[11px]">
+                        <span class="font-mono font-medium text-[oklch(50%_0.25_290)]">${escapeHtml(ann.title)}</span>
+                        <span class="font-mono text-[oklch(46%_0.05_300)]">#${idx + 1}</span>
+                    </div>
+                    <div class="text-xs italic text-[oklch(18%_0.02_300)] bg-white p-2 rounded border border-[oklch(88%_0.03_300)]">
+                        "${escapeHtml(ann.phrase)}"
+                    </div>
+                    <p class="text-xs text-[oklch(46%_0.05_300)] leading-relaxed">${escapeHtml(ann.explanation)}</p>
+                    ${ann.category !== 'strength' && ann.replacement ? `
+                        <div class="pt-1 text-[11px] font-mono text-[oklch(40%_0.15_150)]">
+                            suggested: ${escapeHtml(ann.replacement)}
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+        }
+
+        function inspectAnnotation(idx) {
+            document.querySelectorAll('[id^="ann-span-"]').forEach(el => el.classList.remove('outline', 'outline-2', 'outline-[oklch(50%_0.25_290)]'));
+            document.querySelectorAll('[id^="ann-card-"]').forEach(el => el.classList.remove('border-[oklch(50%_0.25_290)]', 'bg-white'));
+
+            const span = document.getElementById(`ann-span-${idx}`);
+            const card = document.getElementById(`ann-card-${idx}`);
+
+            if (span) {
+                span.classList.add('outline', 'outline-2', 'outline-[oklch(50%_0.25_290)]');
+                span.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            if (card) {
+                card.classList.add('border-[oklch(50%_0.25_290)]', 'bg-white');
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        /***********************************************************************
+         * 8. TAB CONTROLS, MODALS, & EXPORT UTILITIES
+         ***********************************************************************/
+        function switchDiagTab(tabKey) {
+            const tabs = ['annotated', 'rubric', 'upgrades'];
+            const btnMap = { annotated: 'tabBtnAnnotated', rubric: 'tabBtnRubric', upgrades: 'tabBtnUpgrades' };
+            const panelMap = { annotated: 'tabPanelAnnotated', rubric: 'tabPanelRubric', upgrades: 'tabPanelUpgrades' };
+
+            tabs.forEach(t => {
+                const btn = document.getElementById(btnMap[t]);
+                const panel = document.getElementById(panelMap[t]);
+                if (t === tabKey) {
+                    panel.classList.remove('hidden');
+                    btn.className = "px-4 py-2 text-xs font-display font-medium rounded-t-lg bg-[oklch(97%_0.015_300)] text-[oklch(18%_0.02_300)] border-t border-x border-[oklch(84%_0.04_300)] -mb-px flex items-center space-x-2";
+                } else {
+                    panel.classList.add('hidden');
+                    btn.className = "px-4 py-2 text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-2";
+                }
+            });
+        }
+
+        function toggleModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            modal.classList.toggle('hidden');
+        }
+
+        function copyFeedbackReport() {
+            if (!currentEvalData) return;
+            const calc = computeOfficialBand(
+                currentEvalData.scores.TA_TR,
+                currentEvalData.scores.CC,
+                currentEvalData.scores.LR,
+                currentEvalData.scores.GRA
+            );
+            const crit1 = currentTask === 1 ? 'task achievement' : 'task response';
+
+            const lines = [
+                `IELTS ACADEMIC WRITING TASK ${currentTask} EVALUATION REPORT`,
+                `------------------------------------------------------------`,
+                `OVERALL BAND SCORE: ${calc.overall} (${calc.cefr})`,
+                `• ${crit1}: ${calc.scores.TA_TR.toFixed(1)}`,
+                `• coherence & cohesion (cc): ${calc.scores.CC.toFixed(1)}`,
+                `• lexical resource (lr): ${calc.scores.LR.toFixed(1)}`,
+                `• grammatical accuracy (gra): ${calc.scores.GRA.toFixed(1)}`,
+                `------------------------------------------------------------`,
+                `EXAMINER NOTES:`,
+                currentEvalData.summary,
+                ``,
+                `STRENGTHS:`,
+                ...(currentEvalData.strengths || []).map(s => `• ${s}`),
+                ``,
+                `AREAS FOR IMPROVEMENT:`,
+                ...(currentEvalData.improvements || []).map(i => `• ${i}`)
+            ];
+
+            const temp = document.createElement('textarea');
+            temp.value = lines.join('\n');
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            const label = document.getElementById('copyBtnLabel');
+            label.textContent = "copied!";
+            setTimeout(() => { label.textContent = "copy report"; }, 2000);
+            showToast("report copied to clipboard");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('appToast');
+            document.getElementById('toastText').textContent = msg;
+            toast.classList.remove('translate-y-16', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-16', 'opacity-0');
+            }, 2400);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>

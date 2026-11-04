@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>IELTS Academic Reading — DeepSeek Unveils an AI ‘Super Agent’</title>
+<style>
+/* hallmark: 2.0.0 | genre: editorial | theme: newsprint | job: examination-practice | signature: dual-column-desk */
+/* critique: Strips generic floating cards and synthetic gradients in favor of an academic editorial desk with disciplined rule lines, high-contrast serif typography, and tactile focus rings. */
+
+:root {
+  --font-serif: "Newsreader", "Charter", "Bitstream Charter", "Sitka Text", "Cambria", Georgia, serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
+
+  --bg: #f9f8f5;
+  --bg-subtle: #f1ede4;
+  --surface: #ffffff;
+  --surface-alt: #f5f2eb;
+  --line: #dfd9ce;
+  --line-strong: #bfb7a7;
+  --text: #1c1a17;
+  --text-muted: #5e5950;
+  --text-faint: #857e72;
+
+  --accent: #8b2518;
+  --accent-hover: #721e13;
+  --accent-subtle: #f6e8e5;
+  --accent-contrast: #ffffff;
+
+  --highlight-bg: #fae17d;
+  --highlight-text: #211c0f;
+
+  --ok-text: #195b36;
+  --ok-bg: #eaf5ee;
+  --ok-line: #a8d5b8;
+
+  --bad-text: #8b2518;
+  --bad-bg: #faebe8;
+  --bad-line: #e8b0a8;
+
+  --focus-ring: #8b2518;
+  --transparent: transparent;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141312;
+    --bg-subtle: #1c1b18;
+    --surface: #1e1d1a;
+    --surface-alt: #262421;
+    --line: #33302a;
+    --line-strong: #4c473f;
+    --text: #ece8e1;
+    --text-muted: #a49e93;
+    --text-faint: #746e65;
+
+    --accent: #d86854;
+    --accent-hover: #e57d6b;
+    --accent-subtle: #2d1b18;
+    --accent-contrast: #141312;
+
+    --highlight-bg: #4f3f15;
+    --highlight-text: #faebba;
+
+    --ok-text: #5ec78d;
+    --ok-bg: #13261b;
+    --ok-line: #204c32;
+
+    --bad-text: #f08271;
+    --bad-bg: #2d1815;
+    --bad-line: #572a23;
+
+    --focus-ring: #d86854;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Master Top Chrome */
+.desk-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.chrome-row {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.desk-masthead {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.desk-tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+
+.desk-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+  color: var(--text);
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.desk-timer-dock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 6px 4px 12px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.timer-digits {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  min-width: 50px;
+  text-align: center;
+}
+
+.timer-digits.warning {
+  color: var(--accent);
+}
+
+.timer-btn {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.timer-btn:hover {
+  background-color: var(--bg-subtle);
+}
+
+.timer-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+/* Time Expired Notice */
+.expired-banner {
+  display: none;
+  background-color: var(--bad-bg);
+  border-bottom: 1px solid var(--bad-line);
+  color: var(--bad-text);
+  padding: 8px 16px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.expired-banner.is-visible {
+  display: block;
+}
+
+/* Viewport Tabs */
+.view-nav {
+  display: flex;
+  border-top: 1px solid var(--line);
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.view-tab {
+  background: var(--transparent);
+  border: none;
+  border-bottom: 2px solid var(--transparent);
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+
+.view-tab:hover {
+  color: var(--text);
+}
+
+.view-tab[aria-selected="true"] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.view-tab:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: -2px;
+}
+
+/* Layout Shell */
+.exam-layout {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.pane {
+  display: none;
+}
+
+.pane.active {
+  display: block;
+}
+
+/* Split Pane Grid */
+.split-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .split-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    height: calc(100vh - 134px);
+    overflow: hidden;
+  }
+
+  .split-column {
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-right: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line-strong) var(--transparent);
+  }
+}
+
+/* Paper Deck */
+.paper-sheet {
+  background-color: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.sheet-header {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 14px;
+  margin-bottom: 20px;
+}
+
+.sheet-headline {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.sheet-lead {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Highlighter Bar */
+.highlighter-deck {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.hl-btn {
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.hl-btn[aria-pressed="true"] {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.hl-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+}
+
+.hl-caption {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Passage Typography */
+.passage-body {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.passage-body p {
+  margin: 0 0 18px;
+  text-align: justify;
+}
+
+.para-label {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 8px;
+  user-select: none;
+}
+
+mark.hl {
+  background-color: var(--highlight-bg);
+  color: var(--highlight-text);
+  padding: 1px 2px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* Question Sections */
+.q-cluster {
+  border-top: 2px solid var(--line-strong);
+  padding-top: 18px;
+  margin-top: 24px;
+}
+
+.cluster-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+
+.cluster-instruction {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  background-color: var(--surface-alt);
+  border-left: 3px solid var(--accent);
+  padding: 8px 12px;
+  margin: 0 0 16px;
+}
+
+.q-item {
+  border-top: 1px solid var(--line);
+  padding: 14px 0 10px;
+}
+
+.q-prompt {
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+
+.q-index {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+/* Input Fields & Radios */
+.radio-deck {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.radio-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  font-size: 13px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface-alt);
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.radio-pill input[type="radio"] {
+  accent-color: var(--accent);
+  margin: 0;
+  cursor: pointer;
+}
+
+.radio-pill:hover {
+  background-color: var(--bg-subtle);
+}
+
+.radio-pill:has(input:checked) {
+  border-color: var(--accent);
+  background-color: var(--accent-subtle);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.text-entry {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  background-color: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+}
+
+.text-entry:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 1px;
+  border-color: var(--accent);
+}
+
+/* Feedback Row */
+.feedback-slot {
+  font-size: 13px;
+  margin-top: 8px;
+  line-height: 1.5;
+  min-height: 18px;
+}
+
+.feedback-slot.correct {
+  color: var(--ok-text);
+  font-weight: 600;
+}
+
+.feedback-slot.incorrect {
+  color: var(--bad-text);
+  font-weight: 500;
+}
+
+.feedback-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text);
+  background-color: var(--surface-alt);
+  border-left: 2px solid var(--line-strong);
+  padding: 6px 10px;
+  margin: 6px 0 0;
+}
+
+/* Bottom Action Bar */
+.sheet-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--accent-contrast);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  background-color: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-subtle);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.score-tally {
+  display: none;
+  background-color: var(--surface-alt);
+  border: 1px solid var(--line-strong);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Reference Key Table */
+.key-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.key-table th, .key-table td {
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.key-table th {
+  background-color: var(--surface-alt);
+  font-weight: 600;
+  color: var(--text);
+}
+
+details.rationale-drawer {
+  background-color: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin: 8px 0;
+  font-size: 13px;
+}
+
+details.rationale-drawer summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text);
+}
+
+details.rationale-drawer summary:focus-visible {
+  outline: 2px solid var(--focus-ring);
+}
+
+details.rationale-drawer p {
+  margin: 8px 0 4px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+details.rationale-drawer blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  margin: 6px 0 0;
+  padding: 6px 10px;
+  background-color: var(--surface);
+  border-left: 2px solid var(--line-strong);
+}
+
+/* Foot Colophon */
+.desk-colophon {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  font-size: 12px;
+  color: var(--text-faint);
+  line-height: 1.6;
+  border-top: 1px solid var(--line);
+}
+
+.desk-colophon a {
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.desk-colophon a:focus-visible {
+  outline: 2px solid var(--focus-ring);
+}
+
+@media (max-width: 640px) {
+  .paper-sheet {
+    padding: 18px 14px;
+  }
+  .sheet-headline {
+    font-size: 20px;
+  }
+  .passage-body {
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+  .passage-body p {
+    text-align: left;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="desk-chrome">
+  <div class="chrome-row">
+    <div class="desk-masthead">
+      <span class="desk-tag">ielts academic reading · practice passage 3</span>
+      <h1 class="desk-title">DeepSeek Unveils an AI ‘Super Agent’</h1>
+    </div>
+    <div class="desk-timer-dock" aria-label="Examination countdown">
+      <span class="timer-digits" id="timerClock">20:00</span>
+      <button class="timer-btn" id="btnTimerToggle" type="button">Start</button>
+      <button class="timer-btn" id="btnTimerReset" type="button">Reset</button>
+    </div>
+  </div>
+  <div class="expired-banner" id="bannerExpired" role="status">
+    Time elapsed — 20 minutes standard testing limit reached. Review and submit your responses.
+  </div>
+  <nav class="view-nav" role="tablist" aria-label="Reading modes">
+    <button class="view-tab" role="tab" aria-selected="false" data-mode="passage" type="button">Passage</button>
+    <button class="view-tab" role="tab" aria-selected="false" data-mode="questions" type="button">Questions</button>
+    <button class="view-tab" role="tab" aria-selected="true" data-mode="split" type="button">Split View</button>
+    <button class="view-tab" role="tab" aria-selected="false" data-mode="answers" type="button">Answer Key &amp; Analysis</button>
+  </nav>
+</header>
+
+<main class="exam-layout">
+
+  <!-- Mobile / Solo Passage Pane -->
+  <section class="pane" id="pane-passage" role="tabpanel" aria-label="Passage only">
+    <!-- Populated dynamically via DOM assignment -->
+  </section>
+
+  <!-- Mobile / Solo Questions Pane -->
+  <section class="pane" id="pane-questions" role="tabpanel" aria-label="Questions only">
+    <!-- Populated dynamically via DOM assignment -->
+  </section>
+
+  <!-- Split View Pane (Default) -->
+  <section class="pane active" id="pane-split" role="tabpanel" aria-label="Synchronized reading and questions desk">
+    <div class="split-grid" id="splitGridHost">
+      <div class="split-column" id="splitColPassage">
+        <!-- Reusable Passage Sheet Container -->
+        <article class="paper-sheet" id="cardPassage">
+          <header class="sheet-header">
+            <h2 class="sheet-headline">Reading Passage 3: DeepSeek Unveils an AI ‘Super Agent’</h2>
+            <p class="sheet-lead">Spend approximately 20 minutes on Questions 1–13, based on the text below.</p>
+          </header>
+
+          <div class="highlighter-deck">
+            <button class="hl-btn" id="btnHlToggle" type="button" aria-pressed="false">Highlighter: Off</button>
+            <button class="hl-btn" id="btnHlClear" type="button">Clear highlights</button>
+            <span class="hl-caption">Toggle highlighter on to mark phrases. Click marked words to remove.</span>
+          </div>
+
+          <div class="passage-body" id="passageText">
+            <p><span class="para-label" aria-hidden="true">[A]</span>Chinese artificial intelligence start-up DeepSeek has previewed a plan for a more autonomous AI agent that can handle multiple tasks with minimal human intervention, as it steps up competition with US rivals OpenAI and Anthropic in developing coding assistants. The proposed system, dubbed super agent, aimed to reduce the need for humans to coordinate multiple AI agents and monitor their progress, addressing a key bottleneck in managing today’s increasingly complex workflows, according to a technical article published by the company’s DeepSeek Harness team on Saturday.</p>
+            <p><span class="para-label" aria-hidden="true">[B]</span>DeepSeek said that advances in AI models had fuelled the emergence of agents that could automate a growing range of tasks, from managing calendars and drafting emails to preparing work reports and writing code. Such agents promise substantial productivity gains, because a single user can, in principle, delegate several jobs at once instead of completing each one personally. Yet the company argued that this promise runs into a practical limit once several agents are working at the same time, because someone still has to keep track of them all.</p>
+            <p><span class="para-label" aria-hidden="true">[C]</span>However, managing multiple agents simultaneously still demanded considerable human attention, the team said. “Single-task limits depend on model capabilities, while multitask limits depend on human attention,” the paper said. The DeepSeek team estimated that a person could typically oversee only three to five active AI agent sessions simultaneously, limiting the productivity gains from deploying multiple assistants. In other words, even if each individual agent is highly capable, the overall workflow can only expand as far as the human supervisor who must check, direct and combine its outputs.</p>
+            <p><span class="para-label" aria-hidden="true">[D]</span>DeepSeek’s proposed system seeks to overcome this by automatically distributing tasks among agents and coordinating their work, leaving humans to focus on decision-making and reviewing results. Rather than asking a person to act as a full-time coordinator, the super agent is intended to take over much of that organisational work itself. Humans would still set the goals and judge the finished work, but they would no longer need to watch every step in between.</p>
+            <p><span class="para-label" aria-hidden="true">[E]</span>The initiative comes as competition intensifies among AI developers to build more autonomous coding assistants, with Anthropic’s Claude Code and OpenAI’s Codex increasingly capable of handling complex software development tasks. DeepSeek’s proposal seeks to take agent automation further by allowing multiple agents to work simultaneously and proactively respond to events such as messages and code updates without requiring explicit instructions for every task.</p>
+            <p><span class="para-label" aria-hidden="true">[F]</span>Under the proposed architecture, a central coordinating agent would distribute assignments among multiple independent agents, which could execute tasks in parallel and report their progress to the central agent, reducing the need for human oversight. In one example, the team said an agent could detect a software bug reported in a group chat and independently attempt to reproduce and fix it, even without being directly instructed to do so. If it identified a viable solution, the agent could submit a proposed code change for human review. Otherwise, it would remain silent to avoid unnecessary interruptions, the team said in the paper.</p>
+            <p><span class="para-label" aria-hidden="true">[G]</span>In experimental tests, the approach enabled completion of one task in just under 16 minutes, compared with more than 29 minutes for a conventional approach, according to the team’s findings. Some industry experts acknowledged that DeepSeek was making progress in the right direction, but questioned whether the proposal offered meaningful advances over existing systems. “The challenge in AI software development today is ensuring reliability … rather than completing tasks faster,” said Liu Ming, a Beijing-based AI entrepreneur, on China’s Quora-like platform Zhihu.</p>
+            <p><span class="para-label" aria-hidden="true">[H]</span>DeepSeek itself acknowledged potential challenges around security and privacy, including the risk that malicious instructions could compromise the agents connected to other services and systems. DeepSeek released an open-source research prototype of the super agent on code hosting platform GitHub, while stressing that the initiative remained an architectural exploration rather than a mature product.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="split-column" id="splitColQuestions">
+        <!-- Reusable Questions Sheet Container -->
+        <article class="paper-sheet" id="cardQuestions">
+          <header class="sheet-header">
+            <h2 class="sheet-headline">Questions 1–13</h2>
+            <p class="sheet-lead">Answer all questions, then click check responses for instant verification and citation review.</p>
+          </header>
+
+          <!-- Group 1: TFNG -->
+          <div class="q-cluster">
+            <h3 class="cluster-title">Questions 1–6</h3>
+            <p class="cluster-instruction">
+              Do the following statements agree with the information in Reading Passage 3?<br>
+              Choose <strong>TRUE</strong> if the statement agrees, <strong>FALSE</strong> if it contradicts, or <strong>NOT GIVEN</strong> if there is no information.
+            </p>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">1.</span> DeepSeek has already launched a fully autonomous coding assistant that outperforms the products of OpenAI and Anthropic.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 1 options">
+                <label class="radio-pill"><input type="radio" name="ans_1" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_1" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_1" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_1" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">2.</span> According to the team, three to five is the maximum number of agent sessions any person can ever supervise.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 2 options">
+                <label class="radio-pill"><input type="radio" name="ans_2" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_2" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_2" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_2" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">3.</span> Under the proposed system, agents would be permitted to apply code changes directly without any human involvement.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 3 options">
+                <label class="radio-pill"><input type="radio" name="ans_3" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_3" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_3" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_3" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">4.</span> DeepSeek’s system is designed so that agents can react to developments like incoming messages on their own initiative, rather than waiting to be told what to do.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 4 options">
+                <label class="radio-pill"><input type="radio" name="ans_4" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_4" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_4" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_4" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">5.</span> DeepSeek’s fundraising round of 100 billion yuan was intended primarily to fund the super agent project.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 5 options">
+                <label class="radio-pill"><input type="radio" name="ans_5" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_5" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_5" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_5" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">6.</span> Tests showed the super agent completed tasks in less than half the time taken by the conventional method.</p>
+              <div class="radio-deck" role="radiogroup" aria-label="Question 6 options">
+                <label class="radio-pill"><input type="radio" name="ans_6" value="TRUE"> True</label>
+                <label class="radio-pill"><input type="radio" name="ans_6" value="FALSE"> False</label>
+                <label class="radio-pill"><input type="radio" name="ans_6" value="NOT GIVEN"> Not Given</label>
+              </div>
+              <div class="feedback-slot" id="feed_6" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Group 2: Note Completion -->
+          <div class="q-cluster">
+            <h3 class="cluster-title">Questions 7–10</h3>
+            <p class="cluster-instruction">
+              Complete the notes below. Choose <strong>ONE WORD ONLY</strong> from the passage for each answer.
+            </p>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">7.</span> Agents are already able to take over routine office duties such as organising schedules and composing ……………… .</p>
+              <input class="text-entry" type="text" id="ans_7" placeholder="Type one word" autocomplete="off" aria-label="Question 7 answer">
+              <div class="feedback-slot" id="feed_7" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">8.</span> The paper argues that the bottleneck in running several agents at once is the supervisor’s limited ……………… .</p>
+              <input class="text-entry" type="text" id="ans_8" placeholder="Type one word" autocomplete="off" aria-label="Question 8 answer">
+              <div class="feedback-slot" id="feed_8" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">9.</span> In the proposed design, one master agent would hand out ……………… to a set of agents operating on their own.</p>
+              <input class="text-entry" type="text" id="ans_9" placeholder="Type one word" autocomplete="off" aria-label="Question 9 answer">
+              <div class="feedback-slot" id="feed_9" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">10.</span> An agent that fails to find a workable fix should stay ……………… rather than disturbing the user needlessly.</p>
+              <input class="text-entry" type="text" id="ans_10" placeholder="Type one word" autocomplete="off" aria-label="Question 10 answer">
+              <div class="feedback-slot" id="feed_10" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <!-- Group 3: Short Answer -->
+          <div class="q-cluster">
+            <h3 class="cluster-title">Questions 11–13</h3>
+            <p class="cluster-instruction">
+              Answer the questions below. Choose <strong>NO MORE THAN THREE WORDS AND/OR A NUMBER</strong> from the passage for each answer.
+            </p>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">11.</span> What is the estimated upper bound on the number of agent sessions a single supervisor can handle at once?</p>
+              <input class="text-entry" type="text" id="ans_11" placeholder="Type your answer" autocomplete="off" aria-label="Question 11 answer">
+              <div class="feedback-slot" id="feed_11" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">12.</span> Where did DeepSeek publish the prototype code for other developers to access?</p>
+              <input class="text-entry" type="text" id="ans_12" placeholder="Type your answer" autocomplete="off" aria-label="Question 12 answer">
+              <div class="feedback-slot" id="feed_12" aria-live="polite"></div>
+            </div>
+
+            <div class="q-item">
+              <p class="q-prompt"><span class="q-index">13.</span> How long did the new method take to finish a single task in trials?</p>
+              <input class="text-entry" type="text" id="ans_13" placeholder="Type your answer" autocomplete="off" aria-label="Question 13 answer">
+              <div class="feedback-slot" id="feed_13" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="sheet-actions">
+            <button class="btn-primary" id="btnCheckAnswers" type="button">Check responses</button>
+            <button class="btn-secondary" id="btnRevealAnswers" type="button">Reveal answers</button>
+            <button class="btn-secondary" id="btnClearAll" type="button">Clear answers</button>
+          </div>
+
+          <div class="score-tally" id="scoreBanner" role="status"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Complete Answer Key & Explication Pane -->
+  <section class="pane" id="pane-answers" role="tabpanel" aria-label="Answer keys and explanations">
+    <article class="paper-sheet">
+      <header class="sheet-header">
+        <h2 class="sheet-headline">Official Key &amp; Passage Evidence</h2>
+        <p class="sheet-lead">13 items · One mark per question · Verified against technical source report</p>
+      </header>
+
+      <table class="key-table">
+        <thead>
+          <tr>
+            <th scope="col">Question</th>
+            <th scope="col">Target Answer</th>
+            <th scope="col">Accepted Variations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><strong>FALSE</strong></td><td>—</td></tr>
+          <tr><td>2</td><td><strong>FALSE</strong></td><td>—</td></tr>
+          <tr><td>3</td><td><strong>FALSE</strong></td><td>—</td></tr>
+          <tr><td>4</td><td><strong>TRUE</strong></td><td>—</td></tr>
+          <tr><td>5</td><td><strong>NOT GIVEN</strong></td><td>—</td></tr>
+          <tr><td>6</td><td><strong>FALSE</strong></td><td>—</td></tr>
+          <tr><td>7</td><td><strong>emails</strong></td><td>—</td></tr>
+          <tr><td>8</td><td><strong>attention</strong></td><td>—</td></tr>
+          <tr><td>9</td><td><strong>assignments</strong></td><td>—</td></tr>
+          <tr><td>10</td><td><strong>silent</strong></td><td>—</td></tr>
+          <tr><td>11</td><td><strong>three to five</strong></td><td>3 to 5</td></tr>
+          <tr><td>12</td><td><strong>GitHub</strong></td><td>github</td></tr>
+          <tr><td>13</td><td><strong>16 minutes</strong></td><td>16, just under 16</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="cluster-title">Item-by-Item Analysis</h3>
+
+      <details class="rationale-drawer">
+        <summary>Q1. DeepSeek launched outperforming coding assistant — <strong>FALSE</strong></summary>
+        <p>Contradiction on multiple counts: the passage states DeepSeek has only "previewed a plan" (not launched), for a "more autonomous" agent (not fully autonomous), while "stepping up competition" (no claim of outperforming OpenAI or Anthropic).</p>
+        <blockquote>“Chinese artificial intelligence start-up DeepSeek has previewed a plan for a more autonomous AI agent... as it steps up competition with US rivals OpenAI and Anthropic...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q2. Three to five is the maximum any person can ever supervise — <strong>FALSE</strong></summary>
+        <p>The text states that a person could "typically oversee only three to five" sessions — denoting an average operational threshold, not an immutable physical impossibility.</p>
+        <blockquote>“The DeepSeek team estimated that a person could typically oversee only three to five active AI agent sessions simultaneously...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q3. Agents permitted to apply code changes directly without human involvement — <strong>FALSE</strong></summary>
+        <p>Direct contradiction: agents must submit proposed modifications for explicit human scrutiny.</p>
+        <blockquote>“If it identified a viable solution, the agent could submit a proposed code change for human review.”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q4. Proactive reaction to messages without instructions — <strong>TRUE</strong></summary>
+        <p>Agrees directly with DeepSeek's architectural objective.</p>
+        <blockquote>“...allowing multiple agents to work simultaneously and proactively respond to events such as messages and code updates without requiring explicit instructions for every task.”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q5. 100 billion yuan fundraising round — <strong>NOT GIVEN</strong></summary>
+        <p>No venture financing, capital rounds, or valuation amounts are mentioned anywhere in the source passage.</p>
+        <blockquote>[No mention of corporate financing or 100 billion yuan in text]</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q6. Less than half the time of conventional method — <strong>FALSE</strong></summary>
+        <p>Arithmetic trap: the new approach took "just under 16 minutes", compared with "more than 29 minutes". 16 is greater than half of 29 (14.5 minutes), making "less than half" false.</p>
+        <blockquote>“...completion of one task in just under 16 minutes, compared with more than 29 minutes for a conventional approach...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q7. Composing ……………… — <strong>emails</strong></summary>
+        <p>Matches verbatim from paragraph B's list of delegated tasks.</p>
+        <blockquote>“...from managing calendars and drafting emails to preparing work reports and writing code.”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q8. Limited supervisor ……………… — <strong>attention</strong></summary>
+        <p>Direct quotation from paragraph C discussing multi-task constraints.</p>
+        <blockquote>“Single-task limits depend on model capabilities, while multitask limits depend on human attention...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q9. Master agent hands out ……………… — <strong>assignments</strong></summary>
+        <p>Matches paragraph F describing delegation to parallel agents.</p>
+        <blockquote>“Under the proposed architecture, a central coordinating agent would distribute assignments among multiple independent agents...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q10. Without a fix, agent should stay ……………… — <strong>silent</strong></summary>
+        <p>Matches paragraph F regarding non-disruptive behavior.</p>
+        <blockquote>“Otherwise, it would remain silent to avoid unnecessary interruptions, the team said in the paper.”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q11. Upper bound on simultaneous sessions — <strong>three to five</strong></summary>
+        <p>Identified in paragraph C.</p>
+        <blockquote>“...a person could typically oversee only three to five active AI agent sessions simultaneously...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q12. Prototype repository host — <strong>GitHub</strong></summary>
+        <p>Explicitly named in concluding paragraph H.</p>
+        <blockquote>“DeepSeek released an open-source research prototype of the super agent on code hosting platform GitHub...”</blockquote>
+      </details>
+
+      <details class="rationale-drawer">
+        <summary>Q13. Single task completion duration in trials — <strong>16 minutes</strong></summary>
+        <p>Reported in paragraph G (also accepted: "just under 16").</p>
+        <blockquote>“...enabled completion of one task in just under 16 minutes, compared with more than 29 minutes...”</blockquote>
+      </details>
+    </article>
+  </section>
+
+</main>
+
+<footer class="desk-colophon">
+  <p>Practice reading examination adapted for instructional use. Source text: <em>DeepSeek unveils AI ‘super agent’ in coding race with OpenAI, Anthropic</em>, South China Morning Post. Full technical paper released via DeepSeek Harness architecture notes.</p>
+</footer>
+
+<script>
+// Key Specifications & Evaluation Criteria
+var TEST_SPEC = {
+  "1": { type: "tfng", a: ["FALSE"] },
+  "2": { type: "tfng", a: ["FALSE"] },
+  "3": { type: "tfng", a: ["FALSE"] },
+  "4": { type: "tfng", a: ["TRUE"] },
+  "5": { type: "tfng", a: ["NOT GIVEN"] },
+  "6": { type: "tfng", a: ["FALSE"] },
+  "7": { type: "single-word", a: ["emails"] },
+  "8": { type: "single-word", a: ["attention"] },
+  "9": { type: "single-word", a: ["assignments"] },
+  "10": { type: "single-word", a: ["silent"] },
+  "11": { type: "short", a: ["three to five", "3 to 5"] },
+  "12": { type: "short", a: ["github"] },
+  "13": { type: "short", a: ["16 minutes", "16", "just under 16"] }
+};
+
+function normalizeText(str) {
+  return (str || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .replace(/[.。]$/, "");
+}
+
+function getAnswer(qId) {
+  var spec = TEST_SPEC[qId];
+  if (spec.type === "tfng") {
+    var checked = document.querySelector('input[name="ans_' + qId + '"]:checked');
+    return checked ? checked.value : "";
+  }
+  var input = document.getElementById("ans_" + qId);
+  return input ? input.value : "";
+}
+
+function validateItem(qId, val) {
+  var v = normalizeText(val);
+  var spec = TEST_SPEC[qId];
+  if (!v) return false;
+
+  // Single word constraint enforcement
+  if (spec.type === "single-word" && /[\s-]/.test(v)) {
+    return false;
+  }
+
+  for (var i = 0; i < spec.a.length; i++) {
+    if (normalizeText(spec.a[i]) === v) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function getPassageRationale(qId) {
+  var details = document.querySelectorAll("details.rationale-drawer");
+  var target = details[qId - 1];
+  if (!target) return "";
+  var quote = target.querySelector("blockquote");
+  return quote ? quote.textContent : "";
+}
+
+function evaluateQuestion(qId, showCorrect) {
+  var slot = document.getElementById("feed_" + qId);
+  var val = getAnswer(qId);
+  var isPass = validateItem(qId, val);
+
+  slot.className = "feedback-slot " + (isPass ? "correct" : "incorrect");
+
+  if (isPass) {
+    slot.innerHTML = "✓ Correct";
+  } else {
+    var text = "✗ " + (val ? "Submitted: “" + escapeHtml(val) + "”" : "No answer entered");
+    if (showCorrect) {
+      text += " — Target: <strong>" + escapeHtml(TEST_SPEC[qId].a.join(" / ")) + "</strong>";
+    }
+    var citation = getPassageRationale(qId);
+    if (citation) {
+      text += '<blockquote class="feedback-quote">' + escapeHtml(citation) + '</blockquote>';
+    }
+    slot.innerHTML = text;
+  }
+  return isPass;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, function(c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+// Action Handlers
+document.getElementById("btnCheckAnswers").addEventListener("click", function() {
+  var score = 0;
+  var total = Object.keys(TEST_SPEC).length;
+  for (var key in TEST_SPEC) {
+    if (evaluateQuestion(key, true)) {
+      score++;
+    }
+  }
+  var banner = document.getElementById("scoreBanner");
+  banner.style.display = "block";
+  banner.textContent = "Score: " + score + " / " + total + " (" + Math.round((score / total) * 100) + "%)";
+  banner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+});
+
+document.getElementById("btnRevealAnswers").addEventListener("click", function() {
+  for (var key in TEST_SPEC) {
+    var spec = TEST_SPEC[key];
+    if (spec.type === "tfng") {
+      var radio = document.querySelector('input[name="ans_' + key + '"][value="' + spec.a[0] + '"]');
+      if (radio) radio.checked = true;
+    } else {
+      var input = document.getElementById("ans_" + key);
+      if (input) input.value = spec.a[0];
+    }
+    evaluateQuestion(key, false);
+  }
+  var banner = document.getElementById("scoreBanner");
+  banner.style.display = "block";
+  banner.textContent = "All target responses inserted. Review evidence in Answer Key tab.";
+});
+
+document.getElementById("btnClearAll").addEventListener("click", function() {
+  for (var key in TEST_SPEC) {
+    var spec = TEST_SPEC[key];
+    if (spec.type === "tfng") {
+      var radios = document.querySelectorAll('input[name="ans_' + key + '"]');
+      for (var r = 0; r < radios.length; r++) radios[r].checked = false;
+    } else {
+      var input = document.getElementById("ans_" + key);
+      if (input) input.value = "";
+    }
+    var slot = document.getElementById("feed_" + key);
+    slot.className = "feedback-slot";
+    slot.innerHTML = "";
+  }
+  document.getElementById("scoreBanner").style.display = "none";
+});
+
+// Viewport & Mode Switching
+var cardPassage = document.getElementById("cardPassage");
+var cardQuestions = document.getElementById("cardQuestions");
+var panePassage = document.getElementById("pane-passage");
+var paneQuestions = document.getElementById("pane-questions");
+var splitColPassage = document.getElementById("splitColPassage");
+var splitColQuestions = document.getElementById("splitColQuestions");
+
+function setViewMode(mode) {
+  var tabs = document.querySelectorAll(".view-tab");
+  for (var t = 0; t < tabs.length; t++) {
+    tabs[t].setAttribute("aria-selected", tabs[t].getAttribute("data-mode") === mode ? "true" : "false");
+  }
+
+  // Mount cards to active parent container
+  if (mode === "split") {
+    splitColPassage.appendChild(cardPassage);
+    splitColQuestions.appendChild(cardQuestions);
+  } else if (mode === "passage") {
+    panePassage.appendChild(cardPassage);
+  } else if (mode === "questions") {
+    paneQuestions.appendChild(cardQuestions);
+  }
+
+  var panes = document.querySelectorAll(".pane");
+  for (var p = 0; p < panes.length; p++) {
+    panes[p].classList.remove("active");
+  }
+  document.getElementById("pane-" + mode).classList.add("active");
+}
+
+var tabButtons = document.querySelectorAll(".view-tab");
+for (var tb = 0; tb < tabButtons.length; tb++) {
+  tabButtons[tb].addEventListener("click", function() {
+    setViewMode(this.getAttribute("data-mode"));
+  });
+}
+
+// Auto-switch to solo tab on narrow mobile viewport
+if (window.innerWidth < 1024) {
+  setViewMode("passage");
+}
+
+// In-Memory Highlighter
+var isHighlighterActive = false;
+var btnHlToggle = document.getElementById("btnHlToggle");
+var passageHost = document.getElementById("passageText");
+
+btnHlToggle.addEventListener("click", function() {
+  isHighlighterActive = !isHighlighterActive;
+  btnHlToggle.setAttribute("aria-pressed", isHighlighterActive ? "true" : "false");
+  btnHlToggle.textContent = isHighlighterActive ? "Highlighter: Active" : "Highlighter: Off";
+});
+
+function applySelectionHighlight() {
+  if (!isHighlighterActive) return;
+  var selection = window.getSelection();
+  if (!selection || selection.isCollapsed || !selection.rangeCount) return;
+  var range = selection.getRangeAt(0);
+
+  if (!passageHost.contains(range.commonAncestorContainer)) return;
+
+  var mark = document.createElement("mark");
+  mark.className = "hl";
+  try {
+    mark.appendChild(range.extractContents());
+    range.insertNode(mark);
+    selection.removeAllRanges();
+  } catch (err) {}
+}
+
+passageHost.addEventListener("mouseup", applySelectionHighlight);
+passageHost.addEventListener("touchend", function() {
+  setTimeout(applySelectionHighlight, 20);
+});
+
+passageHost.addEventListener("click", function(evt) {
+  var el = evt.target;
+  while (el && el !== passageHost && !(el.tagName === "MARK" && el.classList.contains("hl"))) {
+    el = el.parentNode;
+  }
+  if (el && el.tagName === "MARK") {
+    var parent = el.parentNode;
+    while (el.firstChild) {
+      parent.insertBefore(el.firstChild, el);
+    }
+    parent.removeChild(el);
+    parent.normalize();
+  }
+});
+
+document.getElementById("btnHlClear").addEventListener("click", function() {
+  var marks = passageHost.querySelectorAll("mark.hl");
+  for (var i = marks.length - 1; i >= 0; i--) {
+    var m = marks[i];
+    var p = m.parentNode;
+    while (m.firstChild) {
+      p.insertBefore(m.firstChild, m);
+    }
+    p.removeChild(m);
+    p.normalize();
+  }
+});
+
+// Countdown Timer System
+var timerSeconds = 20 * 60;
+var currentSeconds = timerSeconds;
+var timerInterval = null;
+var clockEl = document.getElementById("timerClock");
+var btnTimerToggle = document.getElementById("btnTimerToggle");
+var bannerExpired = document.getElementById("bannerExpired");
+
+function renderTimer() {
+  var min = String(Math.floor(currentSeconds / 60)).padStart(2, "0");
+  var sec = String(currentSeconds % 60).padStart(2, "0");
+  clockEl.textContent = min + ":" + sec;
+  clockEl.classList.toggle("warning", currentSeconds <= 60 && currentSeconds > 0);
+}
+
+function handleTick() {
+  if (currentSeconds > 0) {
+    currentSeconds--;
+    renderTimer();
+    if (currentSeconds === 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      btnTimerToggle.textContent = "Start";
+      bannerExpired.classList.add("is-visible");
+    }
+  }
+}
+
+btnTimerToggle.addEventListener("click", function() {
+  bannerExpired.classList.remove("is-visible");
+  if (currentSeconds === 0) {
+    currentSeconds = timerSeconds;
+    renderTimer();
+  }
+  if (timerInterval) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    btnTimerToggle.textContent = "Resume";
+  } else {
+    timerInterval = setInterval(handleTick, 1000);
+    btnTimerToggle.textContent = "Pause";
+  }
+});
+
+document.getElementById("btnTimerReset").addEventListener("click", function() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  currentSeconds = timerSeconds;
+  renderTimer();
+  btnTimerToggle.textContent = "Start";
+  bannerExpired.classList.remove("is-visible");
+});
+
+renderTimer();
+</script>
+</body>
+</html>

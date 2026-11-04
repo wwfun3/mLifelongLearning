@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mand T 茶餐廳 · Mand T Cha Chaan Teng — 灣仔半世紀鑊氣與絲襪厚奶茶</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300..900;1,300..900&family=Noto+Serif+HK:wght@400;600;700;900&family=Space+Mono:wght@400;700&family=Ultra&display=swap" rel="stylesheet">
+  <style>
+/* hallmark: v2.0.0 | shape: integrated-portal | theme: vintage-hk-halftone | genre: authentic-vernacular */
+
+:root {
+  --color-paper: #f5f0e5;
+  --color-paper-alt: #ece3d2;
+  --color-paper-warm: #fcf9f2;
+  --color-card: #fbf8f1;
+  --color-slip: #fffef8;
+  --color-tile-line: #d3c7b0;
+  --color-tile-dot: #b9ad95;
+  --color-ink: #1b1814;
+  --color-ink-muted: #595144;
+  --color-ink-subtle: #887d6d;
+  --color-vermilion: #c5341a;
+  --color-vermilion-dark: #97220e;
+  --color-vermilion-soft: #fbeee9;
+  --color-jade: #215943;
+  --color-jade-dark: #143d2d;
+  --color-jade-tint: #eaf3ed;
+  --color-amber: #c3751f;
+  --color-amber-soft: #fcf1df;
+  --color-border: #ded4c3;
+  --color-border-dark: #b5a790;
+  --color-shadow: rgba(27, 24, 20, 0.08);
+  --color-shadow-strong: rgba(27, 24, 20, 0.18);
+  --color-focus: #c5341a;
+  --color-white: #ffffff;
+  --color-tram-green: #0a4f3b;
+  --color-mtr-blue: #00508f;
+
+  --font-display: 'Ultra', serif;
+  --font-serif-hk: "Noto Serif HK", "Songti HK", "PingFang HK", serif;
+  --font-body: 'Chivo', -apple-system, BlinkMacSystemFont, "Noto Serif HK", "PingFang HK", sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: clip;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-image: 
+    radial-gradient(var(--color-tile-line) 1px, transparent 1px),
+    radial-gradient(var(--color-tile-dot) 1px, var(--color-paper) 1px);
+  background-size: 26px 26px;
+  background-position: 0 0, 13px 13px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.shell-container {
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+/* Site Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background-color: var(--color-paper-warm);
+  border-bottom: 2px solid var(--color-ink);
+  box-shadow: 0 2px 10px var(--color-shadow);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+}
+
+.brand-unit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+
+.brand-stamp {
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-vermilion);
+  color: var(--color-white);
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.25rem;
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-ink);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-cn {
+  font-family: var(--font-serif-hk);
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.brand-en {
+  font-size: 0.8125rem;
+  color: var(--color-ink-muted);
+  font-family: var(--font-mono);
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.nav-tab-btn {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-tab-btn:hover {
+  background-color: var(--color-paper-alt);
+  color: var(--color-vermilion);
+}
+
+.nav-tab-btn.is-active {
+  color: var(--color-vermilion);
+  border-bottom-color: var(--color-vermilion);
+  background-color: var(--color-vermilion-soft);
+}
+
+.tab-index-num {
+  font-size: 0.75rem;
+  color: var(--color-ink-subtle);
+  font-family: var(--font-mono);
+}
+
+/* 1-Click Language Switcher Button */
+.lang-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: var(--color-ink);
+  color: var(--color-paper-warm);
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  border: 1.5px solid var(--color-ink);
+  box-shadow: 2px 2px 0 var(--color-vermilion);
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.lang-toggle-btn:hover {
+  background-color: var(--color-vermilion);
+  color: var(--color-white);
+  transform: translate(-1px, -1px);
+}
+
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-paper);
+  padding: 8px;
+}
+
+.mobile-menu-btn span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-ink);
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 66px;
+  left: 0;
+  right: 0;
+  background-color: var(--color-paper-warm);
+  border-bottom: 2px solid var(--color-ink);
+  padding: var(--space-6);
+  display: none;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: 59;
+  box-shadow: 0 16px 30px var(--color-shadow-strong);
+}
+
+.mobile-drawer.open {
+  display: flex;
+}
+
+.mobile-tab-btn {
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: var(--space-3) 0;
+  border-bottom: 1px dashed var(--color-border);
+  text-align: left;
+}
+
+.mobile-tab-btn.is-active {
+  color: var(--color-vermilion);
+}
+
+/* Page View Manager */
+.page-view {
+  display: none;
+  animation: fadeIn 0.18s ease-out;
+}
+
+.page-view.active-page {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Shared UI Components */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-vermilion);
+  color: var(--color-white);
+  padding: 0.85rem 1.6rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-vermilion-dark);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-paper-warm);
+  color: var(--color-ink);
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 var(--color-ink);
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-paper-alt);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.section-title {
+  font-family: var(--font-serif-hk);
+  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+/* Page 1 (Home) Styles */
+.hero-stage {
+  padding-block: var(--space-12) var(--space-16);
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: var(--space-10);
+  border-bottom: 2px solid var(--color-ink);
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-amber-soft);
+  border: 1px solid var(--color-amber);
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.hero-heading {
+  font-family: var(--font-serif-hk);
+  font-weight: 900;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1.1;
+  color: var(--color-ink);
+}
+
+.hero-heading span {
+  color: var(--color-vermilion);
+}
+
+.hero-lede {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--color-ink-muted);
+  max-width: 52ch;
+}
+
+.hero-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  width: 100%;
+  padding-top: var(--space-4);
+  border-top: 1px dashed var(--color-border-dark);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--color-ink);
+}
+
+.stat-desc {
+  font-size: 0.75rem;
+  color: var(--color-ink-muted);
+}
+
+.stage-card {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 8px 8px 0 var(--color-jade-dark);
+  padding: var(--space-6);
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-8) var(--space-12);
+}
+
+.food-card {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-food-title {
+  font-family: var(--font-serif-hk);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--color-ink);
+}
+
+.card-food-price {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--color-vermilion);
+}
+
+/* Fast Table Switcher */
+.switcher-shell {
+  background-color: var(--color-paper-warm);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  padding: var(--space-8);
+  margin-block: var(--space-12);
+}
+
+.switcher-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  border-bottom: 2px solid var(--color-tile-line);
+  padding-bottom: var(--space-4);
+}
+
+.tab-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--color-ink);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-btn.active {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+.session-panel-content {
+  display: none;
+}
+
+.session-panel-content.active {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+/* Page 2 (Menu) Styles */
+.menu-toolbar {
+  padding-block: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search-box-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 440px;
+}
+
+.menu-search-input {
+  width: 100%;
+  padding: 0.65rem 0.75rem 0.65rem 1rem;
+  background-color: var(--color-paper-warm);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+}
+
+.category-sticky-bar {
+  position: sticky;
+  top: 66px;
+  z-index: 45;
+  background-color: var(--color-paper);
+  border-bottom: 2px solid var(--color-ink);
+  padding-block: var(--space-2);
+}
+
+.category-nav-inner {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cat-tab {
+  white-space: nowrap;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-dark);
+  background-color: var(--color-paper-warm);
+}
+
+.cat-tab.active {
+  background-color: var(--color-vermilion);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+.menu-main-wrap {
+  padding-block: var(--space-8) var(--space-16);
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.dish-card {
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  box-shadow: 3px 3px 0 var(--color-ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.order-slip-sidebar {
+  position: sticky;
+  top: 124px;
+}
+
+.bill-slip {
+  background-color: var(--color-slip);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  padding: var(--space-6);
+  position: relative;
+  background-image: repeating-linear-gradient(var(--color-slip), var(--color-slip) 27px, #e8e2d3 28px);
+  line-height: 28px;
+}
+
+.bill-slip::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 44px;
+  height: 14px;
+  background-color: var(--color-vermilion);
+  border: 1px solid var(--color-ink);
+}
+
+/* Page 3 (Story) Styles */
+.timeline-scrubber {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.era-button {
+  background-color: var(--color-paper-warm);
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  padding: var(--space-4) var(--space-3);
+  text-align: left;
+}
+
+.era-button.active {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-vermilion);
+}
+
+.era-stage-card {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  padding: var(--space-8);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.crafts-interactive-wrap {
+  background-color: var(--color-paper-warm);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  padding: var(--space-8);
+  margin-block: var(--space-12);
+}
+
+.crafts-nav-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  border-bottom: 2px solid var(--color-tile-line);
+  padding-bottom: var(--space-4);
+}
+
+.craft-nav-btn {
+  background-color: var(--color-paper);
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-serif-hk);
+  font-weight: 800;
+  text-align: left;
+}
+
+.craft-nav-btn.active {
+  background-color: var(--color-vermilion);
+  color: var(--color-white);
+  border-color: var(--color-ink);
+}
+
+.craft-detail-panel {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.craft-detail-panel.active {
+  display: grid;
+}
+
+/* Page 4 (Gallery) Styles */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+}
+
+.archive-card {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-visual-frame {
+  height: 180px;
+  background-color: var(--color-paper-alt);
+  border-bottom: 2px solid var(--color-ink);
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: var(--space-4);
+}
+
+.postcards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+  padding-block: var(--space-8);
+}
+
+.memory-postcard {
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  padding: var(--space-6);
+  background-image: repeating-linear-gradient(var(--color-card), var(--color-card) 27px, #e7decb 28px);
+  line-height: 28px;
+}
+
+/* Page 5 (Visit) Styles */
+.transit-map-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.transit-pill-box {
+  background-color: var(--color-card);
+  border: 1.5px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 4px 4px 0 var(--color-ink);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  margin-bottom: var(--space-4);
+}
+
+.estimator-card {
+  background-color: var(--color-card);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-lg);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  padding: var(--space-8);
+}
+
+.estimator-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.live-slip-pod {
+  background-color: var(--color-paper-warm);
+  border: 2px dashed var(--color-ink);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(27, 24, 20, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: none;
+  place-items: center;
+  padding: var(--space-4);
+}
+
+.modal-backdrop.is-open {
+  display: grid;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  background-color: var(--color-paper-warm);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius-md);
+  box-shadow: 8px 8px 0 var(--color-ink);
+  padding: var(--space-6);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+  background-color: var(--color-paper);
+}
+
+.toast-msg {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background-color: var(--color-ink);
+  color: var(--color-white);
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 110;
+  box-shadow: 0 4px 16px var(--color-shadow-strong);
+  transition: transform 0.25s ease-out;
+  pointer-events: none;
+}
+
+.toast-msg.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  border-top: 4px solid var(--color-vermilion);
+  padding: var(--space-16) var(--space-6) var(--space-12);
+  margin-top: var(--space-16);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: var(--space-8);
+  border-bottom: 1px solid var(--color-ink-muted);
+  padding-bottom: var(--space-12);
+}
+
+@media (max-width: 1024px) {
+  .hero-stage, .menu-main-wrap, .era-stage-card, .craft-detail-panel, .transit-map-grid, .estimator-grid {
+    grid-template-columns: 1fr;
+  }
+  .specialties-grid, .timeline-scrubber, .crafts-nav-row, .archive-grid, .postcards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .order-slip-sidebar { position: static; order: -1; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .nav-desktop { display: none; }
+  .mobile-menu-btn { display: flex; }
+  .specialties-grid, .timeline-scrubber, .crafts-nav-row, .archive-grid, .postcards-grid, .session-panel-content.active {
+    grid-template-columns: 1fr;
+  }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="shell-container header-inner">
+      <div class="brand-unit" id="brandLogoBtn">
+        <div class="brand-stamp">M&T</div>
+        <div class="brand-text">
+          <span class="brand-cn" data-i18n="brand_name">Mand T 茶餐廳</span>
+          <span class="brand-en">Mand T Cha Chaan Teng · Est. 1968</span>
+        </div>
+      </div>
+
+      <nav class="nav-desktop" aria-label="全站頁面切換">
+        <button type="button" class="nav-tab-btn is-active" data-page="home">
+          <span class="tab-index-num">01</span> <span data-i18n="nav_home">首頁 Home</span>
+        </button>
+        <button type="button" class="nav-tab-btn" data-page="menu">
+          <span class="tab-index-num">02</span> <span data-i18n="nav_menu">招牌餐牌 Menu</span>
+        </button>
+        <button type="button" class="nav-tab-btn" data-page="story">
+          <span class="tab-index-num">03</span> <span data-i18n="nav_story">冰室故事 Story</span>
+        </button>
+        <button type="button" class="nav-tab-btn" data-page="gallery">
+          <span class="tab-index-num">04</span> <span data-i18n="nav_gallery">街坊生活 Gallery</span>
+        </button>
+        <button type="button" class="nav-tab-btn" data-page="visit">
+          <span class="tab-index-num">05</span> <span data-i18n="nav_visit">堂座及交通 Visit</span>
+        </button>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:var(--space-3);">
+        <!-- 1-Click Language Switcher -->
+        <button type="button" class="lang-toggle-btn" id="langSwitchBtn" aria-label="1-Click Language Switcher">
+          <span id="langCurrentLabel">🌐 ENG</span>
+        </button>
+
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="選單">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-drawer" id="mobileDrawer">
+      <button type="button" class="mobile-tab-btn is-active" data-page="home">01 <span data-i18n="nav_home">首頁 Home</span></button>
+      <button type="button" class="mobile-tab-btn" data-page="menu">02 <span data-i18n="nav_menu">招牌餐牌 Menu</span></button>
+      <button type="button" class="mobile-tab-btn" data-page="story">03 <span data-i18n="nav_story">冰室故事 Story</span></button>
+      <button type="button" class="mobile-tab-btn" data-page="gallery">04 <span data-i18n="nav_gallery">街坊生活 Gallery</span></button>
+      <button type="button" class="mobile-tab-btn" data-page="visit">05 <span data-i18n="nav_visit">堂座及交通 Visit</span></button>
+    </div>
+  </header>
+
+  <main>
+    <!-- PAGE 1: HOME -->
+    <div class="page-view active-page" id="page-home">
+      <div class="shell-container">
+        <section class="hero-stage">
+          <div class="hero-content">
+            <div class="hero-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span data-i18n="hero_tag">灣仔半世紀 · 每日清晨六點半準時開爐</span>
+            </div>
+            <h1 class="hero-heading">
+              <span data-i18n="hero_title_1">晨光奶茶，</span><span style="color:var(--color-vermilion);" data-i18n="hero_title_2">炭火熱炒</span>
+            </h1>
+            <p class="hero-lede" data-i18n="hero_desc">
+              Mand T 茶餐廳自1968年起立足灣仔。老茶膽撞荷蘭黑白淡奶，高溫猛火鑊氣乾炒牛河，凝聚香港街坊最真實的煙火日常與甘香記憶。
+            </p>
+            <div style="display:flex; gap:var(--space-4); flex-wrap:wrap; margin-top:var(--space-2);">
+              <button type="button" class="btn-primary" data-page-jump="menu">
+                <span data-i18n="hero_btn_menu">翻開今日快餐牌</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </button>
+              <button type="button" class="btn-secondary" data-page-jump="visit">
+                <span data-i18n="hero_btn_queue">到訪門市與實時等位</span>
+              </button>
+            </div>
+            <div class="hero-stats-bar">
+              <div class="stat-item">
+                <span class="stat-value">58</span>
+                <span class="stat-desc" data-i18n="stat_1">載街坊鄰里信賴</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">1,350+</span>
+                <span class="stat-desc" data-i18n="stat_2">日均手拉茶杯數</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">40m</span>
+                <span class="stat-desc" data-i18n="stat_3">菠蘿包出爐週期</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-3); margin-bottom:var(--space-4);">
+              <span style="font-size:0.75rem; font-weight:700; background-color:var(--color-jade); color:var(--color-white); padding:0.2rem 0.5rem; border-radius:var(--radius-sm);" data-i18n="badge_heritage_tea">手工四度撞茶</span>
+              <span style="font-size:0.8125rem; font-weight:700; color:var(--color-vermilion);" data-i18n="badge_seating_status">● 堂食客滿 · 歡迎搭枱</span>
+            </div>
+            <div style="background-color:var(--color-amber-soft); border:1px solid var(--color-border-dark); border-radius:var(--radius-sm); padding:var(--space-6) var(--space-4); text-align:center;">
+              <svg viewBox="0 0 160 140" width="120" height="110" style="margin-inline:auto;" fill="none">
+                <ellipse cx="80" cy="120" rx="55" ry="12" fill="var(--color-card)" stroke="var(--color-ink)" stroke-width="3"/>
+                <path d="M42 50 L52 108 C53 114 58 118 64 118 L96 118 C102 118 107 114 108 108 L118 50 Z" fill="var(--color-card)" stroke="var(--color-ink)" stroke-width="3"/>
+                <path d="M116 60 C132 62 134 88 112 94" stroke="var(--color-ink)" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M46 64 L114 64" stroke="var(--color-vermilion)" stroke-width="3"/>
+                <path d="M49 76 L111 76" stroke="var(--color-jade)" stroke-width="2"/>
+                <ellipse cx="80" cy="50" rx="38" ry="7" fill="var(--color-amber)" stroke="var(--color-ink)" stroke-width="2"/>
+              </svg>
+              <h3 style="font-family:var(--font-serif-hk); font-weight:900; font-size:1.3rem; margin-top:0.5rem;" data-i18n="hero_tea_card_title">Mand T 瓦煲厚奶茶</h3>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="hero_tea_card_desc">三種碎紅茶原煲深煮，棉紗布袋高空四度拉撞，脂香醇厚回甘。</p>
+            </div>
+            <div style="margin-top:var(--space-4); background-color:var(--color-paper-warm); border:1px dashed var(--color-border-dark); padding:var(--space-3) var(--space-4); display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.8125rem; font-weight:700;"><span data-i18n="queue_now_calling">現場叫號進度：</span><strong>A-082</strong></span>
+              <span style="font-family:var(--font-display); font-size:1.25rem; color:var(--color-vermilion);">A-082</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4 Master Signatures -->
+        <section style="padding-top:var(--space-12);">
+          <div class="section-head">
+            <div>
+              <h2 class="section-title" data-i18n="four_sigs_title">四大招牌名物</h2>
+              <p style="font-size:0.9375rem; color:var(--color-ink-muted);" data-i18n="four_sigs_desc">Mand T 傳承半世紀配方，食客由朝到晚的落單首選</p>
+            </div>
+            <button type="button" style="font-size:0.875rem; font-weight:700; color:var(--color-vermilion);" data-page-jump="menu" data-i18n="view_full_menu_link">查看完整餐牌 →</button>
+          </div>
+          <div class="specialties-grid">
+            <article class="food-card">
+              <div>
+                <h3 class="card-food-title" data-i18n="sig_1_name">瓦煲絲襪厚奶茶</h3>
+                <p style="font-size:0.75rem; color:var(--color-ink-muted);">Silk-stocking milk tea</p>
+                <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3);" data-i18n="sig_1_desc">斯里蘭卡粗中幼三茶拼配，荷蘭黑白淡奶撞出豐厚脂香。</p>
+              </div>
+              <div style="border-top:1px dashed var(--color-border); padding-top:var(--space-2); display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-food-price">HK$22</span>
+                <span style="font-size:0.75rem; font-weight:700; background-color:var(--color-paper-alt); padding:0.15rem 0.4rem; border-radius:var(--radius-sm);" data-i18n="sig_1_badge">熱飲/凍飲+3</span>
+              </div>
+            </article>
+
+            <article class="food-card">
+              <div>
+                <h3 class="card-food-title" data-i18n="sig_2_name">冰火鮮油菠蘿包</h3>
+                <p style="font-size:0.75rem; color:var(--color-ink-muted);">Pineapple bun with ice butter</p>
+                <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3);" data-i18n="sig_2_desc">每40分鐘熱騰出爐，金黃脆裂酥皮，夾入厚切冰鎮荷蘭牛油。</p>
+              </div>
+              <div style="border-top:1px dashed var(--color-border); padding-top:var(--space-2); display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-food-price">HK$18</span>
+                <span style="font-size:0.75rem; font-weight:700; background-color:var(--color-paper-alt); padding:0.15rem 0.4rem; border-radius:var(--radius-sm);" data-i18n="sig_2_badge">出爐即搶</span>
+              </div>
+            </article>
+
+            <article class="food-card">
+              <div>
+                <h3 class="card-food-title" data-i18n="sig_3_name">乾炒安格斯牛河</h3>
+                <p style="font-size:0.75rem; color:var(--color-ink-muted);">Wok-fried beef ho fun</p>
+                <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3);" data-i18n="sig_3_desc">鐵鑊猛火拋翻15秒，芽菜爽脆，每條河粉乾身焦香不油膩。</p>
+              </div>
+              <div style="border-top:1px dashed var(--color-border); padding-top:var(--space-2); display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-food-price">HK$72</span>
+                <span style="font-size:0.75rem; font-weight:700; background-color:var(--color-paper-alt); padding:0.15rem 0.4rem; border-radius:var(--radius-sm);" data-i18n="sig_3_badge">鑊氣標竿</span>
+              </div>
+            </article>
+
+            <article class="food-card">
+              <div>
+                <h3 class="card-food-title" data-i18n="sig_4_name">鮮茄焗厚切豬扒飯</h3>
+                <p style="font-size:0.75rem; color:var(--color-ink-muted);">Baked pork chop rice</p>
+                <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3);" data-i18n="sig_4_desc">蛋炒飯底鋪墊，帶骨厚切豬扒鬆化多汁，鮮熬番茄醬焗至微焦。</p>
+              </div>
+              <div style="border-top:1px dashed var(--color-border); padding-top:var(--space-2); display:flex; justify-content:space-between; align-items:center;">
+                <span class="card-food-price">HK$70</span>
+                <span style="font-size:0.75rem; font-weight:700; background-color:var(--color-paper-alt); padding:0.15rem 0.4rem; border-radius:var(--radius-sm);" data-i18n="sig_4_badge">全日名物</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Session Switcher -->
+        <section class="switcher-shell">
+          <div class="section-head" style="border-bottom:none; margin-bottom:var(--space-4); padding-bottom:0;">
+            <div>
+              <h2 class="section-title" data-i18n="session_title">時段快餐牌 Session Menu</h2>
+              <p style="font-size:0.9375rem; color:var(--color-ink-muted);" data-i18n="session_subtitle">按時入座，感受 Mand T 快、準、熱的落單節奏</p>
+            </div>
+            <span style="font-size:0.8125rem; font-weight:700; background-color:var(--color-jade-tint); color:var(--color-jade-dark); padding:0.35rem 0.75rem; border-radius:var(--radius-sm); border:1px solid var(--color-jade);" data-i18n="session_perk">
+              廚房即叫即炒 · 奉送熱咖啡或熱茶
+            </span>
+          </div>
+
+          <div class="switcher-controls">
+            <button class="tab-btn active" data-session="breakfast">
+              <span data-i18n="sess_tab_bf">晨光早市 Breakfast</span>
+              <span style="font-size:0.75rem; opacity:0.8;">06:30 - 11:30</span>
+            </button>
+            <button class="tab-btn" data-session="tea">
+              <span data-i18n="sess_tab_tea">愜意下午茶 Tea</span>
+              <span style="font-size:0.75rem; opacity:0.8;">14:15 - 18:00</span>
+            </button>
+            <button class="tab-btn" data-session="dinner">
+              <span data-i18n="sess_tab_din">鑊氣晚市 Dinner</span>
+              <span style="font-size:0.75rem; opacity:0.8;">18:00 - 22:30</span>
+            </button>
+          </div>
+
+          <div class="session-panel-content active" id="session-breakfast">
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="bf_1_title">特濃沙爹牛肉公仔麵餐</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$46</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="bf_1_desc">現炒花生沙爹醬、太陽雙煎蛋及牛油多士，送熱奶茶。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="bf_2_title">火腿香濃雞湯通粉餐</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$40</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="bf_2_desc">老火雞高湯配金華火腿絲，嫩炒滑蛋與厚烘多士。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="bf_3_title">榨菜肉絲炆米粉餐</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$44</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="bf_3_desc">爽脆榨菜搭手切嫩豬肉絲，鑊氣快燴新竹米粉。</p>
+            </div>
+          </div>
+
+          <div class="session-panel-content" id="session-tea">
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="tea_1_title">瑞士汁炸雞翼配波浪薯條</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$42</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="tea_1_desc">陳皮蜜香甜豉油燜透，皮脆肉嫩多汁。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="tea_2_title">粒粒流沙西多士</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$36</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="tea_2_desc">夾入香濃花生碎醬，炸至金黃金脆淋純正糖漿。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="tea_3_title">公司三文治 (Club Sandwich)</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$48</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="tea_3_desc">三層烘底白包，煎蛋、煙肉、芝士、番茄四等切。</p>
+            </div>
+          </div>
+
+          <div class="session-panel-content" id="session-dinner">
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="din_1_title">乾炒安格斯牛河</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$72</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="din_1_desc">大廚鐵鑊火光四起，河粉乾爽微焦香，肉嫩多汁。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="din_2_title">招牌星洲炒米</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$68</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="din_2_desc">油咖哩爆炒大蝦仁與叉燒絲，米粉根根分明微辣。</p>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-border); padding:var(--space-4); border-radius:var(--radius-md);">
+              <div style="display:flex; justify-content:space-between;"><strong style="font-family:var(--font-serif-hk);" data-i18n="din_3_title">窩蛋牛肉炒飯</strong><span style="color:var(--color-vermilion); font-family:var(--font-display);">HK$68</span></div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="din_3_desc">生炒鮮牛肉粒粒炒飯，頂層生蛋黃熱拌濃滑順口。</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- PAGE 2: MENU -->
+    <div class="page-view" id="page-menu">
+      <div class="shell-container">
+        <div style="padding-top:var(--space-8); border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-4);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:var(--space-4);">
+            <div>
+              <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--color-vermilion);">MAND T MASTER BILL</span>
+              <h1 style="font-family:var(--font-serif-hk); font-size:clamp(2rem, 4vw, 3rem); font-weight:900;" data-i18n="menu_page_title">全日招牌水牌餐單</h1>
+            </div>
+            <div style="display:flex; gap:var(--space-2);">
+              <span style="font-size:0.75rem; font-weight:700; border:1px dashed var(--color-vermilion); color:var(--color-vermilion); padding:0.25rem 0.5rem; border-radius:var(--radius-sm);" data-i18n="pill_wok_fire">鑊氣生鐵快炒</span>
+              <span style="font-size:0.75rem; font-weight:700; border:1px dashed var(--color-jade); color:var(--color-jade); padding:0.25rem 0.5rem; border-radius:var(--radius-sm);" data-i18n="pill_black_white_milk">荷蘭黑白淡奶</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="menu-toolbar">
+          <div class="search-box-wrap">
+            <input type="text" id="menuSearchInput" class="menu-search-input" placeholder="搜尋菜式 (如: 牛河 / 奶茶 / 菠蘿油)..." data-i18n-placeholder="search_placeholder">
+          </div>
+        </div>
+
+        <nav class="category-sticky-bar">
+          <div class="category-nav-inner">
+            <button class="cat-tab active" data-cat="all" data-i18n="cat_all">全部 All</button>
+            <button class="cat-tab" data-cat="breakfast" data-i18n="cat_bf">晨光早餐</button>
+            <button class="cat-tab" data-cat="allday" data-i18n="cat_all_day">經典常餐</button>
+            <button class="cat-tab" data-cat="wok" data-i18n="cat_wok">馳名鑊氣粉麵</button>
+            <button class="cat-tab" data-cat="baked" data-i18n="cat_baked">懷舊焗飯麵</button>
+            <button class="cat-tab" data-cat="tea" data-i18n="cat_tea">港式下午茶</button>
+            <button class="cat-tab" data-cat="drinks" data-i18n="cat_drinks">地道冷熱飲品</button>
+          </div>
+        </nav>
+
+        <div class="menu-main-wrap">
+          <div id="dishesContainer">
+            <!-- Dishes injected via JS -->
+          </div>
+
+          <aside class="order-slip-sidebar">
+            <div class="bill-slip">
+              <div style="text-align:center; border-bottom:2px dashed var(--color-ink); padding-bottom:var(--space-3); margin-bottom:var(--space-3);">
+                <strong style="font-family:var(--font-serif-hk); font-size:1.25rem;" data-i18n="slip_title">Mand T 茶餐廳 · 水喉單</strong>
+                <span style="display:block; font-size:0.75rem; color:var(--color-ink-muted);">Virtual Waiter Kitchen Slip</span>
+                <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-top:0.4rem; font-family:var(--font-mono);">
+                  <span data-i18n="slip_table">檯號：A-14（搭枱）</span>
+                  <span id="slipTime">12:30</span>
+                </div>
+              </div>
+
+              <div id="billItemsList" style="max-height:260px; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
+                <p id="billEmptyMsg" style="text-align:center; font-size:0.8125rem; color:var(--color-ink-subtle); padding:var(--space-4) 0;" data-i18n="slip_empty">
+                  點擊菜式「＋落單配搭」<br>自動生成伙計速記行話。
+                </p>
+              </div>
+
+              <div style="border-top:2px dashed var(--color-ink); padding-top:var(--space-3); margin-top:var(--space-3); font-size:0.875rem;">
+                <div style="display:flex; justify-content:space-between;">
+                  <span data-i18n="subtotal_label">小計 Subtotal</span>
+                  <strong id="billSubtotalDisplay">HK$ 0</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                  <label style="font-size:0.75rem; display:flex; align-items:center; gap:4px; cursor:pointer;">
+                    <input type="checkbox" id="takeawayCheckbox"> <span data-i18n="takeaway_label">轉外賣盒 (+$2/件)</span>
+                  </label>
+                  <span id="takeawayFeeDisplay" style="font-size:0.8125rem;">HK$ 0</span>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:1.15rem; font-weight:900; color:var(--color-vermilion); margin-top:6px; border-top:1px solid var(--color-border); padding-top:4px;">
+                  <span data-i18n="total_label">總額 Total</span>
+                  <span id="billGrandTotalDisplay">HK$ 0</span>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:var(--space-2); margin-top:var(--space-4);">
+                <button type="button" class="btn-primary" style="width:100%;" id="copySlipBtn">
+                  <span data-i18n="btn_copy_slip">複製伙計水喉單</span>
+                </button>
+                <button type="button" class="btn-secondary" style="width:100%; font-size:0.75rem;" id="clearSlipBtn" data-i18n="btn_clear_slip">
+                  清空水喉單
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: STORY -->
+    <div class="page-view" id="page-story">
+      <div class="shell-container" style="padding-top:var(--space-8);">
+        <div style="border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-4); margin-bottom:var(--space-8);">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--color-vermilion);">OUR HERITAGE</span>
+          <h1 style="font-family:var(--font-serif-hk); font-size:clamp(1.85rem, 3.2vw, 2.75rem); font-weight:900;" data-i18n="story_title">半世紀 Mand T 年表 (1968—2026)</h1>
+          <p style="font-size:0.9375rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="story_subtitle">從灣仔交加街大牌檔炭火，到軒尼詩道兩層堂座，記錄三代人的手藝堅守。</p>
+        </div>
+
+        <div class="timeline-scrubber">
+          <button class="era-button active" data-era="1968">
+            <span style="font-family:var(--font-display); font-size:1.4rem; color:var(--color-vermilion);">1968</span>
+            <strong style="display:block; font-size:0.875rem;" data-i18n="era_btn_1968">交加街大牌檔</strong>
+          </button>
+          <button class="era-button" data-era="1978">
+            <span style="font-family:var(--font-display); font-size:1.4rem; color:var(--color-vermilion);">1978</span>
+            <strong style="display:block; font-size:0.875rem;" data-i18n="era_btn_1978">入舖軒尼詩道</strong>
+          </button>
+          <button class="era-button" data-era="1997">
+            <span style="font-family:var(--font-display); font-size:1.4rem; color:var(--color-vermilion);">1997</span>
+            <strong style="display:block; font-size:0.875rem;" data-i18n="era_btn_1997">抗逆平民飯堂</strong>
+          </button>
+          <button class="era-button" data-era="2014">
+            <span style="font-family:var(--font-display); font-size:1.4rem; color:var(--color-vermilion);">2014</span>
+            <strong style="display:block; font-size:0.875rem;" data-i18n="era_btn_2014">非遺奶茶收徒</strong>
+          </button>
+          <button class="era-button" data-era="2026">
+            <span style="font-family:var(--font-display); font-size:1.4rem; color:var(--color-vermilion);">2026</span>
+            <strong style="display:block; font-size:0.875rem;" data-i18n="era_btn_2026">三代同堂地標</strong>
+          </button>
+        </div>
+
+        <div class="era-stage-card">
+          <div>
+            <span id="eraBadge" style="font-size:0.75rem; font-weight:700; background-color:var(--color-jade-tint); color:var(--color-jade-dark); padding:0.2rem 0.6rem; border-radius:var(--radius-sm); border:1px solid var(--color-jade);">
+              草創期 · 街頭小檔
+            </span>
+            <h2 id="eraHeadline" style="font-family:var(--font-serif-hk); font-size:1.8rem; font-weight:900; margin-top:var(--space-2);">
+              炭火爐邊的清晨四點：交加街木板檔起家
+            </h2>
+            <p id="eraNarrative" style="font-size:0.9375rem; color:var(--color-ink-muted); line-height:1.75; margin-block:var(--space-4);">
+              1968年深秋，創辦人在灣仔交加街推起一輛木板車，架起綠色帆布帳篷。清晨以粗炭燒熱銅煲，拼配三種碎紅茶，四度反覆拉撞，每杯五毫子的厚奶茶成為碼頭工人與洋行跑腿的元氣起點。
+            </p>
+            <div style="border-left:3px solid var(--color-vermilion); padding-left:var(--space-3); font-style:italic; font-size:0.875rem;" id="eraQuote">
+              「茶膽要滾，奶要滑，杯要燙手。做街坊生意，一両茶葉都唔可以呃人。」—— Mand T 創辦人
+            </div>
+          </div>
+          <div style="background-color:var(--color-paper-alt); border:1px solid var(--color-ink); border-radius:var(--radius-sm); padding:var(--space-6);">
+            <strong style="font-family:var(--font-serif-hk); font-size:1.1rem; color:var(--color-ink);" data-i18n="archive_doc_title">歷史文獻存檔</strong>
+            <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.25rem;" data-i18n="archive_doc_desc">
+              手作加厚保溫提壺與1970年代香港市政局發給之首張食肆牌照，見證半世紀市井變遷。
+            </p>
+            <ul style="margin-top:var(--space-3); font-size:0.8125rem; color:var(--color-ink-muted); list-style:square; padding-left:var(--space-4);">
+              <li data-i18n="archive_bullet_1">清晨04:30生火起炭爐</li>
+              <li data-i18n="archive_bullet_2">日售手拉熱奶茶超過千杯</li>
+              <li data-i18n="archive_bullet_3">堅持使用荷蘭黑白淡奶</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 4 Heritage Crafts -->
+        <div class="crafts-interactive-wrap">
+          <div style="margin-bottom:var(--space-4);">
+            <h2 style="font-family:var(--font-serif-hk); font-size:1.8rem; font-weight:900;" data-i18n="crafts_title">Mand T 四大老式手藝</h2>
+            <p style="font-size:0.9375rem; color:var(--color-ink-muted);" data-i18n="crafts_subtitle">點擊切換查看手藝參數與火候標準</p>
+          </div>
+
+          <div class="crafts-nav-row">
+            <button class="craft-nav-btn active" data-craft="tea" data-i18n="cbtn_1">一、瓦煲手拉茶</button>
+            <button class="craft-nav-btn" data-craft="bun" data-i18n="cbtn_2">二、出爐菠蘿油</button>
+            <button class="craft-nav-btn" data-craft="wok" data-i18n="cbtn_3">三、生鐵鑊氣牛河</button>
+            <button class="craft-nav-btn" data-craft="satay" data-i18n="cbtn_4">四、秘傳沙爹底</button>
+          </div>
+
+          <div class="craft-detail-panel active" id="craft-tea">
+            <div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.5rem; font-weight:900;" data-i18n="c_tea_head">瓦煲四沖手拉茶</h3>
+              <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3); line-height:1.7;" data-i18n="c_tea_desc">
+                粗茶取色、中茶取香、幼茶取濃澀。茶袋置於厚身瓦煲慢熬出深褐茶膽，高空於雙銅壺間四度回撞，使茶湯與空氣充分氧化，撫平苦澀。
+              </p>
+              <div style="font-size:0.8125rem; background-color:var(--color-paper-alt); padding:var(--space-3); border-radius:var(--radius-sm);" data-i18n="c_tea_param">
+                <strong>手藝參數：</strong>粗40% : 中35% : 幼25% · 96°C恆定高溫 · 荷蘭黑白淡奶
+              </div>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-ink); padding:var(--space-4); border-radius:var(--radius-sm); font-size:0.8125rem;" data-i18n="c_tea_note">
+              <strong>非遺拉茶關鍵：</strong>手腕旋力決定起泡細緻度。注入厚陶瓷杯後，杯沿需浮現一圈黃金奶沫方為合格。
+            </div>
+          </div>
+
+          <div class="craft-detail-panel" id="craft-bun">
+            <div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.5rem; font-weight:900;" data-i18n="c_bun_head">明爐冰火菠蘿油</h3>
+              <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3); line-height:1.7;" data-i18n="c_bun_desc">
+                老麵自然發酵兩小時，純豬油手搓酥皮，高溫烘烤出自然菱格龜裂。橫剖夾入厚達6mm之冰鎮荷蘭牛油，一冷一熱入口即融。
+              </p>
+              <div style="font-size:0.8125rem; background-color:var(--color-paper-alt); padding:var(--space-3); border-radius:var(--radius-sm);" data-i18n="c_bun_param">
+                <strong>手藝參數：</strong>上火210°C / 下火185°C · 40分鐘出爐一盤 · 5°C冰鎮牛油
+              </div>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-ink); padding:var(--space-4); border-radius:var(--radius-sm); font-size:0.8125rem;" data-i18n="c_bun_note">
+              <strong>出爐鈴聲：</strong>伙計出爐時搖響門前黃銅鈴鐺，大呼「菠蘿包熱辣到！」，此傳統自1978年延續至今。
+            </div>
+          </div>
+
+          <div class="craft-detail-panel" id="craft-wok">
+            <div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.5rem; font-weight:900;" data-i18n="c_wok_head">生鐵猛火乾炒牛河</h3>
+              <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3); line-height:1.7;" data-i18n="c_wok_desc">
+                生鐵鑊油溫達250°C以上，下油不可多、下老抽不可猛。十五秒拋鑊鎖住肉汁，河粉乾爽帶焦香，食畢盤底無流動油漬。
+              </p>
+              <div style="font-size:0.8125rem; background-color:var(--color-paper-alt); padding:var(--space-3); border-radius:var(--radius-sm);" data-i18n="c_wok_param">
+                <strong>手藝參數：</strong>250°C極高溫 · 拋鑊8次 · 雙磺頭抽上色 · 1分45秒極速出餐
+              </div>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-ink); padding:var(--space-4); border-radius:var(--radius-sm); font-size:0.8125rem;" data-i18n="c_wok_note">
+              <strong>鑊氣考驗：</strong>鑊氣源自食材在高溫瞬間產生的美拉德香氣，是考驗粵菜茶餐廳師傅的終極考題。
+            </div>
+          </div>
+
+          <div class="craft-detail-panel" id="craft-satay">
+            <div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.5rem; font-weight:900;" data-i18n="c_satay_head">秘傳慢熬沙爹醬底</h3>
+              <p style="font-size:0.875rem; color:var(--color-ink-muted); margin-block:var(--space-3); line-height:1.7;" data-i18n="c_satay_desc">
+                拒用現成桶裝工廠醬料。每週由老師傅翻炒新鮮生花生、蒜蓉、紅蔥頭與烘香的大地魚粉，慢火推膏熬煮六小時，熟成三天。
+              </p>
+              <div style="font-size:0.8125rem; background-color:var(--color-paper-alt); padding:var(--space-3); border-radius:var(--radius-sm);" data-i18n="c_satay_param">
+                <strong>手藝參數：</strong>慢火推膏6小時 · 陶瓷缸熟成3天 · 粗磨花生碎顆粒感
+              </div>
+            </div>
+            <div style="background-color:var(--color-card); border:1px solid var(--color-ink); padding:var(--space-4); border-radius:var(--radius-sm); font-size:0.8125rem;" data-i18n="c_satay_note">
+              <strong>公仔麵靈魂：</strong>先以老雞清湯化開兩勺原醬，再將牛肉絲緊緊包裹濃稠醬汁澆在麵上。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: GALLERY -->
+    <div class="page-view" id="page-gallery">
+      <div class="shell-container" style="padding-top:var(--space-8);">
+        <div style="border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-4); margin-bottom:var(--space-8);">
+          <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--color-vermilion);">MAND T ARCHIVES</span>
+          <h1 style="font-family:var(--font-serif-hk); font-size:clamp(1.85rem, 3.2vw, 2.75rem); font-weight:900;" data-i18n="gallery_title">街坊生活與時光印記</h1>
+          <p style="font-size:0.9375rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="gallery_subtitle">定格灣仔半世紀的市井晨昏，每一張照片皆是一段街坊回憶。</p>
+        </div>
+
+        <div class="archive-grid">
+          <article class="archive-card">
+            <div class="card-visual-frame">
+              <span style="position:absolute; top:8px; right:8px; font-family:var(--font-mono); font-size:0.6875rem; background:rgba(255,255,255,0.9); padding:2px 6px; border:1px solid var(--color-ink);">1974 · 交加街</span>
+              <svg viewBox="0 0 160 100" width="100" height="70" fill="none">
+                <rect x="20" y="20" width="120" height="60" fill="var(--color-paper-alt)" stroke="var(--color-ink)" stroke-width="2"/>
+                <path d="M40 30 H120 M40 50 H120 M40 70 H120" stroke="var(--color-border-dark)" stroke-width="1"/>
+                <circle cx="80" cy="50" r="16" fill="var(--color-vermilion)"/>
+              </svg>
+            </div>
+            <div style="padding:var(--space-4);">
+              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-ink-muted);">MAND-T-ARC-1974</div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.15rem; font-weight:900; margin-top:2px;" data-i18n="g_card_1_title">師傅親手撞茶的專注神情</h3>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="g_card_1_desc">晨光破曉之際，雙手拉出半米長之茶瀑，滿街熟茶甘香。</p>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <div class="card-visual-frame">
+              <span style="position:absolute; top:8px; right:8px; font-family:var(--font-mono); font-size:0.6875rem; background:rgba(255,255,255,0.9); padding:2px 6px; border:1px solid var(--color-ink);">1982 · 軒尼詩道</span>
+              <svg viewBox="0 0 160 100" width="100" height="70" fill="none">
+                <rect x="25" y="30" width="110" height="40" fill="var(--color-jade-dark)" stroke="var(--color-vermilion)" stroke-width="2"/>
+                <text x="80" y="55" fill="var(--color-white)" font-family="var(--font-serif-hk)" font-size="12" font-weight="900" text-anchor="middle">Mand T 茶餐廳</text>
+              </svg>
+            </div>
+            <div style="padding:var(--space-4);">
+              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-ink-muted);">MAND-T-ARC-1982</div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.15rem; font-weight:900; margin-top:2px;" data-i18n="g_card_2_title">雨夜霓虹與雙層中巴交匯</h3>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="g_card_2_desc">綠色中巴掠過暖紅霓虹招牌，滿堂食客熱氣騰騰吃牛河。</p>
+            </div>
+          </article>
+
+          <article class="archive-card">
+            <div class="card-visual-frame">
+              <span style="position:absolute; top:8px; right:8px; font-family:var(--font-mono); font-size:0.6875rem; background:rgba(255,255,255,0.9); padding:2px 6px; border:1px solid var(--color-ink);">1988 · 實木卡位</span>
+              <svg viewBox="0 0 160 100" width="100" height="70" fill="none">
+                <rect x="20" y="25" width="20" height="60" fill="var(--color-amber)"/>
+                <rect x="120" y="25" width="20" height="60" fill="var(--color-amber)"/>
+                <rect x="40" y="55" width="80" height="6" fill="var(--color-ink)"/>
+              </svg>
+            </div>
+            <div style="padding:var(--space-4);">
+              <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-ink-muted);">MAND-T-ARC-1988</div>
+              <h3 style="font-family:var(--font-serif-hk); font-size:1.15rem; font-weight:900; margin-top:2px;" data-i18n="g_card_3_title">一份明報、一杯熱奶茶的清晨</h3>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="g_card_3_desc">翻看馬經與社評，旁若無人搭枱靜坐，老香港特有市井默契。</p>
+            </div>
+          </article>
+        </div>
+
+        <div style="padding-top:var(--space-8);">
+          <div style="border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-3); margin-bottom:var(--space-4);">
+            <h2 style="font-family:var(--font-serif-hk); font-size:1.6rem; font-weight:900;" data-i18n="cards_title">街坊口述心聲信箱</h2>
+            <p style="font-size:0.9375rem; color:var(--color-ink-muted);" data-i18n="cards_subtitle">跨越半世紀寫在水喉單背後的情感記錄</p>
+          </div>
+          <div class="postcards-grid">
+            <article class="memory-postcard">
+              <p style="font-size:0.875rem; color:var(--color-ink);" data-i18n="pc_1_quote">「當年船塢收工全身油污，別家嫌我哋污糟。得老闆笑口話『入嚟坐低，飲啖茶先！』呢杯奶茶，我記咗一世。」</p>
+              <div style="margin-top:var(--space-3); border-top:1px dashed var(--color-ink-muted); padding-top:4px; font-size:0.75rem;">
+                <strong data-i18n="pc_1_author">權叔（74歲）</strong> · <span data-i18n="pc_1_role">前太古船塢裝配工人</span>
+              </div>
+            </article>
+
+            <article class="memory-postcard">
+              <p style="font-size:0.875rem; color:var(--color-ink);" data-i18n="pc_2_quote">「修頓打完太極同班老友記一定嚟 Mand T。夥計見我入嚟就大叫『芳姐滾水蛋走甜！』人情味濃過杯茶。」</p>
+              <div style="margin-top:var(--space-3); border-top:1px dashed var(--color-ink-muted); padding-top:4px; font-size:0.75rem;">
+                <strong data-i18n="pc_2_author">芳姐（81歲）</strong> · <span data-i18n="pc_2_role">修頓晨運隊</span>
+              </div>
+            </article>
+
+            <article class="memory-postcard">
+              <p style="font-size:0.875rem; color:var(--color-ink);" data-i18n="pc_3_quote">「沙士嗰年軒尼詩道靜英英，Mand T 依然開朝六晚十，廚房大火炒牛河熱辣辣。坐低食餐飯，就覺得香港有希望。」</p>
+              <div style="margin-top:var(--space-3); border-top:1px dashed var(--color-ink-muted); padding-top:4px; font-size:0.75rem;">
+                <strong data-i18n="pc_3_author">標哥（62歲）</strong> · <span data-i18n="pc_3_role">通宵小巴司機</span>
+              </div>
+            </article>
+
+            <article class="memory-postcard">
+              <p style="font-size:0.875rem; color:var(--color-ink);" data-i18n="pc_4_quote">「細個阿爺帶我嚟食菠蘿油，今日我帶自己個女嚟。綠白紙皮石地磚無變，味道無變，這就是灣仔最安心的底色。」</p>
+              <div style="margin-top:var(--space-3); border-top:1px dashed var(--color-ink-muted); padding-top:4px; font-size:0.75rem;">
+                <strong data-i18n="pc_4_author">澄仔（33歲）</strong> · <span data-i18n="pc_4_role">灣仔在地插畫師</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 5: VISIT -->
+    <div class="page-view" id="page-visit">
+      <div class="shell-container" style="padding-top:var(--space-8);">
+        <section style="padding-bottom:var(--space-12); border-bottom:2px solid var(--color-ink);">
+          <div style="display:grid; grid-template-columns:1.2fr 0.8fr; gap:var(--space-8); align-items:center;">
+            <div>
+              <span style="font-size:0.8125rem; font-weight:700; background:var(--color-amber-soft); padding:4px 8px; border:1px solid var(--color-amber); border-radius:4px;" data-i18n="visit_badge">
+                灣仔軒尼詩道188號地下 · 港鐵灣仔站 A4 出口步行 3 分鐘
+              </span>
+              <h1 style="font-family:var(--font-serif-hk); font-size:clamp(2.2rem, 4vw, 3.2rem); font-weight:900; margin-top:var(--space-3);">
+                <span data-i18n="visit_title_1">尋味灣仔，</span><span style="color:var(--color-vermilion);" data-i18n="visit_title_2">入座即點即炒</span>
+              </h1>
+              <p style="font-size:1.1rem; color:var(--color-ink-muted); margin-block:var(--space-3);" data-i18n="visit_lead">
+                清晨六點半銅煲滾水，深夜十點半鐵鑊收火。歡迎街坊散座、搭枱享用經典絲襪厚奶茶與鑊氣炒粉麵。
+              </p>
+              <div style="display:flex; gap:var(--space-3);">
+                <a href="#estimatorAnchor" class="btn-primary" data-i18n="btn_view_queue">查看即時輪候時間</a>
+                <a href="#transitAnchor" class="btn-secondary" data-i18n="btn_view_transit">交通導航指引</a>
+              </div>
+            </div>
+
+            <div style="background:var(--color-card); border:2px solid var(--color-ink); border-radius:8px; padding:var(--space-6); box-shadow:8px 8px 0 var(--color-jade-dark); text-align:center;">
+              <strong style="font-family:var(--font-serif-hk); font-size:1.2rem;" data-i18n="elevation_box_title">Mand T 門面立面</strong>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="elevation_box_desc">門市電話：(852) 2511 8839 · 堂食 68 座 · 設有經典實木卡位</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Queue Estimator -->
+        <section id="estimatorAnchor" style="padding-block:var(--space-12); border-bottom:2px solid var(--color-ink);">
+          <div class="estimator-card">
+            <div style="border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-4); margin-bottom:var(--space-6); display:flex; justify-content:space-between; align-items:flex-end;">
+              <div>
+                <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--color-vermilion);">REAL-TIME QUEUE ESTIMATOR</span>
+                <h2 style="font-family:var(--font-serif-hk); font-size:1.8rem; font-weight:900;" data-i18n="queue_box_title">即時輪候籌號與等候時間試算</h2>
+              </div>
+              <span style="font-size:0.8125rem; font-weight:700; background:var(--color-jade-tint); color:var(--color-jade-dark); padding:4px 8px; border-radius:4px;" data-i18n="queue_sync_badge">
+                現場叫號同步
+              </span>
+            </div>
+
+            <div class="estimator-grid">
+              <div style="display:flex; flex-direction:column; gap:var(--space-4);">
+                <div>
+                  <label style="font-size:0.875rem; font-weight:700;" data-i18n="party_size_label">用餐人數 Party Size</label>
+                  <div style="display:flex; gap:var(--space-2); margin-top:var(--space-1);">
+                    <button type="button" class="btn-secondary active" style="flex:1;" data-party="1-2" data-base="6" data-i18n="party_opt_1">1 - 2 人 (A飛)</button>
+                    <button type="button" class="btn-secondary" style="flex:1;" data-party="3-4" data-base="14" data-i18n="party_opt_2">3 - 4 人 (B飛)</button>
+                    <button type="button" class="btn-secondary" style="flex:1;" data-party="5+" data-base="22" data-i18n="party_opt_3">5人以上 (C飛)</button>
+                  </div>
+                </div>
+
+                <div>
+                  <label style="font-size:0.875rem; font-weight:700;" data-i18n="seating_pref_label">入座默契</label>
+                  <div style="display:flex; gap:var(--space-2); margin-top:var(--space-1);">
+                    <button type="button" class="btn-secondary active" style="flex:1;" data-pref="share" data-i18n="pref_opt_1">✔ 願意搭枱 (最快)</button>
+                    <button type="button" class="btn-secondary" style="flex:1;" data-pref="booth" data-i18n="pref_opt_2">不搭枱/等卡位 (+8分鐘)</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="live-slip-pod">
+                <span style="font-family:var(--font-mono); font-size:0.8125rem; color:var(--color-ink-muted);">
+                  <span data-i18n="current_calls_label">當前叫號：</span><strong>A-078 / B-032 / C-011</strong>
+                </span>
+                <div style="font-size:0.8125rem; font-weight:700; color:var(--color-ink-muted);" data-i18n="est_ticket_label">預計等候籌號</div>
+                <div style="font-family:var(--font-display); font-size:3.2rem; color:var(--color-vermilion); line-height:1;" id="calcTicketNum">A-084</div>
+                <div style="background:var(--color-amber-soft); padding:4px 12px; border-radius:4px; font-weight:700;">
+                  <span data-i18n="est_wait_label">預計等候時間：</span><span id="calcWaitTime" style="font-size:1.2rem; color:var(--color-ink);">6 - 8</span> <span data-i18n="minutes_unit">分鐘</span>
+                </div>
+                <button type="button" class="btn-primary" style="margin-top:var(--space-2);" id="getQueueAlertBtn" data-i18n="btn_queue_register">登記取號提醒</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Transit -->
+        <section id="transitAnchor" style="padding-block:var(--space-16);">
+          <div style="border-bottom:2px solid var(--color-ink); padding-bottom:var(--space-4); margin-bottom:var(--space-8);">
+            <span style="font-family:var(--font-mono); font-size:0.75rem; font-weight:700; color:var(--color-vermilion);">HOW TO REACH US</span>
+            <h2 style="font-family:var(--font-serif-hk); font-size:2rem; font-weight:900;" data-i18n="transit_title">交通指引與港島動線</h2>
+          </div>
+
+          <div class="transit-map-grid">
+            <div style="background:var(--color-card); border:2px solid var(--color-ink); border-radius:8px; padding:var(--space-6); box-shadow:6px 6px 0 var(--color-ink);">
+              <strong style="font-family:var(--font-serif-hk); font-size:1.1rem;" data-i18n="nav_map_box_title">灣仔街道導航示意</strong>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:4px;" data-i18n="nav_map_box_desc">
+                位於菲林明道與柯布連道之間，對正修頓球場看台後方，門前設有綠色復古遮雨篷。
+              </p>
+            </div>
+
+            <div>
+              <article class="transit-pill-box">
+                <div style="width:40px; height:40px; background:var(--color-mtr-blue); color:#fff; display:grid; place-items:center; font-weight:900; border-radius:4px;">鐵</div>
+                <div>
+                  <strong data-i18n="transit_mtr_title">港鐵 MTR (港島線)</strong>
+                  <p style="font-size:0.8125rem; color:var(--color-ink-muted);" data-i18n="transit_mtr_desc">灣仔站 A4 出口左轉沿軒尼詩道直行約 180 米即達（步行約 3 分鐘）。</p>
+                </div>
+              </article>
+
+              <article class="transit-pill-box">
+                <div style="width:40px; height:40px; background:var(--color-tram-green); color:#fff; display:grid; place-items:center; font-weight:900; border-radius:4px;">車</div>
+                <div>
+                  <strong data-i18n="transit_tram_title">香港電車 Ding Ding</strong>
+                  <p style="font-size:0.8125rem; color:var(--color-ink-muted);" data-i18n="transit_tram_desc">於「菲林明道站 (45E/56W)」下車，穿過太原街步行約 2 分鐘。</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Dish Modifier Modal -->
+  <div class="modal-backdrop" id="dishModal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeDishModalBtn">&times;</button>
+      <div>
+        <h3 id="modalDishName" style="font-family:var(--font-serif-hk); font-size:1.4rem; font-weight:900;">菜式名稱</h3>
+        <p id="modalDishDesc" style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:2px;">菜式描述</p>
+        <div id="modalDishBasePrice" style="font-family:var(--font-display); font-size:1.3rem; color:var(--color-vermilion); margin-top:6px;">HK$ 0</div>
+      </div>
+
+      <div id="drinkModSection" style="margin-top:var(--space-4); border-top:1px dashed var(--color-border); padding-top:var(--space-3);">
+        <label style="font-size:0.8125rem; font-weight:700; display:block; margin-bottom:var(--space-2);" data-i18n="mod_temp_title">冷熱溫度 Temperature</label>
+        <div style="display:flex; gap:var(--space-2);" id="drinkTempGroup">
+          <button class="btn-secondary active" data-mod="temp" data-val="熱" data-extra="0" data-i18n="mod_hot">熱飲 Hot</button>
+          <button class="btn-secondary" data-mod="temp" data-val="凍" data-extra="3" data-i18n="mod_iced">凍飲 Iced (+HK$3)</button>
+        </div>
+
+        <label style="font-size:0.8125rem; font-weight:700; display:block; margin-top:var(--space-3); margin-bottom:var(--space-2);" data-i18n="mod_sweet_title">甜度調味 Sweetness</label>
+        <div style="display:flex; flex-wrap:wrap; gap:var(--space-2);" id="drinkSweetGroup">
+          <button class="btn-secondary active" data-mod="sweet" data-val="正常甜" data-i18n="mod_sweet_norm">正常甜</button>
+          <button class="btn-secondary" data-mod="sweet" data-val="少甜" data-i18n="mod_sweet_less">少甜</button>
+          <button class="btn-secondary" data-mod="sweet" data-val="走甜" data-i18n="mod_sweet_none">走甜</button>
+          <button class="btn-secondary" data-mod="sweet" data-val="茶走" data-i18n="mod_sweet_condensed">茶走 (改煉奶)</button>
+        </div>
+      </div>
+
+      <div id="foodModSection" style="margin-top:var(--space-4); border-top:1px dashed var(--color-border); padding-top:var(--space-3);">
+        <label style="font-size:0.8125rem; font-weight:700; display:block; margin-bottom:var(--space-2);" data-i18n="mod_kitchen_pref_title">廚房特製口述 Kitchen Preference</label>
+        <div style="display:flex; flex-wrap:wrap; gap:var(--space-2);">
+          <label style="font-size:0.8125rem; background:var(--color-paper); padding:0.35rem 0.65rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer;">
+            <input type="checkbox" id="chkNoGreen"> <span data-i18n="mod_no_scallion">走青 (免蔥/芫荽)</span>
+          </label>
+          <label style="font-size:0.8125rem; background:var(--color-paper); padding:0.35rem 0.65rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer;">
+            <input type="checkbox" id="chkToast" data-extra="3"> <span data-i18n="mod_toast_crust">多士烘底 (+HK$3)</span>
+          </label>
+          <label style="font-size:0.8125rem; background:var(--color-paper); padding:0.35rem 0.65rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer;">
+            <input type="checkbox" id="chkFriedRice" data-extra="5"> <span data-i18n="mod_fried_rice_base">飯底改炒飯 (+HK$5)</span>
+          </label>
+          <label style="font-size:0.8125rem; background:var(--color-paper); padding:0.35rem 0.65rem; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer;">
+            <input type="checkbox" id="chkDemae" data-extra="5"> <span data-i18n="mod_demae_ramen">轉出前一丁 (+HK$5)</span>
+          </label>
+        </div>
+      </div>
+
+      <div style="margin-top:var(--space-6); border-top:2px solid var(--color-ink); padding-top:var(--space-4); display:flex; justify-content:space-between; align-items:center;">
+        <div><span data-i18n="modal_calc_total">合計：</span><strong id="modalCalculatedTotal" style="font-family:var(--font-display); font-size:1.35rem; color:var(--color-vermilion);">HK$ 0</strong></div>
+        <button type="button" class="btn-primary" id="confirmAddToSlipBtn" data-i18n="btn_add_to_slip">加入水喉單</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-msg" id="toastMessage">已成功登記！</div>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="shell-container">
+      <div class="footer-inner">
+        <div>
+          <h3 style="font-family:var(--font-serif-hk); font-size:1.8rem; font-weight:900; color:var(--color-paper-warm);" data-i18n="footer_title">Mand T 茶餐廳</h3>
+          <p style="font-size:0.875rem; color:var(--color-tile-line); margin-top:var(--space-2); line-height:1.6;" data-i18n="footer_desc">
+            香港灣仔軒尼詩道188號地下。恪守傳統火候，撞出絲滑厚奶茶，見證香港島匆匆步履與人情溫度。
+          </p>
+          <div style="margin-top:var(--space-4); font-size:0.75rem; color:var(--color-paper-alt);" data-i18n="footer_license">
+            普通食肆牌照：0311892014 · 只此一家 絕無分店
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-serif-hk); font-weight:700; color:var(--color-amber-soft); margin-bottom:var(--space-3);" data-i18n="footer_dir_title">全站導覽 Directory</h4>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:var(--space-2); font-size:0.875rem;">
+            <li><button type="button" data-page-jump="home" style="color:var(--color-paper-alt); text-align:left;">01 <span data-i18n="nav_home">首頁 Home</span></button></li>
+            <li><button type="button" data-page-jump="menu" style="color:var(--color-paper-alt); text-align:left;">02 <span data-i18n="nav_menu">招牌餐牌 Master Menu</span></button></li>
+            <li><button type="button" data-page-jump="story" style="color:var(--color-paper-alt); text-align:left;">03 <span data-i18n="nav_story">冰室故事 Our Story</span></button></li>
+            <li><button type="button" data-page-jump="gallery" style="color:var(--color-paper-alt); text-align:left;">04 <span data-i18n="nav_gallery">街坊生活 Gallery & Moments</span></button></li>
+            <li><button type="button" data-page-jump="visit" style="color:var(--color-amber); text-align:left;">05 <span data-i18n="nav_visit">堂座及交通 Location & Visit</span></button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-serif-hk); font-weight:700; color:var(--color-amber-soft); margin-bottom:var(--space-3);" data-i18n="footer_hours_title">營業時間 Hours</h4>
+          <div style="font-size:0.875rem; color:var(--color-paper-alt); display:flex; flex-direction:column; gap:4px;">
+            <p data-i18n="footer_hours_daily">每日：06:30 — 22:30</p>
+            <p data-i18n="footer_hours_last">廚房最後落單：22:00</p>
+            <p style="color:var(--color-tile-line); font-size:0.8125rem; margin-top:4px;">Octopus · Cash · FPS · PayMe</p>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="font-family:var(--font-serif-hk); font-weight:700; color:var(--color-amber-soft); margin-bottom:var(--space-3);" data-i18n="footer_contact_title">門市聯絡 Visit</h4>
+          <div style="font-size:0.875rem; color:var(--color-paper-alt); display:flex; flex-direction:column; gap:4px;">
+            <p><strong style="color:var(--color-white);" data-i18n="footer_address">香港灣仔軒尼詩道188號地下</strong></p>
+            <p data-i18n="footer_transit_hint">港鐵灣仔站 A4 出口步行 3 分鐘</p>
+            <p style="margin-top:6px;"><span data-i18n="footer_hotline">電話熱線：</span><strong style="color:var(--color-white);">(852) 2511 8839</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding-top:var(--space-6); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--color-ink-subtle); flex-wrap:wrap; gap:var(--space-2);">
+        <span>© 1968—2026 Mand T 茶餐廳 Mand T Cha Chaan Teng. All rights reserved.</span>
+        <span>Crafted with authentic Bing Sutt typography & heritage craftsmanship.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dual-Language Translation Dictionary
+      const i18nData = {
+        'zh': {
+          lang_btn: '🌐 ENG',
+          brand_name: 'Mand T 茶餐廳',
+          nav_home: '首頁 Home',
+          nav_menu: '招牌餐牌 Menu',
+          nav_story: '冰室故事 Story',
+          nav_gallery: '街坊生活 Gallery',
+          nav_visit: '堂座及交通 Visit',
+          hero_tag: '灣仔半世紀 · 每日清晨六點半準時開爐',
+          hero_title_1: '晨光奶茶，',
+          hero_title_2: '炭火熱炒',
+          hero_desc: 'Mand T 茶餐廳自1968年起立足灣仔。老茶膽撞荷蘭黑白淡奶，高溫猛火鑊氣乾炒牛河，凝聚香港街坊最真實的煙火日常與甘香記憶。',
+          hero_btn_menu: '翻開今日快餐牌',
+          hero_btn_queue: '到訪門市與實時等位',
+          stat_1: '載街坊鄰里信賴',
+          stat_2: '日均手拉茶杯數',
+          stat_3: '菠蘿包出爐週期',
+          badge_heritage_tea: '手工四度撞茶',
+          badge_seating_status: '● 堂食客滿 · 歡迎搭枱',
+          hero_tea_card_title: 'Mand T 瓦煲厚奶茶',
+          hero_tea_card_desc: '三種碎紅茶原煲深煮，棉紗布袋高空四度拉撞，脂香醇厚回甘。',
+          queue_now_calling: '現場叫號進度：',
+          four_sigs_title: '四大招牌名物',
+          four_sigs_desc: 'Mand T 傳承半世紀配方，食客由朝到晚的落單首選',
+          view_full_menu_link: '查看完整餐牌 →',
+          sig_1_name: '瓦煲絲襪厚奶茶',
+          sig_1_desc: '斯里蘭卡粗中幼三茶拼配，荷蘭黑白淡奶撞出豐厚脂香。',
+          sig_1_badge: '熱飲/凍飲+3',
+          sig_2_name: '冰火鮮油菠蘿包',
+          sig_2_desc: '每40分鐘熱騰出爐，金黃脆裂酥皮，夾入厚切冰鎮荷蘭牛油。',
+          sig_2_badge: '出爐即搶',
+          sig_3_name: '乾炒安格斯牛河',
+          sig_3_desc: '鐵鑊猛火拋翻15秒，芽菜爽脆，每條河粉乾身焦香不油膩。',
+          sig_3_badge: '鑊氣標竿',
+          sig_4_name: '鮮茄焗厚切豬扒飯',
+          sig_4_desc: '蛋炒飯底鋪墊，帶骨厚切豬扒鬆化多汁，鮮熬番茄醬焗至微焦。',
+          sig_4_badge: '全日名物',
+          session_title: '時段快餐牌 Session Menu',
+          session_subtitle: '按時入座，感受 Mand T 快、準、熱的落單節奏',
+          session_perk: '廚房即叫即炒 · 奉送熱咖啡或熱茶',
+          sess_tab_bf: '晨光早市 Breakfast',
+          sess_tab_tea: '愜意下午茶 Tea',
+          sess_tab_din: '鑊氣晚市 Dinner',
+          bf_1_title: '特濃沙爹牛肉公仔麵餐',
+          bf_1_desc: '現炒花生沙爹醬、太陽雙煎蛋及牛油多士，送熱奶茶。',
+          bf_2_title: '火腿香濃雞湯通粉餐',
+          bf_2_desc: '老火雞高湯配金華火腿絲，嫩炒滑蛋與厚烘多士。',
+          bf_3_title: '榨菜肉絲炆米粉餐',
+          bf_3_desc: '爽脆榨菜搭手切嫩豬肉絲，鑊氣快燴新竹米粉。',
+          tea_1_title: '瑞士汁炸雞翼配波浪薯條',
+          tea_1_desc: '陳皮蜜香甜豉油燜透，皮脆肉嫩多汁。',
+          tea_2_title: '粒粒流沙西多士',
+          tea_2_desc: '夾入香濃花生碎醬，炸至金黃金脆淋純正糖漿。',
+          tea_3_title: '公司三文治 (Club Sandwich)',
+          tea_3_desc: '三層烘底白包，煎蛋、煙肉、芝士、番茄四等切。',
+          din_1_title: '乾炒安格斯牛河',
+          din_1_desc: '大廚鐵鑊火光四起，河粉乾爽微焦香，肉嫩多汁。',
+          din_2_title: '招牌星洲炒米',
+          din_2_desc: '油咖哩爆炒大蝦仁與叉燒絲，米粉根根分明微辣。',
+          din_3_title: '窩蛋牛肉炒飯',
+          din_3_desc: '生炒鮮牛肉粒粒炒飯，頂層生蛋黃熱拌濃滑順口。',
+          menu_page_title: '全日招牌水牌餐單',
+          pill_wok_fire: '鑊氣生鐵快炒',
+          pill_black_white_milk: '荷蘭黑白淡奶',
+          search_placeholder: '搜尋菜式 (如: 牛河 / 奶茶 / 菠蘿油)...',
+          cat_all: '全部 All',
+          cat_bf: '晨光早餐',
+          cat_all_day: '經典常餐',
+          cat_wok: '馳名鑊氣粉麵',
+          cat_baked: '懷舊焗飯麵',
+          cat_tea: '港式下午茶',
+          cat_drinks: '地道冷熱飲品',
+          slip_title: 'Mand T 茶餐廳 · 水喉單',
+          slip_table: '檯號：A-14（搭枱）',
+          slip_empty: '點擊菜式「＋落單配搭」<br>自動生成伙計速記行話。',
+          subtotal_label: '小計 Subtotal',
+          takeaway_label: '轉外賣盒 (+$2/件)',
+          total_label: '總額 Total',
+          btn_copy_slip: '複製伙計水喉單',
+          btn_clear_slip: '清空水喉單',
+          story_title: '半世紀 Mand T 年表 (1968—2026)',
+          story_subtitle: '從灣仔交加街大牌檔炭火，到軒尼詩道兩層堂座，記錄三代人的手藝堅守。',
+          era_btn_1968: '交加街大牌檔',
+          era_btn_1978: '入舖軒尼詩道',
+          era_btn_1997: '抗逆平民飯堂',
+          era_btn_2014: '非遺奶茶收徒',
+          era_btn_2026: '三代同堂地標',
+          archive_doc_title: '歷史文獻存檔',
+          archive_doc_desc: '手作加厚保溫提壺與1970年代香港市政局發給之首張食肆牌照，見證半世紀市井變遷。',
+          archive_bullet_1: '清晨04:30生火起炭爐',
+          archive_bullet_2: '日售手拉熱奶茶超過千杯',
+          archive_bullet_3: '堅持使用荷蘭黑白淡奶',
+          crafts_title: 'Mand T 四大老式手藝',
+          crafts_subtitle: '點擊切換查看手藝參數與火候標準',
+          cbtn_1: '一、瓦煲手拉茶',
+          cbtn_2: '二、出爐菠蘿油',
+          cbtn_3: '三、生鐵鑊氣牛河',
+          cbtn_4: '四、秘傳沙爹底',
+          c_tea_head: '瓦煲四沖手拉茶',
+          c_tea_desc: '粗茶取色、中茶取香、幼茶取濃澀。茶袋置於厚身瓦煲慢熬出深褐茶膽，高空於雙銅壺間四度回撞，使茶湯與空氣充分氧化，撫平苦澀。',
+          c_tea_param: '手藝參數：粗40% : 中35% : 幼25% · 96°C恆定高溫 · 荷蘭黑白淡奶',
+          c_tea_note: '非遺拉茶關鍵：手腕旋力決定起泡細緻度。注入厚陶瓷杯後，杯沿需浮現一圈黃金奶沫方為合格。',
+          c_bun_head: '明爐冰火菠蘿油',
+          c_bun_desc: '老麵自然發酵兩小時，純豬油手搓酥皮，高溫烘烤出自然菱格龜裂。橫剖夾入厚達6mm之冰鎮荷蘭牛油，一冷一熱入口即融。',
+          c_bun_param: '手藝參數：上火210°C / 下火185°C · 40分鐘出爐一盤 · 5°C冰鎮牛油',
+          c_bun_note: '出爐鈴聲：伙計出爐時搖響門前黃銅鈴鐺，大呼「菠蘿包熱辣到！」，此傳統自1978年延續至今。',
+          c_wok_head: '生鐵猛火乾炒牛河',
+          c_wok_desc: '生鐵鑊油溫達250°C以上，下油不可多、下老抽不可猛。十五秒拋鑊鎖住肉汁，河粉乾爽帶焦香，食畢盤底無流動油漬。',
+          c_wok_param: '手藝參數：250°C極高溫 · 拋鑊8次 · 雙磺頭抽上色 · 1分45秒極速出餐',
+          c_wok_note: '鑊氣考驗：鑊氣源自食材在高溫瞬間產生的美拉德香氣，是考驗粵菜茶餐廳師傅的終極考題。',
+          c_satay_head: '秘傳慢熬沙爹醬底',
+          c_satay_desc: '拒用現成桶裝工廠醬料。每週由老師傅翻炒新鮮生花生、蒜蓉、紅蔥頭與烘香的大地魚粉，慢火推膏熬煮六小時，熟成三天。',
+          c_satay_param: '手藝參數：慢火推膏6小時 · 陶瓷缸熟成3天 · 粗磨花生碎顆粒感',
+          c_satay_note: '公仔麵靈魂：先以老雞清湯化開兩勺原醬，再將牛肉絲緊緊包裹濃稠醬汁澆在麵上。',
+          gallery_title: '街坊生活與時光印記',
+          gallery_subtitle: '定格灣仔半世紀的市井晨昏，每一張照片皆是一段街坊回憶。',
+          g_card_1_title: '師傅親手撞茶的專注神情',
+          g_card_1_desc: '晨光破曉之際，雙手拉出半米長之茶瀑，滿街熟茶甘香。',
+          g_card_2_title: '雨夜霓虹與雙層中巴交匯',
+          g_card_2_desc: '綠色中巴掠過暖紅霓虹招牌，滿堂食客熱氣騰騰吃牛河。',
+          g_card_3_title: '一份明報、一杯熱奶茶的清晨',
+          g_card_3_desc: '翻看馬經與社評，旁若無人搭枱靜坐，老香港特有市井默契。',
+          cards_title: '街坊口述心聲信箱',
+          cards_subtitle: '跨越半世紀寫在水喉單背後的情感記錄',
+          pc_1_quote: '「當年船塢收工全身油污，別家嫌我哋污糟。得老闆笑口話『入嚟坐低，飲啖茶先！』呢杯奶茶，我記咗一世。」',
+          pc_1_author: '權叔（74歲）',
+          pc_1_role: '前太古船塢裝配工人',
+          pc_2_quote: '「修頓打完太極同班老友記一定嚟 Mand T。夥計見我入嚟就大叫『芳姐滾水蛋走甜！』人情味濃過杯茶。」',
+          pc_2_author: '芳姐（81歲）',
+          pc_2_role: '修頓晨運隊',
+          pc_3_quote: '「沙士嗰年軒尼詩道靜英英，Mand T 依然開朝六晚十，廚房大火炒牛河熱辣辣。坐低食餐飯，就覺得香港有希望。」',
+          pc_3_author: '標哥（62歲）',
+          pc_3_role: '通宵小巴司機',
+          pc_4_quote: '「細個阿爺帶我嚟食菠蘿油，今日我帶自己個女嚟。綠白紙皮石地磚無變，味道無變，這就是灣仔最安心的底色。」',
+          pc_4_author: '澄仔（33歲）',
+          pc_4_role: '灣仔在地插畫師',
+          visit_badge: '灣仔軒尼詩道188號地下 · 港鐵灣仔站 A4 出口步行 3 分鐘',
+          visit_title_1: '尋味灣仔，',
+          visit_title_2: '入座即點即炒',
+          visit_lead: '清晨六點半銅煲滾水，深夜十點半鐵鑊收火。歡迎街坊散座、搭枱享用經典絲襪厚奶茶與鑊氣炒粉麵。',
+          btn_view_queue: '查看即時輪候時間',
+          btn_view_transit: '交通導航指引',
+          elevation_box_title: 'Mand T 門面立面',
+          elevation_box_desc: '門市電話：(852) 2511 8839 · 堂食 68 座 · 設有經典實木卡位',
+          queue_box_title: '即時輪候籌號與等候時間試算',
+          queue_sync_badge: '現場叫號同步',
+          party_size_label: '用餐人數 Party Size',
+          party_opt_1: '1 - 2 人 (A飛)',
+          party_opt_2: '3 - 4 人 (B飛)',
+          party_opt_3: '5人以上 (C飛)',
+          seating_pref_label: '入座默契',
+          pref_opt_1: '✔ 願意搭枱 (最快)',
+          pref_opt_2: '不搭枱/等卡位 (+8分鐘)',
+          current_calls_label: '當前叫號：',
+          est_ticket_label: '預計等候籌號',
+          est_wait_label: '預計等候時間：',
+          minutes_unit: '分鐘',
+          btn_queue_register: '登記取號提醒',
+          transit_title: '交通指引與港島動線',
+          nav_map_box_title: '灣仔街道導航示意',
+          nav_map_box_desc: '位於菲林明道與柯布連道之間，對正修頓球場看台後方，門前設有綠色復古遮雨篷。',
+          transit_mtr_title: '港鐵 MTR (港島線)',
+          transit_mtr_desc: '灣仔站 A4 出口左轉沿軒尼詩道直行約 180 米即達（步行約 3 分鐘）。',
+          transit_tram_title: '香港電車 Ding Ding',
+          transit_tram_desc: '於「菲林明道站 (45E/56W)」下車，穿過太原街步行約 2 分鐘。',
+          mod_temp_title: '冷熱溫度 Temperature',
+          mod_hot: '熱飲 Hot',
+          mod_iced: '凍飲 Iced (+HK$3)',
+          mod_sweet_title: '甜度調味 Sweetness',
+          mod_sweet_norm: '正常甜',
+          mod_sweet_less: '少甜',
+          mod_sweet_none: '走甜',
+          mod_sweet_condensed: '茶走 (改煉奶)',
+          mod_kitchen_pref_title: '廚房特製口述 Kitchen Preference',
+          mod_no_scallion: '走青 (免蔥/芫荽)',
+          mod_toast_crust: '多士烘底 (+HK$3)',
+          mod_fried_rice_base: '飯底改炒飯 (+HK$5)',
+          mod_demae_ramen: '轉出前一丁 (+HK$5)',
+          modal_calc_total: '合計：',
+          btn_add_to_slip: '加入水喉單',
+          footer_title: 'Mand T 茶餐廳',
+          footer_desc: '香港灣仔軒尼詩道188號地下。恪守傳統火候，撞出絲滑厚奶茶，見證香港島匆匆步履與人情溫度。',
+          footer_license: '普通食肆牌照：0311892014 · 只此一家 絕無分店',
+          footer_dir_title: '全站導覽 Directory',
+          footer_hours_title: '營業時間 Hours',
+          footer_hours_daily: '每日：06:30 — 22:30',
+          footer_hours_last: '廚房最後落單：22:00',
+          footer_contact_title: '門市聯絡 Visit',
+          footer_address: '香港灣仔軒尼詩道188號地下',
+          footer_transit_hint: '港鐵灣仔站 A4 出口步行 3 分鐘',
+          footer_hotline: '電話熱線：'
+        },
+        'en': {
+          lang_btn: '🌐 中文',
+          brand_name: 'Mand T Cha Chaan Teng',
+          nav_home: 'Home',
+          nav_menu: 'Menu',
+          nav_story: 'Our Story',
+          nav_gallery: 'Gallery',
+          nav_visit: 'Location & Visit',
+          hero_tag: 'Wan Chai Heritage · Stoves Fired Daily at 06:30 AM',
+          hero_title_1: 'Morning Milk Tea, ',
+          hero_title_2: 'Wok-Fired Classics',
+          hero_desc: 'Established in Wan Chai since 1968. Deep-brewed Ceylon tea pulled through cloth into Dutch evaporated milk, paired with scorching dry-fried Angus beef ho fun.',
+          hero_btn_menu: 'Open Today\'s Bill',
+          hero_btn_queue: 'Live Queue & Visit',
+          stat_1: 'Years of Neighbourhood Trust',
+          stat_2: 'Hand-Pulled Teas Daily',
+          stat_3: 'Bun Oven Bake Cycle',
+          badge_heritage_tea: 'Handcrafted 4-Step Pulling',
+          badge_seating_status: '● Full House · Sharing Welcome',
+          hero_tea_card_title: 'Mand T Claypot Thick Milk Tea',
+          hero_tea_card_desc: 'Slow-simmered Ceylon tea blend aerated across twin copper urns, finished with Dutch evaporated milk for a silky finish.',
+          queue_now_calling: 'Now Calling Ticket: ',
+          four_sigs_title: 'The Four Master Signatures',
+          four_sigs_desc: 'Recipes preserved for over five decades — the all-day staple orders of Wan Chai locals.',
+          view_full_menu_link: 'Explore Master Menu →',
+          sig_1_name: 'Claypot Silk-Stocking Milk Tea',
+          sig_1_desc: 'Coarse, medium and fine Ceylon leaves pulled four times into Dutch milk.',
+          sig_1_badge: 'Hot / Iced +$3',
+          sig_2_name: 'Crispy Pineapple Bun w/ Ice Butter',
+          sig_2_desc: 'Freshly baked every 40 minutes, golden crackled crust with thick slab of cold Dutch butter.',
+          sig_2_badge: 'Bake Rush',
+          sig_3_name: 'Dry-Fried Angus Beef Ho Fun',
+          sig_3_desc: 'Cast-iron wok tossed in 15 seconds, crisp bean sprouts, tender beef, zero lingering grease.',
+          sig_3_badge: 'Wok-Hei Benchmark',
+          sig_4_name: 'Baked Pork Chop Rice with Fresh Tomato',
+          sig_4_desc: 'Bed of egg fried rice, thick tender bone-in pork chop, topped with fresh tomato reduction.',
+          sig_4_badge: 'All-Day Classic',
+          session_title: 'Session Fast Bill',
+          session_subtitle: 'Arrive on time to experience Mand T\'s rapid, piping-hot kitchen rhythm.',
+          session_perk: 'Wok-fired to order · Complimentary hot tea or coffee',
+          sess_tab_bf: 'Breakfast Set',
+          sess_tab_tea: 'Afternoon Tea',
+          sess_tab_din: 'Dinner Session',
+          bf_1_title: 'Rich Satay Beef Instant Noodles Set',
+          bf_1_desc: 'House-ground peanut satay sauce, double sunny eggs, buttered toast & hot tea.',
+          bf_2_title: 'Ham & Shredded Chicken Broth Macaroni',
+          bf_2_desc: 'Slow-simmered chicken soup with Jinhua ham shreds, scrambled eggs & thick toast.',
+          bf_3_title: 'Pickled Cabbage & Shredded Pork Rice Vermicelli',
+          bf_3_desc: 'Crisp pickled radish shoots, hand-cut tender pork braised with Hsinchu vermicelli.',
+          tea_1_title: 'Swiss Sauce Fried Wings w/ Crinkle Fries',
+          tea_1_desc: 'Tender chicken wings braised in aged citrus sweet soy sauce.',
+          tea_2_title: 'Molten Lava French Toast',
+          tea_2_desc: 'Filled with chunky peanut butter, golden egg dipped, drizzled with pure syrup.',
+          tea_3_title: 'Mand T Club Sandwich',
+          tea_3_desc: 'Triple-decker toasted bread with egg, crispy bacon, cheddar & fresh tomato.',
+          din_1_title: 'Wok-Fried Angus Beef Ho Fun',
+          din_1_desc: 'High-heat iron wok toss, caramelised flat rice noodles, tender beef slices.',
+          din_2_title: 'Signature Singapore Fried Vermicelli',
+          din_2_desc: 'Mild curry oil wok-tossed with king prawns, shredded char siu and bell peppers.',
+          din_3_title: 'Minced Beef Fried Rice w/ Raw Egg',
+          din_3_desc: 'Individual rice grain fry with tender minced beef, stirred tableside with fresh yolk.',
+          menu_page_title: 'Master All-Day Dining Bill',
+          pill_wok_fire: 'High-Heat Iron Wok',
+          pill_black_white_milk: 'Black & White Milk',
+          search_placeholder: 'Search dishes (e.g., Beef Ho Fun / Milk Tea / Bun)...',
+          cat_all: 'All Items',
+          cat_bf: 'Breakfast Sets',
+          cat_all_day: 'All-Day Sets',
+          cat_wok: 'Wok-Fried Noodles',
+          cat_baked: 'Baked Rice & Pasta',
+          cat_tea: 'Afternoon Tea',
+          cat_drinks: 'Classic Beverages',
+          slip_title: 'Mand T Waiter Kitchen Slip',
+          slip_table: 'Table: A-14 (Shared)',
+          slip_empty: 'Click dish "＋ Order Modifier"<br>to generate waiter shorthand code.',
+          subtotal_label: 'Subtotal',
+          takeaway_label: 'Takeaway Box (+$2/box)',
+          total_label: 'Total Bill',
+          btn_copy_slip: 'Copy Waiter Order Slip',
+          btn_clear_slip: 'Clear Order Slip',
+          story_title: 'Half-Century Chronicle (1968—2026)',
+          story_subtitle: 'From a curbside charcoal cart on Cross Street to Hennessy Road, three generations of craft.',
+          era_btn_1968: 'Cross St. Dai Pai Dong',
+          era_btn_1978: 'Hennessy Rd. Move',
+          era_btn_1997: 'Crisis Comfort Canteen',
+          era_btn_2014: 'Intangible Heritage',
+          era_btn_2026: 'Three-Gen Landmark',
+          archive_doc_title: 'Historical Archive Vault',
+          archive_doc_desc: 'Handmade insulated tea caddies and the original 1970s Urban Council restaurant license.',
+          archive_bullet_1: '04:30 AM charcoal stove ignition',
+          archive_bullet_2: 'Over 1,000 hand-pulled teas daily',
+          archive_bullet_3: 'Exclusive Dutch evaporated milk',
+          crafts_title: 'The 4 Heritage Handcrafts',
+          crafts_subtitle: 'Click tabs to view craft parameters and heat standards.',
+          cbtn_1: 'I. Claypot Tea Pulling',
+          cbtn_2: 'II. Fresh Pineapple Bun',
+          cbtn_3: 'III. Scorching Beef Ho Fun',
+          cbtn_4: 'IV. House Satay Broth',
+          c_tea_head: 'Claypot 4-Step Pulled Milk Tea',
+          c_tea_desc: 'Coarse leaf for color, medium for aroma, fine for body. Simmered in claypots and pulled high across copper kettles to aerate and eliminate bitterness.',
+          c_tea_param: 'Formula: 40% Coarse : 35% Med : 25% Fine · 96°C Constant · Dutch Evaporated Milk',
+          c_tea_note: 'Heritage Tip: Wrist rotation controls foam micro-bubbles. A genuine cup must display a golden froth ring around the porcelain rim.',
+          c_bun_head: 'Oven-Hot Pineapple Bun w/ Frozen Butter',
+          c_bun_desc: 'Naturally fermented dough with pure lard crust pastry baked to a crackled grid. Sliced hot and paired with a 6mm frozen slab of Dutch butter.',
+          c_bun_param: 'Formula: Top 210°C / Bottom 185°C · 40-Min Bake Cycle · 5°C Chilled Butter',
+          c_bun_note: 'Bake Bell: Staff ring a brass door bell and shout the arrival of piping-hot buns — a ritual preserved since 1978.',
+          c_wok_head: 'Scorching Iron Wok-Fried Beef Ho Fun',
+          c_wok_desc: 'Cast-iron wok heated past 250°C. Minimal oil, high-impact toss in 15 seconds. Tender beef, springy noodles, zero pooled grease.',
+          c_wok_param: 'Formula: 250°C High Heat · 8 Fast Flips · Double Soy Glaze · 1m45s Table Rush',
+          c_wok_note: 'Wok-Hei Test: True wok breath comes from instantaneous Maillard reaction, the ultimate exam for Cantonese chefs.',
+          c_satay_head: 'Slow-Cooked House Satay Sauce',
+          c_satay_desc: 'Refusing canned wholesale sauces. Roasted raw peanuts, shallots, garlic, and flounder powder are stir-reduced for six hours and aged for 3 days.',
+          c_satay_param: 'Formula: 6-Hour Slow Reduction · 3-Day Ceramic Pot Aging · Crunchy Peanut Grind',
+          c_satay_note: 'Soul of Noodles: Diluted with two spoons of chicken stock before dressing noodles, coating beef ribbons completely.',
+          gallery_title: 'Neighbourhood Life & Moments',
+          gallery_subtitle: 'Freezing half a century of Wan Chai dawn and dusk in genuine local memories.',
+          g_card_1_title: 'Master\'s Focus in High-Air Pulling',
+          g_card_1_desc: 'At daybreak, a half-meter cascade of Ceylon tea releases roasted malt fragrance into the alley.',
+          g_card_2_title: 'Rainy Night Neon Meets Double-Decker Bus',
+          g_card_2_desc: 'Green buses cruise beneath glowing vermilion signs as diners devour steaming noodles inside.',
+          g_card_3_title: 'A Daily Paper & A Steaming Hot Tea',
+          g_card_3_desc: 'Reading racing forms and editorials, sharing booths with strangers in tacit Hong Kong harmony.',
+          cards_title: 'Community Memory Postcards',
+          cards_subtitle: 'Warm messages scribbled across the backs of receipt slips across 5 decades.',
+          pc_1_quote: '"Covered in engine grease after dockyard shifts, others turned us away. The owner greeted us: \'Come sit down, drink some tea first!\' That cup stays in my heart forever."',
+          pc_1_author: 'Uncle Kuen (74)',
+          pc_1_role: 'Former Taikoo Dockyard Worker',
+          pc_2_quote: '"After Tai Chi at Southorn, we always gather at Mand T. The waiter shouts \'Auntie Fong, boiling water egg zero sugar!\' Kindness richer than tea."',
+          pc_2_author: 'Auntie Fong (81)',
+          pc_2_role: 'Southorn Morning Exerciser',
+          pc_3_quote: '"During SARS when Hennessy Road was deserted, Mand T remained open 6am to 10pm with roaring wok fires. Sitting down to eat gave us hope."',
+          pc_3_author: 'Brother Bill (62)',
+          pc_3_role: 'Overnight Minibus Driver',
+          pc_4_quote: '"My grandfather took me here for pineapple buns as a kid. Today I bring my daughter. The mosaic tiles never changed, the flavour never changed."',
+          pc_4_author: 'Ching (33)',
+          pc_4_role: 'Wan Chai Local Illustrator',
+          visit_badge: 'G/F, 188 Hennessy Rd, Wan Chai · 3-Min Walk from MTR Exit A4',
+          visit_title_1: 'Taste Wan Chai, ',
+          visit_title_2: 'Wok-Fried to Order',
+          visit_lead: 'Boiling copper urns at 06:30 AM, wok fires quiet at 10:30 PM. Walk-ins and communal table-sharing always welcome.',
+          btn_view_queue: 'Check Live Queue Wait',
+          btn_view_transit: 'Transit Directions',
+          elevation_box_title: 'Mand T Storefront Elevation',
+          elevation_box_desc: 'Direct Phone: (852) 2511 8839 · 68 Dine-in Seats · Authentic Wooden Booths',
+          queue_box_title: 'Live Ticket Queue & Wait Time Estimator',
+          queue_sync_badge: 'Live Counter Sync',
+          party_size_label: 'Party Size',
+          party_opt_1: '1 - 2 Guests (Ticket A)',
+          party_opt_2: '3 - 4 Guests (Ticket B)',
+          party_opt_3: '5+ Guests (Ticket C)',
+          seating_pref_label: 'Seating Preference',
+          pref_opt_1: '✔ Table Sharing (Fastest)',
+          pref_opt_2: 'Booth Only (+8 mins wait)',
+          current_calls_label: 'Now Calling: ',
+          est_ticket_label: 'Estimated Ticket',
+          est_wait_label: 'Est. Wait Time: ',
+          minutes_unit: 'mins',
+          btn_queue_register: 'Register Queue Alert',
+          transit_title: 'How to Reach Us & Transit Lines',
+          nav_map_box_title: 'Wan Chai Street Navigation',
+          nav_map_box_desc: 'Situated between Fleming Rd and O\'Brien Rd, directly opposite Southorn Stadium with classic green awnings.',
+          transit_mtr_title: 'MTR Island Line',
+          transit_mtr_desc: 'Wan Chai Station Exit A4, turn left along Hennessy Road for 180m (approx. 3 mins walk).',
+          transit_tram_title: 'Hong Kong Ding Ding Tram',
+          transit_tram_desc: 'Alight at Fleming Road Stop (45E/56W), walk through Tai Yuen Street for 2 mins.',
+          mod_temp_title: 'Temperature Selection',
+          mod_hot: 'Hot Beverage',
+          mod_iced: 'Iced (+HK$3)',
+          mod_sweet_title: 'Sweetness & Mix',
+          mod_sweet_norm: 'Regular Sweet',
+          mod_sweet_less: 'Less Sweet',
+          mod_sweet_none: 'No Sugar',
+          mod_sweet_condensed: 'Cha Chau (Condensed Milk)',
+          mod_kitchen_pref_title: 'Kitchen Shorthand & Customizations',
+          mod_no_scallion: 'No Greenery (No Scallion/Cilantro)',
+          mod_toast_crust: 'Toasted Bread (+HK$3)',
+          mod_fried_rice_base: 'Egg Fried Rice Base (+HK$5)',
+          mod_demae_ramen: 'Upgrade Demae Iccho (+HK$5)',
+          modal_calc_total: 'Total: ',
+          btn_add_to_slip: 'Add to Water Slip',
+          footer_title: 'Mand T Cha Chaan Teng',
+          footer_desc: 'G/F, 188 Hennessy Road, Wan Chai. Preserving classic stove temperatures and silky milk tea for the people of Hong Kong.',
+          footer_license: 'General Restaurant License: 0311892014 · Only One Location · No Branches',
+          footer_dir_title: 'Directory',
+          footer_hours_title: 'Operating Hours',
+          footer_hours_daily: 'Daily: 06:30 — 22:30',
+          footer_hours_last: 'Kitchen Last Order: 22:00',
+          footer_contact_title: 'Direct Visit',
+          footer_address: 'G/F, 188 Hennessy Road, Wan Chai',
+          footer_transit_hint: '3-min walk from MTR Wan Chai Exit A4',
+          footer_hotline: 'Hotline: '
+        }
+      };
+
+      let currentLang = 'zh';
+
+      function applyTranslations(lang) {
+        currentLang = lang;
+        const dict = i18nData[lang];
+        document.documentElement.lang = (lang === 'zh') ? 'zh-Hant-HK' : 'en';
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) {
+            el.textContent = dict[key];
+          }
+        });
+
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+          const key = el.getAttribute('data-i18n-placeholder');
+          if (dict[key]) {
+            el.setAttribute('placeholder', dict[key]);
+          }
+        });
+
+        document.getElementById('langCurrentLabel').textContent = dict['lang_btn'];
+      }
+
+      const langSwitchBtn = document.getElementById('langSwitchBtn');
+      langSwitchBtn.addEventListener('click', () => {
+        const nextLang = (currentLang === 'zh') ? 'en' : 'zh';
+        applyTranslations(nextLang);
+        showToast(nextLang === 'en' ? 'Switched to English interface!' : '已切換為繁體中文介面！');
+      });
+
+      // 2. Navigation Tab Switcher (Seamless 5-Page SPA Switching)
+      const navTabBtns = document.querySelectorAll('.nav-tab-btn, .mobile-tab-btn');
+      const pageViews = document.querySelectorAll('.page-view');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+      function switchPage(pageKey) {
+        pageViews.forEach(v => {
+          v.classList.toggle('active-page', v.id === `page-${pageKey}`);
+        });
+
+        navTabBtns.forEach(btn => {
+          btn.classList.toggle('is-active', btn.getAttribute('data-page') === pageKey);
+        });
+
+        if (mobileDrawer.classList.contains('open')) {
+          mobileDrawer.classList.remove('open');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      navTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const page = btn.getAttribute('data-page');
+          if (page) switchPage(page);
+        });
+      });
+
+      document.querySelectorAll('[data-page-jump]').forEach(el => {
+        el.addEventListener('click', () => {
+          const target = el.getAttribute('data-page-jump');
+          if (target) switchPage(target);
+        });
+      });
+
+      document.getElementById('brandLogoBtn').addEventListener('click', () => switchPage('home'));
+
+      if (mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('open');
+        });
+      }
+
+      // 3. Page 1 Fast Meal Session Switcher
+      const sessionBtns = document.querySelectorAll('[data-session]');
+      const sessionPanels = document.querySelectorAll('.session-panel-content');
+      sessionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          sessionBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const s = btn.getAttribute('data-session');
+          sessionPanels.forEach(p => p.classList.toggle('active', p.id === `session-${s}`));
+        });
+      });
+
+      // 4. Page 2 Interactive Food Catalog & Real-Time Waiter Slip
+      const menuCatalog = [
+        { id: 'b1', cat: 'breakfast', name: '特濃沙爹牛肉公仔麵餐', nameEn: 'Satay Beef Instant Noodles Set', price: 46, desc: '自家磨製花生沙爹醬、太陽雙煎蛋、厚牛油多士，送熱飲。', descEn: 'House peanut satay sauce, double sunny eggs, thick buttered toast & tea.', type: 'food' },
+        { id: 'b2', cat: 'breakfast', name: '火腿香濃雞湯通粉餐', nameEn: 'Ham & Chicken Broth Macaroni Set', price: 40, desc: '慢熬老雞高湯，吸汁斜紋通粉配金華火腿絲及香滑炒蛋。', descEn: 'Slow-simmered chicken broth with Jinhua ham shreds & scrambled eggs.', type: 'food' },
+        { id: 'b3', cat: 'breakfast', name: '榨菜肉絲炆米粉餐', nameEn: 'Pickled Cabbage & Shredded Pork Vermicelli', price: 44, desc: '川味榨菜搭手切嫩豬肉絲，猛火快燴新竹米粉。', descEn: 'Crisp pickled radish shoots, hand-cut tender pork braised with rice vermicelli.', type: 'food' },
+        { id: 'c1', cat: 'allday', name: 'Mand T 經典常餐（叉燒意粉）', nameEn: 'Classic All-Day Set (Char Siu Spaghetti)', price: 52, desc: '清湯煨煮意大利麵，厚切蜜汁叉燒，熱餐包與嫩滑炒蛋。', descEn: 'Clear broth spaghetti, thick-cut honey char siu, butter roll & scrambled eggs.', type: 'food' },
+        { id: 'c2', cat: 'allday', name: '香煎煙肉雙蛋常餐', nameEn: 'Crispy Bacon & Double Egg Set', price: 48, desc: '脆煎厚培根、流心太陽雙蛋、鮮牛油熱餐包及通粉。', descEn: 'Pan-seared bacon, sunny-side eggs, warm dinner roll & macaroni.', type: 'food' },
+        { id: 'w1', cat: 'wok', name: '乾炒安格斯牛河', nameEn: 'Dry-Fried Angus Beef Ho Fun', price: 72, desc: '生鐵鑊猛火拋翻，粉條乾爽不油膩，牛肉嫩滑帶焦香。', descEn: 'Wok-tossed in high heat, dry silky noodles, tender beef ribbons.', type: 'food' },
+        { id: 'w2', cat: 'wok', name: '招牌星洲炒米', nameEn: 'Signature Singapore Fried Vermicelli', price: 68, desc: '油咖哩粉爆香，大蝦仁、叉燒絲、彩椒條齊炒，微辣惹味。', descEn: 'Mild curry spices tossed with king prawns, char siu & bell peppers.', type: 'food' },
+        { id: 'w3', cat: 'wok', name: '窩蛋牛肉炒飯', nameEn: 'Minced Beef Fried Rice w/ Raw Egg', price: 68, desc: '黃金粒粒蛋炒飯，生炒鮮牛肉粒，熱攪生蛋黃濃郁滑口。', descEn: 'Golden grain fry with minced beef, topped with fresh egg yolk.', type: 'food' },
+        { id: 'bk1', cat: 'baked', name: '鮮茄焗厚切豬扒飯', nameEn: 'Baked Pork Chop Rice w/ Fresh Tomato', price: 70, desc: '蛋炒飯底鋪墊，帶骨厚切豬扒鬆軟，鮮熬番茄醬高溫焗出焦斑。', descEn: 'Egg fried rice base, tender bone-in pork chop, baked tomato glaze.', type: 'food' },
+        { id: 'bk2', cat: 'baked', name: '懷舊焗葡國雞飯', nameEn: 'Baked Portuguese Chicken Rice', price: 68, desc: '薑黃椰汁黑橄欖慢焗嫩滑雞腿肉，葡式港味風情。', descEn: 'Turmeric coconut sauce baked chicken thighs with black olives.', type: 'food' },
+        { id: 't1', cat: 'tea', name: '冰火鮮油菠蘿包', nameEn: 'Pineapple Bun w/ Ice-Cold Butter', price: 18, desc: '每40分鐘熱騰出爐，脆裂金黃酥皮夾入厚切冰鎮荷蘭牛油。', descEn: 'Baked fresh every 40 mins, crackled pastry with thick Dutch butter slab.', type: 'food' },
+        { id: 't2', cat: 'tea', name: '粒粒流沙西多士', nameEn: 'Molten Lava Peanut French Toast', price: 36, desc: '方包抹勻自炒花生醬，蛋液浸透金黃酥炸，淋天然蜜糖。', descEn: 'Thick bread with peanut filling, golden egg-fried, drizzled syrup.', type: 'food' },
+        { id: 't3', cat: 'tea', name: '瑞士汁雞翼配波浪薯條', nameEn: 'Swiss Sauce Wings w/ Crinkle Fries', price: 42, desc: '陳皮蜜香瑞士甜豉油慢火浸透，皮脆肉嫩多汁。', descEn: 'Tender chicken wings braised in aged citrus sweet soy sauce.', type: 'food' },
+        { id: 'd1', cat: 'drinks', name: '瓦煲濃滑絲襪奶茶', nameEn: 'Claypot Silk-Stocking Milk Tea', price: 22, desc: '粗中幼紅茶拼配，白布袋四手反覆拉撞，黑白淡奶厚滑掛杯。', descEn: 'Ceylon tea blend pulled across copper kettles with Dutch milk.', type: 'drink' },
+        { id: 'd2', cat: 'drinks', name: '生磨鴛鴦（啡茶合一）', nameEn: 'Hong Kong Yuenyeung (Coffee & Tea)', price: 22, desc: '七成奶茶搭三成深焙現滴咖啡，茶甘咖啡醇。', descEn: '70% silk milk tea blended with 30% deep-roast drip coffee.', type: 'drink' },
+        { id: 'd3', cat: 'drinks', name: '正宗港式凍鹹檸七', nameEn: 'Iced Preserved Lime 7-Up', price: 26, desc: '玻璃樽醃漬三年老鹹檸檬，搗碎果肉注入冰凍七喜。', descEn: 'Crushed 3-year preserved salted lime paired with chilled 7-Up.', type: 'drink' },
+        { id: 'd4', cat: 'drinks', name: '老冰室經典紅豆冰', nameEn: 'Classic Red Bean Fleecy Ice', price: 28, desc: '紅小豆原鍋熬至起沙粒分明，鋪滿碎冰淋厚黑白淡奶。', descEn: 'Slow-cooked red beans, shaved ice, finished with evaporated milk.', type: 'drink' }
+      ];
+
+      const dishesContainer = document.getElementById('dishesContainer');
+      const menuSearchInput = document.getElementById('menuSearchInput');
+      const catTabs = document.querySelectorAll('.cat-tab');
+      let activeCat = 'all';
+
+      function renderMenu() {
+        dishesContainer.innerHTML = '';
+        const q = menuSearchInput.value.trim().toLowerCase();
+
+        const filtered = menuCatalog.filter(item => {
+          const matchCat = (activeCat === 'all' || item.cat === activeCat);
+          const title = (currentLang === 'en' ? item.nameEn : item.name).toLowerCase();
+          const desc = (currentLang === 'en' ? item.descEn : item.desc).toLowerCase();
+          const matchQuery = !q || title.includes(q) || desc.includes(q);
+          return matchCat && matchQuery;
+        });
+
+        if (filtered.length === 0) {
+          dishesContainer.innerHTML = `<div style="padding:var(--space-8); text-align:center; color:var(--color-ink-muted);">${currentLang === 'en' ? 'No dishes match your search criteria.' : '未有符合搜尋條件之菜式。'}</div>`;
+          return;
+        }
+
+        const grid = document.createElement('div');
+        grid.className = 'dishes-grid';
+
+        filtered.forEach(item => {
+          const card = document.createElement('article');
+          card.className = 'dish-card';
+          const displayName = currentLang === 'en' ? item.nameEn : item.name;
+          const displayDesc = currentLang === 'en' ? item.descEn : item.desc;
+          const badgeType = item.type === 'drink' ? (currentLang === 'en' ? 'Drink' : '飲品') : (currentLang === 'en' ? 'Meal' : '主食');
+          const btnLabel = currentLang === 'en' ? '＋ Custom Order' : '＋ 落單配搭';
+
+          card.innerHTML = `
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <h3 style="font-family:var(--font-serif-hk); font-size:1.15rem; font-weight:800;">${displayName}</h3>
+                <span style="font-family:var(--font-display); font-size:1.25rem; color:var(--color-vermilion); white-space:nowrap;">HK$${item.price}</span>
+              </div>
+              <p style="font-size:0.8125rem; color:var(--color-ink-muted); margin-top:0.4rem; line-height:1.45;">${displayDesc}</p>
+            </div>
+            <div style="margin-top:var(--space-4); border-top:1px dashed var(--color-border); padding-top:var(--space-3); display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:0.75rem; background:var(--color-paper-alt); padding:2px 6px; border-radius:var(--radius-sm); font-family:var(--font-mono);">
+                ${badgeType}
+              </span>
+              <button type="button" class="btn-primary" style="padding:0.35rem 0.75rem; font-size:0.8125rem;" data-add-id="${item.id}">
+                ${btnLabel}
+              </button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        dishesContainer.appendChild(grid);
+      }
+
+      renderMenu();
+
+      menuSearchInput.addEventListener('input', renderMenu);
+
+      catTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          catTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          activeCat = tab.getAttribute('data-cat');
+          renderMenu();
+        });
+      });
+
+      // Modal Customizer
+      const dishModal = document.getElementById('dishModal');
+      const closeDishModalBtn = document.getElementById('closeDishModalBtn');
+      const modalDishName = document.getElementById('modalDishName');
+      const modalDishDesc = document.getElementById('modalDishDesc');
+      const modalDishBasePrice = document.getElementById('modalDishBasePrice');
+      const modalCalculatedTotal = document.getElementById('modalCalculatedTotal');
+      const confirmAddToSlipBtn = document.getElementById('confirmAddToSlipBtn');
+      const drinkModSection = document.getElementById('drinkModSection');
+      const foodModSection = document.getElementById('foodModSection');
+
+      let currentCustomDish = null;
+      let orderSlipItems = [];
+
+      document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-add-id]');
+        if (btn) {
+          const id = btn.getAttribute('data-add-id');
+          const found = menuCatalog.find(d => d.id === id);
+          if (found) {
+            currentCustomDish = found;
+            modalDishName.textContent = currentLang === 'en' ? found.nameEn : found.name;
+            modalDishDesc.textContent = currentLang === 'en' ? found.descEn : found.desc;
+            modalDishBasePrice.textContent = `HK$ ${found.price}`;
+
+            if (found.type === 'drink') {
+              drinkModSection.style.display = 'block';
+              foodModSection.style.display = 'none';
+            } else {
+              drinkModSection.style.display = 'none';
+              foodModSection.style.display = 'block';
+            }
+
+            document.getElementById('chkNoGreen').checked = false;
+            document.getElementById('chkToast').checked = false;
+            document.getElementById('chkFriedRice').checked = false;
+            document.getElementById('chkDemae').checked = false;
+
+            calcModalTotal();
+            dishModal.classList.add('is-open');
+          }
+        }
+      });
+
+      function calcModalTotal() {
+        if (!currentCustomDish) return;
+        let tot = currentCustomDish.price;
+        if (currentCustomDish.type === 'drink') {
+          const activeTemp = document.querySelector('#drinkTempGroup .active');
+          if (activeTemp) tot += parseInt(activeTemp.getAttribute('data-extra') || 0, 10);
+        } else {
+          if (document.getElementById('chkToast').checked) tot += 3;
+          if (document.getElementById('chkFriedRice').checked) tot += 5;
+          if (document.getElementById('chkDemae').checked) tot += 5;
+        }
+        modalCalculatedTotal.textContent = `HK$ ${tot}`;
+      }
+
+      document.querySelectorAll('#drinkTempGroup button, #drinkSweetGroup button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          calcModalTotal();
+        });
+      });
+
+      document.querySelectorAll('#foodModSection input[type="checkbox"]').forEach(chk => {
+        chk.addEventListener('change', calcModalTotal);
+      });
+
+      closeDishModalBtn.addEventListener('click', () => dishModal.classList.remove('is-open'));
+
+      confirmAddToSlipBtn.addEventListener('click', () => {
+        if (!currentCustomDish) return;
+        let mods = [];
+        let itemPrice = currentCustomDish.price;
+
+        if (currentCustomDish.type === 'drink') {
+          const temp = document.querySelector('#drinkTempGroup .active').getAttribute('data-val');
+          const sweet = document.querySelector('#drinkSweetGroup .active').getAttribute('data-val');
+          if (temp === '凍') { mods.push(currentLang === 'en' ? 'Iced' : '凍飲'); itemPrice += 3; } else { mods.push(currentLang === 'en' ? 'Hot' : '熱飲'); }
+          if (sweet !== '正常甜') mods.push(sweet);
+        } else {
+          if (document.getElementById('chkNoGreen').checked) mods.push(currentLang === 'en' ? 'No Scallion' : '走青');
+          if (document.getElementById('chkToast').checked) { mods.push(currentLang === 'en' ? 'Toasted(+3)' : '烘底(+3)'); itemPrice += 3; }
+          if (document.getElementById('chkFriedRice').checked) { mods.push(currentLang === 'en' ? 'Fried Rice(+5)' : '炒底(+5)'); itemPrice += 5; }
+          if (document.getElementById('chkDemae').checked) { mods.push(currentLang === 'en' ? 'Demae Ramen(+5)' : '轉一丁(+5)'); itemPrice += 5; }
+        }
+
+        orderSlipItems.push({
+          id: Date.now(),
+          name: currentLang === 'en' ? currentCustomDish.nameEn : currentCustomDish.name,
+          mods: mods.join(' · '),
+          price: itemPrice
+        });
+
+        renderSlip();
+        dishModal.classList.remove('is-open');
+        showToast(currentLang === 'en' ? `Added to Water Slip: ${currentCustomDish.nameEn}` : `已加入水喉單：${currentCustomDish.name}`);
+      });
+
+      // Slip Engine
+      const billItemsList = document.getElementById('billItemsList');
+      const billEmptyMsg = document.getElementById('billEmptyMsg');
+      const billSubtotalDisplay = document.getElementById('billSubtotalDisplay');
+      const takeawayCheckbox = document.getElementById('takeawayCheckbox');
+      const takeawayFeeDisplay = document.getElementById('takeawayFeeDisplay');
+      const billGrandTotalDisplay = document.getElementById('billGrandTotalDisplay');
+      const copySlipBtn = document.getElementById('copySlipBtn');
+      const clearSlipBtn = document.getElementById('clearSlipBtn');
+      const slipTime = document.getElementById('slipTime');
+
+      const now = new Date();
+      slipTime.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+
+      function renderSlip() {
+        if (orderSlipItems.length === 0) {
+          billEmptyMsg.style.display = 'block';
+          billItemsList.innerHTML = '';
+          billItemsList.appendChild(billEmptyMsg);
+          billSubtotalDisplay.textContent = 'HK$ 0';
+          takeawayFeeDisplay.textContent = 'HK$ 0';
+          billGrandTotalDisplay.textContent = 'HK$ 0';
+          return;
+        }
+
+        billEmptyMsg.style.display = 'none';
+        billItemsList.innerHTML = '';
+        let subtotal = 0;
+
+        orderSlipItems.forEach(item => {
+          subtotal += item.price;
+          const row = document.createElement('div');
+          row.style.cssText = 'display:flex; justify-content:space-between; font-size:0.8125rem; border-bottom:1px dotted var(--color-border-dark); padding-bottom:3px;';
+          row.innerHTML = `
+            <div>
+              <strong style="color:var(--color-ink);">${item.name}</strong>
+              ${item.mods ? `<span style="display:block; font-size:0.6875rem; color:var(--color-vermilion);">[ ${item.mods} ]</span>` : ''}
+            </div>
+            <div style="display:flex; align-items:center; gap:6px;">
+              <span style="font-family:var(--font-display); color:var(--color-ink);">HK$${item.price}</span>
+              <button type="button" style="color:var(--color-ink-muted); font-size:0.9rem;" data-del-id="${item.id}">&times;</button>
+            </div>
+          `;
+          billItemsList.appendChild(row);
+        });
+
+        const boxFee = takeawayCheckbox.checked ? (orderSlipItems.length * 2) : 0;
+        const total = subtotal + boxFee;
+        billSubtotalDisplay.textContent = `HK$ ${subtotal}`;
+        takeawayFeeDisplay.textContent = `HK$ ${boxFee}`;
+        billGrandTotalDisplay.textContent = `HK$ ${total}`;
+      }
+
+      billItemsList.addEventListener('click', (e) => {
+        const delBtn = e.target.closest('[data-del-id]');
+        if (delBtn) {
+          const id = Number(delBtn.getAttribute('data-del-id'));
+          orderSlipItems = orderSlipItems.filter(i => i.id !== id);
+          renderSlip();
+        }
+      });
+
+      takeawayCheckbox.addEventListener('change', renderSlip);
+
+      clearSlipBtn.addEventListener('click', () => {
+        orderSlipItems = [];
+        renderSlip();
+        showToast(currentLang === 'en' ? 'Order slip cleared!' : '水喉單已清空！');
+      });
+
+      copySlipBtn.addEventListener('click', () => {
+        if (orderSlipItems.length === 0) {
+          showToast(currentLang === 'en' ? 'Slip is currently empty!' : '目前水喉單尚未有點餐項目！');
+          return;
+        }
+        let text = `【Mand T Cha Chaan Teng 水喉單】\nTable: A-14 (Shared) | Time: ${slipTime.textContent}\n--------------------------\n`;
+        orderSlipItems.forEach((it, idx) => {
+          text += `${idx + 1}. ${it.name} ${it.mods ? `(${it.mods})` : ''} - HK$${it.price}\n`;
+        });
+        text += `--------------------------\nTotal: ${billGrandTotalDisplay.textContent}\n多謝光顧 Thank you for visiting Mand T!`;
+
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast(currentLang === 'en' ? 'Copied waiter kitchen slip to clipboard!' : '已複製伙計手寫水喉單！');
+        } catch (err) {
+          showToast('複製失敗 / Copy failed');
+        }
+        document.body.removeChild(ta);
+      });
+
+      // 5. Page 3 Story Scrubber & Crafts
+      const eraBtns = document.querySelectorAll('.era-button');
+      const eraHeadline = document.getElementById('eraHeadline');
+      const eraNarrative = document.getElementById('eraNarrative');
+      const eraBadge = document.getElementById('eraBadge');
+      const eraQuote = document.getElementById('eraQuote');
+
+      const eraLore = {
+        '1968': {
+          badgeZh: '草創期 · 街頭小檔', badgeEn: 'Foundation · Street Stall',
+          titleZh: '炭火爐邊的清晨四點：交加街木板檔起家', titleEn: '4:00 AM by Charcoal Stoves: Cross Street Origins',
+          narrativeZh: '1968年深秋，創辦人在灣仔交加街推起一輛木板車，架起綠色帆布帳篷。清晨以粗炭燒熱銅煲，拼配三種碎紅茶，四度反覆拉撞，每杯五毫子的厚奶茶成為碼頭工人與洋行跑腿的元氣起點。',
+          narrativeEn: 'In autumn 1968, the founder set up a wooden cart with a green canvas awning on Cross Street. Simmering Ceylon tea over charcoal urns and pulling it high across copper kettles, the 50-cent milk tea fueled dockers and office runners alike.',
+          quoteZh: '「茶膽要滾，奶要滑，杯要燙手。做街坊生意，一両茶葉都唔可以呃人。」—— Mand T 創辦人',
+          quoteEn: '"The tea base must boil, the milk must be silky, the cup must be scalding. In local business, you never cheat even on one ounce of tea." — Founder'
+        },
+        '1978': {
+          badgeZh: '入舖期 · 軒尼詩道現址', badgeEn: 'Move Indoors · Hennessy Road',
+          titleZh: '告別露天日曬雨淋：遷入軒尼詩道兩層舖位', titleEn: 'Leaving the Weather Behind: Moving to Hennessy Road',
+          narrativeZh: '1970年代末香港市區重整，Mand T 頂下灣仔軒尼詩道188號現址。鋪上防滑綠白紙皮石馬賽克地磚，訂製厚身實木卡位，自此正式以普通食肆牌照營業，餐牌加入生鐵猛火乾炒牛河。',
+          narrativeEn: 'In the late 1970s urban renewal, Mand T acquired 188 Hennessy Road. Laying down green and white mosaic tiles and solid wooden booths, it earned a full restaurant license and introduced scorching dry-fried beef ho fun.',
+          quoteZh: '「入咗舖有風扇吹，但炭火同拉茶手勢，同以前街頭一樣。」',
+          quoteEn: '"We had ceiling fans indoors, but our charcoal heat and tea pulling remained strictly street-grade."'
+        },
+        '1997': {
+          badgeZh: '堅守期 · 經濟風雨中的暖心飯堂', badgeEn: 'Resilience · Crisis Comfort Canteen',
+          titleZh: '風雨同路三十年：金融風暴下的平民常餐', titleEn: 'Thirty Years Together: The Asian Financial Crisis Meals',
+          narrativeZh: '金融風暴與亞洲經濟波動接踵而至，Mand T 堅持不減料、不加價，逆市推出暖心抗逆早茶餐，陪伴灣仔工友與打工仔共度時艱，深深烙印在幾代街坊心坎。',
+          narrativeEn: 'Amid economic storms, Mand T refused to dilute portions or raise prices, creating relief meals that accompanied Wan Chai clerks and workers through turbulent times.',
+          quoteZh: '「有工開就有得食，幾難捱都同街坊一齊過。」',
+          quoteEn: '"As long as people are working, they need good food. We weathered every storm side-by-side with our neighbours."'
+        },
+        '2014': {
+          badgeZh: '非遺期 · 傳統手拉茶藝收徒傳習', badgeEn: 'Intangible Heritage · Apprenticeship Era',
+          titleZh: '港式奶茶非遺傳習：建立四手拉茶標準譜', titleEn: 'Intangible Heritage: Systematizing 4-Step Tea Pulling',
+          narrativeZh: '港式奶茶製作技藝列入香港非物質文化遺產代表作名錄。Mand T 展開青年學徒計畫，將口傳心授的盲感經驗系統化，從粗中幼茶葉配比、水溫控制到手腕發力角度，守護手藝精髓。',
+          narrativeEn: 'As milk tea making was inducted into Hong Kong\'s Intangible Cultural Heritage, Mand T launched apprenticeships to translate master intuition into precise proportions and thermal controls.',
+          quoteZh: '「四度撞茶，手腕唔可以死力，要借壺底重量帶出茶香。」',
+          quoteEn: '"When pulling tea four times, never use brute wrist force; let the kettle\'s own weight release the fragrance."'
+        },
+        '2026': {
+          badgeZh: '當代期 · 守護市井溫度的活態地標', badgeEn: 'Living Icon · 58 Years of Warmth',
+          titleZh: '三代同堂半世紀：在急速變遷中保留純粹味道', titleEn: 'Three Generations: Pure Taste in an Ever-Changing City',
+          narrativeZh: '走過五十八載寒暑，軒尼詩道兩旁高樓拔地而起，Mand T 依舊保持當年的節奏。收銀櫃前依然放著算盤與八達通機，廚房飄出濃郁鑊氣，成為幾代香港人共享日常的活態生活地標。',
+          narrativeEn: 'Spanning 58 years while skyscrapers rose around Hennessy Road, Mand T keeps its authentic tempo. An abacus still rests beside the Octopus reader, serving as a living cultural touchstone.',
+          quoteZh: '「味道無變，溫度無變，這就是灣仔最安心的底色。」',
+          quoteEn: '"Unchanged flavour, unchanged warmth — this is the comforting soul of Wan Chai."'
+        }
+      };
+
+      eraBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          eraBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const era = btn.getAttribute('data-era');
+          if (eraLore[era]) {
+            eraBadge.textContent = currentLang === 'en' ? eraLore[era].badgeEn : eraLore[era].badgeZh;
+            eraHeadline.textContent = currentLang === 'en' ? eraLore[era].titleEn : eraLore[era].titleZh;
+            eraNarrative.textContent = currentLang === 'en' ? eraLore[era].narrativeEn : eraLore[era].narrativeZh;
+            eraQuote.textContent = currentLang === 'en' ? eraLore[era].quoteEn : eraLore[era].quoteZh;
+          }
+        });
+      });
+
+      const craftBtns = document.querySelectorAll('.craft-nav-btn');
+      const craftPanels = document.querySelectorAll('.craft-detail-panel');
+      craftBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          craftBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const c = btn.getAttribute('data-craft');
+          craftPanels.forEach(p => p.classList.toggle('active', p.id === `craft-${c}`));
+        });
+      });
+
+      // 6. Page 5 Visit Queue Estimator
+      const partyBtns = document.querySelectorAll('[data-party]');
+      const prefBtns = document.querySelectorAll('[data-pref]');
+      const calcWaitTime = document.getElementById('calcWaitTime');
+      const calcTicketNum = document.getElementById('calcTicketNum');
+      const getQueueAlertBtn = document.getElementById('getQueueAlertBtn');
+
+      let baseTime = 6;
+      let factor = 1.0;
+      let ticketPrefix = 'A';
+
+      function updateCalc() {
+        const est = Math.round(baseTime * factor);
+        calcWaitTime.textContent = `${est} - ${est + 3}`;
+        const num = ticketPrefix === 'A' ? '084' : (ticketPrefix === 'B' ? '036' : '014');
+        calcTicketNum.textContent = `${ticketPrefix}-${num}`;
+      }
+
+      partyBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          partyBtns.forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          baseTime = parseInt(b.getAttribute('data-base'), 10);
+          const p = b.getAttribute('data-party');
+          ticketPrefix = p === '1-2' ? 'A' : (p === '3-4' ? 'B' : 'C');
+          updateCalc();
+        });
+      });
+
+      prefBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          prefBtns.forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          factor = b.getAttribute('data-pref') === 'share' ? 1.0 : 1.5;
+          updateCalc();
+        });
+      });
+
+      getQueueAlertBtn.addEventListener('click', () => {
+        showToast(currentLang === 'en' ? 'Queue alert registered! SMS will be sent when your table is ready.' : '已成功為您登記！接近入座時將發送通知。');
+      });
+
+      // Toast notification helper
+      const toastMessage = document.getElementById('toastMessage');
+      function showToast(text) {
+        toastMessage.textContent = text;
+        toastMessage.classList.add('show');
+        setTimeout(() => toastMessage.classList.remove('show'), 2600);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,2583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>An Elementary Field Guide to Machine Learning — Hallmark Almanac</title>
+  
+  <!-- Typography: Hanken Grotesk, Newsreader, IBM Plex Mono, Noto Serif TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       HALLMARK ALMANAC THEME: REFINED LAVENDER PALETTE
+       ========================================================================== */
+    :root {
+      /* Paper Stock & Surface (Light Purple / Lavender) */
+      --color-paper: #f5f2fa;
+      --color-paper-2: oklch(93.5% 0.028 305);
+      --color-sheet: #ffffff;
+      --color-surface-subtle: #eeeaec;
+      
+      /* Deep Twilight Plum / Charcoal Ink */
+      --color-ink: #1f1b29;
+      --color-ink-2: oklch(32% 0.035 300);
+      --color-muted: #5e5772;
+      
+      /* Rules & Borders (Lavender Hairline) */
+      --color-rule: #ddd6eb;
+      --color-rule-2: oklch(48% 0.080 300);
+      
+      /* Rich Regal Purple Accent */
+      --color-accent: #6b21a8;
+      --color-accent-2: oklch(40% 0.180 300);
+      --color-accent-subtle: #f0e6fa;
+      --color-accent-ink: #ffffff;
+
+      /* Semantic Data Colors */
+      --color-data-teal: oklch(52% 0.13 195);
+      --color-data-amber: oklch(62% 0.15 75);
+      --color-data-slate: oklch(55% 0.03 290);
+      --color-surface-dim: #ece6f6;
+      --color-badge-bg: #ece5f7;
+
+      /* Typographic Scales */
+      --font-heading: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      --font-body: 'Newsreader', 'Noto Serif TC', Georgia, serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      /* Spacing Scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Layout */
+      --max-width: 1240px;
+    }
+
+    /* Base Reset & Almanac Foundation */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    /* Typography Utilities */
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--color-ink);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+
+    .font-mono {
+      font-family: var(--font-mono);
+      font-feature-settings: "tnum" 1, "zero" 1;
+    }
+
+    .caption {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: clamp(1rem, 3.5vw, 2.5rem);
+      padding-right: clamp(1rem, 3.5vw, 2.5rem);
+    }
+
+    .hairline-b { border-bottom: 1px solid var(--color-rule); }
+    .hairline-t { border-top: 1px solid var(--color-rule); }
+    .bar-rule {
+      height: 3px;
+      background-color: var(--color-rule-2);
+      width: 100%;
+    }
+
+    /* Sticky Masthead */
+    .masthead {
+      background-color: var(--color-paper-2);
+      border-bottom: 1px solid var(--color-rule-2);
+      padding-top: var(--space-xs);
+      padding-bottom: var(--space-xs);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .masthead-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.1rem;
+      list-style: none;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--color-ink-2);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.25rem 0;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent);
+      border-bottom: 1px solid var(--color-accent);
+    }
+
+    /* 1-Click Language Switcher (Segmented Control) */
+    .lang-switcher-wrap {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--color-rule-2);
+      background-color: var(--color-sheet);
+      padding: 2px;
+    }
+
+    .lang-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none;
+      background: transparent;
+      padding: 0.3rem 0.65rem;
+      cursor: pointer;
+      color: var(--color-muted);
+      transition: all 0.15s ease;
+    }
+
+    .lang-btn.active {
+      background-color: var(--color-accent);
+      color: var(--color-accent-ink);
+    }
+
+    /* Buttons & Badges */
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.65rem 1.15rem;
+      background-color: var(--color-accent);
+      color: var(--color-accent-ink);
+      border: 1px solid var(--color-accent);
+      border-radius: 2px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.15s ease, border-color 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background-color: var(--color-accent-2);
+      border-color: var(--color-accent-2);
+    }
+
+    .btn-secondary {
+      background-color: var(--color-sheet);
+      color: var(--color-ink);
+      border: 1px solid var(--color-rule-2);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-accent-subtle);
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.65rem;
+      font-size: 0.72rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      padding: 0.18rem 0.5rem;
+      background-color: var(--color-badge-bg);
+      border: 1px solid var(--color-rule);
+      border-radius: 2px;
+      color: var(--color-muted);
+    }
+
+    .badge-accent {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+      color: var(--color-accent-ink);
+    }
+
+    /* Hero Section */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 1fr;
+        align-items: stretch;
+      }
+    }
+
+    .hero-headline {
+      font-size: clamp(2.3rem, 4.6vw, 3.8rem);
+      line-height: 1.08;
+      margin-bottom: var(--space-md);
+    }
+
+    .hero-prose {
+      font-size: 1.22rem;
+      color: var(--color-ink-2);
+      margin-bottom: var(--space-lg);
+      max-width: 40ch;
+    }
+
+    /* Clean Almanac Sheet Card (No shadows, hairline border) */
+    .sheet-card {
+      background-color: var(--color-sheet);
+      border: 1px solid var(--color-rule-2);
+      padding: clamp(1rem, 2vw, 1.75rem);
+      position: relative;
+    }
+
+    .sheet-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--color-rule);
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Inverted Paradigm Banner */
+    .paradigm-banner {
+      background-color: var(--color-ink);
+      color: var(--color-sheet);
+      padding: clamp(2rem, 4vw, 3.5rem) 0;
+      border-top: 2px solid var(--color-accent);
+      border-bottom: 2px solid var(--color-accent);
+    }
+
+    .paradigm-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(1.35rem, 2.6vw, 2.1rem);
+      font-weight: 500;
+      line-height: 1.35;
+      max-width: 48ch;
+      margin-bottom: var(--space-lg);
+    }
+
+    .paradigm-split-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      border-top: 1px solid oklch(35% 0.04 300);
+      padding-top: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .paradigm-split-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .paradigm-col {
+      background-color: oklch(25% 0.025 300);
+      border: 1px solid oklch(38% 0.04 300);
+      padding: 1.25rem;
+    }
+
+    .diagram-flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .flow-node {
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      padding: 0.5rem 0.75rem;
+      border-left: 3px solid var(--color-rule-2);
+    }
+
+    .flow-node.highlight {
+      border-left-color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: var(--color-rule);
+      font-size: 0.75rem;
+    }
+
+    /* Tabs & Workbenches */
+    .tabs-nav {
+      display: flex;
+      border-bottom: 2px solid var(--color-rule-2);
+      overflow-x: auto;
+      gap: 0.25rem;
+    }
+
+    .tab-btn {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1.25rem;
+      background: none;
+      border: 1px solid transparent;
+      border-bottom: none;
+      color: var(--color-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--color-ink);
+      background-color: var(--color-surface-dim);
+    }
+
+    .tab-btn.active {
+      background-color: var(--color-sheet);
+      color: var(--color-accent);
+      border-color: var(--color-rule-2);
+      border-top: 3px solid var(--color-accent);
+      margin-bottom: -2px;
+      padding-bottom: calc(0.75rem + 2px);
+    }
+
+    .tab-panel {
+      display: none;
+      background-color: var(--color-sheet);
+      border: 1px solid var(--color-rule-2);
+      border-top: none;
+      padding: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Range Controls */
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 1rem;
+    }
+
+    .control-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      background: var(--color-rule);
+      border-radius: 0;
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: var(--color-accent);
+      border: 2px solid var(--color-sheet);
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      background: var(--color-accent);
+      border: 2px solid var(--color-sheet);
+      cursor: pointer;
+      border-radius: 0;
+    }
+
+    canvas.viz-canvas {
+      width: 100%;
+      height: auto;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-rule);
+      display: block;
+    }
+
+    .metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-rule);
+      padding: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+
+    .metric-value.loss {
+      color: var(--color-accent);
+    }
+
+    /* Catalog Table */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--color-rule-2);
+      background-color: var(--color-sheet);
+    }
+
+    .almanac-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .almanac-table th {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background-color: var(--color-paper-2);
+      color: var(--color-ink-2);
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--color-rule-2);
+    }
+
+    .almanac-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--color-rule);
+      vertical-align: top;
+    }
+
+    .almanac-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .almanac-table tr:hover td {
+      background-color: var(--color-surface-dim);
+    }
+
+    /* Lexicon Grid */
+    .lexicon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .lexicon-card {
+      background-color: var(--color-sheet);
+      border: 1px solid var(--color-rule);
+      border-left: 3px solid var(--color-rule-2);
+      padding: 1.25rem;
+    }
+
+    .lexicon-card:hover {
+      border-left-color: var(--color-accent);
+    }
+
+    .lexicon-term {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .lexicon-metaphor {
+      font-style: italic;
+      color: var(--color-muted);
+      font-size: 0.88rem;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    /* Section Headers */
+    .section-head { margin-bottom: 1.75rem; }
+    .section-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-sub {
+      color: var(--color-muted);
+      font-size: 1.08rem;
+      max-width: 65ch;
+    }
+
+    .grid-2col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 840px) {
+      .grid-2col {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .radio-pill-group {
+      display: flex;
+      border: 1px solid var(--color-rule-2);
+      width: fit-content;
+      margin-bottom: 1rem;
+    }
+
+    .radio-pill-btn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.4rem 0.85rem;
+      background: var(--color-paper);
+      border: none;
+      cursor: pointer;
+      color: var(--color-ink-2);
+      font-weight: 500;
+    }
+
+    .radio-pill-btn.active {
+      background: var(--color-ink);
+      color: var(--color-sheet);
+    }
+
+    .sample-phrase-btn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.35rem 0.65rem;
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-rule);
+      cursor: pointer;
+      text-align: left;
+      margin-bottom: 0.4rem;
+      display: block;
+      width: 100%;
+      color: var(--color-ink);
+    }
+
+    .sample-phrase-btn:hover {
+      border-color: var(--color-accent);
+      background-color: var(--color-sheet);
+    }
+
+    .colophon {
+      background-color: var(--color-paper-2);
+      border-top: 2px solid var(--color-rule-2);
+      padding: var(--space-2xl) 0 var(--space-xl);
+      margin-top: var(--space-2xl);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       MASTHEAD WITH 1-CLICK BILINGUAL TOGGLE
+       ========================================================================= -->
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+        <span class="badge badge-accent" data-i18n="badge_almanac">ALMANAC NO. 14</span>
+        <span class="caption" style="font-weight: 600; color: var(--color-ink);" data-i18n="guide_title">HALLMARK FIELD GUIDE</span>
+        <span class="caption">EST. 2026 / VOL. I</span>
+      </div>
+
+      <!-- Segmented Language Switcher -->
+      <div class="lang-switcher-wrap" role="group" aria-label="Language selector">
+        <button class="lang-btn active" id="btn-lang-en" onclick="setLanguage('en')">English</button>
+        <button class="lang-btn" id="btn-lang-zh" onclick="setLanguage('zh')">繁體中文</button>
+      </div>
+
+      <nav aria-label="Reference sections">
+        <ul class="nav-links">
+          <li><a href="#workbench" data-i18n="nav_workbench">Logic Workbench</a></li>
+          <li><a href="#paradigm" data-i18n="nav_paradigm">Core Shift</a></li>
+          <li><a href="#three-schools" data-i18n="nav_schools">The 3 Schools</a></li>
+          <li><a href="#learning-loop" data-i18n="nav_tuning">The Tuning Loop</a></li>
+          <li><a href="#catalog" data-i18n="nav_catalog">Field Catalog</a></li>
+          <li><a href="#lexicon" data-i18n="nav_lexicon">Lexicon</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         HERO SECTION
+         ========================================================================= -->
+    <section class="container" style="padding-top: var(--space-lg);">
+      <div class="bar-rule" style="margin-bottom: var(--space-sm);"></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem;">
+        <span class="caption" data-i18n="hero_chapter">CHAPTER 01 / FUNDAMENTAL DEFINITIONS</span>
+        <span class="caption" data-i18n="hero_read_time">READING TIME ~ 8 MIN</span>
+      </div>
+
+      <div class="hero-grid">
+        <!-- Left: Prose -->
+        <div>
+          <h1 class="hero-headline" data-i18n="hero_headline">
+            Rules are written.<br><span style="color: var(--color-accent);">Patterns are learned.</span>
+          </h1>
+          <p class="hero-prose" data-i18n="hero_prose">
+            For seventy years, computers were calculators that obeyed rigid instructions. 
+            <strong>Machine Learning</strong> is the quiet revolution where we stop writing the instructions 
+            and instead teach the machine to recognize the patterns for itself.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <a href="#workbench" class="btn">
+              <span data-i18n="hero_btn_explore">Explore The Sandbox</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+            </a>
+            <a href="#paradigm" class="btn btn-secondary" data-i18n="hero_btn_thesis">Read The Thesis</a>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-rule); padding-top: 1rem; display: flex; gap: 2rem; flex-wrap: wrap;">
+            <div>
+              <div class="font-mono" style="font-size: 1.15rem; font-weight: 700;">1950s</div>
+              <div class="caption" data-i18n="hero_stat_1">Birth of Concept</div>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size: 1.15rem; font-weight: 700;" data-i18n="hero_stat_2_val">3 Pillars</div>
+              <div class="caption" data-i18n="hero_stat_2_lbl">Data, Weights, Loss</div>
+            </div>
+            <div>
+              <div class="font-mono" style="font-size: 1.15rem; font-weight: 700;" data-i18n="hero_stat_3_val">0 Lines</div>
+              <div class="caption" data-i18n="hero_stat_3_lbl">Manual Edge Cases</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Workbench -->
+        <div id="workbench" class="sheet-card">
+          <div class="sheet-card-header">
+            <div>
+              <div class="caption" data-i18n="wb_proto_tag">INTERACTIVE PROTOTYPE</div>
+              <h2 style="font-size: 1.1rem; margin-top: 0.15rem;" data-i18n="wb_title">The Spam Filter Dilemma</h2>
+            </div>
+            <span class="badge" id="model-mode-badge">MODE: HARD RULES</span>
+          </div>
+
+          <p style="font-size: 0.92rem; color: var(--color-ink-2); margin-bottom: 1rem;" data-i18n="wb_desc">
+            Test how a traditional program behaves versus a statistical learner when confronted with trick variations.
+          </p>
+
+          <div class="control-group">
+            <span class="caption" data-i18n="wb_select_engine">SELECT PROCESSING ENGINE:</span>
+            <div class="radio-pill-group" role="tablist">
+              <button class="radio-pill-btn active" id="btn-engine-rules" onclick="setEngineMode('rules')" data-i18n="wb_engine_rules">1. Explicit Rules (If/Else)</button>
+              <button class="radio-pill-btn" id="btn-engine-ml" onclick="setEngineMode('ml')" data-i18n="wb_engine_ml">2. Machine Learning (Weights)</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="caption" for="email-input" data-i18n="wb_input_label">TEST EMAIL SUBJECT LINE:</label>
+            <input type="text" id="email-input" value="URGENT: Claim your free luxury cruise voucher now!" 
+                   style="width: 100%; padding: 0.6rem; font-family: var(--font-mono); font-size: 0.85rem; border: 1px solid var(--color-rule-2); background: var(--color-paper); color: var(--color-ink);">
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <span class="caption" style="display: block; margin-bottom: 0.35rem;" data-i18n="wb_sample_heading">TRY PRE-LOADED SAMPLES:</span>
+            <button class="sample-phrase-btn" onclick="applySamplePhrase(0)" id="sample-btn-0">
+              • "URGENT: Claim your free luxury cruise voucher now!" (Blatant spam)
+            </button>
+            <button class="sample-phrase-btn" onclick="applySamplePhrase(1)" id="sample-btn-1">
+              • "Claim yr fr.ee luxury cr-uise now!" (Obfuscated letters)
+            </button>
+            <button class="sample-phrase-btn" onclick="applySamplePhrase(2)" id="sample-btn-2">
+              • "Dinner reservations confirmed for tonight at 8pm" (Normal inbox)
+            </button>
+            <button class="sample-phrase-btn" onclick="applySamplePhrase(3)" id="sample-btn-3">
+              • "Free webinar: Learn conversational French with Pierre" (Legitimate use of 'Free')
+            </button>
+          </div>
+
+          <div style="background-color: var(--color-paper); border: 1px solid var(--color-rule); padding: 0.85rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+              <span class="caption" data-i18n="wb_decision_result">DECISION RESULT:</span>
+              <span class="font-mono" id="verdict-tag" style="font-weight: 700; font-size: 0.95rem;">ANALYZING...</span>
+            </div>
+            <div id="verdict-explanation" style="font-size: 0.86rem; color: var(--color-ink-2); min-height: 2.8rem;">
+              Evaluating input rules...
+            </div>
+            <div style="margin-top: 0.5rem; height: 6px; background-color: var(--color-sheet); width: 100%; border: 1px solid var(--color-rule);">
+              <div id="verdict-score-bar" style="height: 100%; width: 50%; background-color: var(--color-accent); transition: width 0.3s ease;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CORE PARADIGM SHIFT
+         ========================================================================= -->
+    <section id="paradigm" class="paradigm-banner">
+      <div class="container">
+        <span class="caption" style="color: var(--color-accent-subtle); letter-spacing: 0.12em; font-weight: 600;" data-i18n="para_label">THE FUNDAMENTAL INVERSION</span>
+        <blockquote class="paradigm-quote" data-i18n="para_quote">
+          "Traditional software requires humans to craft the rules. Machine learning gives the computer examples and answers, and asks the machine to derive the rules."
+        </blockquote>
+
+        <div class="paradigm-split-grid">
+          <!-- Traditional Computation -->
+          <div class="paradigm-col">
+            <span class="badge" style="background: var(--color-paper); color: var(--color-ink); margin-bottom: 0.5rem;" data-i18n="para_trad_badge">TRADITIONAL COMPUTATION</span>
+            <p style="font-size: 0.95rem; color: var(--color-paper); margin-top: 0.5rem;" data-i18n="para_trad_desc">
+              A human software architect studies the problem, writes 10,000 brittle rules (if this, then that), and feeds in data. If the real world changes slightly, the program breaks.
+            </p>
+            <div class="diagram-flow">
+              <div class="flow-node font-mono" data-i18n="para_trad_f1">1. DATA (Images, text, logs)</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-node font-mono highlight" data-i18n="para_trad_f2">2. RULES (Human hand-coded logic)</div>
+              <div class="flow-arrow">▼</div>
+              <div class="flow-node font-mono" style="background-color: var(--color-sheet); font-weight: 700;" data-i18n="para_trad_f3">➔ ANSWERS / ACTIONS</div>
+            </div>
+          </div>
+
+          <!-- Machine Learning -->
+          <div class="paradigm-col" style="border-color: var(--color-accent);">
+            <span class="badge badge-accent" style="margin-bottom: 0.5rem;" data-i18n="para_ml_badge">MACHINE LEARNING</span>
+            <p style="font-size: 0.95rem; color: var(--color-paper); margin-top: 0.5rem;" data-i18n="para_ml_desc">
+              We supply thousands of examples alongside their correct answers. The learning algorithm calculates mathematical dials (weights) that best explain the relationship.
+            </p>
+            <div class="diagram-flow">
+              <div class="flow-node font-mono" data-i18n="para_ml_f1">1. DATA (50,000 photos of pets)</div>
+              <div class="flow-arrow">+</div>
+              <div class="flow-node font-mono" data-i18n="para_ml_f2">2. ANSWERS ("Dog", "Cat", "Dog")</div>
+              <div class="flow-arrow">▼</div>
+              <div class="flow-node font-mono highlight" style="background-color: var(--color-accent); color: var(--color-accent-ink); font-weight: 700;" data-i18n="para_ml_f3">➔ DERIVED RULES / MODEL</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         THE THREE SCHOOLS
+         ========================================================================= -->
+    <section id="three-schools" class="container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);">
+      <div class="section-head">
+        <span class="section-num" data-i18n="sch_chapter">CHAPTER 02 / METHODOLOGY</span>
+        <h2 class="section-title" data-i18n="sch_title">The Three Schools of Machine Learning</h2>
+        <p class="section-sub" data-i18n="sch_sub">
+          Machines do not possess human curiosity; they require a mathematical goal. 
+          Almost all practical machine learning falls into three distinct pedagogies.
+        </p>
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tabs-nav" role="tablist">
+        <button class="tab-btn active" role="tab" id="tab-btn-supervised" onclick="switchSchoolTab('supervised')" data-i18n="sch_tab_sup">
+          I. Supervised Learning
+        </button>
+        <button class="tab-btn" role="tab" id="tab-btn-unsupervised" onclick="switchSchoolTab('unsupervised')" data-i18n="sch_tab_unsup">
+          II. Unsupervised Learning
+        </button>
+        <button class="tab-btn" role="tab" id="tab-btn-reinforcement" onclick="switchSchoolTab('reinforcement')" data-i18n="sch_tab_rl">
+          III. Reinforcement Learning
+        </button>
+      </div>
+
+      <!-- Supervised Simulator -->
+      <div id="panel-supervised" class="tab-panel active" role="tabpanel">
+        <div class="grid-2col">
+          <div>
+            <span class="badge badge-accent" style="margin-bottom: 0.5rem;" data-i18n="sup_badge">THE TEACHER'S ANSWER KEY</span>
+            <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem;" data-i18n="sup_title">Classification via Decision Boundary</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--color-ink-2);" data-i18n="sup_desc">
+              In <strong>Supervised Learning</strong>, every training point is tagged with the ground truth. 
+              Here, a sorter must separate <strong>Apples</strong> (lighter, smoother skin) from <strong>Oranges</strong> (heavier, dimpled skin).
+            </p>
+            <p style="font-size: 0.92rem; color: var(--color-muted); margin-bottom: 1.25rem;" data-i18n="sup_hint">
+              Adjust the boundary cut-off slider below to train the separator. Observe how moving the line improves or damages classification accuracy.
+            </p>
+
+            <div class="control-group">
+              <div class="control-label-row">
+                <span class="caption" data-i18n="sup_slider_label">DECISION BOUNDARY THRESHOLD:</span>
+                <span class="font-mono" id="sup-threshold-val">130 Threshold Score</span>
+              </div>
+              <input type="range" id="sup-slider" min="50" max="220" value="130" oninput="updateSupervisedSim()">
+            </div>
+
+            <div class="metrics-bar">
+              <div class="metric-item">
+                <span class="caption" data-i18n="sup_m_samples">TOTAL SAMPLES</span>
+                <span class="metric-value font-mono" id="sup-sample-count">24 Items</span>
+              </div>
+              <div class="metric-item">
+                <span class="caption" data-i18n="sup_m_acc">ACCURACY</span>
+                <span class="metric-value font-mono" id="sup-acc-val">91.7%</span>
+              </div>
+              <div class="metric-item">
+                <span class="caption" data-i18n="sup_m_err">ERRORS</span>
+                <span class="metric-value font-mono loss" id="sup-err-val">2 Misses</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem;">
+              <button class="btn btn-sm" onclick="autoOptimizeBoundary()" data-i18n="sup_btn_autotune">
+                Run Auto-Tuner (Find Minimum Loss)
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem;">
+              <span class="caption" data-i18n="sup_canvas_title">FEATURE SPACE (WEIGHT VS. TEXTURE)</span>
+              <span class="caption" style="color: var(--color-accent);" id="sup-canvas-legend">● RED = APPLE  ■ GOLD = ORANGE</span>
+            </div>
+            <canvas id="supervised-canvas" class="viz-canvas" width="500" height="340"></canvas>
+            <div class="caption" style="margin-top: 0.35rem; text-align: center;" data-i18n="sup_canvas_sub">
+              Dotted purple line represents the model's learned dividing threshold.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unsupervised Simulator -->
+      <div id="panel-unsupervised" class="tab-panel" role="tabpanel">
+        <div class="grid-2col">
+          <div>
+            <span class="badge" style="background-color: var(--color-data-teal); color: var(--color-sheet); margin-bottom: 0.5rem;" data-i18n="unsup_badge">NO LABELS PROVIDED</span>
+            <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem;" data-i18n="unsup_title">Clustering Natural Cohorts (K-Means)</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--color-ink-2);" data-i18n="unsup_desc">
+              No human labeled these customer points. The algorithm is given raw purchasing data and asked: 
+              <em>"Find 3 natural groupings that behave similarly."</em>
+            </p>
+            <p style="font-size: 0.92rem; color: var(--color-muted); margin-bottom: 1.25rem;" data-i18n="unsup_hint">
+              Click <strong>"Step Iteration"</strong> to watch cluster centers (centroids) calculate the mathematical average of their surrounding points and migrate until stable.
+            </p>
+
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+              <button class="btn btn-sm" onclick="stepKMeans()" data-i18n="unsup_btn_step">Step Iteration</button>
+              <button class="btn btn-sm btn-secondary" onclick="runFullKMeans()" data-i18n="unsup_btn_converge">Converge Instantly</button>
+              <button class="btn btn-sm btn-secondary" onclick="resetKMeans()" data-i18n="unsup_btn_reset">Generate New Data</button>
+            </div>
+
+            <div class="metrics-bar">
+              <div class="metric-item">
+                <span class="caption" data-i18n="unsup_m_iter">ITERATION</span>
+                <span class="metric-value font-mono" id="kmeans-step-counter">0 / 10</span>
+              </div>
+              <div class="metric-item">
+                <span class="caption" data-i18n="unsup_m_status">STATUS</span>
+                <span class="metric-value font-mono" id="kmeans-status" style="font-size: 1rem;">Unassigned</span>
+              </div>
+            </div>
+
+            <p class="caption" style="margin-top: 1rem;" data-i18n="unsup_realworld">
+              Everyday use: Spotify organizing songs into acoustic clusters, genomics grouping DNA variations, fraud rings spotting atypical transactions.
+            </p>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem;">
+              <span class="caption" data-i18n="unsup_canvas_title">PURCHASE FREQUENCY VS. BASKET SIZE</span>
+              <span class="caption" data-i18n="unsup_canvas_legend">✛ = CLUSTER CENTROID</span>
+            </div>
+            <canvas id="unsupervised-canvas" class="viz-canvas" width="500" height="340"></canvas>
+            <div class="caption" style="margin-top: 0.35rem; text-align: center;" data-i18n="unsup_canvas_sub">
+              Points recolor in real time based on nearest centroid distance.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reinforcement Simulator -->
+      <div id="panel-reinforcement" class="tab-panel" role="tabpanel">
+        <div class="grid-2col">
+          <div>
+            <span class="badge" style="background-color: var(--color-data-amber); color: var(--color-ink); margin-bottom: 0.5rem;" data-i18n="rl_badge">TRIAL, ERROR & REWARD</span>
+            <h3 style="font-size: 1.35rem; margin-bottom: 0.5rem;" data-i18n="rl_title">Grid-World Path Optimization</h3>
+            <p style="font-size: 0.95rem; margin-bottom: 1rem; color: var(--color-ink-2);" data-i18n="rl_desc">
+              There is no teacher and no static database. The software agent operates inside an environment. 
+              Reaching the target yields a <strong>+10 reward</strong>; tumbling into a hazard inflicts a <strong>-5 penalty</strong>.
+            </p>
+            <p style="font-size: 0.92rem; color: var(--color-muted); margin-bottom: 1.25rem;" data-i18n="rl_hint">
+              Through repeated stumbles and Q-table updates, the agent figures out the safe, optimal navigation path.
+            </p>
+
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+              <button class="btn btn-sm" onclick="runSingleRLEpisode()" data-i18n="rl_btn_ep1">Run 1 Episode</button>
+              <button class="btn btn-sm btn-secondary" onclick="trainRLEpisodes(25)" data-i18n="rl_btn_ep25">Train 25 Episodes</button>
+              <button class="btn btn-sm btn-secondary" onclick="resetRL()" data-i18n="rl_btn_reset">Reset World</button>
+            </div>
+
+            <div class="metrics-bar">
+              <div class="metric-item">
+                <span class="caption" data-i18n="rl_m_episodes">EPISODES RUN</span>
+                <span class="metric-value font-mono" id="rl-episodes-val">0</span>
+              </div>
+              <div class="metric-item">
+                <span class="caption" data-i18n="rl_m_success">SUCCESS RATE</span>
+                <span class="metric-value font-mono" id="rl-success-rate">0%</span>
+              </div>
+              <div class="metric-item">
+                <span class="caption" data-i18n="rl_m_reward">AVERAGE REWARD</span>
+                <span class="metric-value font-mono" id="rl-avg-reward">0.0</span>
+              </div>
+            </div>
+
+            <p class="caption" style="margin-top: 1rem;" data-i18n="rl_realworld">
+              Everyday use: Autonomous vehicle steering, chess & Go engines (AlphaZero), robotic factory arm manipulation.
+            </p>
+          </div>
+
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem;">
+              <span class="caption" data-i18n="rl_canvas_title">AGENT ENVIRONMENT (5x5 GRID)</span>
+              <span class="caption" data-i18n="rl_canvas_legend">▲ AGENT  ★ GOAL (+10)  ✕ PIT (-5)</span>
+            </div>
+            <canvas id="rl-canvas" class="viz-canvas" width="500" height="340"></canvas>
+            <div class="caption" style="margin-top: 0.35rem; text-align: center;" data-i18n="rl_canvas_sub">
+              Cell color shades intensify as the agent learns high-value paths.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         THE TUNING LOOP & LINEAR REGRESSION SANDBOX
+         ========================================================================= -->
+    <section id="learning-loop" style="background-color: var(--color-paper-2); border-top: 1px solid var(--color-rule-2); border-bottom: 1px solid var(--color-rule-2); padding: var(--space-2xl) 0;">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-num" data-i18n="loop_chapter">CHAPTER 03 / THE ENGINE ROOM</span>
+          <h2 class="section-title" data-i18n="loop_title">The Four Steps of Optimization</h2>
+          <p class="section-sub" data-i18n="loop_sub">
+            Stripped of mystical jargon, machine learning is high-speed guesswork refined by calculus. 
+            All modern systems repeat this precise 4-step loop millions of times.
+          </p>
+        </div>
+
+        <!-- 4 Step Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-bottom: var(--space-xl);">
+          <div class="sheet-card">
+            <span class="caption" style="color: var(--color-accent); font-weight: 700;" data-i18n="loop_p1_tag">PHASE 01</span>
+            <h4 style="margin-top: 0.25rem; margin-bottom: 0.5rem;" data-i18n="loop_p1_title">1. Make a Guess</h4>
+            <p style="font-size: 0.9rem; color: var(--color-ink-2);" data-i18n="loop_p1_desc">
+              The model starts with random weights (knob settings). Given an input (e.g. house square footage), it spits out an initial blind prediction.
+            </p>
+          </div>
+
+          <div class="sheet-card">
+            <span class="caption" style="color: var(--color-accent); font-weight: 700;" data-i18n="loop_p2_tag">PHASE 02</span>
+            <h4 style="margin-top: 0.25rem; margin-bottom: 0.5rem;" data-i18n="loop_p2_title">2. Measure the Error</h4>
+            <p style="font-size: 0.9rem; color: var(--color-ink-2);" data-i18n="loop_p2_desc">
+              Known formally as the <strong>Loss Function</strong>. It subtracts the guess from reality and squares the difference. A bad guess produces a huge error score.
+            </p>
+          </div>
+
+          <div class="sheet-card">
+            <span class="caption" style="color: var(--color-accent); font-weight: 700;" data-i18n="loop_p3_tag">PHASE 03</span>
+            <h4 style="margin-top: 0.25rem; margin-bottom: 0.5rem;" data-i18n="loop_p3_title">3. Calculate Direction</h4>
+            <p style="font-size: 0.9rem; color: var(--color-ink-2);" data-i18n="loop_p3_desc">
+              Using calculus (gradient descent), the computer determines whether nudging weight knob #1 up or down will decrease the loss score.
+            </p>
+          </div>
+
+          <div class="sheet-card">
+            <span class="caption" style="color: var(--color-accent); font-weight: 700;" data-i18n="loop_p4_tag">PHASE 04</span>
+            <h4 style="margin-top: 0.25rem; margin-bottom: 0.5rem;" data-i18n="loop_p4_title">4. Nudge & Repeat</h4>
+            <p style="font-size: 0.9rem; color: var(--color-ink-2);" data-i18n="loop_p4_desc">
+              The weights are nudged by a tiny increment. The machine ingests the next batch of data and repeats until the error stops dropping.
+            </p>
+          </div>
+        </div>
+
+        <!-- Linear Regression Sandbox -->
+        <div class="sheet-card">
+          <div class="sheet-card-header">
+            <div>
+              <span class="caption" data-i18n="reg_lab_tag">HANDS-ON LABORATORY</span>
+              <h3 style="font-size: 1.25rem; margin-top: 0.15rem;" data-i18n="reg_title">Tune The Knobs: Real-Time Loss Minimization</h3>
+            </div>
+            <span class="badge badge-accent" data-i18n="reg_objective">OBJECTIVE: MINIMIZE RESIDUAL LOSS</span>
+          </div>
+
+          <div class="grid-2col">
+            <div>
+              <p style="font-size: 0.92rem; color: var(--color-ink-2); margin-bottom: 1.25rem;" data-i18n="reg_desc">
+                Below is a realistic dataset relating <strong>Living Space (Square Meters)</strong> to <strong>Sale Price ($k)</strong>. 
+                You are playing the role of the training algorithm. Adjust the Slope (Weight) and Baseline (Bias) dials to make the trendline fit the empirical dots.
+              </p>
+
+              <div class="control-group">
+                <div class="control-label-row">
+                  <span class="caption" data-i18n="reg_ctrl_slope">WEIGHT / SLOPE (m):</span>
+                  <span class="font-mono" id="reg-slope-val">0.60</span>
+                </div>
+                <input type="range" id="reg-slope" min="0.2" max="3.5" step="0.05" value="0.6" oninput="updateRegressionSim()">
+              </div>
+
+              <div class="control-group">
+                <div class="control-label-row">
+                  <span class="caption" data-i18n="reg_ctrl_bias">BIAS / INTERCEPT (b):</span>
+                  <span class="font-mono" id="reg-bias-val">120.0</span>
+                </div>
+                <input type="range" id="reg-bias" min="-20" max="150" step="2" value="120" oninput="updateRegressionSim()">
+              </div>
+
+              <div class="metrics-bar">
+                <div class="metric-item">
+                  <span class="caption" data-i18n="reg_m_mse">MEAN SQUARED ERROR (LOSS)</span>
+                  <span class="metric-value font-mono loss" id="reg-loss-val">18,420</span>
+                </div>
+                <div class="metric-item">
+                  <span class="caption" data-i18n="reg_m_fit">FIT QUALITY</span>
+                  <span class="metric-value font-mono" id="reg-fit-val">Poor (Underfit)</span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+                <button class="btn btn-sm" onclick="gradientDescentStep()" data-i18n="reg_btn_step">Run 1 Gradient Step</button>
+                <button class="btn btn-sm btn-secondary" onclick="autoSolveRegression()" data-i18n="reg_btn_auto">Auto-Converge to Minimum Loss</button>
+              </div>
+              <p class="caption" style="margin-top: 0.75rem;" data-i18n="reg_footer_hint">
+                Red vertical drop-lines indicate error residuals (y_actual - y_predicted). When total error is minimized, the drop lines shrink.
+              </p>
+            </div>
+
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem;">
+                <span class="caption" data-i18n="reg_canvas_title">HOUSING MARKET EMPIRICAL DATA</span>
+                <span class="caption" data-i18n="reg_canvas_eq">EQUATION: Price = (m × Area) + b</span>
+              </div>
+              <canvas id="regression-canvas" class="viz-canvas" width="500" height="340"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         EVERYDAY CASE STUDIES CATALOG
+         ========================================================================= -->
+    <section id="catalog" class="container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);">
+      <div class="section-head">
+        <span class="section-num" data-i18n="cat_chapter">CHAPTER 04 / FIELD SPECIMENS</span>
+        <h2 class="section-title" data-i18n="cat_title">An Everyday Catalog of Machine Learning</h2>
+        <p class="section-sub" data-i18n="cat_sub">
+          Where rule-based programming hit an insurmountable brick wall of complexity, 
+          statistical learning succeeded. An audit of five omnipresent systems.
+        </p>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="almanac-table">
+          <thead>
+            <tr>
+              <th style="width: 22%;" data-i18n="cat_th_app">Application</th>
+              <th style="width: 26%;" data-i18n="cat_th_feat">Input Data (Features)</th>
+              <th style="width: 28%;" data-i18n="cat_th_pattern">The Learned Statistical Pattern</th>
+              <th style="width: 24%;" data-i18n="cat_th_failure">Why Hand-Written Rules Failed</th>
+            </tr>
+          </thead>
+          <tbody id="catalog-table-body">
+            <!-- Dynamically populated / translated -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         THE LAYMAN'S LEXICON
+         ========================================================================= -->
+    <section id="lexicon" class="container" style="padding-bottom: var(--space-2xl);">
+      <div class="hairline-t" style="margin-bottom: var(--space-2xl);"></div>
+
+      <div class="section-head" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <span class="section-num" data-i18n="lex_chapter">CHAPTER 05 / COMPENDIUM</span>
+          <h2 class="section-title" data-i18n="lex_title">The Layman's Field Lexicon</h2>
+          <p class="section-sub" data-i18n="lex_sub">
+            De-mystifying the essential pieces of vocabulary engineers use daily.
+          </p>
+        </div>
+        <div>
+          <input type="text" id="lexicon-filter" placeholder="Filter terms / 搜尋術語..." oninput="filterLexicon()"
+                 style="padding: 0.5rem 0.75rem; font-family: var(--font-mono); font-size: 0.8rem; border: 1px solid var(--color-rule-2); background: var(--color-sheet); color: var(--color-ink);">
+        </div>
+      </div>
+
+      <div class="lexicon-grid" id="lexicon-container">
+        <!-- Rendered dynamically for bilingual search -->
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       COLOPHON
+       ========================================================================= -->
+  <footer class="colophon">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div>
+          <span class="caption" style="color: var(--color-accent); font-weight: 700;" data-i18n="footer_spec_tag">DOCUMENT SPECIFICATIONS</span>
+          <h4 style="margin-top: 0.35rem; margin-bottom: 0.5rem; font-size: 1rem;" data-i18n="footer_spec_title">Hallmark Almanac No. 14</h4>
+          <p style="font-size: 0.85rem; color: var(--color-muted);" data-i18n="footer_spec_desc">
+            Rendered in delicate lavender & twilight plum palettes with OKLCH contrast-tested curves for editorial legibility.
+          </p>
+        </div>
+
+        <div>
+          <span class="caption" data-i18n="footer_type_tag">TYPOGRAPHIC PALETTE</span>
+          <div class="font-mono" style="font-size: 0.8rem; margin-top: 0.35rem; color: var(--color-ink-2);">
+            Display: Hanken Grotesk<br>
+            Body: Newsreader / Noto Serif TC<br>
+            Telemetry: IBM Plex Mono
+          </div>
+        </div>
+
+        <div>
+          <span class="caption" data-i18n="footer_post_tag">CURATOR'S POSTSCRIPT</span>
+          <p style="font-size: 0.85rem; color: var(--color-muted); margin-top: 0.35rem;" data-i18n="footer_post_desc">
+            "Machine learning does not replace understanding; it automates the search for approximations." Compiled for students, researchers, and curious minds.
+          </p>
+        </div>
+      </div>
+
+      <div class="hairline-t" style="padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <span class="caption" data-i18n="footer_rights">© HALLMARK ALMANAC REFERENCE INITIATIVE — ALL RIGHTS RESERVED</span>
+        <a href="#" class="caption" style="text-decoration: none; color: var(--color-ink); font-weight: 600;" data-i18n="footer_top">BACK TO TOP ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       SCRIPT: BILINGUAL DATA & INTERACTIVE LOGIC
+       ========================================================================= -->
+  <script>
+    /* =========================================================================
+       BILINGUAL LOCALIZATION DATA (EN & ZH-HANT)
+       ========================================================================= */
+    let currentLang = 'en';
+
+    const I18N = {
+      en: {
+        badge_almanac: "ALMANAC NO. 14",
+        guide_title: "HALLMARK FIELD GUIDE",
+        nav_workbench: "Logic Workbench",
+        nav_paradigm: "Core Shift",
+        nav_schools: "The 3 Schools",
+        nav_tuning: "The Tuning Loop",
+        nav_catalog: "Field Catalog",
+        nav_lexicon: "Lexicon",
+
+        hero_chapter: "CHAPTER 01 / FUNDAMENTAL DEFINITIONS",
+        hero_read_time: "READING TIME ~ 8 MIN",
+        hero_headline: 'Rules are written.<br><span style="color: var(--color-accent);">Patterns are learned.</span>',
+        hero_prose: 'For seventy years, computers were calculators that obeyed rigid instructions. <strong>Machine Learning</strong> is the quiet revolution where we stop writing the instructions and instead teach the machine to recognize the patterns for itself.',
+        hero_btn_explore: "Explore The Sandbox",
+        hero_btn_thesis: "Read The Thesis",
+        hero_stat_1: "Birth of Concept",
+        hero_stat_2_val: "3 Pillars",
+        hero_stat_2_lbl: "Data, Weights, Loss",
+        hero_stat_3_val: "0 Lines",
+        hero_stat_3_lbl: "Manual Edge Cases",
+
+        wb_proto_tag: "INTERACTIVE PROTOTYPE",
+        wb_title: "The Spam Filter Dilemma",
+        wb_desc: "Test how a traditional program behaves versus a statistical learner when confronted with trick variations.",
+        wb_select_engine: "SELECT PROCESSING ENGINE:",
+        wb_engine_rules: "1. Explicit Rules (If/Else)",
+        wb_engine_ml: "2. Machine Learning (Weights)",
+        wb_input_label: "TEST EMAIL SUBJECT LINE:",
+        wb_sample_heading: "TRY PRE-LOADED SAMPLES:",
+        wb_decision_result: "DECISION RESULT:",
+
+        sample_btn_0: '• "URGENT: Claim your free luxury cruise voucher now!" (Blatant spam)',
+        sample_btn_1: '• "Claim yr fr.ee luxury cr-uise now!" (Obfuscated letters)',
+        sample_btn_2: '• "Dinner reservations confirmed for tonight at 8pm" (Normal inbox)',
+        sample_btn_3: '• "Free webinar: Learn conversational French with Pierre" (Legitimate use of "Free")',
+
+        sample_val_0: "URGENT: Claim your free luxury cruise voucher now!",
+        sample_val_1: "Claim yr fr.ee luxury cr-uise now!",
+        sample_val_2: "Dinner reservations confirmed for tonight at 8pm",
+        sample_val_3: "Free webinar: Learn conversational French with Pierre",
+
+        para_label: "THE FUNDAMENTAL INVERSION",
+        para_quote: '"Traditional software requires humans to craft the rules. Machine learning gives the computer examples and answers, and asks the machine to derive the rules."',
+        para_trad_badge: "TRADITIONAL COMPUTATION",
+        para_trad_desc: "A human software architect studies the problem, writes 10,000 brittle rules (if this, then that), and feeds in data. If the real world changes slightly, the program breaks.",
+        para_trad_f1: "1. DATA (Images, text, logs)",
+        para_trad_f2: "2. RULES (Human hand-coded logic)",
+        para_trad_f3: "➔ ANSWERS / ACTIONS",
+        para_ml_badge: "MACHINE LEARNING",
+        para_ml_desc: "We supply thousands of examples alongside their correct answers. The learning algorithm calculates mathematical dials (weights) that best explain the relationship.",
+        para_ml_f1: "1. DATA (50,000 photos of pets)",
+        para_ml_f2: "2. ANSWERS (\"Dog\", \"Cat\", \"Dog\")",
+        para_ml_f3: "➔ DERIVED RULES / MODEL",
+
+        sch_chapter: "CHAPTER 02 / METHODOLOGY",
+        sch_title: "The Three Schools of Machine Learning",
+        sch_sub: "Machines do not possess human curiosity; they require a mathematical goal. Almost all practical machine learning falls into three distinct pedagogies.",
+        sch_tab_sup: "I. Supervised Learning",
+        sch_tab_unsup: "II. Unsupervised Learning",
+        sch_tab_rl: "III. Reinforcement Learning",
+
+        sup_badge: "THE TEACHER'S ANSWER KEY",
+        sup_title: "Classification via Decision Boundary",
+        sup_desc: "In <strong>Supervised Learning</strong>, every training point is tagged with the ground truth. Here, a sorter must separate <strong>Apples</strong> (lighter, smoother skin) from <strong>Oranges</strong> (heavier, dimpled skin).",
+        sup_hint: "Adjust the boundary cut-off slider below to train the separator. Observe how moving the line improves or damages classification accuracy.",
+        sup_slider_label: "DECISION BOUNDARY THRESHOLD:",
+        sup_m_samples: "TOTAL SAMPLES",
+        sup_m_acc: "ACCURACY",
+        sup_m_err: "ERRORS",
+        sup_btn_autotune: "Run Auto-Tuner (Find Minimum Loss)",
+        sup_canvas_title: "FEATURE SPACE (WEIGHT VS. TEXTURE)",
+        sup_canvas_legend: "● RED = APPLE  ■ GOLD = ORANGE",
+        sup_canvas_sub: "Dotted purple line represents the model's learned dividing threshold.",
+
+        unsup_badge: "NO LABELS PROVIDED",
+        unsup_title: "Clustering Natural Cohorts (K-Means)",
+        unsup_desc: 'No human labeled these customer points. The algorithm is given raw purchasing data and asked: <em>"Find 3 natural groupings that behave similarly."</em>',
+        unsup_hint: 'Click <strong>"Step Iteration"</strong> to watch cluster centers (centroids) calculate the mathematical average of their surrounding points and migrate until stable.',
+        unsup_btn_step: "Step Iteration",
+        unsup_btn_converge: "Converge Instantly",
+        unsup_btn_reset: "Generate New Data",
+        unsup_m_iter: "ITERATION",
+        unsup_m_status: "STATUS",
+        unsup_realworld: "Everyday use: Spotify organizing songs into acoustic clusters, genomics grouping DNA variations, fraud rings spotting atypical transactions.",
+        unsup_canvas_title: "PURCHASE FREQUENCY VS. BASKET SIZE",
+        unsup_canvas_legend: "✛ = CLUSTER CENTROID",
+        unsup_canvas_sub: "Points recolor in real time based on nearest centroid distance.",
+
+        rl_badge: "TRIAL, ERROR & REWARD",
+        rl_title: "Grid-World Path Optimization",
+        rl_desc: "There is no teacher and no static database. The software agent operates inside an environment. Reaching the target yields a <strong>+10 reward</strong>; tumbling into a hazard inflicts a <strong>-5 penalty</strong>.",
+        rl_hint: "Through repeated stumbles and Q-table updates, the agent figures out the safe, optimal navigation path.",
+        rl_btn_ep1: "Run 1 Episode",
+        rl_btn_ep25: "Train 25 Episodes",
+        rl_btn_reset: "Reset World",
+        rl_m_episodes: "EPISODES RUN",
+        rl_m_success: "SUCCESS RATE",
+        rl_m_reward: "AVERAGE REWARD",
+        rl_realworld: "Everyday use: Autonomous vehicle steering, chess & Go engines (AlphaZero), robotic factory arm manipulation.",
+        rl_canvas_title: "AGENT ENVIRONMENT (5x5 GRID)",
+        rl_canvas_legend: "▲ AGENT  ★ GOAL (+10)  ✕ PIT (-5)",
+        rl_canvas_sub: "Cell color shades intensify as the agent learns high-value paths.",
+
+        loop_chapter: "CHAPTER 03 / THE ENGINE ROOM",
+        loop_title: "The Four Steps of Optimization",
+        loop_sub: "Stripped of mystical jargon, machine learning is high-speed guesswork refined by calculus. All modern systems repeat this precise 4-step loop millions of times.",
+        loop_p1_tag: "PHASE 01",
+        loop_p1_title: "1. Make a Guess",
+        loop_p1_desc: "The model starts with random weights (knob settings). Given an input (e.g. house square footage), it spits out an initial blind prediction.",
+        loop_p2_tag: "PHASE 02",
+        loop_p2_title: "2. Measure the Error",
+        loop_p2_desc: "Known formally as the <strong>Loss Function</strong>. It subtracts the guess from reality and squares the difference. A bad guess produces a huge error score.",
+        loop_p3_tag: "PHASE 03",
+        loop_p3_title: "3. Calculate Direction",
+        loop_p3_desc: "Using calculus (gradient descent), the computer determines whether nudging weight knob #1 up or down will decrease the loss score.",
+        loop_p4_tag: "PHASE 04",
+        loop_p4_title: "4. Nudge & Repeat",
+        loop_p4_desc: "The weights are nudged by a tiny increment. The machine ingests the next batch of data and repeats until the error stops dropping.",
+
+        reg_lab_tag: "HANDS-ON LABORATORY",
+        reg_title: "Tune The Knobs: Real-Time Loss Minimization",
+        reg_objective: "OBJECTIVE: MINIMIZE RESIDUAL LOSS",
+        reg_desc: "Below is a realistic dataset relating <strong>Living Space (Square Meters)</strong> to <strong>Sale Price ($k)</strong>. You are playing the role of the training algorithm. Adjust the Slope (Weight) and Baseline (Bias) dials to make the trendline fit the empirical dots.",
+        reg_ctrl_slope: "WEIGHT / SLOPE (m):",
+        reg_ctrl_bias: "BIAS / INTERCEPT (b):",
+        reg_m_mse: "MEAN SQUARED ERROR (LOSS)",
+        reg_m_fit: "FIT QUALITY",
+        reg_btn_step: "Run 1 Gradient Step",
+        reg_btn_auto: "Auto-Converge to Minimum Loss",
+        reg_footer_hint: "Red vertical drop-lines indicate error residuals (y_actual - y_predicted). When total error is minimized, the drop lines shrink.",
+        reg_canvas_title: "HOUSING MARKET EMPIRICAL DATA",
+        reg_canvas_eq: "EQUATION: Price = (m × Area) + b",
+
+        cat_chapter: "CHAPTER 04 / FIELD SPECIMENS",
+        cat_title: "An Everyday Catalog of Machine Learning",
+        cat_sub: "Where rule-based programming hit an insurmountable brick wall of complexity, statistical learning succeeded. An audit of five omnipresent systems.",
+        cat_th_app: "Application",
+        cat_th_feat: "Input Data (Features)",
+        cat_th_pattern: "The Learned Statistical Pattern",
+        cat_th_failure: "Why Hand-Written Rules Failed",
+
+        lex_chapter: "CHAPTER 05 / COMPENDIUM",
+        lex_title: "The Layman's Field Lexicon",
+        lex_sub: "De-mystifying the essential pieces of vocabulary engineers use daily.",
+
+        footer_spec_tag: "DOCUMENT SPECIFICATIONS",
+        footer_spec_title: "Hallmark Almanac No. 14",
+        footer_spec_desc: "Rendered in delicate lavender & twilight plum palettes with OKLCH contrast-tested curves for editorial legibility.",
+        footer_type_tag: "TYPOGRAPHIC PALETTE",
+        footer_post_tag: "CURATOR'S POSTSCRIPT",
+        footer_post_desc: '"Machine learning does not replace understanding; it automates the search for approximations." Compiled for students, researchers, and curious minds.',
+        footer_rights: "© HALLMARK ALMANAC REFERENCE INITIATIVE — ALL RIGHTS RESERVED",
+        footer_top: "BACK TO TOP ↑"
+      },
+
+      zh: {
+        badge_almanac: "年鑑第 14 輯",
+        guide_title: "HALLMARK 機器學習野外指南",
+        nav_workbench: "邏輯工作台",
+        nav_paradigm: "思維典範轉移",
+        nav_schools: "三大學習流派",
+        nav_tuning: "參數調校迴圈",
+        nav_catalog: "日常實例矩陣",
+        nav_lexicon: "術語辭典",
+
+        hero_chapter: "第 01 章 / 核心本質與定義",
+        hero_read_time: "預估閱讀時間 ~ 8 分鐘",
+        hero_headline: '規則是被撰寫的。<br><span style="color: var(--color-accent);">規律是被學會的。</span>',
+        hero_prose: '七十年來，電腦只是嚴格聽從具體指示的計算器。<strong>機器學習 (Machine Learning)</strong> 是一場寧靜革命：人類不再手動編寫窮舉規則，而是提供海量數據，讓機器自己推導出隱藏的規律。',
+        hero_btn_explore: "探索互動沙盒",
+        hero_btn_thesis: "閱讀核心論文",
+        hero_stat_1: "概念誕生年份",
+        hero_stat_2_val: "3 大支柱",
+        hero_stat_2_lbl: "數據、權重、損失",
+        hero_stat_3_val: "0 行",
+        hero_stat_3_lbl: "手動極端條件規則",
+
+        wb_proto_tag: "互動實作原型",
+        wb_title: "垃圾郵件過濾器的世紀困境",
+        wb_desc: "觀察傳統「硬寫規則 (If/Else)」在遇到惡意變形字符時的脆弱崩潰，以及統計學習模型如何靈活評估。",
+        wb_select_engine: "選擇運算判斷引擎：",
+        wb_engine_rules: "1. 明確規則 (If/Else 條件)",
+        wb_engine_ml: "2. 機器學習 (特徵權重累積)",
+        wb_input_label: "測試郵件主旨內容：",
+        wb_sample_heading: "點擊載入測試範例：",
+        wb_decision_result: "判斷結果報告：",
+
+        sample_btn_0: '• "URGENT: Claim your free luxury cruise voucher now!" (典型垃圾郵件)',
+        sample_btn_1: '• "Claim yr fr.ee luxury cr-uise now!" (刻意插入標點符號繞過)',
+        sample_btn_2: '• "Dinner reservations confirmed for tonight at 8pm" (正常生活信件)',
+        sample_btn_3: '• "Free webinar: Learn conversational French with Pierre" (包含 Free 但為正當免費講座)',
+
+        sample_val_0: "URGENT: Claim your free luxury cruise voucher now!",
+        sample_val_1: "Claim yr fr.ee luxury cr-uise now!",
+        sample_val_2: "Dinner reservations confirmed for tonight at 8pm",
+        sample_val_3: "Free webinar: Learn conversational French with Pierre",
+
+        para_label: "計算機思維的根本逆轉",
+        para_quote: '「傳統軟體工程由人類工程師費力編寫邏輯規則；機器學習則是給予電腦大量實例與正確答案，讓電腦自行計算出最佳規則。」',
+        para_trad_badge: "傳統程式設計 (TRADITIONAL)",
+        para_trad_desc: "由工程師苦思冥想，撰寫數萬行脆弱的條件式（若符合 A 則執行 B）。一旦現實世界的微小變因超出預設範圍，系統立即出錯。",
+        para_trad_f1: "1. 數據 (文字、圖片、日誌)",
+        para_trad_f2: "2. 規則 (工程師手寫的硬邏輯)",
+        para_trad_f3: "➔ 輸出結果 / 答案",
+        para_ml_badge: "機器學習 (MACHINE LEARNING)",
+        para_ml_desc: "我們提供上萬張照片與對應的標籤答案。演算法反覆微調內部數百萬個數學旋鈕（權重），自動找出能最好解釋這段對應關係的規律。",
+        para_ml_f1: "1. 數據 (50,000 張寵物照片)",
+        para_ml_f2: "2. 答案 (「貓」、「狗」、「貓」)",
+        para_ml_f3: "➔ 自動導出的規則 / 模型",
+
+        sch_chapter: "第 02 章 / 訓練範式",
+        sch_title: "機器學習的三大學習流派",
+        sch_sub: "機器沒有人類的漫遊好奇心，它必須依賴明確的數學目標。當今全世界的實用機器學習系統，幾乎全部歸屬於這三種訓練模式。",
+        sch_tab_sup: "I. 監督式學習 (Supervised)",
+        sch_tab_unsup: "II. 非監督式學習 (Unsupervised)",
+        sch_tab_rl: "III. 強化學習 (Reinforcement)",
+
+        sup_badge: "有老師提供標準解答本",
+        sup_title: "決策邊界分類器 (Decision Boundary)",
+        sup_desc: "在<strong>監督式學習 (Supervised Learning)</strong> 中，每個訓練樣本都事先標註好真實身分。此處分類機必須精準區分<strong>蘋果</strong>（較輕、果皮光滑）與<strong>橙子/柳橙</strong>（較重、果皮粗糙有凹洞）。",
+        sup_hint: "滑動下方「決策臨界點門檻」滑桿。觀察移動分割線如何即時影響分類正確率與誤判個數。",
+        sup_slider_label: "決策臨界分割門檻 (THRESHOLD)：",
+        sup_m_samples: "樣本總數",
+        sup_m_acc: "分類準確率",
+        sup_m_err: "誤判數量",
+        sup_btn_autotune: "啟動自動尋優 (尋找最小損失)",
+        sup_canvas_title: "特徵空間分佈 (重量 vs. 粗糙度)",
+        sup_canvas_legend: "● 紅色圓點 = 蘋果  ■ 金色方塊 = 橙子",
+        sup_canvas_sub: "紫色虛線為模型計算出的最佳分類分割線。",
+
+        unsup_badge: "沒有標籤答案引導",
+        unsup_title: "自然族群自動聚類 (K-Means Clustering)",
+        unsup_desc: '沒有任何人為這些顧客資料貼標籤。演算法僅拿到原始消費數據，並被賦予單純的數學任務：<em>「自動找出 3 個消費模式最相似的自然社群。」</em>',
+        unsup_hint: '點擊<strong>「單步迭代」</strong>，觀察三個集群中心 (Centroids) 如何計算周遭點的平均座標，並逐步移動至最穩定的聚集核心。',
+        unsup_btn_step: "單步迭代運算",
+        unsup_btn_converge: "一鍵收斂至最佳化",
+        unsup_btn_reset: "重新隨機生成資料",
+        unsup_m_iter: "迭代輪次",
+        unsup_m_status: "聚類狀態",
+        unsup_realworld: "日常生活應用：Spotify 將千萬首歌曲依聲學特徵歸納聚類、基因學分析相似 DNA 變異、銀行風控辨識罕見交易異常點。",
+        unsup_canvas_title: "顧客購物頻率 VS. 平均單筆金額",
+        unsup_canvas_legend: "✛ = 該群核心重心 (Centroid)",
+        unsup_canvas_sub: "每個數據點會依照與最近重心的幾何距離，即時變更顏色歸屬。",
+
+        rl_badge: "試錯探索與獎懲回饋",
+        rl_title: "網格世界最佳化路徑探索 (Q-Learning)",
+        rl_desc: "沒有現成題庫，也沒有導師。智慧代理人 (Agent) 身處環境中：踩到終點寶藏獲得 <strong>+10 分獎勵</strong>，掉入危險陷阱則遭受 <strong>-5 分嚴厲懲罰</strong>。",
+        rl_hint: "經歷數十輪盲目摸索後，代理人逐步建立並修正 Q 價值矩陣，最終學會最快且最安全的避障尋寶路線。",
+        rl_btn_ep1: "運行 1 輪探索",
+        rl_btn_ep25: "加速訓練 25 輪",
+        rl_btn_reset: "重設環境與權重",
+        rl_m_episodes: "探索輪數 (EPISODES)",
+        rl_m_success: "尋寶成功率",
+        rl_m_reward: "平均累計獎勵",
+        rl_realworld: "日常生活應用：自動駕駛路徑規劃、AlphaGo 棋藝下棋決策、工業機器手臂避障抓取物料。",
+        rl_canvas_title: "代理人決策環境 (5x5 網格迷宮)",
+        rl_canvas_legend: "▲ 代理人  ★ 終點寶藏 (+10)  ✕ 陷阱 (-5)",
+        rl_canvas_sub: "網格色澤越深，代表代理人估算該格通往寶藏的預期價值越高。",
+
+        loop_chapter: "第 03 章 / 核心引擎運作",
+        loop_title: "模型最佳化的四部曲",
+        loop_sub: "褪去所有玄奧術語，機器學習的本質就是「由微積分引導的高速盲猜與持續修正」。當代所有 AI 系統都在毫秒內重複此循環數億次。",
+        loop_p1_tag: "第一步 / PHASE 01",
+        loop_p1_title: "1. 大膽預測 (Guess)",
+        loop_p1_desc: "模型起初設定完全隨機的旋鈕數值（權重）。輸入一間房屋的坪數，模型隨意給出第一個盲猜售價。",
+        loop_p2_tag: "第二步 / PHASE 02",
+        loop_p2_title: "2. 計算誤差 (Measure Loss)",
+        loop_p2_desc: "即<strong>損失函數 (Loss Function)</strong>。將預測值減去真實售價並取平方，猜得越離譜，損失數值就膨脹得越巨大。",
+        loop_p3_tag: "第三步 / PHASE 03",
+        loop_p3_title: "3. 尋找微調方向 (Gradient)",
+        loop_p3_desc: "透過微積分中的「梯度下降法」，電腦精確計算出：若將 1 號旋鈕往右調一點點，總誤差究竟會變大還是縮小？",
+        loop_p4_tag: "第四步 / PHASE 04",
+        loop_p4_title: "4. 撥動旋鈕並重複 (Nudge)",
+        loop_p4_desc: "依據計算方向將所有旋鈕微調一小步，接著讀取下一批數據繼續重複，直到誤差降到最低且不再下降為止。",
+
+        reg_lab_tag: "動手實驗室",
+        reg_title: "動手旋緊旋鈕：即時損失函數最小化",
+        reg_objective: "學習目標：消除紅色的預測殘差線",
+        reg_desc: "下方為真實收集的<strong>房屋室內坪數 (平方米)</strong> 與<strong>成交價格 (千美元)</strong> 散佈圖。請扮演訓練演算法：滑動斜率（權重）與基準高度（偏置），讓回歸直線盡可能貼合所有點。",
+        reg_ctrl_slope: "權重 / 直線斜率 (m):",
+        reg_ctrl_bias: "偏置 / 截距常數 (b):",
+        reg_m_mse: "均方誤差 (MSE LOSS)",
+        reg_m_fit: "擬合品質評估",
+        reg_btn_step: "單步梯度下降 (Gradient Step)",
+        reg_btn_auto: "一鍵自動擬合 (最低損失解)",
+        reg_footer_hint: "圖中垂直紅色下垂線代表殘差 (真實價格 - 預測價格)。當線段總長度平方和達到最小時，模型達到最佳擬合。",
+        reg_canvas_title: "房屋市場實際成交數據散佈圖",
+        reg_canvas_eq: "預測方程式: 房價 = (m × 坪數) + b",
+
+        cat_chapter: "第 04 章 / 日常實例矩陣",
+        cat_title: "日常生活中的機器學習應用圖鑑",
+        cat_sub: "當傳統程式設計在面對無窮無盡的現實變異而徹底崩潰時，機器學習如何接管世界？五大日常系統深度對比。",
+        cat_th_app: "應用領域",
+        cat_th_feat: "輸入特徵 (Features)",
+        cat_th_pattern: "模型學會的隱含統計規律",
+        cat_th_failure: "為何手寫 If/Else 規則必然失敗？",
+
+        lex_chapter: "第 05 章 / 術語通識辭典",
+        lex_title: "給外行人的通俗術語辭典",
+        lex_sub: "拆解工程師每天掛在嘴邊的核心名詞，用生活化比喻建立直覺。",
+
+        footer_spec_tag: "文件技術規格",
+        footer_spec_title: "Hallmark Almanac 第 14 輯",
+        footer_spec_desc: "採用典雅薰衣草淺紫與暮色墨水對比配色，符合 Web 易讀性與無障礙文字標準。",
+        footer_type_tag: "排版字體規範",
+        footer_post_tag: "編者後記",
+        footer_post_desc: "「機器學習並沒有取代理解，它只是將人類尋找最佳近似解的過程自動化。」專為學生、研究者與求知大眾編撰。",
+        footer_rights: "© HALLMARK ALMANAC REFERENCE INITIATIVE — 版權所有",
+        footer_top: "回到頂部 ↑"
+      }
+    };
+
+    /* Everyday Cases Data */
+    const CATALOG_DATA = [
+      {
+        en: {
+          app: "Email Spam Filtering",
+          type: "Supervised Classification",
+          features: "Word co-occurrences, sender IP reputation, time-of-day, capitalized character ratios, hyperlink density.",
+          pattern: "Correlating subtle word pairings (e.g. 'invoice' + unfamiliar wire transfer link) that indicate deceptive intent.",
+          failure: "Spammers instantly evade fixed keyword rules by inserting punctuation or accents (e.g. V!AGRA, Fr-ee)."
+        },
+        zh: {
+          app: "垃圾郵件智慧過濾",
+          type: "監督式分類模型",
+          features: "文字共現頻率、寄件者 IP 信譽評等、發信時間、大寫字母比例、可疑超連結密度。",
+          pattern: "捕捉多特徵微弱關聯（例如「發票附檔」伴隨「未曾通信過的第三方跳轉網址」所蘊含的高詐騙機率）。",
+          failure: "發垃圾信者只要在字詞中間插入標點或拼寫變形（如 Fr-ee, V!AGRA），手寫關鍵字黑名單就會瞬間失效。"
+        }
+      },
+      {
+        en: {
+          app: "Media Recommendations",
+          type: "Matrix Factorization & Deep Collab",
+          features: "Watch history, completion rate, pause points, thumbnail click preferences, sequential browsing.",
+          pattern: "Clusters users with 98% matching watch patterns into taste cohorts, projecting unwatched items across the group.",
+          failure: "No human editor could manually cross-reference 100 million active subscribers against 500,000 titles in real time."
+        },
+        zh: {
+          app: "影音串流影劇推薦",
+          type: "矩陣分解與神經協同過濾",
+          features: "完整觀看率、中途暫停點、封面縮圖點擊偏好、連續追劇時間序列、重播頻率。",
+          pattern: "將數千萬具有相似隱含偏好的用戶自動分群，預測群內其他成員喜愛但你尚未發掘的高契合作品。",
+          failure: "沒有任何人工編輯團隊有能力為 2 億用戶與 50 萬部影劇手動交叉標註數百億組複雜配對邏輯。"
+        }
+      },
+      {
+        en: {
+          app: "Credit Card Fraud Interception",
+          type: "Anomaly Detection",
+          features: "Transaction amount, physical distance between sequential charges, merchant category, device telemetry.",
+          pattern: "Calculates an individual variance baseline; flags transactions deviating past standard statistical thresholds.",
+          failure: "A rigid hard rule (e.g. >$1000 = fraud) blocks legitimate vacation travel while allowing thousands of $4.50 micro-thefts."
+        },
+        zh: {
+          app: "信用卡盜刷即時攔截",
+          type: "無監督異常偵測 (Anomaly Detection)",
+          features: "單筆刷卡金額、兩筆消費之間的地理物理移動速度、特約商店類別、手機指紋識別。",
+          pattern: "計算每位持卡人日常消費的動態機率分佈球體，即時標記脫離常態分佈達數個標準差的高危交易。",
+          failure: "死板的寫死規則（如「大於 $1,000 即鎖卡」）會頻繁誤鎖出國度假的正常刷卡，卻完全防不住數百筆連續小額盜刷。"
+        }
+      },
+      {
+        en: {
+          app: "Medical Image Diagnostics",
+          type: "Convolutional Vision Networks",
+          features: "2D/3D pixel matrices from MRI scans, CT slices, and dermatoscopic photographs.",
+          pattern: "Hierarchical edge-detection assembling micro-textures into morphological tissue patterns indistinguishable to human eyes.",
+          failure: "Tumors possess irregular geometry and varying pigmentation; drafting explicit mathematical geometry for 'abnormal tissue' is impossible."
+        },
+        zh: {
+          app: "醫療影像輔助診斷",
+          type: "卷積神經網絡 (CNN 視覺)",
+          features: "MRI 核磁共振、CT 電腦斷層高解析度灰階切片、皮膚鏡高倍率組織微距影像。",
+          pattern: "從最底層的邊緣像素梯度，逐步組裝識別出人眼在疲憊時極易忽略的腫瘤病變邊緣微觀結構特徵。",
+          failure: "惡性腫瘤在形狀、邊界與顏色上千變萬化，人類醫學工程師根本不可能寫出一組方程式來定義「何謂腫瘤外觀」。"
+        }
+      },
+      {
+        en: {
+          app: "Turn-by-Turn Navigation",
+          type: "Time-Series Regression & Graphs",
+          features: "Historic segment speeds, live aggregated mobile GPS pings, rain intensity, scheduled lane closures.",
+          pattern: "Dynamic velocity propagation mapping how localized bottleneck slowdowns ripple backward through urban road networks.",
+          failure: "Fixed speed limit formulas fail to foresee how a minor fender bender at 7:15 AM will paralyze an exit ramp 4 miles away by 7:45 AM."
+        },
+        zh: {
+          app: "地圖導航與即時路況預估",
+          type: "時間序列圖回歸分析",
+          features: "各路段歷史行車時速、數萬台行駛中手機匿名 GPS 航速、雷達回波降雨量、即時施工封路通知。",
+          pattern: "學習市區道路流體力學，準確預估前方 3 公里的車流微小停頓會在半小時後產生連鎖回堵的漣漪效應。",
+          failure: "單純依照「法定速限 ÷ 距離」計算的手寫公式，完全無法預料早晨一場微雨會讓後方 5 條替代道路同時癱瘓。"
+        }
+      }
+    ];
+
+    /* Lexicon Compendium Data */
+    const LEXICON_DATA = [
+      {
+        id: "dataset",
+        en: {
+          term: "Training Data (訓練數據)",
+          meta: "Analogous to: The textbook and practice exam problems.",
+          desc: "The historical record of inputs and outcomes fed into the learner. The model's entire universe of understanding is shaped by what this data does—and does not—contain."
+        },
+        zh: {
+          term: "訓練數據 (Training Data)",
+          meta: "生活化比喻：學生在考前精讀的課本、歷屆考古題與練習卷。",
+          desc: "輸入給演算法消化吸收的大量歷史紀錄與範例。模型的整個認知宇宙完全取決於這批資料涵蓋了什麼，以及它遺漏了什麼偏誤。"
+        }
+      },
+      {
+        id: "weights",
+        en: {
+          term: "Weights & Parameters (權重與參數)",
+          meta: "Analogous to: The thousands of frequency knobs on an audio soundboard.",
+          desc: "The internal numerical values that amplify or dampen incoming signals. When we say an LLM has 70 billion parameters, it possesses 70 billion adjustable dials."
+        },
+        zh: {
+          term: "權重與參數 (Weights & Parameters)",
+          meta: "生活化比喻：專業錄音室調音台上數千個控制高低音增益的旋鈕。",
+          desc: "模型內部決定各訊號放大或衰減的數值。當我們說一個大型語言模型擁有 700 億參數時，代表它內部有 700 億個可被微調的精細旋鈕。"
+        }
+      },
+      {
+        id: "loss",
+        en: {
+          term: "Loss Function (損失函數 / 代價函數)",
+          meta: "Analogous to: The score in golf (the closer to zero, the better).",
+          desc: "A strict mathematical penalty score measuring how far the model's guess missed reality. The entire learning journey is about driving this score down."
+        },
+        zh: {
+          term: "損失函數 (Loss Function / 代價函數)",
+          meta: "生活化比喻：高爾夫球的記分卡（桿數/扣分越低代表表現越頂尖）。",
+          desc: "一套用來量化「電腦猜測值與真實答案差距有多大」的嚴格數學公式。所謂的模型訓練，本質上就是千方百計把這個分數往下降到接近零。"
+        }
+      },
+      {
+        id: "overfitting",
+        en: {
+          term: "Overfitting (過擬合 / 死記硬背)",
+          meta: "Analogous to: A student memorizing question order rather than the concept.",
+          desc: "A pathology where a model learns the accidental noise and quirks of its training set so precisely that it scores 100% on practice exams, but flunks on fresh real-world questions."
+        },
+        zh: {
+          term: "過擬合 (Overfitting / 死記硬背)",
+          meta: "生活化比喻：學生靠死背題目的頁碼與選項順序拿到滿分，換了數字立刻交白卷。",
+          desc: "模型過度擬合了訓練集裡面的雜訊與偶發巧合，導致在已看過的練習題上表現完美，但在面對現實世界中沒見過的新數據時全面潰敗。"
+        }
+      },
+      {
+        id: "underfitting",
+        en: {
+          term: "Underfitting (欠擬合 / 概括不足)",
+          meta: "Analogous to: Assuming all four-legged animals are dogs.",
+          desc: "When the chosen model is too simple to capture the underlying pattern in the data (like trying to draw a straight line through a roller coaster curve)."
+        },
+        zh: {
+          term: "欠擬合 (Underfitting / 概括不足)",
+          meta: "生活化比喻：戴著厚重眼罩看世界，把所有四隻腳的動物都當成狗。",
+          desc: "模型結構過於簡化或訓練時間不足，甚至連訓練資料本身的基礎規律都無法掌握（就像試圖用一條筆直的木尺去貼合雲霄飛車的曲線）。"
+        }
+      },
+      {
+        id: "inference",
+        en: {
+          term: "Inference (推論 / 實際上線運作)",
+          meta: "Analogous to: Graduation day and entering the real workplace.",
+          desc: "The operational phase after training is finished. The weights are frozen in place, and the model evaluates new inputs in milliseconds without rewriting its own rules."
+        },
+        zh: {
+          term: "推論 (Inference / 上線應用階段)",
+          meta: "生活化比喻：畢業生結束課堂考試，正式走入職場獨立解決實際任務。",
+          desc: "模型完成所有學習後的實際應用狀態。此時內部數百億個旋鈕已被固定上鎖，專注於在毫秒內對新送來的使用者請求做出精準預測。"
+        }
+      }
+    ];
+
+    /* =========================================================================
+       1-CLICK LANGUAGE TOGGLE ENGINE
+       ========================================================================= */
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.getElementById('btn-lang-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-lang-zh').classList.toggle('active', lang === 'zh');
+
+      // Update all data-i18n elements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[lang] && I18N[lang][key] !== undefined) {
+          el.innerHTML = I18N[lang][key];
+        }
+      });
+
+      // Update sample buttons
+      document.getElementById('sample-btn-0').innerText = I18N[lang].sample_btn_0;
+      document.getElementById('sample-btn-1').innerText = I18N[lang].sample_btn_1;
+      document.getElementById('sample-btn-2').innerText = I18N[lang].sample_btn_2;
+      document.getElementById('sample-btn-3').innerText = I18N[lang].sample_btn_3;
+
+      // Re-render catalog table & lexicon
+      renderCatalogTable();
+      renderLexicon();
+
+      // Refresh workbench status badge & feedback
+      document.getElementById('model-mode-badge').innerText = currentEngine === 'rules' 
+        ? (lang === 'en' ? 'MODE: HARD RULES (IF/ELSE)' : '運算模式：手寫條件規則 (IF/ELSE)')
+        : (lang === 'en' ? 'MODE: STATISTICAL WEIGHTS' : '運算模式：統計特徵加權 (ML)');
+      
+      evaluateEmail();
+      updateSupervisedSim();
+      updateRegressionSim();
+      drawUnsupervisedCanvas();
+      drawRLCanvas();
+    }
+
+    function applySamplePhrase(index) {
+      document.getElementById('email-input').value = I18N[currentLang][`sample_val_${index}`];
+      evaluateEmail();
+    }
+
+    function renderCatalogTable() {
+      const tbody = document.getElementById('catalog-table-body');
+      tbody.innerHTML = CATALOG_DATA.map(item => {
+        const data = item[currentLang];
+        return `
+          <tr>
+            <td>
+              <strong style="display: block; font-family: var(--font-heading); color: var(--color-ink);">${data.app}</strong>
+              <span class="caption" style="color: var(--color-accent); font-weight: 600;">${data.type}</span>
+            </td>
+            <td>${data.features}</td>
+            <td>${data.pattern}</td>
+            <td style="color: var(--color-ink-2);">${data.failure}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderLexicon() {
+      const container = document.getElementById('lexicon-container');
+      const filterVal = document.getElementById('lexicon-filter').value.toLowerCase().trim();
+
+      const itemsToRender = LEXICON_DATA.filter(item => {
+        if (!filterVal) return true;
+        const enText = `${item.en.term} ${item.en.meta} ${item.en.desc}`.toLowerCase();
+        const zhText = `${item.zh.term} ${item.zh.meta} ${item.zh.desc}`.toLowerCase();
+        return enText.includes(filterVal) || zhText.includes(filterVal);
+      });
+
+      container.innerHTML = itemsToRender.map(item => {
+        const d = item[currentLang];
+        return `
+          <article class="lexicon-card">
+            <div class="lexicon-term">${d.term}</div>
+            <span class="lexicon-metaphor">${d.meta}</span>
+            <p style="font-size: 0.9rem; color: var(--color-ink-2);">${d.desc}</p>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function filterLexicon() {
+      renderLexicon();
+    }
+
+    /* =========================================================================
+       MODULE 1: LOGIC WORKBENCH (RULES VS STATISTICAL WEIGHTS)
+       ========================================================================= */
+    let currentEngine = 'rules';
+
+    const ruleKeywords = ['free', 'urgent', 'voucher', 'prize', 'winner', 'cash', 'wire', '免費', '急件', '兌換券', '中獎'];
+
+    const mlFeatureWeights = {
+      'urgent': 3.5,
+      'claim': 2.8,
+      'free': 1.8,
+      'luxury': 1.4,
+      'voucher': 3.2,
+      'cruise': 1.6,
+      'confirmed': -2.5,
+      'dinner': -3.0,
+      'webinar': -2.2,
+      'french': -1.8,
+      'tonight': -1.2,
+      'learn': -1.5,
+      '急件': 3.5,
+      '領取': 2.8,
+      '免費': 1.8,
+      '郵輪': 2.0,
+      '確認': -2.8,
+      '預約': -2.5,
+      '講座': -2.0,
+      '研討會': -2.2
+    };
+
+    function setEngineMode(mode) {
+      currentEngine = mode;
+      document.getElementById('btn-engine-rules').classList.toggle('active', mode === 'rules');
+      document.getElementById('btn-engine-ml').classList.toggle('active', mode === 'ml');
+
+      document.getElementById('model-mode-badge').innerText = mode === 'rules'
+        ? (currentLang === 'en' ? 'MODE: HARD RULES (IF/ELSE)' : '運算模式：手寫條件規則 (IF/ELSE)')
+        : (currentLang === 'en' ? 'MODE: STATISTICAL WEIGHTS' : '運算模式：統計特徵加權 (ML)');
+      
+      evaluateEmail();
+    }
+
+    function evaluateEmail() {
+      const input = document.getElementById('email-input').value.toLowerCase();
+      const verdictTag = document.getElementById('verdict-tag');
+      const explanation = document.getElementById('verdict-explanation');
+      const scoreBar = document.getElementById('verdict-score-bar');
+
+      if (!input.trim()) {
+        verdictTag.innerText = currentLang === 'en' ? "NO INPUT" : "無輸入資料";
+        verdictTag.style.color = "var(--color-muted)";
+        explanation.innerText = currentLang === 'en' ? "Please provide an email subject line to test." : "請輸入郵件主旨以進行運算評估。";
+        scoreBar.style.width = "0%";
+        return;
+      }
+
+      if (currentEngine === 'rules') {
+        const matched = ruleKeywords.filter(k => {
+          const regex = new RegExp(k, 'i');
+          return regex.test(input);
+        });
+
+        if (matched.length > 0) {
+          verdictTag.innerText = currentLang === 'en' ? "SPAM DETECTED [REJECT]" : "判定為垃圾郵件 [攔截]";
+          verdictTag.style.color = "var(--color-accent)";
+          explanation.innerHTML = currentLang === 'en'
+            ? `<strong>Rule triggered:</strong> Found banned literal token(s): <code>${matched.join(', ')}</code>. Brittle flaw: it falsely blocks legitimate emails like "Free university webinar" while failing if spammers insert hyphens or dots.`
+            : `<strong>觸發死板規則：</strong>偵測到黑名單關鍵字 <code>${matched.join(', ')}</code>。重大缺點：它會誤殺如「免費法語研討會」等正當郵件；而發信者只要在字母間插入小點 (如 <code>fr.ee</code>)，規則便完全失效。`;
+          scoreBar.style.width = "100%";
+          scoreBar.style.backgroundColor = "var(--color-accent)";
+        } else {
+          verdictTag.innerText = currentLang === 'en' ? "INBOX ACCEPTED [PASS]" : "判定為正常信件 [放行]";
+          verdictTag.style.color = "var(--color-data-teal)";
+          explanation.innerHTML = currentLang === 'en'
+            ? `<strong>Passed:</strong> No exact blacklist tokens found. Notice: If a scammer wrote <em>"yr fr.ee cr-uise"</em>, the rule-based system was fooled and allowed it straight into the user's inbox!`
+            : `<strong>規則檢查通過：</strong>未包含完全相符之黑名單關鍵字。請注意：即使這是明顯的欺詐信（如 <em>"fr.ee cr-uise"</em>），由於字符變形，手寫規則被輕易騙過！`;
+          scoreBar.style.width = "15%";
+          scoreBar.style.backgroundColor = "var(--color-data-teal)";
+        }
+      } else {
+        let score = 0;
+        const normalized = input.replace(/[.\-_!]/g, '');
+        const words = normalized.split(/\s+/);
+        let evidence = [];
+
+        words.forEach(w => {
+          for (let key in mlFeatureWeights) {
+            if (w.includes(key) || (key.includes(w) && w.length >= 3)) {
+              score += mlFeatureWeights[key];
+              evidence.push(`${key} (${mlFeatureWeights[key] > 0 ? '+' : ''}${mlFeatureWeights[key]})`);
+            }
+          }
+        });
+
+        const prob = 1 / (1 + Math.exp(-0.8 * (score - 1.5)));
+        const pct = Math.round(prob * 100);
+
+        scoreBar.style.width = pct + "%";
+
+        if (pct >= 50) {
+          verdictTag.innerText = currentLang === 'en' ? `SPAM (${pct}% CONFIDENCE)` : `判定為垃圾郵件 (${pct}% 信心度)`;
+          verdictTag.style.color = "var(--color-accent)";
+          explanation.innerHTML = currentLang === 'en'
+            ? `<strong>Aggregated Statistical Weights:</strong> Evidence tokens: [${evidence.slice(0, 4).join(', ')}]. The model tolerates typos, punctuation tricks, and weighs overall semantic intent.`
+            : `<strong>特徵權重動態整合：</strong>偵測到關鍵特徵權重：[${evidence.slice(0, 4).join(', ')}]。機器學習模型能夠容忍錯別字與特殊符號干擾，並整體評估上下文的真實意圖。`;
+          scoreBar.style.backgroundColor = "var(--color-accent)";
+        } else {
+          verdictTag.innerText = currentLang === 'en' ? `LEGITIMATE (${100 - pct}% CONFIDENCE)` : `判定為正常信件 (${100 - pct}% 信心度)`;
+          verdictTag.style.color = "var(--color-data-teal)";
+          explanation.innerHTML = currentLang === 'en'
+            ? `<strong>Contextual Balance:</strong> Even if trigger words like "free" appeared, surrounding educational/conversational terms neutralized the spam risk score.`
+            : `<strong>語境平衡抵銷：</strong>即使標題出現「免費 (Free)」，周圍的「研討會 (webinar)」、「法語學習」等教育正面特徵有效抵銷了風險分數。`;
+          scoreBar.style.backgroundColor = "var(--color-data-teal)";
+        }
+      }
+    }
+
+    document.getElementById('email-input').addEventListener('input', evaluateEmail);
+
+    /* =========================================================================
+       MODULE 2: THREE SCHOOLS SIMULATORS
+       ========================================================================= */
+    function switchSchoolTab(tabName) {
+      const tabs = ['supervised', 'unsupervised', 'reinforcement'];
+      tabs.forEach(t => {
+        document.getElementById(`tab-btn-${t}`).classList.toggle('active', t === tabName);
+        document.getElementById(`panel-${t}`).classList.toggle('active', t === tabName);
+      });
+
+      if (tabName === 'supervised') drawSupervisedCanvas();
+      if (tabName === 'unsupervised') drawUnsupervisedCanvas();
+      if (tabName === 'reinforcement') drawRLCanvas();
+    }
+
+    /* 2A: Supervised Learning */
+    const supCanvas = document.getElementById('supervised-canvas');
+    const supCtx = supCanvas.getContext('2d');
+
+    const fruits = [
+      { weight: 80, rough: 20, type: 'apple' },
+      { weight: 95, rough: 25, type: 'apple' },
+      { weight: 110, rough: 15, type: 'apple' },
+      { weight: 105, rough: 35, type: 'apple' },
+      { weight: 120, rough: 30, type: 'apple' },
+      { weight: 90, rough: 40, type: 'apple' },
+      { weight: 130, rough: 22, type: 'apple' },
+      { weight: 115, rough: 45, type: 'apple' },
+      { weight: 125, rough: 38, type: 'apple' },
+      { weight: 135, rough: 18, type: 'apple' },
+      { weight: 140, rough: 48, type: 'apple' },
+      { weight: 100, rough: 12, type: 'apple' },
+      { weight: 155, rough: 65, type: 'orange' },
+      { weight: 165, rough: 75, type: 'orange' },
+      { weight: 180, rough: 82, type: 'orange' },
+      { weight: 195, rough: 60, type: 'orange' },
+      { weight: 170, rough: 88, type: 'orange' },
+      { weight: 145, rough: 55, type: 'orange' },
+      { weight: 190, rough: 70, type: 'orange' },
+      { weight: 205, rough: 92, type: 'orange' },
+      { weight: 150, rough: 78, type: 'orange' },
+      { weight: 160, rough: 52, type: 'orange' },
+      { weight: 138, rough: 62, type: 'orange' },
+      { weight: 175, rough: 68, type: 'orange' }
+    ];
+
+    let currentBoundaryThreshold = 130;
+
+    function updateSupervisedSim() {
+      currentBoundaryThreshold = parseFloat(document.getElementById('sup-slider').value);
+      document.getElementById('sup-threshold-val').innerText = currentLang === 'en'
+        ? `${currentBoundaryThreshold} Threshold Score`
+        : `${currentBoundaryThreshold} 門檻評分`;
+
+      let mistakes = 0;
+      fruits.forEach(f => {
+        const score = (f.weight * 0.7) + (f.rough * 0.9);
+        const predicted = score > currentBoundaryThreshold ? 'orange' : 'apple';
+        if (predicted !== f.type) mistakes++;
+      });
+
+      const total = fruits.length;
+      const acc = (((total - mistakes) / total) * 100).toFixed(1);
+      document.getElementById('sup-sample-count').innerText = currentLang === 'en' ? `${total} Items` : `${total} 件樣本`;
+      document.getElementById('sup-acc-val').innerText = `${acc}%`;
+      document.getElementById('sup-err-val').innerText = currentLang === 'en' ? `${mistakes} Misses` : `${mistakes} 處誤判`;
+
+      drawSupervisedCanvas();
+    }
+
+    function autoOptimizeBoundary() {
+      let bestT = 130;
+      let minMistakes = 999;
+      for (let t = 60; t <= 210; t += 1) {
+        let err = 0;
+        fruits.forEach(f => {
+          const score = (f.weight * 0.7) + (f.rough * 0.9);
+          const predicted = score > t ? 'orange' : 'apple';
+          if (predicted !== f.type) err++;
+        });
+        if (err < minMistakes) {
+          minMistakes = err;
+          bestT = t;
+        }
+      }
+      document.getElementById('sup-slider').value = bestT;
+      updateSupervisedSim();
+    }
+
+    function drawSupervisedCanvas() {
+      const w = supCanvas.width;
+      const h = supCanvas.height;
+      supCtx.clearRect(0, 0, w, h);
+
+      // Grid rules
+      supCtx.strokeStyle = '#ddd6eb';
+      supCtx.lineWidth = 1;
+      for (let x = 50; x < w; x += 50) {
+        supCtx.beginPath();
+        supCtx.moveTo(x, 0);
+        supCtx.lineTo(x, h);
+        supCtx.stroke();
+      }
+      for (let y = 50; y < h; y += 50) {
+        supCtx.beginPath();
+        supCtx.moveTo(0, y);
+        supCtx.lineTo(w, y);
+        supCtx.stroke();
+      }
+
+      // Dividing Boundary Line
+      supCtx.save();
+      supCtx.strokeStyle = '#6b21a8';
+      supCtx.lineWidth = 2.5;
+      supCtx.setLineDash([6, 6]);
+
+      const r1 = 10;
+      const w1 = (currentBoundaryThreshold - (r1 * 0.9)) / 0.7;
+      const x1 = 40 + ((w1 - 60) / 160) * 420;
+      const y1 = 300 - ((r1 - 10) / 90) * 260;
+
+      const r2 = 95;
+      const w2 = (currentBoundaryThreshold - (r2 * 0.9)) / 0.7;
+      const x2 = 40 + ((w2 - 60) / 160) * 420;
+      const y2 = 300 - ((r2 - 10) / 90) * 260;
+
+      supCtx.beginPath();
+      supCtx.moveTo(x1, y1);
+      supCtx.lineTo(x2, y2);
+      supCtx.stroke();
+      supCtx.restore();
+
+      // Plot data points
+      fruits.forEach(f => {
+        const px = 40 + ((f.weight - 60) / 160) * 420;
+        const py = 300 - ((f.rough - 10) / 90) * 260;
+
+        const score = (f.weight * 0.7) + (f.rough * 0.9);
+        const predicted = score > currentBoundaryThreshold ? 'orange' : 'apple';
+        const isError = predicted !== f.type;
+
+        if (f.type === 'apple') {
+          supCtx.fillStyle = isError ? '#5e5772' : '#dc2626';
+          supCtx.beginPath();
+          supCtx.arc(px, py, 6, 0, Math.PI * 2);
+          supCtx.fill();
+        } else {
+          supCtx.fillStyle = isError ? '#5e5772' : '#d97706';
+          supCtx.fillRect(px - 5, py - 5, 10, 10);
+        }
+
+        if (isError) {
+          supCtx.strokeStyle = '#1f1b29';
+          supCtx.lineWidth = 2;
+          supCtx.beginPath();
+          supCtx.arc(px, py, 9, 0, Math.PI * 2);
+          supCtx.stroke();
+        }
+      });
+    }
+
+    /* 2B: Unsupervised Learning (K-Means) */
+    const unsupCanvas = document.getElementById('unsupervised-canvas');
+    const unsupCtx = unsupCanvas.getContext('2d');
+
+    let kmeansPoints = [];
+    let centroids = [];
+    let kmeansStep = 0;
+    const K = 3;
+    const clusterColors = [
+      '#6b21a8', // Rich Purple
+      'oklch(52% 0.13 195)', // Teal
+      '#d97706'  // Amber
+    ];
+
+    function initKMeansData() {
+      kmeansPoints = [];
+      kmeansStep = 0;
+      document.getElementById('kmeans-step-counter').innerText = `0 / 10`;
+      document.getElementById('kmeans-status').innerText = currentLang === 'en' ? 'Unassigned' : '未指派集群';
+
+      const centers = [
+        { x: 120, y: 100 },
+        { x: 380, y: 120 },
+        { x: 260, y: 240 }
+      ];
+
+      centers.forEach(c => {
+        for (let i = 0; i < 16; i++) {
+          kmeansPoints.push({
+            x: c.x + (Math.random() - 0.5) * 110,
+            y: c.y + (Math.random() - 0.5) * 85,
+            cluster: -1
+          });
+        }
+      });
+
+      centroids = [
+        { x: 100 + Math.random() * 100, y: 50 + Math.random() * 80 },
+        { x: 300 + Math.random() * 100, y: 80 + Math.random() * 80 },
+        { x: 200 + Math.random() * 100, y: 220 + Math.random() * 80 }
+      ];
+
+      drawUnsupervisedCanvas();
+    }
+
+    function stepKMeans() {
+      if (kmeansStep >= 10) return;
+
+      kmeansPoints.forEach(p => {
+        let minDist = Infinity;
+        let bestC = 0;
+        centroids.forEach((c, idx) => {
+          const d = Math.hypot(p.x - c.x, p.y - c.y);
+          if (d < minDist) {
+            minDist = d;
+            bestC = idx;
+          }
+        });
+        p.cluster = bestC;
+      });
+
+      for (let k = 0; k < K; k++) {
+        const assigned = kmeansPoints.filter(p => p.cluster === k);
+        if (assigned.length > 0) {
+          centroids[k].x = assigned.reduce((acc, p) => acc + p.x, 0) / assigned.length;
+          centroids[k].y = assigned.reduce((acc, p) => acc + p.y, 0) / assigned.length;
+        }
+      }
+
+      kmeansStep++;
+      document.getElementById('kmeans-step-counter').innerText = `${kmeansStep} / 10`;
+      document.getElementById('kmeans-status').innerText = kmeansStep >= 5 
+        ? (currentLang === 'en' ? 'Converged' : '已收斂最佳化')
+        : (currentLang === 'en' ? 'Optimizing' : '持續迭代調整中');
+      drawUnsupervisedCanvas();
+    }
+
+    function runFullKMeans() {
+      for (let i = 0; i < 8; i++) {
+        stepKMeans();
+      }
+    }
+
+    function resetKMeans() {
+      initKMeansData();
+    }
+
+    function drawUnsupervisedCanvas() {
+      const w = unsupCanvas.width;
+      const h = unsupCanvas.height;
+      unsupCtx.clearRect(0, 0, w, h);
+
+      unsupCtx.strokeStyle = '#ddd6eb';
+      unsupCtx.lineWidth = 1;
+      for (let x = 50; x < w; x += 50) {
+        unsupCtx.beginPath();
+        unsupCtx.moveTo(x, 0);
+        unsupCtx.lineTo(x, h);
+        unsupCtx.stroke();
+      }
+      for (let y = 50; y < h; y += 50) {
+        unsupCtx.beginPath();
+        unsupCtx.moveTo(0, y);
+        unsupCtx.lineTo(w, y);
+        unsupCtx.stroke();
+      }
+
+      kmeansPoints.forEach(p => {
+        unsupCtx.fillStyle = p.cluster === -1 ? '#5e5772' : clusterColors[p.cluster];
+        unsupCtx.beginPath();
+        unsupCtx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+        unsupCtx.fill();
+      });
+
+      centroids.forEach((c, idx) => {
+        unsupCtx.strokeStyle = '#1f1b29';
+        unsupCtx.lineWidth = 3;
+        const size = 10;
+        unsupCtx.beginPath();
+        unsupCtx.moveTo(c.x - size, c.y);
+        unsupCtx.lineTo(c.x + size, c.y);
+        unsupCtx.stroke();
+
+        unsupCtx.beginPath();
+        unsupCtx.moveTo(c.x, c.y - size);
+        unsupCtx.lineTo(c.x, c.y + size);
+        unsupCtx.stroke();
+
+        unsupCtx.strokeStyle = clusterColors[idx];
+        unsupCtx.lineWidth = 2;
+        unsupCtx.beginPath();
+        unsupCtx.arc(c.x, c.y, 14, 0, Math.PI * 2);
+        unsupCtx.stroke();
+      });
+    }
+
+    /* 2C: Reinforcement Learning */
+    const rlCanvas = document.getElementById('rl-canvas');
+    const rlCtx = rlCanvas.getContext('2d');
+
+    const GRID_SIZE = 5;
+    let agentPos = { x: 0, y: 0 };
+    const goalPos = { x: 4, y: 4 };
+    const hazardList = [
+      { x: 1, y: 1 },
+      { x: 2, y: 3 },
+      { x: 3, y: 2 }
+    ];
+
+    let qTable = [];
+    let rlEpisodes = 0;
+    let rlSuccesses = 0;
+    let totalRewards = 0;
+
+    function initRLWorld() {
+      qTable = [];
+      for (let x = 0; x < GRID_SIZE; x++) {
+        qTable[x] = [];
+        for (let y = 0; y < GRID_SIZE; y++) {
+          qTable[x][y] = [0, 0, 0, 0];
+        }
+      }
+      agentPos = { x: 0, y: 0 };
+      rlEpisodes = 0;
+      rlSuccesses = 0;
+      totalRewards = 0;
+      updateRLMetrics();
+      drawRLCanvas();
+    }
+
+    function updateRLMetrics() {
+      document.getElementById('rl-episodes-val').innerText = rlEpisodes;
+      const rate = rlEpisodes === 0 ? 0 : Math.round((rlSuccesses / rlEpisodes) * 100);
+      document.getElementById('rl-success-rate').innerText = `${rate}%`;
+      const avg = rlEpisodes === 0 ? "0.0" : (totalRewards / rlEpisodes).toFixed(1);
+      document.getElementById('rl-avg-reward').innerText = avg;
+    }
+
+    function runSingleRLEpisode() {
+      agentPos = { x: 0, y: 0 };
+      let steps = 0;
+      let epReward = 0;
+      const maxSteps = 20;
+
+      while (steps < maxSteps) {
+        steps++;
+        const currX = agentPos.x;
+        const currY = agentPos.y;
+
+        let action = 0;
+        const epsilon = Math.max(0.1, 1 - (rlEpisodes * 0.05));
+        if (Math.random() < epsilon) {
+          action = Math.floor(Math.random() * 4);
+        } else {
+          const qVals = qTable[currX][currY];
+          action = qVals.indexOf(Math.max(...qVals));
+        }
+
+        let nextX = currX;
+        let nextY = currY;
+        if (action === 0 && currY > 0) nextY--;
+        if (action === 1 && currX < GRID_SIZE - 1) nextX++;
+        if (action === 2 && currY < GRID_SIZE - 1) nextY++;
+        if (action === 3 && currX > 0) nextX--;
+
+        let reward = -0.1;
+        let done = false;
+
+        const isHazard = hazardList.some(h => h.x === nextX && h.y === nextY);
+        if (isHazard) {
+          reward = -5.0;
+          done = true;
+        } else if (nextX === goalPos.x && nextY === goalPos.y) {
+          reward = 10.0;
+          done = true;
+          rlSuccesses++;
+        }
+
+        epReward += reward;
+
+        const alpha = 0.5;
+        const gamma = 0.9;
+        const maxNextQ = Math.max(...qTable[nextX][nextY]);
+        qTable[currX][currY][action] += alpha * (reward + gamma * maxNextQ - qTable[currX][currY][action]);
+
+        agentPos = { x: nextX, y: nextY };
+        if (done) break;
+      }
+
+      rlEpisodes++;
+      totalRewards += epReward;
+      updateRLMetrics();
+      drawRLCanvas();
+    }
+
+    function trainRLEpisodes(n) {
+      for (let i = 0; i < n; i++) {
+        runSingleRLEpisode();
+      }
+    }
+
+    function resetRL() {
+      initRLWorld();
+    }
+
+    function drawRLCanvas() {
+      const w = rlCanvas.width;
+      const h = rlCanvas.height;
+      rlCtx.clearRect(0, 0, w, h);
+
+      const cellW = w / GRID_SIZE;
+      const cellH = h / GRID_SIZE;
+
+      for (let x = 0; x < GRID_SIZE; x++) {
+        for (let y = 0; y < GRID_SIZE; y++) {
+          const maxQ = Math.max(...qTable[x][y]);
+          
+          if (maxQ > 0) {
+            const intensity = Math.min(1, maxQ / 10);
+            rlCtx.fillStyle = `oklch(92% ${0.03 + (intensity * 0.08)} 305)`;
+          } else {
+            rlCtx.fillStyle = '#ffffff';
+          }
+          rlCtx.fillRect(x * cellW, y * cellH, cellW, cellH);
+
+          rlCtx.strokeStyle = '#ddd6eb';
+          rlCtx.lineWidth = 1;
+          rlCtx.strokeRect(x * cellW, y * cellH, cellW, cellH);
+
+          const isH = hazardList.some(haz => haz.x === x && haz.y === y);
+          if (isH) {
+            rlCtx.fillStyle = '#6b21a8';
+            rlCtx.font = '16px "IBM Plex Mono", monospace';
+            rlCtx.textAlign = 'center';
+            rlCtx.fillText('✕ -5', (x + 0.5) * cellW, (y + 0.58) * cellH);
+          }
+
+          if (x === goalPos.x && y === goalPos.y) {
+            rlCtx.fillStyle = '#d97706';
+            rlCtx.font = 'bold 15px "IBM Plex Mono", monospace';
+            rlCtx.textAlign = 'center';
+            rlCtx.fillText('★ +10', (x + 0.5) * cellW, (y + 0.58) * cellH);
+          }
+        }
+      }
+
+      rlCtx.fillStyle = '#1f1b29';
+      const cx = (agentPos.x + 0.5) * cellW;
+      const cy = (agentPos.y + 0.5) * cellH;
+      rlCtx.beginPath();
+      rlCtx.moveTo(cx, cy - 14);
+      rlCtx.lineTo(cx - 11, cy + 10);
+      rlCtx.lineTo(cx + 11, cy + 10);
+      rlCtx.closePath();
+      rlCtx.fill();
+    }
+
+    /* =========================================================================
+       MODULE 3: LINEAR REGRESSION SANDBOX & ERROR MINIMIZATION
+       ========================================================================= */
+    const regCanvas = document.getElementById('regression-canvas');
+    const regCtx = regCanvas.getContext('2d');
+
+    const houseData = [
+      { size: 45, price: 120 },
+      { size: 60, price: 165 },
+      { size: 75, price: 175 },
+      { size: 90, price: 230 },
+      { size: 110, price: 260 },
+      { size: 125, price: 310 },
+      { size: 140, price: 340 },
+      { size: 160, price: 410 }
+    ];
+
+    let currentSlope = 0.6;
+    let currentBias = 120;
+
+    function updateRegressionSim() {
+      currentSlope = parseFloat(document.getElementById('reg-slope').value);
+      currentBias = parseFloat(document.getElementById('reg-bias').value);
+
+      document.getElementById('reg-slope-val').innerText = currentSlope.toFixed(2);
+      document.getElementById('reg-bias-val').innerText = currentBias.toFixed(1);
+
+      let totalLoss = 0;
+      houseData.forEach(d => {
+        const predicted = (currentSlope * d.size) + currentBias;
+        const err = d.price - predicted;
+        totalLoss += (err * err);
+      });
+
+      const meanLoss = Math.round(totalLoss / houseData.length);
+      document.getElementById('reg-loss-val').innerText = meanLoss.toLocaleString();
+
+      const fitTag = document.getElementById('reg-fit-val');
+      if (meanLoss < 350) {
+        fitTag.innerText = currentLang === 'en' ? 'Optimal Fit!' : '已達最佳擬合！';
+        fitTag.style.color = 'oklch(52% 0.13 195)';
+      } else if (meanLoss < 2500) {
+        fitTag.innerText = currentLang === 'en' ? 'Moderate Fit' : '普通擬合程度';
+        fitTag.style.color = '#d97706';
+      } else {
+        fitTag.innerText = currentLang === 'en' ? 'Poor (Underfit)' : '誤差過大 (欠擬合)';
+        fitTag.style.color = '#6b21a8';
+      }
+
+      drawRegressionCanvas();
+    }
+
+    function gradientDescentStep() {
+      const delta = 0.01;
+      let lossBase = 0;
+      let lossSlopeBump = 0;
+      let lossBiasBump = 0;
+
+      houseData.forEach(d => {
+        const p = (currentSlope * d.size) + currentBias;
+        lossBase += Math.pow(d.price - p, 2);
+
+        const pS = ((currentSlope + delta) * d.size) + currentBias;
+        lossSlopeBump += Math.pow(d.price - pS, 2);
+
+        const pB = (currentSlope * d.size) + (currentBias + delta);
+        lossBiasBump += Math.pow(d.price - pB, 2);
+      });
+
+      const gradSlope = (lossSlopeBump - lossBase) / delta;
+      const gradBias = (lossBiasBump - lossBase) / delta;
+
+      const lrSlope = 0.000008;
+      const lrBias = 0.08;
+
+      currentSlope -= gradSlope * lrSlope;
+      currentBias -= gradBias * lrBias;
+
+      currentSlope = Math.max(0.2, Math.min(3.5, currentSlope));
+      currentBias = Math.max(-20, Math.min(150, currentBias));
+
+      document.getElementById('reg-slope').value = currentSlope;
+      document.getElementById('reg-bias').value = currentBias;
+      updateRegressionSim();
+    }
+
+    function autoSolveRegression() {
+      let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+      const n = houseData.length;
+      houseData.forEach(d => {
+        sumX += d.size;
+        sumY += d.price;
+        sumXY += (d.size * d.price);
+        sumX2 += (d.size * d.size);
+      });
+
+      const optimalSlope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+      const optimalBias = (sumY - optimalSlope * sumX) / n;
+
+      document.getElementById('reg-slope').value = optimalSlope.toFixed(2);
+      document.getElementById('reg-bias').value = optimalBias.toFixed(1);
+      updateRegressionSim();
+    }
+
+    function drawRegressionCanvas() {
+      const w = regCanvas.width;
+      const h = regCanvas.height;
+      regCtx.clearRect(0, 0, w, h);
+
+      regCtx.strokeStyle = '#ddd6eb';
+      regCtx.lineWidth = 1;
+      for (let x = 50; x < w; x += 60) {
+        regCtx.beginPath();
+        regCtx.moveTo(x, 0);
+        regCtx.lineTo(x, h);
+        regCtx.stroke();
+      }
+      for (let y = 40; y < h; y += 50) {
+        regCtx.beginPath();
+        regCtx.moveTo(0, y);
+        regCtx.lineTo(w, y);
+        regCtx.stroke();
+      }
+
+      // Draw residual drop lines
+      houseData.forEach(d => {
+        const px = 50 + ((d.size - 30) / 150) * 410;
+        const py = 300 - ((d.price - 50) / 400) * 260;
+
+        const predPrice = (currentSlope * d.size) + currentBias;
+        const predY = 300 - ((predPrice - 50) / 400) * 260;
+
+        regCtx.strokeStyle = '#6b21a8';
+        regCtx.lineWidth = 1.5;
+        regCtx.beginPath();
+        regCtx.moveTo(px, py);
+        regCtx.lineTo(px, predY);
+        regCtx.stroke();
+      });
+
+      // Draw predicted trendline
+      regCtx.strokeStyle = '#1f1b29';
+      regCtx.lineWidth = 2.5;
+      regCtx.beginPath();
+      const xStartSize = 30;
+      const xEndSize = 180;
+      const yStartPrice = (currentSlope * xStartSize) + currentBias;
+      const yEndPrice = (currentSlope * xEndSize) + currentBias;
+
+      const lineX1 = 50;
+      const lineY1 = 300 - ((yStartPrice - 50) / 400) * 260;
+      const lineX2 = 460;
+      const lineY2 = 300 - ((yEndPrice - 50) / 400) * 260;
+
+      regCtx.moveTo(lineX1, lineY1);
+      regCtx.lineTo(lineX2, lineY2);
+      regCtx.stroke();
+
+      // Draw actual house points
+      houseData.forEach(d => {
+        const px = 50 + ((d.size - 30) / 150) * 410;
+        const py = 300 - ((d.price - 50) / 400) * 260;
+
+        regCtx.fillStyle = 'oklch(52% 0.13 195)';
+        regCtx.beginPath();
+        regCtx.arc(px, py, 5.5, 0, Math.PI * 2);
+        regCtx.fill();
+        regCtx.strokeStyle = '#1f1b29';
+        regCtx.lineWidth = 1.5;
+        regCtx.stroke();
+      });
+    }
+
+    /* =========================================================================
+       INITIALIZATION
+       ========================================================================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderCatalogTable();
+      renderLexicon();
+      evaluateEmail();
+      updateSupervisedSim();
+      initKMeansData();
+      initRLWorld();
+      updateRegressionSim();
+    });
+
+    window.addEventListener('resize', () => {
+      drawSupervisedCanvas();
+      drawUnsupervisedCanvas();
+      drawRLCanvas();
+      drawRegressionCanvas();
+    });
+  </script>
+</body>
+</html>

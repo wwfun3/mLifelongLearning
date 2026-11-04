@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CondiMaster — Interactive Conditional Sentences Academy</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Tone.js for subtle sound effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Smooth Card Transitions */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+        }
+
+        .syntax-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.15rem 0.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        /* Inversion animation */
+        @keyframes swapPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); box-shadow: 0 8px 20px -4px rgba(99, 102, 241, 0.2); }
+            100% { transform: scale(1); }
+        }
+        .animate-swap {
+            animation: swapPulse 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Tab active indicator */
+        .nav-pill-active {
+            background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-indigo-100 selection:text-indigo-900 text-[13px] sm:text-sm">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-12 sm:h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center gap-2 sm:gap-3 cursor-pointer" onclick="switchTab('core')">
+                <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-500 flex items-center justify-center text-white shadow-sm sm:shadow-md shadow-indigo-200">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 sm:w-5 sm:h-5"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <span class="font-display font-bold text-sm sm:text-lg tracking-tight text-slate-900">CondiMaster</span>
+                        <span class="text-[9px] sm:text-[11px] font-bold uppercase tracking-wider px-1.5 sm:px-2 py-0.2 sm:py-0.5 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200/60">Pro</span>
+                    </div>
+                    <p class="text-[10px] sm:text-xs text-slate-500 hidden sm:block">Complete Interactive Guide to Conditional Sentences</p>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-1.5 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/60">
+                <button onclick="switchTab('core')" id="nav-core" class="nav-btn nav-pill-active px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="layers" class="w-4 h-4"></i>
+                    <span>Core Types (0–3)</span>
+                </button>
+                <button onclick="switchTab('mixed')" id="nav-mixed" class="nav-btn text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="git-merge" class="w-4 h-4"></i>
+                    <span>Mixed Time</span>
+                </button>
+                <button onclick="switchTab('inversion')" id="nav-inversion" class="nav-btn text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="repeat" class="w-4 h-4"></i>
+                    <span>Inversion Lab</span>
+                </button>
+                <button onclick="switchTab('advanced')" id="nav-advanced" class="nav-btn text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="compass" class="w-4 h-4"></i>
+                    <span>Nuances & Wishes</span>
+                </button>
+                <button onclick="switchTab('sandbox')" id="nav-sandbox" class="nav-btn text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="sliders" class="w-4 h-4"></i>
+                    <span>Time Machine</span>
+                </button>
+                <button onclick="switchTab('quiz')" id="nav-quiz" class="nav-btn text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5">
+                    <i data-lucide="award" class="w-4 h-4"></i>
+                    <span>Practice Arena</span>
+                </button>
+            </nav>
+
+            <!-- Right Status: XP & Sound Toggle -->
+            <div class="flex items-center gap-1.5 sm:gap-2.5">
+                <div class="flex items-center gap-1 sm:gap-2 bg-amber-50 border border-amber-200/80 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl">
+                    <i data-lucide="zap" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-500 fill-amber-500"></i>
+                    <span class="text-[11px] sm:text-xs font-bold text-amber-900"><span id="xp-display">120</span> XP</span>
+                </div>
+                <button onclick="toggleSound()" id="sound-btn" class="p-1.5 sm:p-2 rounded-lg sm:rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 transition-colors" title="Toggle Sound Effects">
+                    <i data-lucide="volume-2" id="sound-icon" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                </button>
+                <button onclick="openCheatSheetModal()" class="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[11px] sm:text-xs font-semibold border border-indigo-200/60 transition-all">
+                    <i data-lucide="table" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+                    <span>Matrix</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-20 md:pb-12">
+
+        <!-- Hero Banner / Mastery Progress -->
+        <div class="mb-3 sm:mb-8 glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 bg-gradient-to-r from-white via-indigo-50/30 to-sky-50/40 border border-slate-200/90 flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-6">
+            <div class="space-y-1 sm:space-y-1.5 max-w-2xl">
+                <div class="inline-flex items-center gap-1 sm:gap-2 text-[10px] sm:text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg border border-indigo-100">
+                    <i data-lucide="book-open-check" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+                    <span>Interactive Grammar Studio</span>
+                </div>
+                <h1 class="font-display text-lg sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+                    Master Cause, Effect & Hypothetical Realities
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Conditional sentences connect a <span class="font-semibold text-indigo-600 underline decoration-indigo-300 decoration-1 underline-offset-1">condition</span> with a <span class="font-semibold text-emerald-600 underline decoration-emerald-300 decoration-1 underline-offset-1">result</span>. Shifting tenses backward ("backshifting") alters probability and reality!
+                </p>
+            </div>
+
+            <!-- Mastery Progress Widget -->
+            <div class="bg-white/90 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm min-w-full lg:min-w-[260px] flex flex-col gap-1.5 sm:gap-2.5">
+                <div class="flex items-center justify-between text-[11px] sm:text-xs font-semibold">
+                    <span class="text-slate-600 flex items-center gap-1 sm:gap-1.5">
+                        <i data-lucide="bar-chart-3" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-600"></i>
+                        Course Exploration
+                    </span>
+                    <span id="mastery-percent" class="text-indigo-600 font-bold">25%</span>
+                </div>
+                <div class="w-full h-1.5 sm:h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200/60">
+                    <div id="mastery-bar" class="h-full bg-gradient-to-r from-indigo-500 to-teal-400 rounded-full transition-all duration-500" style="width: 25%"></div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] sm:text-[11px] text-slate-500">
+                    <span>Explore all modules to master</span>
+                    <button onclick="openCheatSheetModal()" class="text-indigo-600 font-semibold hover:underline flex items-center gap-0.5 sm:hidden">
+                        <span>Full Matrix</span>
+                        <i data-lucide="external-link" class="w-3 h-3"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 1: CORE TYPES (0, 1, 2, 3)
+             ========================================== -->
+        <section id="tab-core" class="tab-section space-y-3 sm:space-y-6">
+            <!-- Type Selector Pills -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                <button onclick="selectCoreType(0)" id="core-btn-0" class="core-type-btn p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 text-left transition-all bg-white hover:border-emerald-400 border-emerald-500 ring-2 sm:ring-4 ring-emerald-500/10">
+                    <div class="flex items-center justify-between mb-1 sm:mb-2">
+                        <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded text-[10px] sm:text-xs font-bold bg-emerald-100 text-emerald-800">TYPE 0</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-emerald-600">100% Real</span>
+                    </div>
+                    <h3 class="font-display font-bold text-slate-900 text-xs sm:text-base leading-tight">Zero Conditional</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1 sm:line-clamp-none">Scientific facts & habits</p>
+                </button>
+
+                <button onclick="selectCoreType(1)" id="core-btn-1" class="core-type-btn p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200/80 text-left transition-all bg-white hover:border-sky-400">
+                    <div class="flex items-center justify-between mb-1 sm:mb-2">
+                        <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded text-[10px] sm:text-xs font-bold bg-sky-100 text-sky-800">TYPE 1</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-sky-600">50–90% Likely</span>
+                    </div>
+                    <h3 class="font-display font-bold text-slate-900 text-xs sm:text-base leading-tight">First Conditional</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1 sm:line-clamp-none">Real future possibilities</p>
+                </button>
+
+                <button onclick="selectCoreType(2)" id="core-btn-2" class="core-type-btn p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200/80 text-left transition-all bg-white hover:border-violet-400">
+                    <div class="flex items-center justify-between mb-1 sm:mb-2">
+                        <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded text-[10px] sm:text-xs font-bold bg-violet-100 text-violet-800">TYPE 2</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-violet-600">0–5% Unreal</span>
+                    </div>
+                    <h3 class="font-display font-bold text-slate-900 text-xs sm:text-base leading-tight">Second Conditional</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1 sm:line-clamp-none">Hypothetical present / unlikely</p>
+                </button>
+
+                <button onclick="selectCoreType(3)" id="core-btn-3" class="core-type-btn p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200/80 text-left transition-all bg-white hover:border-rose-400">
+                    <div class="flex items-center justify-between mb-1 sm:mb-2">
+                        <span class="px-1.5 sm:px-2.5 py-0.2 sm:py-0.5 rounded text-[10px] sm:text-xs font-bold bg-rose-100 text-rose-800">TYPE 3</span>
+                        <span class="text-[10px] sm:text-xs font-bold text-rose-600">0% Past</span>
+                    </div>
+                    <h3 class="font-display font-bold text-slate-900 text-xs sm:text-base leading-tight">Third Conditional</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1 sm:line-clamp-none">Imaginary past & regrets</p>
+                </button>
+            </div>
+
+            <!-- Dynamic Detail Display Area -->
+            <div id="core-detail-container" class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 2: MIXED CONDITIONALS
+             ========================================== -->
+        <section id="tab-mixed" class="tab-section hidden space-y-3 sm:space-y-6">
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200">
+                <div class="max-w-3xl space-y-1 sm:space-y-2 mb-4 sm:mb-6">
+                    <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold bg-purple-100 text-purple-700 border border-purple-200">CROSS-TIME BRIDGES</span>
+                    <h2 class="font-display text-lg sm:text-2xl font-bold text-slate-900">Mixed Conditionals: When Time Frames Collide</h2>
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        When the time in the <strong>If-clause</strong> is not the same as the <strong>Main clause</strong>, mixing Type 2 and Type 3 lets us show how past actions affect now, or how permanent traits affected the past!
+                    </p>
+                </div>
+
+                <!-- Mixed Pattern Selector -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-6">
+                    <!-- Pattern A: Past Condition -> Present Result -->
+                    <div class="rounded-xl sm:rounded-2xl border-2 border-indigo-200 bg-gradient-to-b from-indigo-50/50 to-white p-3.5 sm:p-6 flex flex-col justify-between space-y-3 sm:space-y-5">
+                        <div class="space-y-2.5 sm:space-y-4">
+                            <div class="flex items-center justify-between gap-1 flex-wrap">
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg bg-indigo-600 text-white">Most Common (3 → 2)</span>
+                                <span class="text-[10px] sm:text-xs font-semibold text-indigo-700 bg-indigo-100 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg">Past Cause ➔ Present Effect</span>
+                            </div>
+                            <h3 class="font-display text-base sm:text-xl font-bold text-slate-900">Past Condition + Present Result</h3>
+                            <p class="text-xs sm:text-sm text-slate-600">
+                                An <strong class="text-rose-600">unreal past event</strong> having an effect on our <strong class="text-violet-600">present reality right now</strong>.
+                            </p>
+
+                            <!-- Visual Timeline Formula -->
+                            <div class="bg-white p-2.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm space-y-2 sm:space-y-3">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-bold text-slate-400 uppercase">
+                                    <span>If-Clause (Type 3 • Past)</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <span>Main Clause (Type 2 • Now)</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold">
+                                    <div class="p-2 sm:p-2.5 rounded-lg bg-rose-50 text-rose-800 border border-rose-200">
+                                        If + S + <strong>had + V3 (p.p.)</strong>
+                                    </div>
+                                    <div class="p-2 sm:p-2.5 rounded-lg bg-violet-50 text-violet-800 border border-violet-200">
+                                        S + <strong>would + V1</strong> (now)
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Examples -->
+                            <div class="space-y-2 sm:space-y-3 pt-1">
+                                <div class="p-2.5 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                    <p class="text-xs sm:text-sm font-medium text-slate-800">
+                                        "<span class="text-rose-600 font-semibold">If I had taken</span> that job in Tokyo last year, <span class="text-violet-600 font-semibold">I would be living</span> in Japan right now."
+                                    </p>
+                                    <p class="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5">
+                                        <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-500 shrink-0"></i>
+                                        <span><strong>Reality:</strong> Didn't take it (past) ➔ not living there now.</span>
+                                    </p>
+                                </div>
+
+                                <div class="p-2.5 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                    <p class="text-xs sm:text-sm font-medium text-slate-800">
+                                        "<span class="text-rose-600 font-semibold">If she had slept</span> earlier, <span class="text-violet-600 font-semibold">she wouldn't feel</span> exhausted today."
+                                    </p>
+                                    <p class="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5">
+                                        <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-500 shrink-0"></i>
+                                        <span><strong>Reality:</strong> Stayed up late (past) ➔ tired today.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pattern B: Present Condition -> Past Result -->
+                    <div class="rounded-xl sm:rounded-2xl border-2 border-teal-200 bg-gradient-to-b from-teal-50/50 to-white p-3.5 sm:p-6 flex flex-col justify-between space-y-3 sm:space-y-5">
+                        <div class="space-y-2.5 sm:space-y-4">
+                            <div class="flex items-center justify-between gap-1 flex-wrap">
+                                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg bg-teal-600 text-white">Reverse Mix (2 → 3)</span>
+                                <span class="text-[10px] sm:text-xs font-semibold text-teal-800 bg-teal-100 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg">General State ➔ Past Effect</span>
+                            </div>
+                            <h3 class="font-display text-base sm:text-xl font-bold text-slate-900">Present/General State + Past Result</h3>
+                            <p class="text-xs sm:text-sm text-slate-600">
+                                A <strong class="text-violet-600">permanent or ongoing trait</strong> influenced or prevented something in the <strong class="text-rose-600">past</strong>.
+                            </p>
+
+                            <!-- Visual Timeline Formula -->
+                            <div class="bg-white p-2.5 sm:p-4 rounded-xl border border-slate-200 shadow-sm space-y-2 sm:space-y-3">
+                                <div class="flex items-center justify-between text-[10px] sm:text-xs font-bold text-slate-400 uppercase">
+                                    <span>If-Clause (Type 2 • General)</span>
+                                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <span>Main Clause (Type 3 • Past)</span>
+                                </div>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold">
+                                    <div class="p-2 sm:p-2.5 rounded-lg bg-violet-50 text-violet-800 border border-violet-200">
+                                        If + S + <strong>Simple Past (were)</strong>
+                                    </div>
+                                    <div class="p-2 sm:p-2.5 rounded-lg bg-rose-50 text-rose-800 border border-rose-200">
+                                        S + <strong>would have + V3 (p.p.)</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Examples -->
+                            <div class="space-y-2 sm:space-y-3 pt-1">
+                                <div class="p-2.5 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                    <p class="text-xs sm:text-sm font-medium text-slate-800">
+                                        "<span class="text-violet-600 font-semibold">If I weren't afraid</span> of heights, <span class="text-rose-600 font-semibold">I would have gone</span> skydiving yesterday."
+                                    </p>
+                                    <p class="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5">
+                                        <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-600 shrink-0"></i>
+                                        <span><strong>Reality:</strong> Generally afraid (permanent) ➔ didn't go.</span>
+                                    </p>
+                                </div>
+
+                                <div class="p-2.5 sm:p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                                    <p class="text-xs sm:text-sm font-medium text-slate-800">
+                                        "<span class="text-violet-600 font-semibold">If he spoke</span> fluent French, <span class="text-rose-600 font-semibold">he would have translated</span> the contract."
+                                    </p>
+                                    <p class="text-[11px] sm:text-xs text-slate-500 flex items-center gap-1.5">
+                                        <i data-lucide="info" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-600 shrink-0"></i>
+                                        <span><strong>Reality:</strong> Doesn't speak French ➔ couldn't translate.</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 3: INVERSION LAB (SHOULD / WERE / HAD)
+             ========================================== -->
+        <section id="tab-inversion" class="tab-section hidden space-y-3 sm:space-y-6">
+            <!-- Interactive Inversion Transformer -->
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200 bg-gradient-to-br from-white via-white to-indigo-50/40">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4 mb-4 sm:mb-6">
+                    <div>
+                        <span class="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">FORMAL & C1/C2 ACADEMIC ENGLISH</span>
+                        <h2 class="font-display text-lg sm:text-2xl font-bold text-slate-900 mt-1">Conditional Inversion Transformer</h2>
+                        <p class="text-xs sm:text-sm text-slate-600">
+                            In formal writing, omit <strong>"If"</strong> and invert the subject and auxiliary verb (<em>Should, Were, Had</em>).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Machine -->
+                <div class="bg-slate-900 text-white rounded-xl sm:rounded-2xl p-3.5 sm:p-7 shadow-lg space-y-3 sm:space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5 sm:pb-4">
+                        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">Select Sentence:</span>
+                        <div class="grid grid-cols-2 sm:flex sm:flex-wrap gap-1.5 sm:gap-2 w-full sm:w-auto">
+                            <button onclick="loadInversionExample(0)" id="inv-ex-0" class="inv-ex-btn px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-indigo-600 text-white transition-all">Type 1: Should</button>
+                            <button onclick="loadInversionExample(1)" id="inv-ex-1" class="inv-ex-btn px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Type 2: Were</button>
+                            <button onclick="loadInversionExample(2)" id="inv-ex-2" class="inv-ex-btn px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Type 2: Were...to</button>
+                            <button onclick="loadInversionExample(3)" id="inv-ex-3" class="inv-ex-btn px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">Type 3: Had Neg.</button>
+                        </div>
+                    </div>
+
+                    <!-- Display Area -->
+                    <div id="inversion-stage" class="bg-slate-800/90 border border-slate-700 rounded-xl sm:rounded-2xl p-3 sm:p-6 transition-all">
+                        <div class="flex items-center justify-between gap-1 mb-2">
+                            <span id="inv-mode-badge" class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                Standard "If" Form
+                            </span>
+                            <span id="inv-type-label" class="text-[10px] sm:text-xs text-slate-400 font-medium truncate">Type 1 Conditional</span>
+                        </div>
+
+                        <p id="inv-sentence-display" class="font-display text-sm sm:text-xl lg:text-2xl font-bold leading-relaxed tracking-tight text-white my-2">
+                            <!-- Filled via JS -->
+                        </p>
+
+                        <p id="inv-step-note" class="text-[11px] sm:text-sm text-indigo-300 flex items-center gap-1.5 mt-2.5 bg-indigo-950/60 p-2 sm:p-3 rounded-lg sm:rounded-xl border border-indigo-800/60">
+                            <!-- Filled via JS -->
+                        </p>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4">
+                        <div class="text-[10px] sm:text-xs text-slate-400 flex items-center gap-1.5">
+                            <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+                            <span>Never contract "not": Write <em>"Had I not..."</em> (Never <em>"Hadn't I..."</em>).</span>
+                        </div>
+                        <button onclick="toggleInversionState()" id="inv-toggle-btn" class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 text-white shadow-md flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="repeat" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                            <span id="inv-btn-text">Apply Formal Inversion</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 Pillars of Inversion Reference Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6">
+                <!-- Card 1: SHOULD -->
+                <div class="glass-card rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200 space-y-2.5 sm:space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-sky-100 text-sky-800">TYPE 1 INVERSION</span>
+                        <span class="font-mono text-[10px] sm:text-xs font-bold text-sky-600">SHOULD + S + V1</span>
+                    </div>
+                    <h3 class="font-display text-sm sm:text-lg font-bold text-slate-900">1. "Should" (Replaces "If")</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                        Formal instructions & emails. Means <em>"If by any chance..."</em>; always takes a <strong>bare infinitive</strong> (base verb)—even for <em>he/she/it</em>!
+                    </p>
+                    <div class="p-2 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1 text-[11px] sm:text-xs">
+                        <div class="text-slate-500"><span class="font-semibold">Standard:</span> If the alarm <u>rings</u>, leave.</div>
+                        <div class="text-sky-700 font-semibold"><span class="text-slate-900">Inverted:</span> <u>Should</u> the alarm <u>ring</u>, leave.</div>
+                    </div>
+                </div>
+
+                <!-- Card 2: WERE -->
+                <div class="glass-card rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200 space-y-2.5 sm:space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-violet-100 text-violet-800">TYPE 2 INVERSION</span>
+                        <span class="font-mono text-[10px] sm:text-xs font-bold text-violet-600">WERE + S + (TO V1)</span>
+                    </div>
+                    <h3 class="font-display text-sm sm:text-lg font-bold text-slate-900">2. "Were" & "Were... to"</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                        <strong>Be-verb:</strong> Swap <em>were</em> and subject.<br>
+                        <strong>Action verbs:</strong> <strong>Were + S + to + V1</strong> makes an unlikely action formal.
+                    </p>
+                    <div class="p-2 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1 text-[11px] sm:text-xs">
+                        <div class="text-slate-500"><span class="font-semibold">Be:</span> <u>Were I</u> in your position, I would accept.</div>
+                        <div class="text-violet-700 font-semibold"><span class="text-slate-900">Action:</span> <u>Were rates to rise</u>, prices would drop.</div>
+                    </div>
+                </div>
+
+                <!-- Card 3: HAD -->
+                <div class="glass-card rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200 space-y-2.5 sm:space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-rose-100 text-rose-800">TYPE 3 INVERSION</span>
+                        <span class="font-mono text-[10px] sm:text-xs font-bold text-rose-600">HAD + S + V3 (P.P.)</span>
+                    </div>
+                    <h3 class="font-display text-sm sm:text-lg font-bold text-slate-900">3. "Had" (Past Unreal)</h3>
+                    <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                        Delete <em>"If"</em> and place auxiliary <strong>Had</strong> before the subject. Also applies to Mixed Conditionals with a Type 3 condition!
+                    </p>
+                    <div class="p-2 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 space-y-1 text-[11px] sm:text-xs">
+                        <div class="text-slate-500"><span class="font-semibold">Standard:</span> If we <u>had known</u>, we'd have waited.</div>
+                        <div class="text-rose-700 font-semibold"><span class="text-slate-900">Inverted:</span> <u>Had we known</u>, we'd have waited.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bonus Special Structure: But for / If it weren't for -->
+            <div class="glass-card rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-amber-200 bg-gradient-to-r from-amber-50/60 to-white">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4">
+                    <div class="space-y-1 max-w-2xl">
+                        <div class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
+                            <i data-lucide="award" class="w-3 h-3"></i>
+                            <span>High-Scoring: "Without / But for"</span>
+                        </div>
+                        <h3 class="font-display text-sm sm:text-lg font-bold text-slate-900">"Were it not for..." & "Had it not been for..."</h3>
+                        <p class="text-[11px] sm:text-sm text-slate-600">
+                            Express that one factor prevented disaster. Both equal <strong>"But for + Noun"</strong> or <strong>"Without + Noun"</strong>!
+                        </p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4 mt-3">
+                    <div class="bg-white p-2.5 sm:p-4 rounded-xl border border-amber-200/80 text-[11px] sm:text-xs space-y-1">
+                        <span class="font-bold text-violet-700 uppercase">Present (Type 2 — Right Now)</span>
+                        <p class="text-slate-700">• <strong>If it weren't for</strong> your help, I would fail.</p>
+                        <p class="text-slate-900 font-semibold">• <strong>Were it not for</strong> your help, I would fail.</p>
+                        <p class="text-amber-800">• <strong>But for / Without</strong> your help, I would fail.</p>
+                    </div>
+                    <div class="bg-white p-2.5 sm:p-4 rounded-xl border border-amber-200/80 text-[11px] sm:text-xs space-y-1">
+                        <span class="font-bold text-rose-700 uppercase">Past (Type 3 — Yesterday)</span>
+                        <p class="text-slate-700">• <strong>If it hadn't been for</strong> the seatbelt, he would have died.</p>
+                        <p class="text-slate-900 font-semibold">• <strong>Had it not been for</strong> the seatbelt, he would have died.</p>
+                        <p class="text-amber-800">• <strong>But for / Without</strong> the seatbelt, he would have died.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 4: ADVANCED NUANCES, CONJUNCTIONS & WISHES
+             ========================================== -->
+        <section id="tab-advanced" class="tab-section hidden space-y-3 sm:space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
+                <!-- Alternative Conjunctions -->
+                <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 border border-slate-200 space-y-3 sm:space-y-5">
+                    <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-indigo-100 text-indigo-700">BEYOND "IF"</span>
+                        <h3 class="font-display text-base sm:text-xl font-bold text-slate-900 mt-1">Alternative Conditional Linkers</h3>
+                        <p class="text-[11px] sm:text-sm text-slate-600">Connect condition & result with precision:</p>
+                    </div>
+
+                    <div class="space-y-2.5">
+                        <div class="p-2.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                            <div class="flex items-center justify-between gap-1 flex-wrap">
+                                <span class="font-bold text-xs sm:text-sm text-rose-700">1. Unless (= If ... not)</span>
+                                <span class="text-[9px] sm:text-[11px] font-semibold bg-rose-100 text-rose-800 px-1.5 py-0.2 rounded">No double negatives!</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-600">For negative conditions in real conditionals. Don't use with unreal emotions.</p>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-800">✅ "You won't pass <u>unless you study</u>." (= if you don't study)</p>
+                        </div>
+
+                        <div class="p-2.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                            <div class="flex items-center justify-between gap-1 flex-wrap">
+                                <span class="font-bold text-xs sm:text-sm text-emerald-700">2. Provided / As long as</span>
+                                <span class="text-[9px] sm:text-[11px] font-semibold bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded">"Only if"</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-600">Strict permission or requirement.</p>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-800">✅ "You can borrow my car <u>as long as you drive</u> safely."</p>
+                        </div>
+
+                        <div class="p-2.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                            <div class="flex items-center justify-between gap-1 flex-wrap">
+                                <span class="font-bold text-xs sm:text-sm text-amber-700">3. In case vs. If (Exam Trap!)</span>
+                                <span class="text-[9px] sm:text-[11px] font-semibold bg-amber-100 text-amber-800 px-1.5 py-0.2 rounded">Precaution vs. Reaction</span>
+                            </div>
+                            <p class="text-[11px] sm:text-xs text-slate-600 leading-snug">
+                                • <strong>In case:</strong> Do Action A <em>first</em> as a precaution.<br>
+                                • <strong>If:</strong> Wait for Event B first, then do Action A.
+                            </p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1 text-[11px]">
+                                <div class="p-1.5 sm:p-2 rounded-lg bg-white border border-slate-200">☔ "Take umbrella <strong>in case</strong> it rains."</div>
+                                <div class="p-1.5 sm:p-2 rounded-lg bg-white border border-slate-200">🌂 "Open umbrella <strong>if</strong> it rains."</div>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 sm:p-4 rounded-xl bg-slate-50 border border-slate-200/80 space-y-1">
+                            <span class="font-bold text-xs sm:text-sm text-violet-700">4. Suppose / Even if</span>
+                            <p class="text-[11px] sm:text-xs text-slate-600"><strong>Suppose/What if</strong> invite imagination. <strong>Even if</strong> means result stays unchanged.</p>
+                            <p class="text-[11px] sm:text-xs font-semibold text-slate-800">✅ "<u>Even if</u> he apologizes, I won't go."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wish / If Only & Special "If + Will/Would" -->
+                <div class="space-y-3 sm:space-y-6">
+                    <!-- Wish & If only -->
+                    <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 border border-slate-200 space-y-2.5 sm:space-y-4">
+                        <div>
+                            <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-rose-100 text-rose-700">COUSINS OF CONDITIONALS</span>
+                            <h3 class="font-display text-base sm:text-xl font-bold text-slate-900 mt-1">"Wish" & "If Only" Backshifting</h3>
+                            <p class="text-[11px] sm:text-sm text-slate-600">Step one tense backward to show unreality:</p>
+                        </div>
+
+                        <div class="space-y-2 text-[11px] sm:text-xs">
+                            <div class="p-2.5 sm:p-3 rounded-lg bg-violet-50/70 border border-violet-200 space-y-0.5">
+                                <div class="font-bold text-violet-900 flex justify-between">
+                                    <span>1. Wish + Past Simple (Present)</span>
+                                    <span class="text-[10px] text-violet-600">Matches Type 2</span>
+                                </div>
+                                <p class="text-slate-600">Regret about now: "I wish I <u>knew</u> the answer."</p>
+                            </div>
+
+                            <div class="p-2.5 sm:p-3 rounded-lg bg-rose-50/70 border border-rose-200 space-y-0.5">
+                                <div class="font-bold text-rose-900 flex justify-between">
+                                    <span>2. Wish + Past Perfect (Past)</span>
+                                    <span class="text-[10px] text-rose-600">Matches Type 3</span>
+                                </div>
+                                <p class="text-slate-600">Past regret: "If only I <u>had set</u> my alarm last night!"</p>
+                            </div>
+
+                            <div class="p-2.5 sm:p-3 rounded-lg bg-amber-50/70 border border-amber-200 space-y-0.5">
+                                <div class="font-bold text-amber-900 flex justify-between">
+                                    <span>3. Wish + Would + V1</span>
+                                    <span class="text-[10px] text-amber-700">Never with "I"!</span>
+                                </div>
+                                <p class="text-slate-600">Annoyance with someone else: "I wish you <u>would stop</u> tapping!"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Myth Buster -->
+                    <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 border border-sky-200 bg-gradient-to-br from-sky-50/60 to-white space-y-2 sm:space-y-3">
+                        <div class="flex items-center gap-1.5">
+                            <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-sky-600 text-white">MYTH BUSTER</span>
+                            <h4 class="font-display font-bold text-xs sm:text-base text-slate-900">Can "will" or "would" follow "If"?</h4>
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
+                            Normally no. But in advanced English, <strong>If + will/would</strong> is valid in 2 situations:
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs">
+                            <div class="bg-white p-2 sm:p-3 rounded-lg border border-sky-200">
+                                <span class="font-bold text-sky-800 block mb-0.5">1. Polite Requests</span>
+                                <p class="text-slate-700">"<u>If you would wait</u> here, I'll fetch the manager."</p>
+                            </div>
+                            <div class="bg-white p-2 sm:p-3 rounded-lg border border-sky-200">
+                                <span class="font-bold text-sky-800 block mb-0.5">2. Stubborn Refusal</span>
+                                <p class="text-slate-700">"<u>If he won't listen</u>, we can't help." <em>(won't = refuses)</em></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 5: INTERACTIVE TIME-MACHINE SANDBOX
+             ========================================== -->
+        <section id="tab-sandbox" class="tab-section hidden space-y-3 sm:space-y-6">
+            <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200 space-y-3 sm:space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 sm:gap-4 border-b border-slate-200 pb-3 sm:pb-5">
+                    <div>
+                        <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-emerald-100 text-emerald-800">LIVE MORPHING ENGINE</span>
+                        <h2 class="font-display text-base sm:text-2xl font-bold text-slate-900 mt-0.5">Time Machine Morpher</h2>
+                        <p class="text-xs sm:text-sm text-slate-600">
+                            Watch the <strong>same scenario</strong> transform across conditional modes!
+                        </p>
+                    </div>
+                    <!-- Scenario Picker -->
+                    <div class="flex flex-col gap-1 w-full md:w-auto">
+                        <label class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase">Scenario:</label>
+                        <select id="sandbox-scenario-select" onchange="updateSandbox()" class="px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-white border border-slate-300 text-xs sm:text-sm font-semibold text-slate-800 shadow-sm focus:outline-none">
+                            <option value="0">🔬 Heating Ice (Science)</option>
+                            <option value="1">✈️ Winning Scholarship (Academic)</option>
+                            <option value="2">🌧️ Rain & Cancellation</option>
+                            <option value="3">🔑 Knowing Phone Number</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Mode Selector Buttons -->
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2.5">
+                    <button onclick="setSandboxMode(0)" id="sb-mode-0" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border-2 border-indigo-600 bg-indigo-50/70 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-indigo-700">Type 0</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">Always True</div>
+                    </button>
+                    <button onclick="setSandboxMode(1)" id="sb-mode-1" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-slate-800">Type 1</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">Likely Future</div>
+                    </button>
+                    <button onclick="setSandboxMode(2)" id="sb-mode-2" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-slate-800">Type 2</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">Unreal Now</div>
+                    </button>
+                    <button onclick="setSandboxMode(3)" id="sb-mode-3" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-slate-800">Type 3</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">Unreal Past</div>
+                    </button>
+                    <button onclick="setSandboxMode(4)" id="sb-mode-4" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-slate-800">Mixed</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">Past ➔ Now</div>
+                    </button>
+                    <button onclick="setSandboxMode(5)" id="sb-mode-5" class="sb-mode-btn p-1.5 sm:p-3 rounded-lg sm:rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all">
+                        <div class="text-[11px] sm:text-xs font-bold text-slate-800">Inverted</div>
+                        <div class="text-[9px] sm:text-[11px] text-slate-500">No "If"</div>
+                    </button>
+                </div>
+
+                <!-- Live Morphed Output Card -->
+                <div class="bg-gradient-to-br from-slate-50 via-white to-indigo-50/40 rounded-xl sm:rounded-2xl p-3.5 sm:p-8 border-2 border-indigo-100 shadow-inner space-y-3 sm:space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-1.5">
+                        <div class="flex items-center gap-1.5">
+                            <span id="sb-badge" class="px-2 py-0.5 sm:px-3 sm:py-1 rounded text-[10px] sm:text-xs font-bold bg-indigo-600 text-white">TYPE 0</span>
+                            <span id="sb-probability" class="text-[10px] sm:text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded">100% Certain</span>
+                        </div>
+                        <button onclick="reverseClauseOrder()" class="text-[11px] sm:text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-white px-2.5 py-1 rounded-lg border border-indigo-200 shadow-sm flex items-center gap-1">
+                            <i data-lucide="arrow-left-right" class="w-3 h-3"></i>
+                            <span>Swap Clause Order</span>
+                        </button>
+                    </div>
+
+                    <!-- Main Sentence Output -->
+                    <div id="sb-sentence-box" class="p-3 sm:p-5 rounded-xl bg-white border border-slate-200 shadow-sm">
+                        <p id="sb-sentence-text" class="font-display text-sm sm:text-2xl font-bold text-slate-900 leading-relaxed">
+                            <!-- Injected via JS -->
+                        </p>
+                    </div>
+
+                    <!-- Reality Check & Grammar Breakdown -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-4">
+                        <div class="p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-white border border-slate-200/80 space-y-0.5">
+                            <span class="text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">Speaker's Reality Check</span>
+                            <p id="sb-meaning" class="text-[11px] sm:text-sm font-medium text-slate-700"></p>
+                        </div>
+                        <div class="p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-white border border-slate-200/80 space-y-0.5">
+                            <span class="text-[9px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">Punctuation & Comma Rule</span>
+                            <p id="sb-comma-note" class="text-[11px] sm:text-sm font-medium text-slate-700"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 6: PRACTICE ARENA (QUIZ & DIAGNOSTICS)
+             ========================================== -->
+        <section id="tab-quiz" class="tab-section hidden space-y-3 sm:space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6">
+                <!-- Left Column: Interactive Quiz Engine -->
+                <div class="lg:col-span-8 glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200 space-y-3 sm:space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-2.5 sm:pb-4">
+                        <div>
+                            <span class="px-2 py-0.5 rounded text-[10px] sm:text-xs font-bold bg-indigo-100 text-indigo-700">ADAPTIVE CHALLENGE</span>
+                            <h2 class="font-display text-base sm:text-2xl font-bold text-slate-900 mt-0.5">Practice Arena</h2>
+                        </div>
+                        <!-- Filter by Category -->
+                        <div class="flex items-center gap-1.5">
+                            <select id="quiz-filter" onchange="filterQuizQuestions()" class="px-2 sm:px-3 py-1 sm:py-2 rounded-lg sm:rounded-xl bg-slate-100 border border-slate-200 text-[11px] sm:text-xs font-bold text-slate-700 focus:outline-none">
+                                <option value="all">All Topics (12 Qs)</option>
+                                <option value="core">Core 0–3</option>
+                                <option value="mixed">Mixed Time</option>
+                                <option value="inversion">Inversion</option>
+                                <option value="advanced">Nuances</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Progress & Score Strip -->
+                    <div class="flex items-center justify-between bg-slate-50 px-2.5 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl border border-slate-200/80 text-[11px] sm:text-xs font-semibold">
+                        <span class="text-slate-600">Q <strong id="q-current-index" class="text-slate-900">1</strong>/<strong id="q-total-count" class="text-slate-900">12</strong></span>
+                        <span id="q-topic-pill" class="px-2 py-0.5 rounded bg-indigo-100 text-indigo-700 font-bold truncate max-w-[120px] sm:max-w-none">Core Type 2</span>
+                        <span class="text-emerald-700 font-bold">Score: <span id="q-score">0</span></span>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div id="quiz-question-box" class="space-y-3 sm:space-y-5">
+                        <div class="p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50/30 border border-slate-200/90 space-y-1">
+                            <span id="q-context-hint" class="text-[10px] sm:text-xs font-semibold text-indigo-600 block"></span>
+                            <p id="q-prompt" class="font-display text-sm sm:text-xl font-bold text-slate-900 leading-snug"></p>
+                        </div>
+
+                        <!-- Options Grid -->
+                        <div id="q-options" class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                            <!-- Buttons rendered by JS -->
+                        </div>
+
+                        <!-- Detailed Explanation Feedback Box -->
+                        <div id="q-feedback" class="hidden p-3 sm:p-5 rounded-xl sm:rounded-2xl border space-y-1.5 transition-all">
+                            <div class="flex items-center justify-between">
+                                <span id="q-feedback-title" class="font-display font-bold text-xs sm:text-sm"></span>
+                                <button onclick="nextQuizQuestion()" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-[11px] sm:text-xs font-bold flex items-center gap-1 transition-all">
+                                    <span>Next</span>
+                                    <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                                </button>
+                            </div>
+                            <p id="q-feedback-text" class="text-[11px] sm:text-sm text-slate-700 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Common Student Mistakes & Exam Traps -->
+                <div class="lg:col-span-4 space-y-3 sm:space-y-6">
+                    <div class="glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 border border-rose-200/80 bg-gradient-to-b from-rose-50/40 to-white space-y-2.5 sm:space-y-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center">
+                                <i data-lucide="shield-alert" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-display font-bold text-xs sm:text-base text-slate-900">Top 5 Exam Traps</h3>
+                                <p class="text-[10px] sm:text-xs text-slate-500">Avoid these frequent mistakes!</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2 text-[11px] sm:text-xs">
+                            <div class="p-2 sm:p-3 rounded-lg bg-white border border-slate-200 space-y-0.5">
+                                <span class="font-bold text-rose-600">❌ Trap 1: "Would" in If-Clause</span>
+                                <p class="text-slate-500 line-through">If I would have time, I'd call.</p>
+                                <p class="text-emerald-700 font-semibold">✅ If I <u>had</u> time, I would call.</p>
+                            </div>
+
+                            <div class="p-2 sm:p-3 rounded-lg bg-white border border-slate-200 space-y-0.5">
+                                <span class="font-bold text-rose-600">❌ Trap 2: "Would have" in Type 3 If</span>
+                                <p class="text-slate-500 line-through">If you would have told me...</p>
+                                <p class="text-emerald-700 font-semibold">✅ If you <u>had told</u> me, I would have helped.</p>
+                            </div>
+
+                            <div class="p-2 sm:p-3 rounded-lg bg-white border border-slate-200 space-y-0.5">
+                                <span class="font-bold text-rose-600">❌ Trap 3: Contracted "Not" Inversion</span>
+                                <p class="text-slate-500 line-through">Hadn't he worn a helmet...</p>
+                                <p class="text-emerald-700 font-semibold">✅ <u>Had he not</u> worn a helmet...</p>
+                            </div>
+
+                            <div class="p-2 sm:p-3 rounded-lg bg-white border border-slate-200 space-y-0.5">
+                                <span class="font-bold text-rose-600">❌ Trap 4: "-s" after "Should"</span>
+                                <p class="text-slate-500 line-through">Should she needs help...</p>
+                                <p class="text-emerald-700 font-semibold">✅ Should she <u>need</u> help...</p>
+                            </div>
+
+                            <div class="p-2 sm:p-3 rounded-lg bg-white border border-slate-200 space-y-0.5">
+                                <span class="font-bold text-rose-600">❌ Trap 5: Comma Rule</span>
+                                <p class="text-slate-600">• <strong>If</strong> clause<strong>,</strong> Main clause.<br>• Main clause + <strong>if</strong> clause (no comma).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar (Super Compact) -->
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-1 py-1 flex items-center justify-around shadow-lg h-12">
+        <button onclick="switchTab('core')" id="mob-nav-core" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-indigo-600">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+            <span class="text-[9px] font-bold mt-0.5">Core</span>
+        </button>
+        <button onclick="switchTab('mixed')" id="mob-nav-mixed" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-slate-500">
+            <i data-lucide="git-merge" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold mt-0.5">Mixed</span>
+        </button>
+        <button onclick="switchTab('inversion')" id="mob-nav-inversion" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-slate-500">
+            <i data-lucide="repeat" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold mt-0.5">Invert</span>
+        </button>
+        <button onclick="switchTab('advanced')" id="mob-nav-advanced" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-slate-500">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold mt-0.5">Nuance</span>
+        </button>
+        <button onclick="switchTab('sandbox')" id="mob-nav-sandbox" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-slate-500">
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold mt-0.5">Morph</span>
+        </button>
+        <button onclick="switchTab('quiz')" id="mob-nav-quiz" class="mob-nav-btn flex flex-col items-center py-0.5 px-1.5 rounded-lg text-slate-500">
+            <i data-lucide="award" class="w-4 h-4"></i>
+            <span class="text-[9px] font-semibold mt-0.5">Quiz</span>
+        </button>
+    </nav>
+
+    <!-- Quick Reference Matrix Modal -->
+    <div id="cheat-sheet-modal" class="fixed inset-0 z-50 hidden bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[85vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div>
+                    <span class="text-xs font-bold text-indigo-600 uppercase">Complete Summary Sheet</span>
+                    <h3 class="font-display text-xl font-bold text-slate-900">Conditional Sentences Master Matrix</h3>
+                </div>
+                <button onclick="closeCheatSheetModal()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+                            <th class="p-3 rounded-tl-xl">Type</th>
+                            <th class="p-3">Time & Reality</th>
+                            <th class="p-3">If-Clause (Condition)</th>
+                            <th class="p-3">Main Clause (Result)</th>
+                            <th class="p-3 rounded-tr-xl">Formal Inversion</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr>
+                            <td class="p-3 font-bold text-emerald-700">Type 0</td>
+                            <td class="p-3">Anytime / 100% Fact</td>
+                            <td class="p-3 font-mono text-xs">If + Simple Present</td>
+                            <td class="p-3 font-mono text-xs">Simple Present</td>
+                            <td class="p-3 text-slate-400 italic">None (Use "Whenever")</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-sky-700">Type 1</td>
+                            <td class="p-3">Future / Real & Likely</td>
+                            <td class="p-3 font-mono text-xs">If + Simple Present</td>
+                            <td class="p-3 font-mono text-xs">will / can / may + V1</td>
+                            <td class="p-3 font-mono text-xs text-sky-700">Should + S + V1...</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-violet-700">Type 2</td>
+                            <td class="p-3">Present or Future / Unreal</td>
+                            <td class="p-3 font-mono text-xs">If + Simple Past (were)</td>
+                            <td class="p-3 font-mono text-xs">would / could / might + V1</td>
+                            <td class="p-3 font-mono text-xs text-violet-700">Were + S + (to V1)...</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-rose-700">Type 3</td>
+                            <td class="p-3">Past / 0% Imaginary Past</td>
+                            <td class="p-3 font-mono text-xs">If + had + V3 (p.p.)</td>
+                            <td class="p-3 font-mono text-xs">would/could/might + have + V3</td>
+                            <td class="p-3 font-mono text-xs text-rose-700">Had + S + V3...</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-indigo-700">Mixed (3→2)</td>
+                            <td class="p-3">Past Cause ➔ Present Result</td>
+                            <td class="p-3 font-mono text-xs">If + had + V3 (Past)</td>
+                            <td class="p-3 font-mono text-xs">would + V1 (Now)</td>
+                            <td class="p-3 font-mono text-xs text-indigo-700">Had + S + V3...</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-teal-700">Mixed (2→3)</td>
+                            <td class="p-3">General State ➔ Past Result</td>
+                            <td class="p-3 font-mono text-xs">If + Simple Past (General)</td>
+                            <td class="p-3 font-mono text-xs">would + have + V3 (Past)</td>
+                            <td class="p-3 font-mono text-xs text-teal-700">Were + S + ...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // SOUND ENGINE & GAMIFICATION STATE
+        // ==========================================
+        let soundEnabled = true;
+        let xp = 120;
+        const visitedSections = new Set(['core', 'core-0']);
+
+        function playTone(type) {
+            if (!soundEnabled || typeof Tone === 'undefined') return;
+            try {
+                const synth = new Tone.Synth({
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 0.01, decay: 0.1, sustain: 0.05, release: 0.2 }
+                }).toDestination();
+                synth.volume.value = -14;
+
+                if (type === 'click') synth.triggerAttackRelease('C5', '32n');
+                else if (type === 'success') {
+                    synth.triggerAttackRelease('E5', '16n', Tone.now());
+                    synth.triggerAttackRelease('G5', '16n', Tone.now() + 0.08);
+                    synth.triggerAttackRelease('C6', '8n', Tone.now() + 0.16);
+                } else if (type === 'error') {
+                    synth.triggerAttackRelease('G3', '8n');
+                } else if (type === 'swap') {
+                    synth.triggerAttackRelease('A4', '16n', Tone.now());
+                    synth.triggerAttackRelease('E5', '16n', Tone.now() + 0.07);
+                }
+            } catch (e) {
+                // Ignore audio context restrictions before user gesture
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('sound-icon');
+            icon.setAttribute('data-lucide', soundEnabled ? 'volume-2' : 'volume-x');
+            lucide.createIcons();
+            if (soundEnabled) playTone('click');
+        }
+
+        function awardXP(amount, key) {
+            if (key && visitedSections.has(key)) return;
+            if (key) visitedSections.add(key);
+            xp += amount;
+            document.getElementById('xp-display').textContent = xp;
+
+            // Calculate exploration percentage (out of ~12 milestones)
+            const pct = Math.min(100, Math.round((visitedSections.size / 12) * 100));
+            document.getElementById('mastery-percent').textContent = pct + '%';
+            document.getElementById('mastery-bar').style.width = pct + '%';
+        }
+
+        // ==========================================
+        // NAVIGATION CONTROLLER
+        // ==========================================
+        function switchTab(tabId) {
+            playTone('click');
+            awardXP(15, 'tab-' + tabId);
+
+            // Hide all sections
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+            // Update desktop nav
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('nav-pill-active');
+                btn.classList.add('text-slate-600');
+            });
+            const activeDesktop = document.getElementById('nav-' + tabId);
+            if (activeDesktop) {
+                activeDesktop.classList.add('nav-pill-active');
+                activeDesktop.classList.remove('text-slate-600');
+            }
+
+            // Update mobile nav
+            document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+                btn.classList.remove('text-indigo-600');
+                btn.classList.add('text-slate-500');
+            });
+            const activeMob = document.getElementById('mob-nav-' + tabId);
+            if (activeMob) {
+                activeMob.classList.add('text-indigo-600');
+                activeMob.classList.remove('text-slate-500');
+            }
+        }
+
+        function openCheatSheetModal() {
+            playTone('click');
+            document.getElementById('cheat-sheet-modal').classList.remove('hidden');
+        }
+
+        function closeCheatSheetModal() {
+            playTone('click');
+            document.getElementById('cheat-sheet-modal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // DATA & LOGIC: CORE TYPES (0, 1, 2, 3)
+        // ==========================================
+        const coreTypesData = {
+            0: {
+                badge: 'TYPE 0 • ZERO CONDITIONAL',
+                color: 'emerald',
+                title: 'Universal Truths, Scientific Facts & Habits',
+                probability: '100% Certain (Every time A happens, B happens)',
+                timeRef: 'All Time / Present / Routine',
+                ifFormula: 'If / When + Simple Present (V1)',
+                mainFormula: 'Simple Present (V1) or Imperative',
+                explanation: 'The Zero Conditional describes rules of nature, scientific laws, or automatic habits where the result is always guaranteed. Because there is no doubt, you can replace "If" with "When" or "Whenever" without changing the meaning.',
+                examples: [
+                    {
+                        ifPart: 'If you heat pure water to 100°C,',
+                        mainPart: 'it boils and turns into steam.',
+                        note: 'Scientific law: 100% repeatable at any time.'
+                    },
+                    {
+                        ifPart: 'If babies are hungry,',
+                        mainPart: 'they cry.',
+                        note: 'Natural human behavior / general truth.'
+                    },
+                    {
+                        ifPart: 'If you receive a suspicious link,',
+                        mainPart: 'do not click on it!',
+                        note: 'Zero Conditional with an Imperative (instruction) in the main clause.'
+                    }
+                ],
+                variations: [
+                    'Can also use Past Simple + Past Simple for past routines: "When we lived in Paris, if it rained, we always visited the Louvre."',
+                    'Replacing "If" with "Whenever" is a quick test to verify if a sentence is truly a Zero Conditional.'
+                ]
+            },
+            1: {
+                badge: 'TYPE 1 • FIRST CONDITIONAL',
+                color: 'sky',
+                title: 'Real & Likely Future Possibilities',
+                probability: '50%–90% Likely (Open Future Condition)',
+                timeRef: 'Future (or Present ongoing)',
+                ifFormula: 'If + Simple Present (or Present Cont./Perfect)',
+                mainFormula: 'will / can / may / should + Base Verb (V1)',
+                explanation: 'The First Conditional talks about a specific future situation that the speaker believes is genuinely possible or likely to happen. CRITICAL RULE: Even though the meaning is in the future, NEVER use "will" in the If-clause—use the Simple Present tense instead!',
+                examples: [
+                    {
+                        ifPart: 'If it rains tomorrow morning,',
+                        mainPart: 'we will postpone the tennis match.',
+                        note: 'Notice: "If it rains" (Simple Present) refers to tomorrow!'
+                    },
+                    {
+                        ifPart: 'If you have finished your essay by 5 PM,',
+                        mainPart: 'you can join us for dinner.',
+                        note: 'Using Present Perfect ("have finished") in the If-clause + modal "can".'
+                    },
+                    {
+                        ifPart: 'Should you require any further assistance,',
+                        mainPart: 'please contact our support team.',
+                        note: 'Formal Type 1 inversion using "Should" instead of "If".'
+                    }
+                ],
+                variations: [
+                    'Instead of "will", use "may/might" (less certain), "can" (permission/ability), or "must/should" (advice).',
+                    'To make a Type 1 condition sound less likely or more polite, use "If + should + V1": "If you should see Leo, tell him I called."'
+                ]
+            },
+            2: {
+                badge: 'TYPE 2 • SECOND CONDITIONAL',
+                color: 'violet',
+                title: 'Hypothetical Present or Unlikely Future',
+                probability: '0%–5% (Contrary to Present Fact / Dreaming)',
+                timeRef: 'Present (Right Now) OR Future (Imaginary)',
+                ifFormula: 'If + Simple Past (Subjunctive "were" for all subjects)',
+                mainFormula: 'would / could / might + Base Verb (V1)',
+                explanation: 'The Second Conditional steps one tense backward into the Simple Past ("backshifting") NOT to talk about the past, but to show distance from reality! We use it for situations that are impossible right now (e.g., "If I were you") or highly unlikely in the future (e.g., winning the lottery).',
+                examples: [
+                    {
+                        ifPart: 'If I were the principal of this school,',
+                        mainPart: 'I would introduce four-day school weeks.',
+                        note: 'Subjunctive Mood: In formal exams, use "were" (not "was") for I/he/she/it!'
+                    },
+                    {
+                        ifPart: 'If we had a faster internet connection right now,',
+                        mainPart: 'we could stream the lecture in 4K.',
+                        note: 'Contrary to present fact: We do NOT have a fast connection right now.'
+                    },
+                    {
+                        ifPart: 'If an asteroid hit the ocean tomorrow,',
+                        mainPart: 'it might trigger massive tsunamis.',
+                        note: 'Unlikely future speculation using "might" for possibility.'
+                    }
+                ],
+                variations: [
+                    '"If I were you, I would..." is the most common structure for giving polite advice.',
+                    'Use "would" for the intended result, "could" for hypothetical ability ("would be able to"), and "might" for hypothetical possibility ("would perhaps").'
+                ]
+            },
+            3: {
+                badge: 'TYPE 3 • THIRD CONDITIONAL',
+                color: 'rose',
+                title: 'Imaginary Past, Hindsight & Regrets',
+                probability: '0% Impossible (History Cannot Be Changed)',
+                timeRef: 'Strictly Past (Finished Events)',
+                ifFormula: 'If + Past Perfect (had + Past Participle / V3)',
+                mainFormula: 'would / could / might + have + V3 (Past Participle)',
+                explanation: 'The Third Conditional looks back at the past and imagines how things would have been different if history had changed. Because the past is already finished, the condition is 100% impossible—making it the primary grammar structure for expressing regret, relief, or criticism.',
+                examples: [
+                    {
+                        ifPart: 'If I had studied harder for the final exam,',
+                        mainPart: 'I would have passed with flying colors.',
+                        note: 'Reality: I did NOT study hard in the past, so I failed.'
+                    },
+                    {
+                        ifPart: 'If the driver had been paying attention,',
+                        mainPart: 'the accident could have been avoided.',
+                        note: 'Using Past Perfect Continuous ("had been paying") + Passive Modal ("could have been avoided").'
+                    },
+                    {
+                        ifPart: 'Had we left five minutes earlier,',
+                        mainPart: 'we wouldn\'t have missed the express train.',
+                        note: 'Formal Type 3 inversion ("Had we left..." = "If we had left...").'
+                    }
+                ],
+                variations: [
+                    'Spoken contraction alert: Native speakers contract both "had" and "would" to "\'d" ("If I\'d known, I\'d have helped"). Look at the word after "\'d" to tell them apart!',
+                    'Never put "would have" inside the If-clause!'
+                ]
+            }
+        };
+
+        function selectCoreType(typeNum) {
+            playTone('click');
+            awardXP(10, 'core-' + typeNum);
+
+            const data = coreTypesData[typeNum];
+            const colorMap = {
+                emerald: { border: 'border-emerald-500', ring: 'ring-emerald-500/10', bgSoft: 'bg-emerald-50', text: 'text-emerald-700', badgeBg: 'bg-emerald-100 text-emerald-800' },
+                sky: { border: 'border-sky-500', ring: 'ring-sky-500/10', bgSoft: 'bg-sky-50', text: 'text-sky-700', badgeBg: 'bg-sky-100 text-sky-800' },
+                violet: { border: 'border-violet-500', ring: 'ring-violet-500/10', bgSoft: 'bg-violet-50', text: 'text-violet-700', badgeBg: 'bg-violet-100 text-violet-800' },
+                rose: { border: 'border-rose-500', ring: 'ring-rose-500/10', bgSoft: 'bg-rose-50', text: 'text-rose-700', badgeBg: 'bg-rose-100 text-rose-800' }
+            };
+
+            // Highlight active button
+            [0, 1, 2, 3].forEach(n => {
+                const btn = document.getElementById('core-btn-' + n);
+                btn.className = 'core-type-btn p-4 rounded-2xl border-2 text-left transition-all bg-white ';
+                if (n === typeNum) {
+                    const c = colorMap[coreTypesData[n].color];
+                    btn.className += `${c.border} ring-4 ${c.ring}`;
+                } else {
+                    btn.className += 'border-slate-200/80 hover:border-slate-300';
+                }
+            });
+
+            const c = colorMap[data.color];
+            const container = document.getElementById('core-detail-container');
+
+            container.innerHTML = `
+                <!-- Left Column: Concept & Formula Blueprint -->
+                <div class="lg:col-span-7 glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200 space-y-3 sm:space-y-6">
+                    <div class="space-y-1 sm:space-y-2">
+                        <div class="flex flex-wrap items-center gap-1.5">
+                            <span class="px-2 py-0.5 sm:px-3 sm:py-1 rounded-md sm:rounded-full text-[10px] sm:text-xs font-bold ${c.badgeBg}">${data.badge}</span>
+                            <span class="px-2 py-0.5 sm:px-3 sm:py-1 rounded-md sm:rounded-full text-[10px] sm:text-xs font-semibold bg-slate-100 text-slate-700">⏱️ ${data.timeRef}</span>
+                        </div>
+                        <h2 class="font-display text-base sm:text-2xl lg:text-3xl font-extrabold text-slate-900 pt-0.5">${data.title}</h2>
+                        <p class="text-[11px] sm:text-sm text-slate-600 leading-relaxed">${data.explanation}</p>
+                    </div>
+
+                    <!-- Formula Blueprint Box -->
+                    <div class="p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-900 text-white space-y-2.5 sm:space-y-4 shadow-md">
+                        <div class="flex items-center justify-between text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400">
+                            <span>Formula Blueprint</span>
+                            <span class="text-amber-400 text-[10px] sm:text-xs">${data.probability}</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-11 gap-1.5 sm:gap-2 items-center">
+                            <div class="sm:col-span-5 p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-indigo-500/20 border border-indigo-400/40">
+                                <span class="text-[9px] sm:text-[10px] font-bold uppercase text-indigo-300 block mb-0.5">Condition (If-Clause)</span>
+                                <span class="font-mono text-[11px] sm:text-sm font-bold text-white">${data.ifFormula}</span>
+                            </div>
+                            <div class="sm:col-span-1 hidden sm:flex justify-center text-slate-400 font-bold text-lg">+</div>
+                            <div class="sm:col-span-5 p-2 sm:p-3.5 rounded-lg sm:rounded-xl bg-emerald-500/20 border border-emerald-400/40">
+                                <span class="text-[9px] sm:text-[10px] font-bold uppercase text-emerald-300 block mb-0.5">Result (Main Clause)</span>
+                                <span class="font-mono text-[11px] sm:text-sm font-bold text-white">${data.mainFormula}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pro Variations -->
+                    <div class="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl ${c.bgSoft} border border-slate-200/80 space-y-1.5">
+                        <div class="font-display font-bold text-[10px] sm:text-xs uppercase tracking-wider ${c.text} flex items-center gap-1">
+                            <i data-lucide="lightbulb" class="w-3.5 h-3.5"></i>
+                            <span>Advanced Nuances</span>
+                        </div>
+                        <ul class="space-y-1 text-[11px] sm:text-xs text-slate-700 list-disc list-inside">
+                            ${data.variations.map(v => `<li>${v}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Right Column: Annotated Examples -->
+                <div class="lg:col-span-5 glass-card rounded-2xl sm:rounded-3xl p-3.5 sm:p-8 border border-slate-200 flex flex-col justify-between space-y-3 sm:space-y-5">
+                    <div class="space-y-2.5 sm:space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-display font-bold text-sm sm:text-lg text-slate-900">Color-Coded Examples</h3>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-medium">If vs. Main</span>
+                        </div>
+
+                        <div class="space-y-2 sm:space-y-3.5">
+                            ${data.examples.map((ex, i) => `
+                                <div class="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-200/90 hover:border-indigo-300 transition-all space-y-1 sm:space-y-2">
+                                    <div class="text-xs sm:text-sm font-semibold leading-relaxed">
+                                        <span class="text-indigo-700 bg-indigo-50 px-1 py-0.5 rounded">${ex.ifPart}</span>
+                                        <span class="text-emerald-800 bg-emerald-50 px-1 py-0.5 rounded ml-0.5">${ex.mainPart}</span>
+                                    </div>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 flex items-start gap-1">
+                                        <i data-lucide="check-circle-2" class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-indigo-500 shrink-0 mt-0.5"></i>
+                                        <span>${ex.note}</span>
+                                    </p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="p-2.5 sm:p-4 rounded-xl bg-slate-100/80 border border-slate-200 text-[11px] sm:text-xs text-slate-600 flex items-center justify-between">
+                        <span>See this without "If"?</span>
+                        <button onclick="switchTab('inversion')" class="font-bold text-indigo-600 hover:underline flex items-center gap-1 shrink-0">
+                            <span>Inversion Lab</span>
+                            <i data-lucide="arrow-right" class="w-3 h-3 sm:w-3.5 sm:h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // ==========================================
+        // INVERSION LAB CONTROLLER
+        // ==========================================
+        const inversionExamples = [
+            {
+                typeLabel: 'Type 1 Conditional (Polite / Formal Possibility)',
+                standardHTML: '<span class="text-amber-400 underline decoration-amber-400/50">If</span> you <span class="text-sky-400">need</span> any further information, please do not hesitate to call us.',
+                invertedHTML: '<span class="text-emerald-400 font-extrabold underline decoration-emerald-400">Should</span> you <span class="text-sky-300">need</span> any further information, please do not hesitate to call us.',
+                standardNote: 'Standard form uses "If + Subject + Simple Present". Click the button below to invert!',
+                invertedNote: '✨ Inversion Rule: Delete "If", place "Should" at the start, and keep the base verb ("need").'
+            },
+            {
+                typeLabel: 'Type 2 Conditional with "Were" (Hypothetical Present State)',
+                standardHTML: '<span class="text-amber-400 underline decoration-amber-400/50">If</span> I <span class="text-violet-400">were</span> in charge of the project, I would allocate more budget to design.',
+                invertedHTML: '<span class="text-emerald-400 font-extrabold underline decoration-emerald-400">Were</span> I in charge of the project, I would allocate more budget to design.',
+                standardNote: 'Standard Type 2 uses subjunctive "were" after "If + Subject".',
+                invertedNote: '✨ Inversion Rule: Delete "If" and swap "were" with the subject ("If I were" ➔ "Were I").'
+            },
+            {
+                typeLabel: 'Type 2 Conditional with Action Verb (Unlikely Future)',
+                standardHTML: '<span class="text-amber-400 underline decoration-amber-400/50">If</span> the negotiations <span class="text-violet-400">failed</span>, both companies would suffer heavy losses.',
+                invertedHTML: '<span class="text-emerald-400 font-extrabold underline decoration-emerald-400">Were</span> the negotiations <span class="text-emerald-400 font-extrabold underline decoration-emerald-400">to fail</span>, both companies would suffer heavy losses.',
+                standardNote: 'Standard Type 2 with an action verb ("failed"). You CANNOT say "Failed the negotiations..."!',
+                invertedNote: '✨ Inversion Rule: For action verbs in Type 2, use "Were + Subject + to + Base Verb" ("Were the negotiations to fail").'
+            },
+            {
+                typeLabel: 'Type 3 Negative Conditional (Past Regret / Relief)',
+                standardHTML: '<span class="text-amber-400 underline decoration-amber-400/50">If</span> the pilot <span class="text-rose-400">hadn\'t reacted</span> so quickly, the plane would have crashed.',
+                invertedHTML: '<span class="text-emerald-400 font-extrabold underline decoration-emerald-400">Had</span> the pilot <span class="text-amber-300 font-bold">not</span> <span class="text-rose-300">reacted</span> so quickly, the plane would have crashed.',
+                standardNote: 'Standard Type 3 with contracted negative "hadn\'t reacted". Watch what happens to "not" when inverted!',
+                invertedNote: '✨ Inversion Rule: Move "Had" before the subject and separate "not" after the subject ("Had the pilot not reacted...").'
+            }
+        ];
+
+        let currentInvIndex = 0;
+        let isInverted = false;
+
+        function loadInversionExample(idx) {
+            playTone('click');
+            currentInvIndex = idx;
+            isInverted = false;
+            awardXP(10, 'inv-' + idx);
+
+            document.querySelectorAll('.inv-ex-btn').forEach((btn, i) => {
+                if (i === idx) {
+                    btn.className = 'inv-ex-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white transition-all';
+                } else {
+                    btn.className = 'inv-ex-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all';
+                }
+            });
+
+            renderInversionStage();
+        }
+
+        function toggleInversionState() {
+            playTone('swap');
+            isInverted = !isInverted;
+            awardXP(15, 'inv-toggle-' + currentInvIndex);
+
+            const stage = document.getElementById('inversion-stage');
+            stage.classList.remove('animate-swap');
+            void stage.offsetWidth; // trigger reflow
+            stage.classList.add('animate-swap');
+
+            renderInversionStage();
+        }
+
+        function renderInversionStage() {
+            const item = inversionExamples[currentInvIndex];
+            const badge = document.getElementById('inv-mode-badge');
+            const label = document.getElementById('inv-type-label');
+            const display = document.getElementById('inv-sentence-display');
+            const note = document.getElementById('inv-step-note');
+            const btnText = document.getElementById('inv-btn-text');
+
+            label.textContent = item.typeLabel;
+
+            if (!isInverted) {
+                badge.textContent = 'Standard "If" Form';
+                badge.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30';
+                display.innerHTML = item.standardHTML;
+                note.innerHTML = `<i data-lucide="info" class="w-4 h-4 shrink-0"></i><span>${item.standardNote}</span>`;
+                btnText.textContent = 'Apply Formal Inversion (Drop "If")';
+            } else {
+                badge.textContent = 'Formal Inverted Form (C1/C2)';
+                badge.className = 'px-2.5 py-1 rounded-md text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                display.innerHTML = item.invertedHTML;
+                note.innerHTML = `<i data-lucide="sparkles" class="w-4 h-4 shrink-0 text-emerald-400"></i><span>${item.invertedNote}</span>`;
+                btnText.textContent = 'Restore Standard "If" Form';
+            }
+            lucide.createIcons();
+        }
+
+        // ==========================================
+        // TIME-MACHINE SANDBOX DATA & CONTROLLER
+        // ==========================================
+        const sandboxScenarios = [
+            {
+                // Scenario 0: Heating Ice
+                modes: [
+                    {
+                        badge: 'TYPE 0 • SCIENTIFIC FACT',
+                        prob: 'Probability: 100% Always True',
+                        ifClause: 'If you heat ice above 0°C',
+                        mainClause: 'it melts into water',
+                        meaning: 'A timeless law of physics. Every single time anyone heats ice above 0°C, it melts.',
+                    },
+                    {
+                        badge: 'TYPE 1 • REAL FUTURE',
+                        prob: 'Probability: ~80% Likely',
+                        ifClause: 'If you leave that ice in the sun',
+                        mainClause: 'it will melt before the guests arrive',
+                        meaning: 'Talking about a specific piece of ice right now and warning about a very real future consequence.',
+                    },
+                    {
+                        badge: 'TYPE 2 • UNREAL PRESENT',
+                        prob: 'Probability: ~5% Hypothetical',
+                        ifClause: 'If we heated this glacier ice',
+                        mainClause: 'we would have fresh drinking water right now',
+                        meaning: 'We are NOT heating the ice right now, so we don\'t have drinking water at this moment.',
+                    },
+                    {
+                        badge: 'TYPE 3 • UNREAL PAST',
+                        prob: 'Probability: 0% (Past Finished)',
+                        ifClause: 'If you had heated the ice earlier',
+                        mainClause: 'it would have melted in time for the experiment',
+                        meaning: 'You did NOT heat the ice earlier, so it didn\'t melt in time. The experiment is already over.',
+                    },
+                    {
+                        badge: 'MIXED (3 → 2) • PAST TO PRESENT',
+                        prob: 'Past Cause ➔ Present Result',
+                        ifClause: 'If the freezer hadn\'t broken down last night',
+                        mainClause: 'the ice wouldn\'t be melted right now',
+                        meaning: 'The freezer broke last night (Past), which is why the ice is a puddle of water right now (Present).',
+                    },
+                    {
+                        badge: 'FORMAL INVERSION • ACADEMIC',
+                        prob: 'Elevated Literary Style',
+                        ifClause: 'Were the polar ice caps to melt completely',
+                        mainClause: 'coastal cities would be submerged',
+                        meaning: 'Uses formal Type 2 inversion ("Were + Subject + to V1") for a dramatic scientific hypothesis.',
+                    }
+                ]
+            },
+            {
+                // Scenario 1: Winning a Scholarship
+                modes: [
+                    {
+                        badge: 'TYPE 0 • GENERAL RULE',
+                        prob: 'Probability: 100% Policy',
+                        ifClause: 'If a student maintains a 3.9 GPA',
+                        mainClause: 'the university awards them an automatic scholarship',
+                        meaning: 'An official university regulation that applies to every student every semester.',
+                    },
+                    {
+                        badge: 'TYPE 1 • REAL FUTURE',
+                        prob: 'Probability: ~75% Open Possibility',
+                        ifClause: 'If Maya wins the scholarship next month',
+                        mainClause: 'she will study architecture in London',
+                        meaning: 'Maya has applied and has a realistic chance of winning next month.',
+                    },
+                    {
+                        badge: 'TYPE 2 • UNREAL PRESENT',
+                        prob: 'Probability: ~5% Dreaming',
+                        ifClause: 'If Maya won a full scholarship',
+                        mainClause: 'she wouldn\'t need a part-time job',
+                        meaning: 'Maya hasn\'t applied or thinks winning is very unlikely; she currently works part-time.',
+                    },
+                    {
+                        badge: 'TYPE 3 • UNREAL PAST',
+                        prob: 'Probability: 0% Past Regret',
+                        ifClause: 'If Maya had submitted her application on time',
+                        mainClause: 'she would have won the scholarship last year',
+                        meaning: 'She missed the deadline last year, so she did not win the scholarship.',
+                    },
+                    {
+                        badge: 'MIXED (3 → 2) • PAST TO PRESENT',
+                        prob: 'Past Cause ➔ Present Result',
+                        ifClause: 'If Maya had won that scholarship last year',
+                        mainClause: 'she would be studying in London right now',
+                        meaning: 'Because she didn\'t win it last year (Past), she is not studying in London today (Present).',
+                    },
+                    {
+                        badge: 'FORMAL INVERSION • TYPE 3',
+                        prob: 'Formal / Academic Tone',
+                        ifClause: 'Had Maya won the scholarship',
+                        mainClause: 'her tuition fees would have been waived',
+                        meaning: 'Omits "If" and inverts "Had Maya won..." for a formal report or essay.',
+                    }
+                ]
+            },
+            {
+                // Scenario 2: Heavy Rain
+                modes: [
+                    {
+                        badge: 'TYPE 0 • HABITUAL FACT',
+                        prob: 'Probability: 100% Routine',
+                        ifClause: 'If it rains heavily',
+                        mainClause: 'the school always moves PE lessons indoors',
+                        meaning: 'A standard school routine that happens every time there is heavy rain.',
+                    },
+                    {
+                        badge: 'TYPE 1 • REAL FUTURE',
+                        prob: 'Probability: ~70% Dark Clouds',
+                        ifClause: 'If it rains this afternoon',
+                        mainClause: 'the referee will cancel the football final',
+                        meaning: 'Looking at the forecast for today: rain is quite possible this afternoon.',
+                    },
+                    {
+                        badge: 'TYPE 2 • HYPOTHETICAL',
+                        prob: 'Probability: ~5% Clear Blue Sky',
+                        ifClause: 'If it rained right now in the middle of the desert',
+                        mainClause: 'everyone would be shocked',
+                        meaning: 'The sky is completely clear; rain right now is purely imaginary.',
+                    },
+                    {
+                        badge: 'TYPE 3 • UNREAL PAST',
+                        prob: 'Probability: 0% Yesterday',
+                        ifClause: 'If it hadn\'t rained so heavily yesterday',
+                        mainClause: 'our team would have won the match',
+                        meaning: 'It DID rain heavily yesterday, and our team lost.',
+                    },
+                    {
+                        badge: 'MIXED (3 → 2) • PAST TO PRESENT',
+                        prob: 'Past Cause ➔ Present Result',
+                        ifClause: 'If it hadn\'t rained all night',
+                        mainClause: 'the pitch wouldn\'t be so muddy right now',
+                        meaning: 'It rained last night (Past), so the grass is muddy right now (Present).',
+                    },
+                    {
+                        badge: 'FORMAL INVERSION • TYPE 1',
+                        prob: 'Official Announcement',
+                        ifClause: 'Should it rain during the outdoor concert',
+                        mainClause: 'complimentary ponchos will be provided',
+                        meaning: 'Polite event announcement using "Should + Subject + V1".',
+                    }
+                ]
+            },
+            {
+                // Scenario 3: Knowing Her Phone Number
+                modes: [
+                    {
+                        badge: 'TYPE 0 • GENERAL FACT',
+                        prob: 'Probability: 100% Routine',
+                        ifClause: 'If I have a client\'s phone number',
+                        mainClause: 'I always save it in my contacts immediately',
+                        meaning: 'My general personal habit whenever I receive a phone number.',
+                    },
+                    {
+                        badge: 'TYPE 1 • REAL FUTURE',
+                        prob: 'Probability: ~80% Likely',
+                        ifClause: 'If I find Chloe\'s phone number in my notebook',
+                        mainClause: 'I will text her right away',
+                        meaning: 'I am looking through my notebook now and expect to find it soon.',
+                    },
+                    {
+                        badge: 'TYPE 2 • UNREAL PRESENT',
+                        prob: 'Probability: 0% Right Now',
+                        ifClause: 'If I knew Chloe\'s phone number',
+                        mainClause: 'I would call her right now',
+                        meaning: 'Reality: I do NOT know her number right now, so I cannot call her.',
+                    },
+                    {
+                        badge: 'TYPE 3 • UNREAL PAST',
+                        prob: 'Probability: 0% Yesterday',
+                        ifClause: 'If I had known Chloe\'s phone number yesterday',
+                        mainClause: 'I would have invited her to the party',
+                        meaning: 'Reality: I didn\'t know her number yesterday, so I didn\'t invite her.',
+                    },
+                    {
+                        badge: 'MIXED (2 → 3) • GENERAL TO PAST',
+                        prob: 'Present State ➔ Past Effect',
+                        ifClause: 'If I knew her phone number',
+                        mainClause: 'I would have called her yesterday',
+                        meaning: 'I generally don\'t know her number (still true today), which is why I didn\'t call her yesterday.',
+                    },
+                    {
+                        badge: 'FORMAL INVERSION • TYPE 3',
+                        prob: 'Literary / Formal',
+                        ifClause: 'Had I known her contact details earlier',
+                        mainClause: 'I would have notified her immediately',
+                        meaning: 'Formal inversion omitting "If" and placing "Had" before the subject.',
+                    }
+                ]
+            }
+        ];
+
+        let currentSbMode = 0;
+        let isClauseReversed = false;
+
+        function setSandboxMode(modeIdx) {
+            playTone('click');
+            currentSbMode = modeIdx;
+            awardXP(10, 'sb-mode-' + modeIdx);
+
+            document.querySelectorAll('.sb-mode-btn').forEach((btn, idx) => {
+                if (idx === modeIdx) {
+                    btn.className = 'sb-mode-btn p-3 rounded-xl border-2 border-indigo-600 bg-indigo-50/70 text-center transition-all';
+                } else {
+                    btn.className = 'sb-mode-btn p-3 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-center transition-all';
+                }
+            });
+
+            updateSandbox();
+        }
+
+        function reverseClauseOrder() {
+            playTone('swap');
+            isClauseReversed = !isClauseReversed;
+            updateSandbox();
+        }
+
+        function updateSandbox() {
+            const scenarioIdx = parseInt(document.getElementById('sandbox-scenario-select').value, 10);
+            const data = sandboxScenarios[scenarioIdx].modes[currentSbMode];
+
+            document.getElementById('sb-badge').textContent = data.badge;
+            document.getElementById('sb-probability').textContent = data.prob;
+            document.getElementById('sb-meaning').textContent = data.meaning;
+
+            const sentenceEl = document.getElementById('sb-sentence-text');
+            const commaNote = document.getElementById('sb-comma-note');
+
+            if (!isClauseReversed) {
+                sentenceEl.innerHTML = `<span class="text-indigo-600">${data.ifClause}</span><span class="text-rose-500 font-extrabold">,</span> <span class="text-emerald-700">${data.mainClause}.</span>`;
+                commaNote.innerHTML = `✅ <strong>If-Clause First:</strong> Because the condition comes first, a <span class="text-rose-600 font-bold">comma (,)</span> is mandatory before the main clause.`;
+            } else {
+                // Lowercase the first letter of ifClause unless it starts with "If I " or "Had I "
+                let adjustedIf = data.ifClause;
+                if (!adjustedIf.startsWith('If I ') && !adjustedIf.startsWith('Had I ') && !adjustedIf.startsWith('Were I ')) {
+                    adjustedIf = adjustedIf.charAt(0).toLowerCase() + adjustedIf.slice(1);
+                }
+                const capMain = data.mainClause.charAt(0).toUpperCase() + data.mainClause.slice(1);
+                sentenceEl.innerHTML = `<span class="text-emerald-700">${capMain}</span> <span class="text-indigo-600">${adjustedIf}.</span>`;
+                commaNote.innerHTML = `✅ <strong>Main Clause First:</strong> When the result comes first, <span class="text-indigo-600 font-bold">NO comma</span> is needed between the clauses!`;
+            }
+        }
+
+        // ==========================================
+        // PRACTICE ARENA QUIZ ENGINE
+        // ==========================================
+        const allQuizQuestions = [
+            {
+                category: 'core',
+                topic: 'Core Type 1 (Future Rule)',
+                hint: 'Context: Making a real plan for tomorrow\'s hike.',
+                prompt: 'If the weather ________ fine tomorrow morning, we will hike up Victoria Peak.',
+                options: ['will be', 'is', 'would be', 'was'],
+                answer: 1,
+                explanation: 'In a Type 1 Conditional (real future possibility), we use the Simple Present ("is") in the If-clause—never "will be"!'
+            },
+            {
+                category: 'core',
+                topic: 'Core Type 2 (Subjunctive)',
+                hint: 'Context: Giving hypothetical advice to a friend right now.',
+                prompt: 'If I ________ in your position, I would accept the scholarship offer immediately.',
+                options: ['am', 'will be', 'were', 'had been'],
+                answer: 2,
+                explanation: 'Type 2 Conditionals describe an unreal present situation ("I am not you"). In formal English, use the subjunctive "were" for all subjects.'
+            },
+            {
+                category: 'core',
+                topic: 'Core Type 3 (Past Regret)',
+                hint: 'Context: Looking back at yesterday\'s missed train.',
+                prompt: 'If we ________ a taxi instead of the bus yesterday, we wouldn\'t have missed the flight.',
+                options: ['took', 'had taken', 'would have taken', 'have taken'],
+                answer: 1,
+                explanation: 'Type 3 Conditionals require the Past Perfect ("had + V3" = had taken) in the If-clause to describe an imaginary past.'
+            },
+            {
+                category: 'mixed',
+                topic: 'Mixed Conditional (3 → 2)',
+                hint: 'Context: A past action with a direct result right now.',
+                prompt: 'If Noah had backed up his laptop last week, he ________ all his research files right now.',
+                options: ['wouldn\'t lose', 'wouldn\'t have lost', ' wouldn\'t be missing', 'won\'t lose'],
+                answer: 2,
+                explanation: 'Notice the time markers: "last week" (Type 3 If-clause: had backed up) + "right now" (Type 2 Main clause: wouldn\'t be missing).'
+            },
+            {
+                category: 'mixed',
+                topic: 'Mixed Conditional (2 → 3)',
+                hint: 'Context: A permanent personal trait affecting a past decision.',
+                prompt: 'If she ________ allergic to seafood, she would have tried the lobster at last night\'s banquet.',
+                options: ['hadn\'t been', 'weren\'t', 'isn\'t', 'wouldn\'t be'],
+                answer: 1,
+                explanation: 'She is permanently allergic to seafood (general present truth = Type 2 "weren\'t"), which prevented her from eating lobster last night (Type 3 result).'
+            },
+            {
+                category: 'inversion',
+                topic: 'Type 1 Formal Inversion',
+                hint: 'Context: Formal customer service email.',
+                prompt: '________ she require any adjustments to the contract, our legal team will revise it immediately.',
+                options: ['If', 'Should', 'Were', 'Had'],
+                answer: 1,
+                explanation: 'Look at the base verb "require" (not "requires") with subject "she"! Only "Should" takes a bare infinitive ("Should she require...").'
+            },
+            {
+                category: 'inversion',
+                topic: 'Type 2 Formal Inversion',
+                hint: 'Context: Formal economic prediction with an action verb.',
+                prompt: '________ interest rates to rise sharply next quarter, small businesses would struggle.',
+                options: ['Should', 'If', 'Were', 'Had'],
+                answer: 2,
+                explanation: 'Notice the structure "... + Subject + to + Base Verb" ("to rise"). This requires Type 2 inversion: "Were interest rates to rise...".'
+            },
+            {
+                category: 'inversion',
+                topic: 'Type 3 Negative Inversion',
+                hint: 'Context: Formal safety report about a past incident.',
+                prompt: '________ for the emergency braking system, the train would have derailed.',
+                options: ['Hadn\'t it been', 'Had it not been', 'Were it not', 'If it hadn\'t'],
+                answer: 1,
+                explanation: 'For a past event ("would have derailed"), we use "Had it not been for...". Remember: never contract "not" in formal inversions!'
+            },
+            {
+                category: 'advanced',
+                topic: 'In case vs. If',
+                hint: 'Context: Taking a precaution BEFORE an emergency happens.',
+                prompt: 'Write down my emergency phone number on a piece of paper ________ your phone battery dies.',
+                options: ['unless', 'in case', 'as long as', 'suppose'],
+                answer: 1,
+                explanation: 'You write down the number FIRST as a precaution before the battery dies, so "in case" is correct.'
+            },
+            {
+                category: 'advanced',
+                topic: 'Unless (Warning)',
+                hint: 'Context: Expressing "except if".',
+                prompt: 'The outdoor concert will go ahead as scheduled tomorrow ________ there is a severe thunderstorm.',
+                options: ['unless', 'provided that', 'as long as', 'in case'],
+                answer: 0,
+                explanation: '"Unless" means "if there is NOT" or "except if". The concert will happen except if there is a thunderstorm.'
+            },
+            {
+                category: 'advanced',
+                topic: 'Wish + Past Perfect',
+                hint: 'Context: Expressing regret about something you said yesterday.',
+                prompt: 'I really wish I ________ such harsh words to my best friend during yesterday\'s argument.',
+                options: ['didn\'t say', 'wouldn\'t say', 'hadn\'t said', 'haven\'t said'],
+                answer: 2,
+                explanation: 'To express regret about the past ("yesterday\'s argument"), "wish" must be followed by the Past Perfect ("hadn\'t said"), matching Type 3!'
+            },
+            {
+                category: 'core',
+                topic: 'Core Type 0 (Scientific Truth)',
+                hint: 'Context: A biological fact about plants.',
+                prompt: 'If green plants ________ enough sunlight and water, they wither and die.',
+                options: ['won\'t get', 'didn\'t get', 'don\'t get', 'wouldn\'t get'],
+                answer: 2,
+                explanation: 'This is a Type 0 scientific truth. Both clauses use the Simple Present tense ("don\'t get" ... "wither").'
+            }
+        ];
+
+        let filteredQuestions = [...allQuizQuestions];
+        let currentQIndex = 0;
+        let quizScore = 0;
+        let questionAnswered = false;
+
+        function filterQuizQuestions() {
+            playTone('click');
+            const filterVal = document.getElementById('quiz-filter').value;
+            if (filterVal === 'all') {
+                filteredQuestions = [...allQuizQuestions];
+            } else {
+                filteredQuestions = allQuizQuestions.filter(q => q.category === filterVal);
+            }
+            currentQIndex = 0;
+            quizScore = 0;
+            document.getElementById('q-score').textContent = quizScore;
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            questionAnswered = false;
+            const q = filteredQuestions[currentQIndex];
+
+            document.getElementById('q-current-index').textContent = currentQIndex + 1;
+            document.getElementById('q-total-count').textContent = filteredQuestions.length;
+            document.getElementById('q-topic-pill').textContent = q.topic;
+            document.getElementById('q-context-hint').textContent = q.hint;
+            document.getElementById('q-prompt').textContent = q.prompt;
+
+            const feedbackBox = document.getElementById('q-feedback');
+            feedbackBox.classList.add('hidden');
+
+            const optionsContainer = document.getElementById('q-options');
+            optionsContainer.innerHTML = q.options.map((opt, idx) => `
+                <button onclick="submitQuizAnswer(${idx})" id="q-opt-${idx}" class="p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-slate-200 bg-white hover:border-indigo-400 hover:bg-indigo-50/30 text-left font-semibold text-xs sm:text-sm text-slate-800 transition-all flex items-center justify-between">
+                    <span><span class="inline-block w-5 h-5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold text-center leading-5 mr-1.5">${String.fromCharCode(65 + idx)}</span> ${opt}</span>
+                </button>
+            `).join('');
+        }
+
+        function submitQuizAnswer(selectedIdx) {
+            if (questionAnswered) return;
+            questionAnswered = true;
+
+            const q = filteredQuestions[currentQIndex];
+            const isCorrect = selectedIdx === q.answer;
+
+            if (isCorrect) {
+                playTone('success');
+                quizScore++;
+                document.getElementById('q-score').textContent = quizScore;
+                awardXP(20, 'quiz-q-' + q.prompt);
+            } else {
+                playTone('error');
+            }
+
+            // Style buttons
+            q.options.forEach((_, idx) => {
+                const btn = document.getElementById('q-opt-' + idx);
+                if (idx === q.answer) {
+                    btn.className = 'p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-emerald-500 bg-emerald-50 text-left font-bold text-xs sm:text-sm text-emerald-900 transition-all flex items-center justify-between';
+                } else if (idx === selectedIdx && !isCorrect) {
+                    btn.className = 'p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border-2 border-rose-500 bg-rose-50 text-left font-bold text-xs sm:text-sm text-rose-900 transition-all flex items-center justify-between';
+                } else {
+                    btn.className = 'p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200 bg-slate-50 text-left font-medium text-xs sm:text-sm text-slate-400 opacity-70';
+                }
+            });
+
+            // Show feedback
+            const feedbackBox = document.getElementById('q-feedback');
+            const title = document.getElementById('q-feedback-title');
+            const text = document.getElementById('q-feedback-text');
+
+            feedbackBox.classList.remove('hidden');
+            if (isCorrect) {
+                feedbackBox.className = 'p-3 sm:p-5 rounded-xl sm:rounded-2xl border-2 border-emerald-200 bg-emerald-50/70 space-y-1 sm:space-y-2 transition-all';
+                title.className = 'font-display font-bold text-xs sm:text-sm text-emerald-800';
+                title.textContent = '🎉 Spot On! +20 XP';
+            } else {
+                feedbackBox.className = 'p-3 sm:p-5 rounded-xl sm:rounded-2xl border-2 border-rose-200 bg-rose-50/70 space-y-1 sm:space-y-2 transition-all';
+                title.className = 'font-display font-bold text-xs sm:text-sm text-rose-800';
+                title.textContent = '💡 Not quite! Check the tense & time markers:';
+            }
+            text.textContent = q.explanation;
+            lucide.createIcons();
+        }
+
+        function nextQuizQuestion() {
+            playTone('click');
+            currentQIndex = (currentQIndex + 1) % filteredQuestions.length;
+            renderQuizQuestion();
+        }
+
+        // ==========================================
+        // INITIALIZATION ON LOAD
+        // ==========================================
+        window.onload = function () {
+            lucide.createIcons();
+            selectCoreType(0);
+            loadInversionExample(0);
+            updateSandbox();
+            renderQuizQuestion();
+        };
+    </script>
+</body>
+</html>

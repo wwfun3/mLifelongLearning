@@ -1,0 +1,2980 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>香港生活零售與體育場館名錄 · HK Living & Retail Index</title>
+    <style>
+/* Hallmark · v2.0.0 · theme: formwork · genre: modern-minimal · depth: full · scope: app · copy: verbatim */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 · weakest: V, directory app structure kept; transformed to architectural Swiss editorial layout */
+/* Hallmark · waive 64 · monospace typography reserved strictly for index numbers, phone digits, and hours */
+
+:root {
+    --paper: oklch(98.2% 0.006 82);
+    --paper-card: oklch(99.2% 0.003 82);
+    --paper-well: oklch(95.5% 0.008 82);
+    --paper-hover: oklch(93.8% 0.01 82);
+    --ink: oklch(22% 0.015 260);
+    --ink-muted: oklch(48% 0.015 260);
+    --ink-faint: oklch(65% 0.012 260);
+    --rule: oklch(89% 0.008 82);
+    --rule-dark: oklch(78% 0.01 82);
+    --accent: oklch(62% 0.18 42);
+    --accent-hover: oklch(56% 0.19 42);
+    --accent-tint: oklch(94% 0.035 42);
+    --accent-ink: oklch(99% 0.003 82);
+    --focus-ring: oklch(62% 0.18 42);
+
+    --brand-247-bg: oklch(94% 0.04 25);
+    --brand-247-ink: oklch(45% 0.14 25);
+    --brand-anytime-bg: oklch(94% 0.035 240);
+    --brand-anytime-ink: oklch(40% 0.12 240);
+    --brand-choco-bg: oklch(94% 0.045 75);
+    --brand-choco-ink: oklch(44% 0.12 75);
+    --brand-lcsd-bg: oklch(94% 0.04 150);
+    --brand-lcsd-ink: oklch(38% 0.11 150);
+    --brand-mcd-bg: oklch(93% 0.06 80);
+    --brand-mcd-ink: oklch(42% 0.14 70);
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang HK", "Noto Sans TC", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+}
+
+.mono {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+}
+
+.app-wrapper {
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 3.5rem;
+}
+
+/* Masthead / Header */
+.masthead {
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.masthead-titles {
+    flex: 1;
+    min-width: 280px;
+}
+
+.masthead-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+}
+
+.masthead-title {
+    font-size: clamp(1.4rem, 2.5vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+}
+
+.masthead-desc {
+    font-size: 0.88rem;
+    color: var(--ink-muted);
+    margin-top: 0.4rem;
+    max-width: 780px;
+}
+
+.masthead-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Buttons & Controls */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.52rem 0.95rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid var(--rule-dark);
+    background: var(--paper-card);
+    color: var(--ink);
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.btn:hover {
+    background: var(--paper-hover);
+    border-color: var(--ink);
+}
+
+.btn:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+}
+
+.btn-primary:hover {
+    background: oklch(12% 0.015 260);
+    color: var(--paper);
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-color: var(--accent);
+}
+
+.btn-accent:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.btn-sm {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.76rem;
+}
+
+.svg-icon {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+/* Architectural Navigation Tabs */
+.tab-strip {
+    display: flex;
+    gap: 0.25rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.25rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.tab-nav-btn {
+    appearance: none;
+    background: transparent;
+    border: 1px solid transparent;
+    border-bottom: none;
+    padding: 0.65rem 1rem;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    cursor: pointer;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    position: relative;
+    top: 1px;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.tab-nav-btn:hover {
+    color: var(--ink);
+    background: var(--paper-well);
+}
+
+.tab-nav-btn.active {
+    color: var(--ink);
+    background: var(--paper-card);
+    border-color: var(--rule);
+    border-bottom-color: var(--paper-card);
+}
+
+.tab-nav-btn.active::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent);
+}
+
+.tab-badge {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: var(--paper-well);
+    color: var(--ink-muted);
+}
+
+.tab-nav-btn.active .tab-badge {
+    background: var(--accent-tint);
+    color: var(--accent);
+}
+
+/* KPI Banner Strip */
+.kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+}
+
+.kpi-cell {
+    background: var(--paper-card);
+    padding: 0.85rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kpi-tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    margin-bottom: 0.2rem;
+}
+
+.kpi-num {
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--ink);
+    line-height: 1.1;
+}
+
+/* Control Hub */
+.control-hub {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.control-hub-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr 1fr 1fr auto;
+    gap: 0.85rem;
+    align-items: end;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.input-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--ink-muted);
+}
+
+.input-field {
+    width: 100%;
+    height: 38px;
+    padding: 0 0.75rem;
+    font-size: 0.86rem;
+    border: 1px solid var(--rule-dark);
+    border-radius: var(--radius-sm);
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-field:focus {
+    border-color: var(--focus-ring);
+    box-shadow: 0 0 0 2px var(--accent-tint);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+/* Stats bar */
+.query-meta-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+}
+
+.brand-chips-strip {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+/* Brand & Area Pills */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.16rem 0.55rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.74rem;
+    font-weight: 600;
+    border: 1px solid var(--rule);
+    background: var(--paper-well);
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+.chip-247 { background: var(--brand-247-bg); color: var(--brand-247-ink); border-color: oklch(88% 0.05 25); }
+.chip-anytime { background: var(--brand-anytime-bg); color: var(--brand-anytime-ink); border-color: oklch(88% 0.05 240); }
+.chip-choco { background: var(--brand-choco-bg); color: var(--brand-choco-ink); border-color: oklch(88% 0.06 75); }
+.chip-lcsd { background: var(--brand-lcsd-bg); color: var(--brand-lcsd-ink); border-color: oklch(88% 0.05 150); }
+.chip-mcd { background: var(--brand-mcd-bg); color: var(--brand-mcd-ink); border-color: oklch(87% 0.08 75); }
+
+/* Table Architectural Frame */
+.dir-table-shell {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.dir-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.dir-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.84rem;
+    text-align: left;
+}
+
+.dir-table thead {
+    background: var(--paper-well);
+    border-bottom: 2px solid var(--rule-dark);
+}
+
+.dir-table th {
+    padding: 0.75rem 0.85rem;
+    font-weight: 700;
+    font-size: 0.76rem;
+    color: var(--ink);
+    user-select: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dir-table th.no-sort {
+    cursor: default;
+}
+
+.dir-table th:hover:not(.no-sort) {
+    background: var(--paper-hover);
+}
+
+.dir-table tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 0.12s ease;
+}
+
+.dir-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.dir-table tbody tr:hover {
+    background: var(--paper-well);
+}
+
+.dir-table td {
+    padding: 0.7rem 0.85rem;
+    vertical-align: middle;
+}
+
+.col-w-id { width: 68px; min-width: 68px; text-align: center; }
+.col-w-name { min-width: 200px; }
+.col-w-brand { min-width: 150px; }
+.col-w-district { min-width: 110px; }
+.col-w-addr { min-width: 360px; line-height: 1.4; }
+.col-w-hours { min-width: 130px; font-family: var(--font-mono); font-size: 0.8rem; }
+.col-w-phone { min-width: 130px; font-family: var(--font-mono); font-size: 0.8rem; }
+.col-w-action { min-width: 110px; text-align: center; }
+
+.col-hidden { display: none !important; }
+
+/* Direct Route Link */
+.route-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--rule-dark);
+    font-weight: 500;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.route-link:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+}
+
+.route-link svg {
+    color: var(--accent);
+}
+
+/* Card Mode */
+.cards-deck {
+    display: none;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 0.85rem;
+}
+
+.dir-table-shell.view-cards .dir-table-scroll { display: none; }
+.dir-table-shell.view-cards .cards-deck { display: flex; }
+
+.branch-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.branch-card:hover {
+    border-color: var(--rule-dark);
+}
+
+.branch-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.branch-card-title {
+    font-size: 0.94rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: var(--ink);
+}
+
+.branch-card-body {
+    margin-top: 0.6rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    font-size: 0.82rem;
+}
+
+.branch-card-row {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.branch-card-label {
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--ink-muted);
+    width: 60px;
+    flex-shrink: 0;
+}
+
+/* Pagination Strip */
+.pagination-strip {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem 1.15rem;
+    background: var(--paper-well);
+    border-top: 1px solid var(--rule);
+    font-size: 0.82rem;
+}
+
+.page-btn-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.page-num-btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 0.4rem;
+    border: 1px solid var(--rule-dark);
+    background: var(--paper-card);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ink);
+    transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+
+.page-num-btn:hover:not(:disabled) {
+    background: var(--paper-hover);
+    border-color: var(--ink);
+}
+
+.page-num-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+}
+
+.page-num-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.page-jump-cluster {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    justify-self: end;
+}
+
+.page-jump-input {
+    width: 58px;
+    height: 32px;
+    border: 1px solid var(--rule-dark);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    background: var(--paper-card);
+    color: var(--ink);
+}
+
+.page-jump-input:focus {
+    outline: none;
+    border-color: var(--focus-ring);
+}
+
+/* Modals */
+.modal-shield {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 24, 33, 0.6);
+    backdrop-filter: blur(3px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+}
+
+.modal-shield.open {
+    display: flex;
+}
+
+.modal-dialog {
+    background: var(--paper-card);
+    border: 1px solid var(--rule-dark);
+    border-radius: var(--radius-md);
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+}
+
+.modal-head {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--paper-well);
+}
+
+.modal-head h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.modal-body {
+    padding: 1.15rem 1.25rem;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-foot {
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    background: var(--paper-well);
+}
+
+.toggle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+.toggle-item:last-child {
+    border-bottom: none;
+}
+
+.switch-toggle {
+    position: relative;
+    width: 38px;
+    height: 20px;
+}
+
+.switch-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-track {
+    position: absolute;
+    inset: 0;
+    background: var(--rule-dark);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.switch-track::before {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+input:checked + .switch-track {
+    background: var(--accent);
+}
+
+input:checked + .switch-track::before {
+    transform: translateX(18px);
+}
+
+.toast {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.65rem 1.15rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.84rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .control-hub-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .filter-actions {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 768px) {
+    .app-wrapper { padding: 0.75rem 0.65rem 2.5rem; }
+    .masthead { gap: 0.75rem; margin-bottom: 1rem; }
+    .control-hub-grid { grid-template-columns: 1fr; }
+    .pagination-strip {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+    .page-jump-cluster { justify-self: center; }
+}
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <header class="masthead">
+            <div class="masthead-titles">
+                <div class="masthead-kicker mono">INDEX / CIVIC & COMMERCIAL / HK-2026</div>
+                <h1 class="masthead-title">香港民生與連鎖名錄系統</h1>
+                <p class="masthead-desc">
+                    全港 18 區即時門市指引：涵蓋全天候健身中心、公共體育館、超市護理、連鎖咖啡及麥當勞門市。店名預設隱藏以保留清晰版面，支援 Google Maps 即時路線導航。
+                </p>
+            </div>
+            <div class="masthead-actions">
+                <button type="button" class="btn" id="openMdImportBtn" title="貼上 Markdown 格式表格以附加或置換目前名錄">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                    匯入 Markdown
+                </button>
+                <button type="button" class="btn" id="colToggleBtn" title="自訂顯示欄位">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3h7a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-7m0-18H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7m0-18v18"></path></svg>
+                    欄位自訂
+                </button>
+                <button type="button" class="btn btn-accent" id="exportCsvBtn" title="匯出目前篩選結果為 CSV">
+                    <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    匯出 CSV
+                </button>
+            </div>
+        </header>
+
+        <!-- Category Tabs -->
+        <nav class="tab-strip" role="tablist">
+            <button type="button" class="tab-nav-btn active" data-tab="fitness" role="tab">
+                健身中心及體育館
+                <span class="tab-badge" id="badgeCountFitness">315</span>
+            </button>
+            <button type="button" class="tab-nav-btn" data-tab="groceries" role="tab">
+                超市及個人護理
+                <span class="tab-badge" id="badgeCountGroceries">658</span>
+            </button>
+            <button type="button" class="tab-nav-btn" data-tab="coffee" role="tab">
+                連鎖咖啡門市
+                <span class="tab-badge" id="badgeCountCoffee">129</span>
+            </button>
+            <button type="button" class="tab-nav-btn" data-tab="mcdonalds" role="tab">
+                麥當勞全港分店
+                <span class="tab-badge" id="badgeCountMcd">269</span>
+            </button>
+        </nav>
+
+        <!-- KPI Summary Strip -->
+        <div class="kpi-row">
+            <div class="kpi-cell">
+                <span class="kpi-tag">TOTAL LOCATIONS / 總場館數</span>
+                <span class="kpi-num" id="kpiTotalNum">0</span>
+            </div>
+            <div class="kpi-cell">
+                <span class="kpi-tag">DISTRICT COVERAGE / 涵蓋政區</span>
+                <span class="kpi-num" id="kpiDistrictNum">18 區</span>
+            </div>
+            <div class="kpi-cell">
+                <span class="kpi-tag">KEY BRANDS / 品牌網絡</span>
+                <span class="kpi-num" id="kpiBrandNum">0</span>
+            </div>
+            <div class="kpi-cell">
+                <span class="kpi-tag">OPERATING SPECS / 營運時間</span>
+                <span class="kpi-num" style="font-size:1rem;" id="kpiHoursText">24小時 / 早至晚</span>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="control-hub">
+            <div class="control-hub-grid">
+                <div class="input-group">
+                    <label class="input-label" for="searchBox">搜尋關鍵字 (店名、街道、商場或電話)</label>
+                    <input type="search" id="searchBox" class="input-field" placeholder="輸入關鍵字..." autocomplete="off" />
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="brandSelect">品牌篩選</label>
+                    <select id="brandSelect" class="input-field">
+                        <option value="">全部品牌</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="districtSelect">行政分區</label>
+                    <select id="districtSelect" class="input-field">
+                        <option value="">全部行政區 (18區)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="viewModeSelect">顯示模式</label>
+                    <select id="viewModeSelect" class="input-field">
+                        <option value="table">表格視圖</option>
+                        <option value="cards">卡片視圖</option>
+                    </select>
+                </div>
+                <div class="filter-actions">
+                    <button type="button" class="btn" id="resetFiltersBtn" title="清空搜尋與篩選條件">重設條件</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Query Meta -->
+        <div class="query-meta-strip">
+            <div>
+                顯示範圍：<strong id="metaShowingRange" class="mono">0-0</strong> 筆（共篩選出 <strong id="metaFilteredCount" class="mono">0</strong> 筆）
+            </div>
+            <div class="brand-chips-strip" id="brandChipsStrip"></div>
+        </div>
+
+        <!-- Table / Cards Shell -->
+        <div class="dir-table-shell" id="dirTableShell">
+            <div class="dir-table-scroll">
+                <table class="dir-table" id="mainDirectoryTable">
+                    <thead>
+                        <tr>
+                            <th data-col="id" class="col-w-id">序號</th>
+                            <th data-col="name" class="col-w-name">店名</th>
+                            <th data-col="brand" class="col-w-brand">品牌 / 類別</th>
+                            <th data-col="district" class="col-w-district">行政區</th>
+                            <th data-col="address" class="col-w-addr no-sort">詳細地址 (點擊規劃路線)</th>
+                            <th data-col="hours" class="col-w-hours no-sort">開放/營業時間</th>
+                            <th data-col="phone" class="col-w-phone no-sort">電話</th>
+                            <th data-col="route" class="col-w-action no-sort">導航</th>
+                        </tr>
+                    </thead>
+                    <tbody id="directoryTbody"></tbody>
+                </table>
+            </div>
+
+            <div class="cards-deck" id="cardsDeck"></div>
+
+            <!-- Pagination Bar -->
+            <div class="pagination-strip">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span>每頁顯示：</span>
+                    <select id="pageSizeSelect" class="input-field" style="width: auto; height: 32px; padding: 0 0.5rem;">
+                        <option value="15" selected>15</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="all">全部</option>
+                    </select>
+                </div>
+                <div class="page-btn-list" id="pageBtnList"></div>
+                <div class="page-jump-cluster">
+                    <span id="pageProgressText" class="mono">1 / 1</span>
+                    <span>前往第</span>
+                    <input type="number" id="jumpPageInput" class="page-jump-input" min="1" placeholder="頁" />
+                    <span>頁</span>
+                    <button type="button" class="btn btn-sm" id="jumpPageBtn">跳轉</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Column Customizer Modal -->
+    <div class="modal-shield" id="colCustomizerModal">
+        <div class="modal-dialog">
+            <div class="modal-head">
+                <h3>自訂表格欄位顯示</h3>
+                <button type="button" class="btn btn-sm" id="closeColModalBtn">關閉</button>
+            </div>
+            <div class="modal-body" id="colCustomizerBody"></div>
+            <div class="modal-foot">
+                <button type="button" class="btn btn-primary" id="saveColModalBtn">確認儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Markdown Importer Modal -->
+    <div class="modal-shield" id="mdImportModal">
+        <div class="modal-dialog" style="max-width: 680px;">
+            <div class="modal-head">
+                <h3>匯入 Markdown 表格名錄</h3>
+                <button type="button" class="btn btn-sm" id="closeMdModalBtn">關閉</button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group" style="margin-bottom:0.75rem;">
+                    <label class="input-label" for="importTargetTab">目標分類分頁</label>
+                    <select id="importTargetTab" class="input-field">
+                        <option value="fitness">健身中心及體育館</option>
+                        <option value="groceries">超市及個人護理</option>
+                        <option value="coffee">連鎖咖啡門市</option>
+                        <option value="mcdonalds">麥當勞全港分店</option>
+                    </select>
+                </div>
+                <div class="input-group" style="margin-bottom:0.75rem;">
+                    <label class="input-label" for="importModeSelect">匯入模式</label>
+                    <select id="importModeSelect" class="input-field">
+                        <option value="replace">取代現有名錄 (Replace)</option>
+                        <option value="append">附加於現有名錄後 (Append)</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="mdRawInput">貼上 Markdown 格式表格文字</label>
+                    <textarea id="mdRawInput" class="input-field" style="height: 180px; padding: 0.5rem; font-family: var(--font-mono); font-size: 0.76rem; resize: vertical;" placeholder="| # | 店名 | 地區* | 地址 | 辦公時間 | 電話 |&#10;| 1 | 24/7 FITNESS - 堅尼地城分店 | 中西區 | 香港堅尼地城卑路乍街35A號翡翠閣地下 | 00:00-24:00 | 9449 5871 |"></textarea>
+                </div>
+                <p style="font-size:0.75rem; color:var(--ink-muted); margin-top:0.4rem;">
+                    提示：支援標準 Markdown 格式表格，系統將自動解析欄位標題（店名、地區、地址、時間、電話）並自動識別品牌。資料將儲存於您的瀏覽器本機儲存空間中。
+                </p>
+            </div>
+            <div class="modal-foot">
+                <button type="button" class="btn" id="resetTabDefaultBtn">重設為系統預設</button>
+                <button type="button" class="btn btn-accent" id="executeImportBtn">開始解析並匯入</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toastMessage"></div>
+
+    <script>
+        // TAB 1 DATASET: Hong Kong Fitness Centers & Sports Facilities (315 items)
+        const rawDiningData = [
+            { id: 1, name: "24/7 FITNESS - 堅尼地城分店", brand: "24/7 FITNESS", district: "中西區", address: "香港堅尼地城卑路乍街35A號翡翠閣地下4-7號舖", hours: "00:00-24:00", phone: "9449 5871" },
+            { id: 2, name: "24/7 FITNESS - 堅尼地城（第二分店）", brand: "24/7 FITNESS", district: "中西區", address: "香港堅尼地城吉席街55-57號美新大廈1樓B號舖", hours: "00:00-24:00", phone: "6507 9247" },
+            { id: 3, name: "24/7 FITNESS - 西營盤分店", brand: "24/7 FITNESS", district: "中西區", address: "香港西營盤皇后大道西312-314號1樓及2樓", hours: "00:00-24:00", phone: "9299 8247" },
+            { id: 4, name: "24/7 FITNESS - 西營盤（第二分店）", brand: "24/7 FITNESS", district: "中西區", address: "香港西營盤德輔道西32-36號帝權商業大樓1樓及2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 5, name: "24/7 FITNESS - 上環分店", brand: "24/7 FITNESS", district: "中西區", address: "香港上環皇后大道中328號中源中心1樓G28號舖", hours: "00:00-24:00", phone: "6365 8894" },
+            { id: 6, name: "24/7 FITNESS - 中環分店", brand: "24/7 FITNESS", district: "中西區", address: "香港中環皇后大道中110-116號永恆商業大廈地庫", hours: "00:00-24:00", phone: "NA" },
+            { id: 7, name: "24/7 FITNESS - 中環（蘭桂坊）分店", brand: "24/7 FITNESS", district: "中西區", address: "香港中環威靈頓街1號荊威廣場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 8, name: "24/7 FITNESS - 半山堅道分店", brand: "24/7 FITNESS", district: "中西區", address: "香港半山堅道119-125號金堅大廈閣樓及1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 9, name: "24/7 FITNESS - 灣仔分店", brand: "24/7 FITNESS", district: "灣仔區", address: "香港灣仔摩利臣山道20-30號凱利商業大廈2樓", hours: "00:00-24:00", phone: "6597 2247" },
+            { id: 10, name: "24/7 FITNESS - 灣仔（第二分店）", brand: "24/7 FITNESS", district: "灣仔區", address: "香港灣仔軒尼詩道68-76號新禧大樓1樓及2樓", hours: "00:00-24:00", phone: "5409 4247" },
+            { id: 11, name: "24/7 FITNESS - 灣仔（第三分店）", brand: "24/7 FITNESS", district: "灣仔區", address: "香港灣仔軒尼詩道338號北海中心1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 12, name: "24/7 FITNESS - 灣仔（合和）分店", brand: "24/7 FITNESS", district: "灣仔區", address: "香港灣仔皇后大道東183號合和中心6樓616號舖", hours: "00:00-24:00", phone: "NA" },
+            { id: 13, name: "24/7 FITNESS - 銅鑼灣分店", brand: "24/7 FITNESS", district: "灣仔區", address: "香港銅鑼灣高士威道2-6號華都大廈2樓A號舖", hours: "00:00-24:00", phone: "6234 9001" },
+            { id: 14, name: "24/7 FITNESS - 銅鑼灣（第二分店）", brand: "24/7 FITNESS", district: "灣仔區", address: "香港銅鑼灣波斯富街99號利舞臺廣場12樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 15, name: "24/7 FITNESS - 跑馬地分店", brand: "24/7 FITNESS", district: "灣仔區", address: "香港跑馬地成和道67B號1樓", hours: "00:00-24:00", phone: "5604 3247" },
+            { id: 16, name: "24/7 FITNESS - 天后分店", brand: "24/7 FITNESS", district: "灣仔區", address: "香港天后留仙街3號雅景樓1樓", hours: "00:00-24:00", phone: "9794 7247" },
+            { id: 17, name: "24/7 FITNESS - 北角分店", brand: "24/7 FITNESS", district: "東區", address: "香港北角英皇道260號怡安中心1樓", hours: "00:00-24:00", phone: "9663 7796" },
+            { id: 18, name: "24/7 FITNESS - 北角（第二分店）", brand: "24/7 FITNESS", district: "東區", address: "香港北角渣華道128號渣華商業中心2樓", hours: "00:00-24:00", phone: "9161 9247" },
+            { id: 19, name: "24/7 FITNESS - 北角（和富）分店", brand: "24/7 FITNESS", district: "東區", address: "香港北角和富道21-53號和富中心地庫", hours: "00:00-24:00", phone: "NA" },
+            { id: 20, name: "24/7 FITNESS - 鰂魚涌分店", brand: "24/7 FITNESS", district: "東區", address: "香港鰂魚涌英皇道1065號東達中心10樓05室", hours: "00:00-24:00", phone: "6111 4950" },
+            { id: 21, name: "24/7 FITNESS - 鰂魚涌（第二分店）", brand: "24/7 FITNESS", district: "東區", address: "香港鰂魚涌英皇道993號得利樓1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 22, name: "24/7 FITNESS - 西灣河分店", brand: "24/7 FITNESS", district: "東區", address: "香港西灣河筲箕灣道57-87號太安樓地下G24號舖", hours: "00:00-24:00", phone: "5596 9247" },
+            { id: 23, name: "24/7 FITNESS - 筲箕灣分店", brand: "24/7 FITNESS", district: "東區", address: "香港筲箕灣道361號利嘉中心1樓及2樓", hours: "00:00-24:00", phone: "6468 7247" },
+            { id: 24, name: "24/7 FITNESS - 筲箕灣（第二分店）", brand: "24/7 FITNESS", district: "東區", address: "香港筲箕灣東大街59-99號東威大廈1樓2號舖", hours: "00:00-24:00", phone: "5596 9247" },
+            { id: 25, name: "24/7 FITNESS - 柴灣分店", brand: "24/7 FITNESS", district: "東區", address: "香港柴灣永泰道50號港利中心地下1號舖", hours: "00:00-24:00", phone: "6823 2247" },
+            { id: 26, name: "24/7 FITNESS - 小西灣分店", brand: "24/7 FITNESS", district: "東區", address: "香港小西灣小西灣道28號藍灣半島商場1樓115B號舖", hours: "00:00-24:00", phone: "NA" },
+            { id: 27, name: "24/7 FITNESS - 香港仔分店", brand: "24/7 FITNESS", district: "南區", address: "香港香港仔湖北街25號1樓至3樓", hours: "00:00-24:00", phone: "5960 6628" },
+            { id: 28, name: "24/7 FITNESS - 香港仔（第二分店）", brand: "24/7 FITNESS", district: "南區", address: "香港香港仔大道208號裕輝商業中心2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 29, name: "24/7 FITNESS - 鴨脷洲海怡分店", brand: "24/7 FITNESS", district: "南區", address: "香港鴨脷洲海怡半島海怡西商場3樓310號舖", hours: "00:00-24:00", phone: "NA" },
+            { id: 30, name: "24/7 FITNESS - 鴨脷洲利東分店", brand: "24/7 FITNESS", district: "南區", address: "香港鴨脷洲利東邨利東商場一期4樓401號舖", hours: "00:00-24:00", phone: "NA" },
+            { id: 31, name: "24/7 FITNESS - 黃竹坑分店", brand: "24/7 FITNESS", district: "南區", address: "香港黃竹坑香葉道11號THE SOUTHSIDE 2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 32, name: "24/7 FITNESS - 置富花園分店", brand: "24/7 FITNESS", district: "南區", address: "香港薄扶林置富道置富南區廣場4樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 33, name: "24/7 FITNESS - 尖沙咀分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍尖沙咀金馬倫道38-40號金龍中心3樓", hours: "00:00-24:00", phone: "5281 4819" },
+            { id: 34, name: "24/7 FITNESS - 尖沙咀（第二分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍尖沙咀彌敦道176號The Nate 3樓", hours: "00:00-24:00", phone: "6655 0247" },
+            { id: 35, name: "24/7 FITNESS - 尖沙咀（第三分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍尖沙咀廣東道30號新港中心2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 36, name: "24/7 FITNESS - 尖沙咀東分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍尖沙咀東麼地道67號半島中心1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 37, name: "24/7 FITNESS - 佐敦分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍佐敦彌敦道241-243號香港體檢中心2樓", hours: "00:00-24:00", phone: "9161 7247" },
+            { id: 38, name: "24/7 FITNESS - 佐敦（第二分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍佐敦白加士街59號健能發展大廈1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 39, name: "24/7 FITNESS - 油麻地分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍油麻地彌敦道525-543A號寶寧大廈B座2樓", hours: "00:00-24:00", phone: "5989 1979" },
+            { id: 40, name: "24/7 FITNESS - 旺角分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍旺角西洋菜南街1A號百寶利商業中心5樓", hours: "00:00-24:00", phone: "6795 1906" },
+            { id: 41, name: "24/7 FITNESS - 旺角（第二分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍旺角彌敦道601號創興廣場6樓", hours: "00:00-24:00", phone: "9799 5247" },
+            { id: 42, name: "24/7 FITNESS - 旺角（第三分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍旺角山東街47-51號中僑商業大廈3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 43, name: "24/7 FITNESS - 旺角（麥花臣）分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍旺角奶路臣街38號麥花臣匯1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 44, name: "24/7 FITNESS - 太子分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍太子彌敦道760號東海大廈3樓", hours: "00:00-24:00", phone: "5503 5247" },
+            { id: 45, name: "24/7 FITNESS - 太子（第二分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍太子道西141號長榮大廈1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 46, name: "24/7 FITNESS - 大角咀分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍大角咀道38號新九龍廣場1樓127-136號舖", hours: "00:00-24:00", phone: "9545 4501" },
+            { id: 47, name: "24/7 FITNESS - 大角咀（第二分店）", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍大角咀福利街8號港灣豪庭廣場地下G50-51號舖", hours: "00:00-24:00", phone: "9664 0247" },
+            { id: 48, name: "24/7 FITNESS - 大角咀（奧海城）分店", brand: "24/7 FITNESS", district: "油尖旺區", address: "九龍大角咀海庭道18號奧海城二期1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 49, name: "24/7 FITNESS - 深水埗分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍深水埗福華街146-152號黃金大廈2樓", hours: "00:00-24:00", phone: "5598 4247" },
+            { id: 50, name: "24/7 FITNESS - 深水埗（第二分店）", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍深水埗青山道76-82號金盟大廈1樓", hours: "00:00-24:00", phone: "9725 8247" },
+            { id: 51, name: "24/7 FITNESS - 深水埗（元州）分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍深水埗元州街303號元州商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 52, name: "24/7 FITNESS - 長沙灣分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍長沙灣青山道399號喜韻1樓", hours: "00:00-24:00", phone: "6539 1020" },
+            { id: 53, name: "24/7 FITNESS - 長沙灣（第二分店）", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍長沙灣長順街15號D2 Place TWO 3樓", hours: "00:00-24:00", phone: "9664 1247" },
+            { id: 54, name: "24/7 FITNESS - 長沙灣（碧海藍天）分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍長沙灣深盛路8號碧海藍天AEON 2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 55, name: "24/7 FITNESS - 荔枝角分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍荔枝角景荔徑8號盈暉家居城1樓", hours: "00:00-24:00", phone: "9858 3247" },
+            { id: 56, name: "24/7 FITNESS - 美孚分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍美孚新邨百老匯街69-119號四期2樓", hours: "00:00-24:00", phone: "5596 8247" },
+            { id: 57, name: "24/7 FITNESS - 石硤尾分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍石硤尾窩仔街石硤尾商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 58, name: "24/7 FITNESS - 南昌分店", brand: "24/7 FITNESS", district: "深水埗區", address: "九龍深水埗深旺道28號V Walk 2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 59, name: "24/7 FITNESS - 紅磡分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍紅磡馬頭圍道37-39號紅磡廣場1樓", hours: "00:00-24:00", phone: "5503 1247" },
+            { id: 60, name: "24/7 FITNESS - 紅磡（第二分店）", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍紅磡蕪湖街111號蕪湖居1樓", hours: "00:00-24:00", phone: "6365 7247" },
+            { id: 61, name: "24/7 FITNESS - 黃埔分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍紅磡黃埔天地聚寶坊地庫B11號舖", hours: "00:00-24:00", phone: "9161 8247" },
+            { id: 62, name: "24/7 FITNESS - 土瓜灣分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍土瓜灣馬頭角道33號欣榮花園1樓101-109號舖", hours: "00:00-24:00", phone: "6652 5742" },
+            { id: 63, name: "24/7 FITNESS - 土瓜灣（第二分店）", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍土瓜灣道86號順聯工業大廈地下", hours: "00:00-24:00", phone: "5286 9247" },
+            { id: 64, name: "24/7 FITNESS - 九龍城分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍九龍城賈炳達道128號九龍城廣場3樓304-306號舖", hours: "00:00-24:00", phone: "5409 8247" },
+            { id: 65, name: "24/7 FITNESS - 何文田分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍何文田佛光街80號何文田廣場3樓315A號舖", hours: "00:00-24:00", phone: "9161 5247" },
+            { id: 66, name: "24/7 FITNESS - 何文田（愛民）分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍何文田忠孝街60號愛民廣場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 67, name: "24/7 FITNESS - 啟德分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍啟德沐元街煥然壹居商場1樓", hours: "00:00-24:00", phone: "9549 5247" },
+            { id: 68, name: "24/7 FITNESS - 啟德（晴朗）分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍啟德沐虹街12號晴朗商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 69, name: "24/7 FITNESS - 新蒲崗分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍新蒲崗寧遠街3-23號越秀廣場3樓", hours: "00:00-24:00", phone: "5403 3247" },
+            { id: 70, name: "24/7 FITNESS - 新蒲崗（Mikiki）分店", brand: "24/7 FITNESS", district: "九龍城區", address: "九龍新蒲崗太子道東638號Mikiki 1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 71, name: "24/7 FITNESS - 黃大仙分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍黃大仙龍翔道110號豪苑商場1樓8號舖", hours: "00:00-24:00", phone: "6365 2247" },
+            { id: 72, name: "24/7 FITNESS - 鑽石山分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍鑽石山鳳德道111號鳳德商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 73, name: "24/7 FITNESS - 慈雲山分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍慈雲山毓華街23號慈雲山中心6樓", hours: "00:00-24:00", phone: "9545 8247" },
+            { id: 74, name: "24/7 FITNESS - 樂富分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍樂富聯合道198號樂富廣場B區1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 75, name: "24/7 FITNESS - 牛池灣彩雲分店", brand: "24/7 FITNESS", district: "黃大仙區", address: "九龍牛池灣彩雲邨彩雲商場二期3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 76, name: "24/7 FITNESS - 九龍灣分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍九龍灣牛頭角道77號淘大商場三期2樓", hours: "00:00-24:00", phone: "9545 4502" },
+            { id: 77, name: "24/7 FITNESS - 九龍灣（第二分店）", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍九龍灣常悅道19號福康工業大廈地下", hours: "00:00-24:00", phone: "5598 1247" },
+            { id: 78, name: "24/7 FITNESS - 九龍灣（麗晶）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍九龍灣宏光道80號麗晶商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 79, name: "24/7 FITNESS - 九龍灣（啟業）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍九龍灣啟業邨啟業商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 80, name: "24/7 FITNESS - 牛頭角分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍牛頭角振華道70號樂華北邨商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 81, name: "24/7 FITNESS - 觀塘分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍觀塘成業街7號寧晉中心東廣場1樓", hours: "00:00-24:00", phone: "9386 6798" },
+            { id: 82, name: "24/7 FITNESS - 觀塘（第二分店）", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍觀塘開源道60號駱駝漆大廈三座1樓", hours: "00:00-24:00", phone: "5598 2247" },
+            { id: 83, name: "24/7 FITNESS - 觀塘（裕民坊）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍觀塘協和街33號裕民坊YM² 3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 84, name: "24/7 FITNESS - 觀塘（秀茂坪）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍觀塘秀明道101號秀茂坪商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 85, name: "24/7 FITNESS - 觀塘（順利）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍觀塘利安道15號順利商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 86, name: "24/7 FITNESS - 藍田分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍藍田匯景道8號匯景廣場5樓", hours: "00:00-24:00", phone: "6823 5247" },
+            { id: 87, name: "24/7 FITNESS - 藍田（麗港城）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍藍田茶果嶺道88號麗港城商場2樓", hours: "00:00-24:00", phone: "9794 6247" },
+            { id: 88, name: "24/7 FITNESS - 藍田（啟田）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍藍田啟田道50號啟田商場4樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 89, name: "24/7 FITNESS - 油塘分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍油塘嘉榮街1號油塘中心第1座1樓", hours: "00:00-24:00", phone: "5596 7247" },
+            { id: 90, name: "24/7 FITNESS - 油塘（鯉魚門）分店", brand: "24/7 FITNESS", district: "觀塘區", address: "九龍油塘鯉魚門道80號鯉魚門廣場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 91, name: "24/7 FITNESS - 葵芳分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界葵芳興芳路208號葵芳匯3樓", hours: "00:00-24:00", phone: "6608 1689" },
+            { id: 92, name: "24/7 FITNESS - 葵興分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界葵涌葵昌路51號九龍貿易中心2樓", hours: "00:00-24:00", phone: "6823 1247" },
+            { id: 93, name: "24/7 FITNESS - 葵涌石籬分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界葵涌大隴街110號石籬商場二期3樓", hours: "00:00-24:00", phone: "9725 7247" },
+            { id: 94, name: "24/7 FITNESS - 葵涌大窩口分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界葵涌大窩口道15號大窩口商場二期2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 95, name: "24/7 FITNESS - 葵盛東分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界葵涌葵盛圍63號葵盛東商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 96, name: "24/7 FITNESS - 青衣分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界青衣青敬路33號青衣城二期2樓", hours: "00:00-24:00", phone: "5598 7247" },
+            { id: 97, name: "24/7 FITNESS - 青衣（長發）分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界青衣担杆山路6號長發廣場4樓", hours: "00:00-24:00", phone: "9161 3247" },
+            { id: 98, name: "24/7 FITNESS - 青衣（美景）分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界青衣細山路2-16號美景花園商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 99, name: "24/7 FITNESS - 青衣（長康）分店", brand: "24/7 FITNESS", district: "葵青區", address: "新界青衣青康路12號長康第一商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 100, name: "24/7 FITNESS - 荃灣分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣沙咀道289號恒生荃灣大廈3樓", hours: "00:00-24:00", phone: "9386 6798" },
+            { id: 101, name: "24/7 FITNESS - 荃灣（第二分店）", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣青山公路荃灣段398號愉景新城3樓", hours: "00:00-24:00", phone: "5503 2247" },
+            { id: 102, name: "24/7 FITNESS - 荃灣（麗城）分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣青山公路荃灣段625號麗城薈三期地下", hours: "00:00-24:00", phone: "9545 6247" },
+            { id: 103, name: "24/7 FITNESS - 荃灣（海濱）分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣怡樂街海濱花園A平台2樓", hours: "00:00-24:00", phone: "6823 6247" },
+            { id: 104, name: "24/7 FITNESS - 荃灣（石圍角）分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣石圍角路3號石圍角商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 105, name: "24/7 FITNESS - 荃灣（梨木樹）分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣和宜合道389號梨木樹商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 106, name: "24/7 FITNESS - 深井分店", brand: "24/7 FITNESS", district: "荃灣區", address: "新界荃灣深井青山公路深井段33號碧堤坊3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 107, name: "24/7 FITNESS - 屯門分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門新合里3號匯賢一號‧雋峰1樓", hours: "00:00-24:00", phone: "6110 8900" },
+            { id: 108, name: "24/7 FITNESS - 屯門（第二分店）", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門屯利街1號華都商場2樓", hours: "00:00-24:00", phone: "5503 8247" },
+            { id: 109, name: "24/7 FITNESS - 屯門（海趣坊）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門湖翠路168-236號海趣坊", hours: "00:00-24:00", phone: "9794 5247" },
+            { id: 110, name: "24/7 FITNESS - 屯門（良景）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門田景路31號良景廣場4樓", hours: "00:00-24:00", phone: "5409 3247" },
+            { id: 111, name: "24/7 FITNESS - 屯門（山景）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門鳴琴路1號山景商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 112, name: "24/7 FITNESS - 屯門（大興）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門大方街大興花園二期商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 113, name: "24/7 FITNESS - 屯門（蝴蝶）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門湖翠路1號蝴蝶廣場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 114, name: "24/7 FITNESS - 屯門（黃金海岸）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門青山公路1號黃金海岸商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 115, name: "24/7 FITNESS - 屯門（富泰）分店", brand: "24/7 FITNESS", district: "屯門區", address: "新界屯門屯貴路9號富泰商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 116, name: "24/7 FITNESS - 元朗分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界元朗青山公路元朗段56-60號新基大廈2樓", hours: "00:00-24:00", phone: "9545 4503" },
+            { id: 117, name: "24/7 FITNESS - 元朗（第二分店）", brand: "24/7 FITNESS", district: "元朗區", address: "新界元朗合益路9-15號紀業樓1樓", hours: "00:00-24:00", phone: "5598 5247" },
+            { id: 118, name: "24/7 FITNESS - 元朗（朗屏）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界元朗朗屏邨朗屏商場3樓", hours: "00:00-24:00", phone: "9161 2247" },
+            { id: 119, name: "24/7 FITNESS - 元朗（洪水橋）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界元朗洪水橋田心路10號雅珊園商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 120, name: "24/7 FITNESS - 元朗（錦綉花園）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界元朗錦綉花園商場A座1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 121, name: "24/7 FITNESS - 天水圍分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界天水圍天恩路12-18號置富嘉湖二期2樓", hours: "00:00-24:00", phone: "6823 7247" },
+            { id: 122, name: "24/7 FITNESS - 天水圍（T Town）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界天水圍天華路30號T Town North 2樓", hours: "00:00-24:00", phone: "5596 5247" },
+            { id: 123, name: "24/7 FITNESS - 天水圍（天瑞）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界天水圍天瑞路9號天瑞商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 124, name: "24/7 FITNESS - 天水圍（天澤）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界天水圍天瑞路77號天澤商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 125, name: "24/7 FITNESS - 天水圍（天耀）分店", brand: "24/7 FITNESS", district: "元朗區", address: "新界天水圍天湖路2號天耀廣場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 126, name: "24/7 FITNESS - 上水分店", brand: "24/7 FITNESS", district: "北區", address: "新界上水龍琛路48號上水匯8樓", hours: "00:00-24:00", phone: "9858 1247" },
+            { id: 127, name: "24/7 FITNESS - 上水（彩園）分店", brand: "24/7 FITNESS", district: "北區", address: "新界上水彩園路8號彩園廣場4樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 128, name: "24/7 FITNESS - 上水（天平）分店", brand: "24/7 FITNESS", district: "北區", address: "新界上水天平邨天平商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 129, name: "24/7 FITNESS - 粉嶺分店", brand: "24/7 FITNESS", district: "北區", address: "新界粉嶺一鳴路15號碧湖花園商場地下", hours: "00:00-24:00", phone: "5503 7247" },
+            { id: 130, name: "24/7 FITNESS - 粉嶺（聯和墟）分店", brand: "24/7 FITNESS", district: "北區", address: "新界粉嶺和滿街8號帝庭軒購物商場1樓", hours: "00:00-24:00", phone: "6365 5247" },
+            { id: 131, name: "24/7 FITNESS - 粉嶺（華明）分店", brand: "24/7 FITNESS", district: "北區", address: "新界粉嶺華明路21號華明商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 132, name: "24/7 FITNESS - 粉嶺（祥華）分店", brand: "24/7 FITNESS", district: "北區", address: "新界粉嶺新運路38號祥華商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 133, name: "24/7 FITNESS - 大埔分店", brand: "24/7 FITNESS", district: "大埔區", address: "新界大埔太和路15號太和中心地下", hours: "00:00-24:00", phone: "5403 3891" },
+            { id: 134, name: "24/7 FITNESS - 大埔（第二分店）", brand: "24/7 FITNESS", district: "大埔區", address: "新界大埔安邦路8及10號大埔超級城C區2樓", hours: "00:00-24:00", phone: "9549 8247" },
+            { id: 135, name: "24/7 FITNESS - 大埔（富善）分店", brand: "24/7 FITNESS", district: "大埔區", address: "新界大埔安埔路12號富善商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 136, name: "24/7 FITNESS - 大埔（廣福）分店", brand: "24/7 FITNESS", district: "大埔區", address: "新界大埔寶湖道28號廣福商場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 137, name: "24/7 FITNESS - 大埔（富亨）分店", brand: "24/7 FITNESS", district: "大埔區", address: "新界大埔頌雅路6號富亨商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 138, name: "24/7 FITNESS - 沙田分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田石門安群街1號京瑞廣場二期2樓", hours: "00:00-24:00", phone: "6823 8247" },
+            { id: 139, name: "24/7 FITNESS - 沙田（第一城）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田銀城街2號置富第一城樂薈1樓", hours: "00:00-24:00", phone: "5598 9247" },
+            { id: 140, name: "24/7 FITNESS - 沙田（瀝源）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田瀝源街6號瀝源廣場2樓", hours: "00:00-24:00", phone: "9725 6247" },
+            { id: 141, name: "24/7 FITNESS - 沙田（廣源）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田小瀝源路68號廣源商場2座2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 142, name: "24/7 FITNESS - 沙田（禾輋）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田德厚街3號禾輋廣場3樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 143, name: "24/7 FITNESS - 沙田（沙角）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界沙田沙角街5號沙角商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 144, name: "24/7 FITNESS - 大圍分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界大圍富健街2號仁安醫院分科診所樓下（大圍道）", hours: "00:00-24:00", phone: "5409 1247" },
+            { id: 145, name: "24/7 FITNESS - 大圍（美林）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界大圍美田路30號美林商場2樓", hours: "00:00-24:00", phone: "9161 6247" },
+            { id: 146, name: "24/7 FITNESS - 大圍（新翠）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界大圍新翠邨新翠商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 147, name: "24/7 FITNESS - 大圍（顯徑）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界大圍車公廟路69號顯徑商場A翼2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 148, name: "24/7 FITNESS - 馬鞍山分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界馬鞍山鞍誠街8號新港城中心大街地下", hours: "00:00-24:00", phone: "5503 6247" },
+            { id: 149, name: "24/7 FITNESS - 馬鞍山（恒安）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界馬鞍山恒錦街1號恒安商場3樓", hours: "00:00-24:00", phone: "9664 2247" },
+            { id: 150, name: "24/7 FITNESS - 馬鞍山（頌安）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界馬鞍山西沙路632號頌安商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 151, name: "24/7 FITNESS - 馬鞍山（耀安）分店", brand: "24/7 FITNESS", district: "沙田區", address: "新界馬鞍山恒康街2號耀安商場1樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 152, name: "24/7 FITNESS - 將軍澳分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳唐俊街12號天晉匯1樓", hours: "00:00-24:00", phone: "6823 9247" },
+            { id: 153, name: "24/7 FITNESS - 將軍澳（寶琳）分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳欣景路8號新都城中心二期2樓", hours: "00:00-24:00", phone: "5596 3247" },
+            { id: 154, name: "24/7 FITNESS - 將軍澳（坑口）分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳常寧路2號TKO Gateway西翼2樓", hours: "00:00-24:00", phone: "9794 8247" },
+            { id: 155, name: "24/7 FITNESS - 將軍澳（尚德）分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳唐明街2號TKO Spot 3樓", hours: "00:00-24:00", phone: "6365 1247" },
+            { id: 156, name: "24/7 FITNESS - 將軍澳（調景嶺）分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳景嶺路8號都會駅商場2樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 157, name: "24/7 FITNESS - 將軍澳（日出康城）分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界將軍澳康城路1號The LOHAS康城4樓", hours: "00:00-24:00", phone: "NA" },
+            { id: 158, name: "24/7 FITNESS - 西貢分店", brand: "24/7 FITNESS", district: "西貢區", address: "新界西貢親民街16號西貢花園地下", hours: "00:00-24:00", phone: "NA" },
+            { id: 159, name: "24/7 FITNESS - 東涌分店", brand: "24/7 FITNESS", district: "離島區", address: "新界大嶼山東涌富東街6號富東廣場2樓", hours: "00:00-24:00", phone: "5409 7247" },
+            { id: 160, name: "24/7 FITNESS - 東涌（逸東）分店", brand: "24/7 FITNESS", district: "離島區", address: "新界大嶼山東涌逸東街8號逸東商場2樓", hours: "00:00-24:00", phone: "9549 6247" },
+            { id: 161, name: "Anytime Fitness - 堅尼地城分店", brand: "Anytime Fitness", district: "中西區", address: "香港堅尼地城卑路乍街116-122號聯康新樓1樓", hours: "00:00-24:00", phone: "3460 3318" },
+            { id: 162, name: "Anytime Fitness - 西營盤分店", brand: "Anytime Fitness", district: "中西區", address: "香港西營盤皇后大道西189號西浦1樓", hours: "00:00-24:00", phone: "2813 5111" },
+            { id: 163, name: "Anytime Fitness - 中環威靈頓街分店", brand: "Anytime Fitness", district: "中西區", address: "香港中環威靈頓街33號The Loop地庫", hours: "00:00-24:00", phone: "2801 7331" },
+            { id: 164, name: "Anytime Fitness - 灣仔分店", brand: "Anytime Fitness", district: "灣仔區", address: "香港灣仔安樂里4號A-B舖及1樓", hours: "00:00-24:00", phone: "2328 2128" },
+            { id: 165, name: "Anytime Fitness - 銅鑼灣分店", brand: "Anytime Fitness", district: "灣仔區", address: "香港銅鑼灣怡和街88號富豪香港酒店地庫", hours: "00:00-24:00", phone: "2568 1868" },
+            { id: 166, name: "Anytime Fitness - 天后分店", brand: "Anytime Fitness", district: "灣仔區", address: "香港天后英皇道14號僑興大廈1樓", hours: "00:00-24:00", phone: "2566 1388" },
+            { id: 167, name: "Anytime Fitness - 北角分店", brand: "Anytime Fitness", district: "東區", address: "香港北角英皇道441-447號漢宮大廈1樓", hours: "00:00-24:00", phone: "2570 2888" },
+            { id: 168, name: "Anytime Fitness - 鰂魚涌分店", brand: "Anytime Fitness", district: "東區", address: "香港鰂魚涌華蘭路20號華蘭中心地下2-3號舖", hours: "00:00-24:00", phone: "2811 2688" },
+            { id: 169, name: "Anytime Fitness - 西灣河分店", brand: "Anytime Fitness", district: "東區", address: "香港西灣河成安街18-36號成安閣1樓", hours: "00:00-24:00", phone: "2569 2088" },
+            { id: 170, name: "Anytime Fitness - 筲箕灣分店", brand: "Anytime Fitness", district: "東區", address: "香港筲箕灣南安街83號海灣華庭1樓", hours: "00:00-24:00", phone: "2885 8833" },
+            { id: 171, name: "Anytime Fitness - 小西灣分店", brand: "Anytime Fitness", district: "東區", address: "香港小西灣小西灣道10號小西灣廣場4樓402號舖", hours: "00:00-24:00", phone: "2505 1888" },
+            { id: 172, name: "Anytime Fitness - 香港仔分店", brand: "Anytime Fitness", district: "南區", address: "香港香港仔大道234號富嘉工業大廈1樓", hours: "00:00-24:00", phone: "2553 2988" },
+            { id: 173, name: "Anytime Fitness - 尖沙咀分店", brand: "Anytime Fitness", district: "油尖旺區", address: "九龍尖沙咀亞士厘道29-39號九龍中心地庫", hours: "00:00-24:00", phone: "2368 8988" },
+            { id: 174, name: "Anytime Fitness - 佐敦分店", brand: "Anytime Fitness", district: "油尖旺區", address: "九龍佐敦吳松街182號榮國中心1樓", hours: "00:00-24:00", phone: "2314 2988" },
+            { id: 175, name: "Anytime Fitness - 油麻地分店", brand: "Anytime Fitness", district: "油尖旺區", address: "九龍油麻地彌敦道518-520號彌敦行1樓", hours: "00:00-24:00", phone: "2384 6698" },
+            { id: 176, name: "Anytime Fitness - 旺角分店", brand: "Anytime Fitness", district: "油尖旺區", address: "九龍旺角豉油街15號萬利商業大廈2樓", hours: "00:00-24:00", phone: "2392 8688" },
+            { id: 177, name: "Anytime Fitness - 大角咀分店", brand: "Anytime Fitness", district: "油尖旺區", address: "九龍大角咀道97-105號大同新邨大公樓1樓", hours: "00:00-24:00", phone: "2395 2888" },
+            { id: 178, name: "Anytime Fitness - 深水埗分店", brand: "Anytime Fitness", district: "深水埗區", address: "九龍深水埗大埔道222-230號傲凱1樓", hours: "00:00-24:00", phone: "2778 8238" },
+            { id: 179, name: "Anytime Fitness - 長沙灣分店", brand: "Anytime Fitness", district: "深水埗區", address: "九龍長沙灣青山道268號2樓", hours: "00:00-24:00", phone: "2708 1188" },
+            { id: 180, name: "Anytime Fitness - 荔枝角分店", brand: "Anytime Fitness", district: "深水埗區", address: "九龍荔枝角長義街10號昌隆工業大廈地下", hours: "00:00-24:00", phone: "2370 0899" },
+            { id: 181, name: "Anytime Fitness - 紅磡分店", brand: "Anytime Fitness", district: "九龍城區", address: "九龍紅磡馬頭圍道87-89號新福閣1樓", hours: "00:00-24:00", phone: "2362 8188" },
+            { id: 182, name: "Anytime Fitness - 土瓜灣分店", brand: "Anytime Fitness", district: "九龍城區", address: "九龍土瓜灣馬頭圍道326-332號1樓", hours: "00:00-24:00", phone: "2712 8838" },
+            { id: 183, name: "Anytime Fitness - 九龍城分店", brand: "Anytime Fitness", district: "九龍城區", address: "九龍九龍城太子道西398號御・太子1樓", hours: "00:00-24:00", phone: "2382 8838" },
+            { id: 184, name: "Anytime Fitness - 何文田分店", brand: "Anytime Fitness", district: "九龍城區", address: "九龍何文田梭椏道8號榮英大廈1樓", hours: "00:00-24:00", phone: "2713 2888" },
+            { id: 185, name: "Anytime Fitness - 新蒲崗分店", brand: "Anytime Fitness", district: "黃大仙區", address: "九龍新蒲崗大有街31號善美工業大廈地下", hours: "00:00-24:00", phone: "2328 8918" },
+            { id: 186, name: "Anytime Fitness - 慈雲山分店", brand: "Anytime Fitness", district: "黃大仙區", address: "九龍慈雲山蒲崗村道139號1樓", hours: "00:00-24:00", phone: "2326 2288" },
+            { id: 187, name: "Anytime Fitness - 九龍灣分店", brand: "Anytime Fitness", district: "觀塘區", address: "九龍九龍灣牛頭角道3號得寶花園商場地下", hours: "00:00-24:00", phone: "2756 2688" },
+            { id: 188, name: "Anytime Fitness - 觀塘分店", brand: "Anytime Fitness", district: "觀塘區", address: "九龍觀塘開源道79號鱷魚恤中心12樓", hours: "00:00-24:00", phone: "2342 8288" },
+            { id: 189, name: "Anytime Fitness - 油塘分店", brand: "Anytime Fitness", district: "觀塘區", address: "九龍油塘草園街4號華順工業大廈地下", hours: "00:00-24:00", phone: "2348 1688" },
+            { id: 190, name: "Anytime Fitness - 葵芳分店", brand: "Anytime Fitness", district: "葵青區", address: "新界葵芳葵富路7-11號葵涌廣場3樓3069號舖", hours: "00:00-24:00", phone: "2428 2868" },
+            { id: 191, name: "Anytime Fitness - 葵興分店", brand: "Anytime Fitness", district: "葵青區", address: "新界葵涌禾塘咀街31-39號香港毛紡工業大廈地下", hours: "00:00-24:00", phone: "2426 6888" },
+            { id: 192, name: "Anytime Fitness - 荃灣分店", brand: "Anytime Fitness", district: "荃灣區", address: "新界荃灣海盛路3號TML廣場地下D2舖", hours: "00:00-24:00", phone: "2413 8868" },
+            { id: 193, name: "Anytime Fitness - 荃灣沙咀道分店", brand: "Anytime Fitness", district: "荃灣區", address: "新界荃灣沙咀道362號全發商業大廈2樓", hours: "00:00-24:00", phone: "2492 2688" },
+            { id: 194, name: "Anytime Fitness - 屯門分店", brand: "Anytime Fitness", district: "屯門區", address: "新界屯門建發街11號好景工業大廈A座地下", hours: "00:00-24:00", phone: "2458 2688" },
+            { id: 195, name: "Anytime Fitness - 屯門置樂分店", brand: "Anytime Fitness", district: "屯門區", address: "新界屯門青海圍18號置樂花園商場1樓", hours: "00:00-24:00", phone: "2451 2888" },
+            { id: 196, name: "Anytime Fitness - 元朗分店", brand: "Anytime Fitness", district: "元朗區", address: "新界元朗安寧路38號世宙3座地下", hours: "00:00-24:00", phone: "2476 2888" },
+            { id: 197, name: "Anytime Fitness - 元朗教育路分店", brand: "Anytime Fitness", district: "元朗區", address: "新界元朗教育路15-19號嘉城廣場3樓", hours: "00:00-24:00", phone: "2478 8388" },
+            { id: 198, name: "Anytime Fitness - 天水圍分店", brand: "Anytime Fitness", district: "元朗區", address: "新界天水圍新北江商場2樓", hours: "00:00-24:00", phone: "2448 2888" },
+            { id: 199, name: "Anytime Fitness - 上水分店", brand: "Anytime Fitness", district: "北區", address: "新界上水新康街67號1樓", hours: "00:00-24:00", phone: "2672 2888" },
+            { id: 200, name: "Anytime Fitness - 粉嶺分店", brand: "Anytime Fitness", district: "北區", address: "新界粉嶺聯安街9-15號1樓", hours: "00:00-24:00", phone: "2676 2888" },
+            { id: 201, name: "Anytime Fitness - 大埔分店", brand: "Anytime Fitness", district: "大埔區", address: "新界大埔翠樂街8號富萊花園地下", hours: "00:00-24:00", phone: "2665 2888" },
+            { id: 202, name: "Anytime Fitness - 沙田石門分店", brand: "Anytime Fitness", district: "沙田區", address: "新界沙田石門安群街3號京瑞廣場一期2樓239號舖", hours: "00:00-24:00", phone: "2637 2888" },
+            { id: 203, name: "Anytime Fitness - 大圍分店", brand: "Anytime Fitness", district: "沙田區", address: "新界大圍積福街68號1樓", hours: "00:00-24:00", phone: "2698 2888" },
+            { id: 204, name: "Anytime Fitness - 馬鞍山分店", brand: "Anytime Fitness", district: "沙田區", address: "新界馬鞍山鞍駿街1號馬鞍山中心地下A68號舖", hours: "00:00-24:00", phone: "2633 2888" },
+            { id: 205, name: "chocoZAP - 屯門（蝴蝶灣）店", brand: "chocoZAP", district: "屯門區", address: "新界屯門湖翠路201號兆禧苑商場地下G09號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 206, name: "chocoZAP - 太子店", brand: "chocoZAP", district: "油尖旺區", address: "太子大埔道6-8號福耀大廈1樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 207, name: "chocoZAP - 尖東店", brand: "chocoZAP", district: "油尖旺區", address: "尖沙咀東科學館道14號新文華中心G66-71號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 208, name: "chocoZAP - 長沙灣店", brand: "chocoZAP", district: "深水埗區", address: "深水埗元州街310號悅雅地下1號舖連一樓4號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 209, name: "chocoZAP - 上水店", brand: "chocoZAP", district: "北區", address: "新界上水智昌路9號上水名都商場地下3號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 210, name: "chocoZAP - 太古店", brand: "chocoZAP", district: "東區", address: "鰂魚涌康安街18號地下A9號舖連高層地下A9-A15", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 211, name: "chocoZAP - 大窩口店", brand: "chocoZAP", district: "葵青區", address: "荃灣沙咀道345-347號華興樓地下", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 212, name: "chocoZAP - 九龍城店", brand: "chocoZAP", district: "九龍城區", address: "九龍城侯王道39-43號地下", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 213, name: "chocoZAP - 元朗店", brand: "chocoZAP", district: "元朗區", address: "元朗青山公路-元朗段239-247號萬昌樓地下連一樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 214, name: "chocoZAP - 尖沙咀（帝國酒店）店", brand: "chocoZAP", district: "油尖旺區", address: "尖沙咀彌敦道32-34號帝國酒店地下入口及地庫全層", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 215, name: "chocoZAP - 何文田店", brand: "chocoZAP", district: "九龍城區", address: "紅磡機利士南路9-21號源成大廈地下A,B,C舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 216, name: "chocoZAP - 紅磡馬頭圍道店", brand: "chocoZAP", district: "九龍城區", address: "紅磡馬頭圍道47-49號寶怡大廈連一樓A舖地舖入口號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 217, name: "chocoZAP - 銅鑼灣店", brand: "chocoZAP", district: "灣仔區", address: "銅鑼灣銅鑼灣道3-17號1樓A2號鋪", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 218, name: "chocoZAP - 炮台山店", brand: "chocoZAP", district: "東區", address: "炮台山英皇道153-153C號英皇大廈地下A,C,D號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 219, name: "chocoZAP - 西環店", brand: "chocoZAP", district: "中西區", address: "香港西環皇后大道西業昌大廈443-453號地下13號舖連閣樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 220, name: "chocoZAP - 將軍澳店", brand: "chocoZAP", district: "西貢區", address: "將軍澳至善街9號帝景灣地下2-3號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 221, name: "chocoZAP - 觀塘店", brand: "chocoZAP", district: "觀塘區", address: "觀塘駿業街52-56號中海日升中心一樓A號舖", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 222, name: "chocoZAP - 上環店", brand: "chocoZAP", district: "中西區", address: "上環皇后大道西77-91號荷李活中心地下C號舖及地庫部份", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 223, name: "chocoZAP - 寶琳店", brand: "chocoZAP", district: "西貢區", address: "將軍澳寶琳毓雅里7號富麗花園地下3-5號鋪", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 224, name: "chocoZAP - 佐敦店", brand: "chocoZAP", district: "油尖旺區", address: "香港九龍彌敦道358-366號善美大廈地下及1樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 225, name: "chocoZAP - 葵芳店", brand: "chocoZAP", district: "葵青區", address: "新界葵涌興芳路178號豐寓地下及1樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 226, name: "chocoZAP - 深水埗店", brand: "chocoZAP", district: "深水埗區", address: "深水埗元州街85-89號新高登電腦廣場地下及地庫", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 227, name: "chocoZAP - 筲箕灣店", brand: "chocoZAP", district: "東區", address: "港島筲箕灣筲箕灣道363號都滙東1樓", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 228, name: "chocoZAP - 土瓜灣店", brand: "chocoZAP", district: "九龍城區", address: "九龍土瓜灣炮仗街92號福至大廈地下店舖3&4", hours: "00:00-24:00", phone: "6135 0650" },
+            { id: 229, name: "香港仔體育館", brand: "康文署體育館/設施", district: "南區", address: "香港仔大道203號香港仔市政大廈5字樓", hours: "07:00-23:00", phone: "2555 8909" },
+            { id: 230, name: "香港仔網球及壁球中心", brand: "康文署體育館/設施", district: "南區", address: "香港仔海傍道1號", hours: "07:00-23:00", phone: "2553 6130" },
+            { id: 231, name: "鴨脷洲體育館", brand: "康文署體育館/設施", district: "南區", address: "鴨脷洲洪聖街8號", hours: "07:00-23:00", phone: "2554 0832" },
+            { id: 232, name: "柴灣體育館", brand: "康文署體育館/設施", district: "東區", address: "柴灣怡順街", hours: "07:00-23:00", phone: "2897 9144" },
+            { id: 233, name: "港灣道體育館", brand: "康文署體育館/設施", district: "灣仔區", address: "灣仔港灣道27號", hours: "07:00-23:00", phone: "2827 9684" },
+            { id: 234, name: "香港公園體育館", brand: "康文署體育館/設施", district: "中西區", address: "中環紅棉路29號", hours: "07:00-23:00", phone: "2521 5072" },
+            { id: 235, name: "港島東體育館", brand: "康文署體育館/設施", district: "東區", address: "西灣河鯉景道52號", hours: "07:00-23:00", phone: "2151 4070" },
+            { id: 236, name: "渣華道體育館", brand: "康文署體育館/設施", district: "東區", address: "北角渣華道99號渣華道市政大廈3樓", hours: "07:00-23:00", phone: "2516 9415" },
+            { id: 237, name: "駱克道體育館", brand: "康文署體育館/設施", district: "灣仔區", address: "灣仔軒尼詩道225號駱克道市政大廈10樓", hours: "07:00-23:00", phone: "2879 5521" },
+            { id: 238, name: "鰂魚涌體育館", brand: "康文署體育館/設施", district: "東區", address: "鰂魚涌街38號鰂魚涌市政大廈6字樓", hours: "07:00-23:00", phone: "2562 0374" },
+            { id: 239, name: "石塘咀體育館", brand: "康文署體育館/設施", district: "中西區", address: "皇后大道西470號5樓", hours: "07:00-23:00", phone: "2858 0541" },
+            { id: 240, name: "上環體育館", brand: "康文署體育館/設施", district: "中西區", address: "皇后大道中345號11字樓", hours: "07:00-23:00", phone: "2853 2574" },
+            { id: 241, name: "士美非路體育館", brand: "康文署體育館/設施", district: "中西區", address: "香港堅尼地城士美菲路12K號士美非路市政大廈4樓", hours: "07:00-23:00", phone: "2855 7321" },
+            { id: 242, name: "中山紀念公園體育館", brand: "康文署體育館/設施", district: "中西區", address: "西營盤東邊街北18號", hours: "07:00-23:00", phone: "2858 2493" },
+            { id: 243, name: "彩虹道體育館", brand: "康文署體育館/設施", district: "黃大仙區", address: "黃大仙彩虹道150號", hours: "07:00-23:00", phone: "2326 2714" },
+            { id: 244, name: "彩榮路體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "觀塘彩榮路58號", hours: "07:00-23:00", phone: "2721 5918" },
+            { id: 245, name: "竹園體育館", brand: "康文署體育館/設施", district: "黃大仙區", address: "黃大仙竹園道竹園北邨", hours: "07:00-23:00", phone: "2324 3960" },
+            { id: 246, name: "花園街體育館", brand: "康文署體育館/設施", district: "油尖旺區", address: "旺角花園街123號A花園街市政大廈10字樓", hours: "07:00-23:00", phone: "2395 1501" },
+            { id: 247, name: "佛光街體育館", brand: "康文署體育館/設施", district: "九龍城區", address: "何文田牧愛街18號9字樓", hours: "07:00-23:00", phone: "2712 2652" },
+            { id: 248, name: "曉光街體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "九龍觀塘曉光街2號", hours: "07:00-23:00", phone: "2347 0384" },
+            { id: 249, name: "何文田體育館", brand: "康文署體育館/設施", district: "九龍城區", address: "何文田忠義街1號", hours: "07:00-23:00", phone: "2762 7837" },
+            { id: 250, name: "紅磡市政大廈體育館", brand: "康文署體育館/設施", district: "九龍城區", address: "紅磡馬頭圍道11號紅磡市政大廈3樓", hours: "07:00-23:00", phone: "2765 0586" },
+            { id: 251, name: "九龍公園體育館", brand: "康文署體育館/設施", district: "油尖旺區", address: "尖沙咀柯士甸道22號", hours: "07:00-23:00", phone: "2724 3120/2724 3344" },
+            { id: 252, name: "官涌體育館", brand: "康文署體育館/設施", district: "油尖旺區", address: "佐敦寶靈街17號官涌市政大廈5字樓", hours: "07:00-23:00", phone: "2302 1275" },
+            { id: 253, name: "藍田(南)體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "藍田碧雲道170號", hours: "07:00-23:00", phone: "2379 9254" },
+            { id: 254, name: "鯉魚門體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "觀塘油塘鯉魚門徑6號鯉魚門市政大廈2字樓", hours: "07:00-23:00", phone: "2349 3954" },
+            { id: 255, name: "馬仔坑體育館", brand: "康文署體育館/設施", district: "黃大仙區", address: "黃大仙馬仔坑道30號", hours: "07:00-23:00", phone: "2321 0126" },
+            { id: 256, name: "牛頭角道體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "牛頭角道183號牛頭角市政大廈4樓", hours: "07:00-23:00", phone: "2756 3466" },
+            { id: 257, name: "北河街體育館", brand: "康文署體育館/設施", district: "深水埗區", address: "深水埗基隆街333號北河街市政大廈5字樓", hours: "07:00-23:00", phone: "2729 1010" },
+            { id: 258, name: "蒲崗村道體育館", brand: "康文署體育館/設施", district: "黃大仙區", address: "黃大仙蒲崗村道120號", hours: "07:00-23:00", phone: "2325 3585" },
+            { id: 259, name: "保安道體育館", brand: "康文署體育館/設施", district: "深水埗區", address: "深水埗保安道325-329號保安道市政大廈2字樓", hours: "07:00-23:00", phone: "2729 4237" },
+            { id: 260, name: "深水埗體育館", brand: "康文署體育館/設施", district: "深水埗區", address: "九龍深水埗深旺道38號深水埗康樂文化大樓2樓", hours: "07:00-23:00", phone: "2360 2276" },
+            { id: 261, name: "石硤尾公園體育館", brand: "康文署體育館/設施", district: "深水埗區", address: "深水埗南昌街290號", hours: "07:00-23:00", phone: "2784 7424" },
+            { id: 262, name: "順利邨體育館", brand: "康文署體育館/設施", district: "觀塘區", address: "觀塘順利邨道33號", hours: "07:00-23:00", phone: "2951 4136" },
+            { id: 263, name: "大角咀體育館", brand: "康文署體育館/設施", district: "油尖旺區", address: "九龍大角咀褔全街63號大角咀市政大廈6樓", hours: "07:00-23:00", phone: "2393 1084" },
+            { id: 264, name: "土瓜灣體育館", brand: "康文署體育館/設施", district: "九龍城區", address: "土瓜灣下鄉道66號", hours: "07:00-23:00", phone: "2364 9285" },
+            { id: 265, name: "車公廟體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田沙田頭路10號", hours: "07:00-23:00", phone: "2790 0221" },
+            { id: 266, name: "長洲體育館", brand: "康文署體育館/設施", district: "離島區", address: "長洲醫院路3號", hours: "07:00-23:00", phone: "2981 6285" },
+            { id: 267, name: "長發體育館", brand: "康文署體育館/設施", district: "葵青區", address: "青衣長發邨長發廣場4樓", hours: "07:00-23:00", phone: "2433 5886" },
+            { id: 268, name: "富亨體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔富亨邨富亨商場1字樓", hours: "07:00-23:00", phone: "2665 2753" },
+            { id: 269, name: "富善體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔富善邨停車場7樓", hours: "07:00-23:00", phone: "2661 4144" },
+            { id: 270, name: "鳳琴街體育館", brand: "康文署體育館/設施", district: "元朗區", address: "元朗鳳攸北街", hours: "07:00-23:00", phone: "2475 2334" },
+            { id: 271, name: "楓樹窩體育館", brand: "康文署體育館/設施", district: "葵青區", address: "青衣楓樹窩路10號青衣邨第二期", hours: "07:00-23:00", phone: "2433 6523" },
+            { id: 272, name: "坑口體育館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳培成路38號西貢將軍澳政府綜合大樓1樓", hours: "07:00-23:00", phone: "2623 5928" },
+            { id: 273, name: "恆安體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田恆安邨恆安商場4樓", hours: "07:00-23:00", phone: "2642 0203" },
+            { id: 274, name: "顯徑體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田顯徑邨顯徑商場", hours: "07:00-23:00", phone: "2605 8407" },
+            { id: 275, name: "香港單車館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳寶康路107號", hours: "07:00-23:00", phone: "2878 8622" },
+            { id: 276, name: "荔景體育館", brand: "康文署體育館/設施", district: "葵青區", address: "葵涌荔景麗祖路", hours: "07:00-23:00", phone: "2744 5678" },
+            { id: 277, name: "良田體育館", brand: "康文署體育館/設施", district: "屯門區", address: "屯門田景邨停車場4字樓", hours: "07:00-23:00", phone: "2467 1594" },
+            { id: 278, name: "朗屏體育館", brand: "康文署體育館/設施", district: "元朗區", address: "元朗朗屏邨朗屏商場2樓", hours: "07:00-23:00", phone: "2475 2404/2475 1444" },
+            { id: 279, name: "聯和墟體育館", brand: "康文署體育館/設施", district: "北區", address: "粉嶺和滿街9號3樓", hours: "07:00-23:00", phone: "2677 5149" },
+            { id: 280, name: "龍琛路體育館", brand: "康文署體育館/設施", district: "北區", address: "上水馬會道155號", hours: "07:00-23:00", phone: "2673 4433" },
+            { id: 281, name: "馬鞍山體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田馬鞍山鞍駿街14號", hours: "07:00-23:00", phone: "2631 1597" },
+            { id: 282, name: "美林體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田美林邨", hours: "07:00-23:00", phone: "2695 9318" },
+            { id: 283, name: "梅窩體育館", brand: "康文署體育館/設施", district: "離島區", address: "梅窩銀石街9號梅窩市政大廈", hours: "07:00-23:00", phone: "2984 2334" },
+            { id: 284, name: "北葵涌鄧肇堅體育館", brand: "康文署體育館/設施", district: "葵青區", address: "葵涌和宜合道292號", hours: "07:00-23:00", phone: "2426 3269" },
+            { id: 285, name: "林士德體育館", brand: "康文署體育館/設施", district: "葵青區", address: "葵涌興芳路176號", hours: "07:00-23:00", phone: "2422 5610" },
+            { id: 286, name: "坪洲體育館", brand: "康文署體育館/設施", district: "離島區", address: "坪洲寶坪街6號坪洲市政大廈", hours: "07:00-23:00", phone: "2983 8420" },
+            { id: 287, name: "寶林體育館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳寶林邨", hours: "07:00-23:00", phone: "2701 5918" },
+            { id: 288, name: "保榮路體育館", brand: "康文署體育館/設施", district: "北區", address: "上水百和路19號", hours: "07:00-23:00", phone: "2639 2979" },
+            { id: 289, name: "兆麟體育館", brand: "康文署體育館/設施", district: "屯門區", address: "屯門兆麟街19號屯門兆麟政府綜合大樓3字樓", hours: "07:00-23:00", phone: "2659 2311" },
+            { id: 290, name: "大興體育館", brand: "康文署體育館/設施", district: "屯門區", address: "屯門青松觀路", hours: "07:00-23:00", phone: "2463 1260" },
+            { id: 291, name: "大埔墟體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔鄉事會街8號大埔綜合大樓6樓", hours: "07:00-23:00", phone: "3183 9011" },
+            { id: 292, name: "大埔體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔汀太路13號", hours: "07:00-23:00", phone: "2664 7222" },
+            { id: 293, name: "大窩口體育館", brand: "康文署體育館/設施", district: "葵青區", address: "葵涌大窩口大廈街", hours: "07:00-23:00", phone: "2920 2011" },
+            { id: 294, name: "太和體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔太和邨太和商場平台", hours: "07:00-23:00", phone: "2656 3398" },
+            { id: 295, name: "賽馬會屯門蝴蝶灣體育館", brand: "康文署體育館/設施", district: "屯門區", address: "屯門湖山路", hours: "07:00-23:00", phone: "2465 7610" },
+            { id: 296, name: "天暉路體育館", brand: "康文署體育館/設施", district: "元朗區", address: "新界天水圍天瑞路63號", hours: "07:00-23:00", phone: "2473 0229" },
+            { id: 297, name: "天平體育館", brand: "康文署體育館/設施", district: "北區", address: "上水天平邨天平商場3樓", hours: "07:00-23:00", phone: "2673 3699" },
+            { id: 298, name: "天瑞體育館", brand: "康文署體育館/設施", district: "元朗區", address: "元朗天水圍天瑞路7號", hours: "07:00-23:00", phone: "2446 6609" },
+            { id: 299, name: "天水圍體育館", brand: "康文署體育館/設施", district: "元朗區", address: "天水圍天柏路1號", hours: "07:00-23:00", phone: "2446 4778" },
+            { id: 300, name: "調景嶺體育館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳翠嶺路2號", hours: "07:00-23:00", phone: "2481 5033" },
+            { id: 301, name: "將軍澳體育館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳運隆路9號", hours: "07:00-23:00", phone: "2701 2317" },
+            { id: 302, name: "青衣西南體育館", brand: "康文署體育館/設施", district: "葵青區", address: "新界青衣涌美路70號", hours: "07:00-23:00", phone: "2341 0102" },
+            { id: 303, name: "青衣體育館", brand: "康文署體育館/設施", district: "葵青區", address: "青衣青綠街38號青衣市政大廈2樓", hours: "07:00-23:00", phone: "2495 4631" },
+            { id: 304, name: "荃灣體育館", brand: "康文署體育館/設施", district: "荃灣區", address: "新界荃灣永順街53號", hours: "07:00-23:00", phone: "2392 9570" },
+            { id: 305, name: "荃灣西約體育館", brand: "康文署體育館/設施", district: "荃灣區", address: "荃灣海安路68號", hours: "07:00-23:00", phone: "2412 0904" },
+            { id: 306, name: "翠林體育館", brand: "康文署體育館/設施", district: "西貢區", address: "將軍澳翠林邨", hours: "07:00-23:00", phone: "2703 1137" },
+            { id: 307, name: "東昌街體育館", brand: "康文署體育館/設施", district: "大埔區", address: "大埔東昌街25號大埔東昌街康體大樓3樓", hours: "07:00-23:00", phone: "2691 2055" },
+            { id: 308, name: "東涌文東路體育館", brand: "康文署體育館/設施", district: "離島區", address: "新界東涌文東路39號東涌巿政大樓2樓", hours: "07:00-23:00", phone: "2109 2421" },
+            { id: 309, name: "蕙荃體育館", brand: "康文署體育館/設施", district: "荃灣區", address: "荃灣廟崗街6號", hours: "07:00-23:00", phone: "2415 2621" },
+            { id: 310, name: "和興體育館", brand: "康文署體育館/設施", district: "北區", address: "粉嶺和鳴里8號", hours: "07:00-23:00", phone: "2669 7057" },
+            { id: 311, name: "友愛體育館", brand: "康文署體育館/設施", district: "屯門區", address: "屯門興安里", hours: "07:00-23:00", phone: "2450 8850" },
+            { id: 312, name: "楊屋道體育館", brand: "康文署體育館/設施", district: "荃灣區", address: "荃灣楊屋道45號楊屋道市政大廈4樓", hours: "07:00-23:00", phone: "2415 4445" },
+            { id: 313, name: "圓洲角體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田銀城街35號", hours: "07:00-23:00", phone: "2509 9108" },
+            { id: 314, name: "元朗體育館", brand: "康文署體育館/設施", district: "元朗區", address: "元朗馬田路52號元朗文化康樂大樓3樓", hours: "07:00-23:00", phone: "2891 9207" },
+            { id: 315, name: "源禾路體育館", brand: "康文署體育館/設施", district: "沙田區", address: "沙田源禾路8號", hours: "07:00-23:00", phone: "2604 5987" }
+        ];
+
+        // ==================== TAB 2 DATA: GROCERIES & CARE (658 STORES) ====================
+        // Format: [id, brand, name, district, address, hours, phone]
+        const rawGroceriesArray = [
+            [1,"萬寧","啟德Airside","九龍城區","九龍啟德協調道2號AIRSIDE地庫1層B119-B120號舖","10:00-22:00","NA"],
+            [2,"萬寧","淘大商場","觀塘區","九龍牛頭角道77 號淘大商場二期地下183-185號","10:00-22:00","NA"],
+            [3,"萬寧","安泰大廈","中西區","香港上環德輔道中144-148 號安泰大廈地下","08:30-20:00","NA"],
+            [4,"萬寧","創紀之城","觀塘區","九龍觀塘創紀之城5期apm1樓L1-28及L1-29號舖","10:30-22:00","NA"],
+            [5,"萬寧","宇宙商場","中西區","九龍深水埗青山道164-170號宇宙商場地下G18A-B","11:00-21:30","NA"],
+            [6,"萬寧","碧湖花園","北區","新界粉嶺一鳴道15號碧湖花園商場地下高層19-21號舖","09:00-21:00","NA"],
+            [7,"萬寧","碧堤坊","荃灣區","新界深井青山公路33號碧堤坊3樓8號舖","10:00-20:00","NA"],
+            [8,"萬寧","麗城薈","荃灣區","新界荃灣青山公路625號麗城薈3期地下23,24及26號舖","09:30-21:00","NA"],
+            [9,"萬寧","金御門","九龍城區","九龍九龍城衙前圍道39號金．御門地下1號舖","09:00-21:30","NA"],
+            [10,"萬寧","般咸道","中西區","香港般咸道57號地下","11:00-19:30","NA"],
+            [11,"萬寧","偉景花園","葵青區","新界青衣青綠街1號偉景花園商場地下8-11號","10:00-21:00","NA"],
+            [12,"萬寧","弼街","油尖旺區","香港九龍西洋菜南街218-220號及弼街41號生發大廈地下A及B號舖","10:00-22:00","NA"],
+            [13,"萬寧","蝴蝶邨","屯門區","新界屯門蝴蝶廣場地下R123號舖","08:30-21:00","NA"],
+            [14,"萬寧","窩打老道","油尖旺區","九龍窩打老道86D 萬基大廈地下A&B1A號","09:00-20:30","NA"],
+            [15,"萬寧","金馬倫道","油尖旺區","九龍尖沙咀金馬倫道26-28號金壘商業中心地下","10:00-22:00","NA"],
+            [16,"萬寧","卓爾居","屯門區","屯門石排頭徑1號卓爾居地下G2A號舖","10:00-21:00","NA"],
+            [17,"萬寧","長洲","離島區","香港長洲海旁道31號地下","11:30-20:00","NA"],
+            [18,"萬寧","長亨商場","葵青區","新界青衣長亨邨長亨商場3樓313-315號舖","09:00-20:30","NA"],
+            [19,"萬寧","長康商場","葵青區","新界青衣長康邨長康商場2期3樓301號舖","11:00-21:00","NA"],
+            [20,"萬寧","長沙灣道","深水埗區","九龍長沙灣道226-242號金華大廈地下B6 & B7號舖","10:00-22:00","NA"],
+            [21,"萬寧","置富","南區","香港薄扶林置富南區廣場3樓303號室","11:30-19:30","NA"],
+            [22,"萬寧","置樂花園","屯門區","新界屯門置樂花園地下66A號舖","09:00-20:00","NA"],
+            [23,"萬寧","中港城","油尖旺區","九龍尖沙咀廣東道33號中港城地下11及11A號舖","10:00-22:00","NA"],
+            [24,"萬寧","清河商場","北區","新界上水清河邨清河商場9號舖","09:00-22:00","NA"],
+            [25,"萬寧","晴朗商場","九龍城區","九龍九龍城沐翠街晴朗商場地下A004號舖位","09:30-21:30","NA"],
+            [26,"萬寧","菁田邨","屯門區","新界屯門菁田邨菁田商場地下G12號舖","09:30-21:00","NA"],
+            [27,"萬寧","彩雲商場","黃大仙區","九龍牛池灣彩雲(一)邨彩雲商場2期高層地下A111號舖","09:30-22:00","NA"],
+            [28,"萬寧","竹園","黃大仙區","九龍竹園南村竹園商場1樓S101號","09:00-22:00","NA"],
+            [29,"萬寧","駿洋商場","沙田區","新界沙田火炭駿洋邨駿洋商場G層G13號舖","10:00-20:00","NA"],
+            [30,"萬寧","頌安","沙田區","新界馬鞍山頌安商場1樓110&111號","09:00-22:00","NA"],
+            [31,"萬寧","東薈城","離島區","新界東涌東薈城名店倉5樓501號舖","10:00-21:00","NA"],
+            [32,"萬寧","荃新天地","荃灣區","新界荃灣荃新天地地下G39及G41舖","10:00-22:00","NA"],
+            [33,"萬寧","荃新天地2","荃灣區","新界荃灣楊屋道18號荃新天地2期高層地下UG70-73及UG75-77號舖","10:00-22:00","NA"],
+            [34,"萬寧","雲景道","東區","香港北角雲景道33號","12:00-20:30","NA"],
+            [35,"萬寧","囍逸","北區","新界粉嶺和豐街28號囍逸地下5號舖","10:00-21:00","NA"],
+            [36,"萬寧","天璽天","九龍城區","九龍啟德協調道10號天璽．天低層地下LG28, LG30 及LG32號舖","10:00-22:00","NA"],
+            [37,"萬寧","大本型","觀塘區","九龍油塘高超道38號大本型2樓233號舖","10:00-22:00","NA"],
+            [38,"萬寧","西九龍中心","油尖旺區","九龍深水埗欽洲街37K西九龍中心5樓501B","10:00-22:00","NA"],
+            [39,"萬寧","東港城","西貢區","新界將軍澳重華路8號東港城2樓238B號舖","10:00-22:00","NA"],
+            [40,"萬寧","八號花園","大埔區","新界大埔八號花園地下15-16號舖","09:00-22:00","NA"],
+            [41,"萬寧","電氣道","灣仔區","香港北角電氣道183號友邦廣場地下5-6號","08:30-22:00","NA"],
+            [42,"萬寧","圓方","油尖旺區","九龍柯士甸道西一號圓方1樓1092號舖","10:00-22:00","NA"],
+            [43,"萬寧","粉嶺中心","北區","新界粉嶺新運路33號粉嶺中心地下139至142號舖","09:00-22:00","NA"],
+            [44,"萬寧","又一城","深水埗區","九龍九龍塘達之路80號又一城MTR-09號舖","09:30-22:00","NA"],
+            [45,"萬寧","健威坊","東區","香港北角英皇道560號健威坊低層地下L37號舖","09:00-22:00","NA"],
+            [46,"萬寧","花都廣場","北區","新界粉嶺百和路88號花都廣場地下A56-A59號","09:00-22:00","NA"],
+            [47,"萬寧","福昌樓","東區","香港鰂魚涌英皇道1032-1044號福昌樓低層地下102號舖","09:00-20:30","NA"],
+            [48,"萬寧","北角城","東區","香港英皇道250號北角城中心地下02號舖","09:00-22:30","NA"],
+            [49,"萬寧","四海大廈","油尖旺區","九龍尖沙咀彌敦道208-212號四海大廈地下A舖","10:00-22:00","NA"],
+            [50,"萬寧","富亨","大埔區","新界大埔富亨邨富亨購物中心28號","09:30-22:00","NA"],
+            [51,"萬寧","富山邨","黃大仙區","九龍富山邨富仁樓LG2層L203-204號舖","10:30-20:00","NA"],
+            [52,"萬寧","富蝶商場","大埔區","新界大埔富蝶邨二期富蝶商場地下15號舖","09:00-21:00","NA"],
+            [53,"萬寧","富運","油尖旺區","九龍彌敦道573號富運中心地下A舖","10:00-22:00","NA"],
+            [54,"萬寧","元朗鳳琴街","元朗區","新界元朗鳳琴街15-21號鴻運中心地下73號","10:30-21:30","NA"],
+            [55,"萬寧","富健花園","屯門區","新界屯門龍門道45號富健花園55, 56 & 58號舖","09:30-21:30","NA"],
+            [56,"萬寧","西沙GO PARK 2","油尖旺區","新界西沙海映路8號西沙GO PARK 2 地下低層LG30號舖","11:30-20:00","NA"],
+            [57,"萬寧","翔龍灣","九龍城區","九龍馬頭角新碼頭街38號翔龍灣廣場地下2號舖","11:30-20:30","NA"],
+            [58,"萬寧","俊宏軒","元朗區","新界天水圍天瑞路88號俊宏軒1樓104號舖","09:30-21:30","NA"],
+            [59,"萬寧","翠華花園","沙田區","新界沙田沙角街7-11號翠華花園地下12-13號舖","12:00-20:30","NA"],
+            [60,"萬寧","機利臣街","灣仔區","香港灣仔莊士敦道18號嘉寧大厦地下C,E,F,G 及J 舖","09:00-22:00","NA"],
+            [61,"萬寧","恆福商場","屯門區","新界屯門青山公路333號青山灣段恆福商場2樓213-214號舖","11:00-19:30","NA"],
+            [62,"萬寧","恒隆中心","灣仔區","香港銅鑼灣百德新街2-20號恒隆中心地下G02號舖","10:00-22:00","NA"],
+            [63,"萬寧","跑馬地","灣仔區","香港跑馬地成和道25-27號地下","09:00-22:00","NA"],
+            [64,"萬寧","海港城","油尖旺區","九龍海港城港威商場三階3304號舖","10:00-22:00","NA"],
+            [65,"萬寧","杏花","東區","香港柴灣杏花村杏花新城157-159號舖","09:00-21:00","NA"],
+            [66,"萬寧","恆安","沙田區","新界沙田馬鞍山恆安商場2樓221-222號舖","09:00-22:00","NA"],
+            [67,"萬寧","顯徑","沙田區","新界沙田顯徑邨顯徑購物中心地下113號","09:00-21:30","NA"],
+            [68,"萬寧","興東商場","東區","香港筲箕灣興東邨商場地下10號舖","09:00-21:30","NA"],
+            [69,"萬寧","興華商場","東區","香港柴灣興華商場地下G05及G06號舖","09:30-20:30","NA"],
+            [70,"萬寧","香港港鐵站","油尖旺區","香港香港港鐵站HOK48號舖","10:00-21:00","NA"],
+            [71,"萬寧","何文田廣場","九龍城區","九龍何文田何文田村何文田廣場三樓320及321號舖","09:00-22:00","NA"],
+            [72,"萬寧","新土瓜灣","九龍城區","九龍土瓜灣土瓜灣道70-80W號定安大廈地下31號舖","11:00-19:30","NA"],
+            [73,"萬寧","孔雀樓","觀塘區","九龍牛頭角道281號觀塘花園大廈孔雀樓地下281號舖","11:30-20:00","NA"],
+            [74,"萬寧","洪福商場","屯門區","新界元朗洪水橋洪福商場地下9-10號舖","10:00-21:00","NA"],
+            [75,"萬寧","紅磡廣場","九龍城區","九龍紅磡馬頭圍道37-41號紅磡廣場一樓54-60號舖","10:30-21:00","NA"],
+            [76,"萬寧","洪水橋","屯門區","新界元朗洪水橋洪堤路3號麗珊閣地下3號舖","11:30-20:00","NA"],
+            [77,"萬寧","國際金融中心","中西區","香港中環港景街1號國際金融中心商場第二層2004號","09:00-21:30","NA"],
+            [78,"萬寧","國際廣場","油尖旺區","九龍尖沙咀彌敦道63號國際廣場MTR樓層17, 20-23號舖","11:00-22:00","NA"],
+            [79,"萬寧","埃華街","油尖旺區","九龍大角咀51-65號埃華街大方樓地下3-4號舖","09:00-21:30","NA"],
+            [80,"萬寧","尖沙咀K11 MUSEA","油尖旺區","香港九龍尖沙咀梳士巴利道18號K11 MUSEA B2層B201號01B舖","11:00-21:00","NA"],
+            [81,"萬寧","嘉福商場","北區","新界粉嶺嘉褔邨嘉褔商場1樓111號舖","11:30-20:00","NA"],
+            [82,"萬寧","啟鑽商場","黃大仙區","九龍黃大仙鑽石山啟鑽苑二期啟鑽商場B1樓B14號舖","12:00-20:30","NA"],
+            [83,"萬寧","啟德體育園","九龍城區","香港九龍九龍城啟德體育園啟德零售館1, 2樓M1-204號舖","10:00-21:00","NA"],
+            [84,"萬寧","啟田商場","觀塘區","九龍觀塘藍田啟田商場2樓228號舖","09:30-21:00","NA"],
+            [85,"萬寧","葵涌商場","葵青區","新界葵涌上角街葵涌邨3期葵涌商場104號舗","09:00-21:00","NA"],
+            [86,"萬寧","葵芳","葵青區","新界葵芳新都會廣場4 樓417-419 號舖","10:00-22:00","NA"],
+            [87,"萬寧","葵興港鐵站","葵青區","新界葵興葵興港鐵站KWH5號舖","09:00-21:30","NA"],
+            [88,"萬寧","葵盛東邨","葵青區","新界葵涌葵盛東邨葵盛東商場1樓131號舖","09:00-21:00","NA"],
+            [89,"萬寧","廣褔商場","大埔區","新界大埔廣福邨廣福商場1樓206-209號舖","11:00-19:30","NA"],
+            [90,"萬寧","光華中心","元朗區","新界元朗阜材街34-36號光華中心地下4號舖","09:00-21:30","NA"],
+            [91,"萬寧","廣源","沙田區","新界沙田廣源邨商場第四座1-3號","09:00-22:00","NA"],
+            [92,"萬寧","觀塘","觀塘區","九龍觀塘通明街7號地下","09:00-22:00","NA"],
+            [93,"萬寧","麗港城","觀塘區","九龍觀塘茶果嶺道88號麗港城商場地下34及36號舖","09:30-22:00","NA"],
+            [94,"萬寧","荔枝角","深水埗區","九龍深水埗荔枝角道316-318號地下","09:00-22:00","NA"],
+            [95,"萬寧","麗閣商場","深水埗區","九龍深水埗麗閣邨麗閣商場地下G01及G02號舖","11:00-21:00","NA"],
+            [96,"萬寧","賴恩樓","中西區","香港上環皇后大道西42-56號賴恩樓地下A號舖","09:30-21:30","NA"],
+            [97,"萬寧","銀湖天峰","沙田區","新界馬鞍山西沙路599號銀湖天峰G10號舖","10:00-22:00","NA"],
+            [98,"萬寧","置地廣場","中西區","香港中環皇后大道中15號置地廣場中庭3樓312號舖","09:00-20:00","NA"],
+            [99,"萬寧","上水廣場","北區","新界上水石湖墟龍琛路39號上水廣場4樓419-423舖","09:00-21:30","NA"],
+            [100,"萬寧","李鄭屋","深水埗區","九龍順寧道273號日輝大廈地下G11號","08:30-21:00","NA"],
+            [101,"萬寧","鯉景灣","東區","香港鯉景灣太安街25號D段地下GD20至21A舖","10:00-20:30","NA"],
+            [102,"萬寧","鯉魚門廣場","觀塘區","九龍油塘鯉魚門廣場1樓140號舖","09:30-21:00","NA"],
+            [103,"萬寧","瀝源","沙田區","新界沙田瀝源邨瀝源商場二樓214號舖","10:30-21:00","NA"],
+            [104,"萬寧","良景","屯門區","新界屯門良景邨良景廣場2樓L217號舖","09:00-21:30","NA"],
+            [105,"萬寧","昇悅居","深水埗區","九龍荔枝角道833號昇悅居1樓130及132號舖","10:00-21:30","NA"],
+            [106,"萬寧","樂富廣場","九龍城區","九龍黃大仙聯合道198號樂富廣場3樓3183A號舖","09:30-22:00","NA"],
+            [107,"萬寧","樂華商場","觀塘區","九龍牛頭角樂華南及北邨樂華商場3樓314號舖","09:00-22:00","NA"],
+            [108,"萬寧","朗屏邨","元朗區","新界元朗朗屏邨5座鏡屏樓M樓M006,M007號舖","09:30-21:30","NA"],
+            [109,"萬寧","牛頭角下邨","觀塘區","九龍牛頭角下邨廣場地下2及3號舖","09:00-21:00","NA"],
+            [110,"萬寧","西環聯康","中西區","香港卑路乍街116-122及122A號聯康新樓地下C舖","11:00-20:30","NA"],
+            [111,"萬寧","綠楊","荃灣區","新界荃灣綠楊坊平台P11A & P11B","09:30-22:00","NA"],
+            [112,"萬寧","馬頭角道","九龍城區","九龍九龍城馬頭角道金都豪苑地下3-4號舖","09:00-22:00","NA"],
+            [113,"萬寧","海怡西商場","南區","香港鴨俐洲海怡半島海怡廣場西座1樓122 號舖","09:30-21:00","NA"],
+            [114,"萬寧","青衣城","葵青區","新界青衣青敬路33號青衣城二樓216-217號舖","10:00-22:00","NA"],
+            [115,"萬寧","沙田萬怡酒店","沙田區","新界沙田安平街一號地下2A號舖","11:30-20:00","NA"],
+            [116,"萬寧","新都城二期","西貢區","新界將軍澳新都城中心二期1樓1116至1118號舖","10:00-21:30","NA"],
+            [117,"萬寧","美孚","深水埗區","九龍美孚新邨百老匯街69-119號地下99B","09:30-21:30","NA"],
+            [118,"萬寧","美林商場","沙田區","新界大圍美林邨美林商場地下20-22號舖","09:00-21:30","NA"],
+            [119,"萬寧","美田商場","沙田區","新界大圍美田邨美田商場1樓103及104號舖","10:30-21:00","NA"],
+            [120,"萬寧","港灣豪庭廣場","油尖旺區","九龍大角咀福利街8 號港灣豪庭廣場1樓109-110號舖","10:30-20:30","NA"],
+            [121,"萬寧","都會豪庭","西貢區","新界將軍澳MCP Discovery 二樓205及208號舖","10:00-21:30","NA"],
+            [122,"萬寧","新蒲崗Mikiki","油尖旺區","九龍新蒲崗太子道東638號Mikiki地下G56號鋪","10:00-21:30","NA"],
+            [123,"萬寧","Moko","油尖旺區","九龍旺角太子道西193號新世紀廣場一樓162號舖","10:30-21:00","NA"],
+            [124,"萬寧","新港城","沙田區","新界馬鞍山新港城中心二樓2108舖","10:00-22:00","NA"],
+            [125,"萬寧","萬事達廣場","深水埗區","九龍美孚新邨荔灣道萬事達廣場N72號地下","09:00-22:00","NA"],
+            [126,"萬寧","南昌街","深水埗區","九龍南昌街223-237號名都廣場地下","09:30-22:00","NA"],
+            [127,"萬寧","新香港仔","南區","香港香港仔香港仔大道170至172號海滙大厦地下","09:00-22:00","NA"],
+            [128,"萬寧","新寶怡花園","屯門區","新界屯門良德街11號寶怡花園地下17-18號","09:00-21:30","NA"],
+            [129,"萬寧","新彩明商場","西貢區","新界將軍澳彩明商場310號舖","09:00-21:00","NA"],
+            [130,"萬寧","新彩園廣場","北區","新界上水彩園邨彩園廣場3樓R8號舖","09:00-21:30","NA"],
+            [131,"萬寧","新愉景新城","中西區","新界荃灣青山道398號愉景城購物商場二層2050舖","09:00-22:00","NA"],
+            [132,"萬寧","新海防道","油尖旺區","九龍尖沙咀海防道38-40號中達大廈地下及天井","10:00-22:00","NA"],
+            [133,"萬寧","新軒尼詩道","灣仔區","香港灣仔軒尼詩道388號Mall Plus地下G08舖","09:00-22:00","NA"],
+            [134,"萬寧","新翠商場","東區","香港柴灣新翠商場4樓1-11號","09:00-21:30","NA"],
+            [135,"萬寧","新教育路","元朗區","新界元朗教育路9-13號興發大樓地下7號舖","09:00-22:00","NA"],
+            [136,"萬寧","新九龍廣場","油尖旺區","九龍大角咀道38號新九龍廣場地下56-59號","10:00-20:00","NA"],
+            [137,"萬寧","新荔枝角","深水埗區","九龍荔枝角道50-52號大華大廈地下B及C舖","09:30-21:00","NA"],
+            [138,"萬寧","新水渠道","油尖旺區","九龍太子水渠道38-42號寶石大樓地下B舖及天井","09:00-21:00","NA"],
+            [139,"萬寧","新西灣河","東區","香港筲箕灣道326至332號康泰大樓地下4號舖","09:30-20:30","NA"],
+            [140,"萬寧","新天后","灣仔區","香港天后電氣道68號地下B及C舖","09:00-22:00","NA"],
+            [141,"萬寧","新城市廣場","沙田區","新界沙田新城市廣場一期3樓307及307A號舖","09:00-22:00","NA"],
+            [142,"萬寧","新元州街","深水埗區","九龍深水埗元州街388號肇如大廈地下B舖","10:00-22:00","NA"],
+            [143,"萬寧","新形點Baby","元朗區","新界元朗朗日路9號形點I 2樓2008號舖","10:00-21:30","NA"],
+            [144,"萬寧","如心廣場","荃灣區","新界荃灣楊屋道8號如心廣場一期2樓202B及203號舖","10:00-21:30","NA"],
+            [145,"萬寧","北角","東區","香港北角英皇道386-388號北港商業大廈地下B","09:00-22:30","NA"],
+            [146,"萬寧","屯門Novo Walk","屯門區","新界屯門欣寶路8號NOVO WALK 地下22及23號舖","10:00-21:00","NA"],
+            [147,"萬寧","海翠坊","屯門區","新界屯門湖翠路168-236號海翠坊1號及85-86號舖","09:00-21:30","NA"],
+            [148,"萬寧","愛民商場","九龍城區","九龍何文田愛民邨愛民廣場G17號舖","09:00-21:00","NA"],
+            [149,"萬寧","愛東","東區","香港筲箕灣愛東村愛東商場111號舖","09:00-22:00","NA"],
+            [150,"萬寧","奧海城1期","油尖旺區","香港西九龍海輝道11號奧海城1期高層地下5號舖","10:30-21:00","NA"],
+            [151,"萬寧","奧海城2期","油尖旺區","九龍大角咀奧海城商場2期1樓142-143號舖","10:00-22:00","NA"],
+            [152,"萬寧","安泰商場","觀塘區","九龍觀塘安泰邨安泰商場地下高層105號舖","09:00-21:00","NA"],
+            [153,"萬寧","安達商場","觀塘區","九龍觀塘安達邨安達商場地下低層LG02號舖","09:00-21:00","NA"],
+            [154,"萬寧","百得","沙田區","新界沙田第一城商場G30-32號","09:00-22:00","NA"],
+            [155,"萬寧","將軍澳中心","西貢區","新界西貢將軍澳唐德街9號將軍澳中心1樓117號舖","10:30-21:30","NA"],
+            [156,"萬寧","珀麗灣","荃灣區","新界馬灣珀麗灣珀麗路8 號地下S10 號舖","11:30-20:00","NA"],
+            [157,"萬寧","新青山道","中西區","九龍長沙灣青山道476號百佳商業中心地下","11:30-20:00","NA"],
+            [158,"萬寧","坪石邨","黃大仙區","九龍坪石邨玉石樓地下117 - 120號舖","09:00-21:30","NA"],
+            [159,"萬寧","繽紛購物城","九龍城區","九龍紅磡德民街1-15號繽紛購物城1字樓E","09:00-18:00","NA"],
+            [160,"萬寧","荷里活廣場","黃大仙區","九龍鑽石山荷里活廣場377-378號舖","10:00-22:00","NA"],
+            [161,"萬寧","寶琳邨","西貢區","新界將軍澳寶琳北路18號寶琳邨寶勤樓地下116及117號舖","10:00-20:00","NA"],
+            [162,"萬寧","寶來街","九龍城區","九龍紅磡湖光街1-7號地下17 G1A 號舖","09:00-22:00","NA"],
+            [163,"萬寧","寶達","觀塘區","九龍秀茂坪寶琳路寶達商場地下7號舖","09:00-21:00","NA"],
+            [164,"萬寧","博康","沙田區","新界沙田博康邨博康商場107-109號舖","09:00-20:30","NA"],
+            [165,"萬寧","將軍澳POPCORN","西貢區","新界將軍澳唐賢街9號PopCorn 一樓F66及67號舖","10:30-22:00","NA"],
+            [166,"萬寧","總統戲院","灣仔區","香港銅鑼灣謝菲道517號地下B舖","10:00-23:00","NA"],
+            [167,"萬寧","太子","油尖旺區","九龍大埔道10A地下","09:30-21:30","NA"],
+            [168,"萬寧","皇后大道西","中西區","香港皇后大道西230-236 號好時大廈地下C 舖","10:30-20:30","NA"],
+            [169,"萬寧","帝庭軒","北區","新界粉嶺聯和墟和滿街8號帝庭軒一期商場一樓1&2號舖","09:00-22:00","NA"],
+            [170,"萬寧","麗晶花園","觀塘區","九龍九龍灣宏光道80號麗晶花園商場2樓2182, 2183, 2186號舖","09:00-21:00","NA"],
+            [171,"萬寧","新北江","元朗區","新界元朗天水圍新北江廣場1樓C61及62舖","09:00-21:30","NA"],
+            [172,"萬寧","羅便臣道","中西區","香港西摩道1號輝煌臺地下8 號舖","12:00-20:30","NA"],
+            [173,"萬寧","羅素街","灣仔區","香港銅鑼灣羅素街8號英皇鐘錶珠寶中心地下1及2號舖","10:00-22:00","NA"],
+            [174,"萬寧","西貢","西貢區","新界西貢福民路22-40號西貢苑地下26-27號舖","10:00-19:30","NA"],
+            [175,"萬寧","西營盤","中西區","香港德輔道西334至350號恆裕大廈地下8號舖","09:30-21:00","NA"],
+            [176,"萬寧","上水新豐路","北區","新界上水石湖墟新豐路122-130號龍霞樓地下A & B舖","09:00-21:30","NA"],
+            [177,"萬寧","新蒲崗","黃大仙區","九龍康強街35-49號地下2號舖","09:00-21:30","NA"],
+            [178,"萬寧","元朗壽富街","元朗區","新界元朗壽富街51-59元朗中心地下4A及4B號舖","09:00-21:00","NA"],
+            [179,"萬寧","秀茂坪","觀塘區","九龍秀茂坪邨秀茂坪商場1 樓108 號舖","09:00-22:00","NA"],
+            [180,"萬寧","沙角商場","沙田區","新界沙田沙角街5號沙角商場2樓235號舖","08:30-22:00","NA"],
+            [181,"萬寧","沙咀道","荃灣區","新界荃灣沙咀道236號地下,天井及平台","10:00-20:00","NA"],
+            [182,"萬寧","山景商場","屯門區","新界屯門山景村山景商場低層地下106C及106D號","09:00-21:00","NA"],
+            [183,"萬寧","新沙田Baby","沙田區","新界沙田新城市廣場第三期二樓A213號舖","10:00-21:00","NA"],
+            [184,"萬寧","石硤尾","深水埗區","九龍石硤尾窩仔街1-13號仁寶大廈地下A舖","10:30-21:00","NA"],
+            [185,"萬寧","石硤尾邨二期","深水埗區","九龍石硤尾邨二期美亮樓地下9號舖","10:00-22:00","NA"],
+            [186,"萬寧","石籬商場","葵青區","石籬商場","09:00-22:00","NA"],
+            [187,"萬寧","碩門商場","沙田區","沙田碩門邨2期碩門商場P1層P12號舖","11:30-20:00","NA"],
+            [188,"萬寧","石蔭","葵青區","新界葵涌石蔭路96號天安樓地下1號舖","08:30-21:00","NA"],
+            [189,"萬寧","雙鳳街","黃大仙區","九龍黃大仙雙鳳街18號地下","09:00-21:00","NA"],
+            [190,"萬寧","上水Baby","北區","新界上水龍運街8號新都廣場106a號舖","09:00-21:30","NA"],
+            [191,"萬寧","上水中心","北區","新界上水智昌路3號上水中心2樓2077D-H號舖","09:00-21:30","NA"],
+            [192,"萬寧","尚德商場","西貢區","新界將軍澳唐明街2號尚德邨尚德商場1樓109號舖","09:30-21:00","NA"],
+            [193,"萬寧","上環","中西區","香港皇后大道中368號偉利大廈1樓6 號舖","11:00-19:30","NA"],
+            [194,"萬寧","盛芳街","葵青區","新界葵涌盛芳街38-44號寬德大廈地下8-10號舖","09:00-22:00","NA"],
+            [195,"萬寧","水泉澳廣場","沙田區","新界沙田水泉澳邨水泉澳廣場2樓204號舖","09:00-21:00","NA"],
+            [196,"萬寧","順利商場","觀塘區","九龍觀塘利安道15號順利邨順利商場2樓201B號舖","09:00-21:30","NA"],
+            [197,"萬寧","順天","觀塘區","九龍順天邨天權樓地下9-10號舖","09:00-21:00","NA"],
+            [198,"萬寧","新寶廣場","油尖旺區","九龍佐敦道23號新寶廣場地下1號舖","09:00-22:30","NA"],
+            [199,"萬寧","兆康苑","屯門區","新界屯門兆康苑兆康商場226號舖","10:30-20:00","NA"],
+            [200,"萬寧","小西灣廣場","東區","香港柴灣小西灣道小西灣廣場1樓110A號舖","09:00-22:00","NA"],
+            [201,"萬寧","春園街","灣仔區","香港灣仔春園街47至65號新春園大廈地下E及F舖","08:30-21:00","NA"],
+            [202,"萬寧","穗禾","沙田區","新界沙田穗禾購物中心地下G11,G12號","11:00-19:30","NA"],
+            [203,"萬寧","新鴻基中心","灣仔區","香港灣仔新鴻基中心地下G14-G18號舖","09:00-19:00","NA"],
+            [204,"萬寧","大興","屯門區","新界屯門大興街1號大興邨商場地下L107號舖","10:00-21:00","NA"],
+            [205,"萬寧","大河道","荃灣區","新界荃灣大河道19號地下","09:00-22:00","NA"],
+            [206,"萬寧","太古城","東區","香港太古城道18號太古城中心第一期420舖","10:00-22:00","NA"],
+            [207,"萬寧","太安樓","東區","香港筲箕灣筲箕灣道57-87號太安樓地下G7及A6號舖","09:00-22:00","NA"],
+            [208,"萬寧","大埔超級城","大埔區","新界大埔大埔超級城A區2樓055-056號","10:00-22:00","NA"],
+            [209,"萬寧","大埔超級城Baby","大埔區","新界大埔大埔超級城B區2樓269-270號舖","10:00-22:00","NA"],
+            [210,"萬寧","大圍","沙田區","新界沙田大圍道55-56號金禧花園10號地下","09:00-22:00","NA"],
+            [211,"萬寧","大窩口","葵青區","新界葵涌大窩口邨大窩口第一商場1樓B01及B02號舖","09:00-21:30","NA"],
+            [212,"萬寧","太和廣場","大埔區","新界大埔太和路12號太和廣場2樓201號舖","09:00-22:00","NA"],
+            [213,"萬寧","大元村","大埔區","新界大埔大元商場新翼地下1號舖","09:00-20:30","NA"],
+            [214,"萬寧","德田商場","觀塘區","九龍藍田碧雲道223號德田商場1樓103號舖","09:00-21:00","NA"],
+            [215,"萬寧","德褔中心","觀塘區","九龍九龍灣德褔廣場第一期F16A & F17-F17A號舖","10:00-22:00","NA"],
+            [216,"萬寧","黃大仙中心北館","黃大仙區","九龍黃大仙龍翔道136號黃大仙中心北館2樓N210A號舖","09:30-21:30","NA"],
+            [217,"萬寧","連理街商場","西貢區","新界將軍澳坑口連理街商場1樓119-121號舖","10:00-22:00","NA"],
+            [218,"萬寧","圍方","沙田區","新界沙田圍方3樓302-303號舖","10:00-22:00","NA"],
+            [219,"萬寧","世貿中心","灣仔區","香港銅鑼灣告士打道280號世貿中心L2樓L2-12號舖","11:00-20:00","NA"],
+            [220,"萬寧","時代廣場","灣仔區","香港銅鑼灣時代廣場9樓917號舖","11:00-21:00","NA"],
+            [221,"萬寧","天澤","元朗區","新界天水圍天瑞路71, 73, 75及77號天澤邨天澤商場2樓210A舖","09:00-21:30","NA"],
+            [222,"萬寧","天盛商場","元朗區","新界元朗天水圍天靖街3號天盛苑天盛商場1樓L102號舖","09:00-21:30","NA"],
+            [223,"萬寧","天瑞商場","元朗區","新界天水圍天瑞邨天瑞商場地下G21號舖","09:00-21:30","NA"],
+            [224,"萬寧","天水圍港鐵站","元朗區","新界天水圍天水圍港鐵站TIS 30-33號舖","10:00-21:00","NA"],
+            [225,"萬寧","天耀","元朗區","新界天水圍天耀廣場地下L029號舖","09:00-21:30","NA"],
+            [226,"萬寧","土瓜灣(美景大廈)","九龍城區","九龍土瓜灣道美景大廈地下243A","09:00-22:00","NA"],
+            [227,"萬寧","灣仔Tower 188","灣仔區","香港灣仔軒尼詩道188-190號Tower 188 地下","11:00-19:30","NA"],
+            [228,"萬寧","屯門時代廣場","灣仔區","新界屯門時代廣場南翼3樓8,9及39號舖","09:00-21:30","NA"],
+            [229,"萬寧","爵祿街","黃大仙區","九龍新蒲崗爵祿街74-76號地下","08:00-20:30","NA"],
+            [230,"萬寧","將軍澳Baby","西貢區","新界將軍澳唐俊街9號pop Corn1樓F68號舖","10:00-21:00","NA"],
+            [231,"萬寧","青衣","葵青區","新界青衣長發廣場2樓217號舖","09:00-22:00","NA"],
+            [232,"萬寧","荃錦中心","荃灣區","新界荃灣荃錦中心110-125號","09:00-22:00","NA"],
+            [233,"萬寧","荃灣千色匯","荃灣區","新界荃灣眾安街68號荃灣千色匯I期地下G016-G017舖","09:00-22:00","NA"],
+            [234,"萬寧","翠林新城","西貢區","新界將軍澳翠林邨翠林新城5樓101號舖","10:00-20:00","NA"],
+            [235,"萬寧","翠屏道","觀塘區","九龍觀塘翠屏(北)邨翠屏商場4A號舖","09:00-21:00","NA"],
+            [236,"萬寧","慈雲山中心","黃大仙區","九龍慈雲山毓華街23號慈雲山中心5樓537-538號舖","09:00-22:00","NA"],
+            [237,"萬寧","屯門HANDS","屯門區","新界屯門友愛路友愛邨H.A.N.D.S. S區2樓S-229及S-230號舖","09:30-21:30","NA"],
+            [238,"萬寧","屯門仁政街","屯門區","新界屯門仁政街26A富華大廈地下C-E號","08:30-20:00","NA"],
+            [239,"萬寧","屯門市廣場","屯門區","新界屯門屯順街1號屯門市廣場1期2樓2199B-2199F號舖","10:00-22:00","NA"],
+            [240,"萬寧","東堤灣畔","離島區","香港大嶼山東涌東堤灣畔地下3-4號舖","09:30-22:00","NA"],
+            [241,"萬寧","元朗同樂街","元朗區","新界元朗同樂街21號地下","09:00-21:00","NA"],
+            [242,"萬寧","新達廣場","大埔區","新界大埔南運路9號新達廣場1樓A048-A050號舖","10:00-22:00","NA"],
+            [243,"萬寧","屯門V City","屯門區","新界屯門屯門鄉事會路83號V City MTR層28、29、30及31號舖","10:00-21:30","NA"],
+            [244,"萬寧","屯門V City Baby","屯門區","新界屯門屯門鄉事會路83號V City MTR層M-72號舖","10:30-20:30","NA"],
+            [245,"萬寧","深水埗V Walk","深水埗區","九龍深水埗深旺道28號V Walk 2樓L2-97及L2-98號舖","10:00-22:00","NA"],
+            [246,"萬寧","深水埗V Walk Baby","深水埗區","九龍深水埗深旺道28號V Walk 2樓L2-1及L2-2號舖","11:00-21:00","NA"],
+            [247,"萬寧","華富","南區","香港華富(一)邨華珍樓714-715號舖","11:30-20:00","NA"],
+            [248,"萬寧","華光勵精中心","中西區","香港中環皇后大道中88號勵精中心地下2號","09:00-20:30","NA"],
+            [249,"萬寧","灣仔光華","灣仔區","香港灣仔軒尼詩道269至273號地下A及B號舖","09:30-21:00","NA"],
+            [250,"萬寧","灣仔道","灣仔區","香港灣仔道212-214號怡康大廈地下B舖","11:00-19:30","NA"],
+            [251,"萬寧","運頭塘","大埔區","新界大埔運頭塘邨商場29舖","11:00-19:30","NA"],
+            [252,"萬寧","馬鞍山","沙田區","新界馬鞍山保泰街16號地下G10","10:00-21:00","NA"],
+            [253,"萬寧","西環","中西區","香港皇后大道西572-574號高良大廈地下","10:00-22:00","NA"],
+            [254,"萬寧","寶翠園","中西區","香港西環卑路乍街8號寶翠園西寶城2樓237舖","10:00-22:00","NA"],
+            [255,"萬寧","黃埔花園","九龍城區","九龍紅磡黃埔花園第十一期商場地下G4A及G4B號舖","09:30-22:00","NA"],
+            [256,"萬寧","皇室堡","灣仔區","香港銅鑼灣告士打道311 號皇室堡3樓311至312號舖","10:00-22:00","NA"],
+            [257,"萬寧","禾輋","沙田區","新界沙田禾輋邨商場2樓261號舖","09:00-22:00","NA"],
+            [258,"萬寧","禾塘咀街","葵青區","新界葵興禾塘咀街85號地下","09:00-21:00","NA"],
+            [259,"萬寧","欣田商場","屯門區","新界屯門欣田邨欣田商場地下G06號舖","09:30-21:00","NA"],
+            [260,"萬寧","逸東商場","離島區","香港新界東涌逸東街8號逸東商場1樓115及116號舖","09:00-22:00","NA"],
+            [261,"萬寧","油麗商場","觀塘區","九龍油塘油麗商場地下9 號舖","09:30-21:30","NA"],
+            [262,"萬寧","油麻地","油尖旺區","九龍彌敦道494-496號晉利商業大廈地下","10:00-22:00","NA"],
+            [263,"萬寧","耀東商場","東區","香港筲箕灣耀東邨耀東商場2樓201號舖","10:30-20:00","NA"],
+            [264,"萬寧","形點","元朗區","新界元朗朗日路8-9號及元龍街9號形點2樓A212a號舖","11:00-21:00","NA"],
+            [265,"萬寧","愉翠商場","沙田區","新界沙田愉翠苑愉翠苑商場1樓119-120號舖","09:00-22:00","NA"],
+            [266,"萬寧","漁灣邨","東區","香港柴灣漁灣邨漁豐樓地下2號舖","11:00-20:30","NA"],
+            [267,"萬寧","元朗大馬路","元朗區","新界元朗青山公路元朗段118號地下2A及2B號舖","09:30-21:00","NA"],
+            [268,"萬寧","元朗廣場","元朗區","新界元朗廣場1樓130及181-183號鋪","10:00-21:30","NA"],
+            [269,"萬寧","雍盛商埸","北區","新界粉嶺雍盛苑雍盛商場地下3號舖","09:00-21:00","NA"],
+            [270,"佳宝食品超級市場","328商場","灣仔區","香港灣仔灣仔道234-236 號鴻業大廈地下上層A 至C , D1 至D3 舖","07:00-20:00","NA"],
+            [271,"佳宝食品超級市場","香港仔","南區","香港香港仔香港仔大道210-210A號地下","07:00-20:00","NA"],
+            [272,"佳宝食品超級市場","明秀","東區","香港北角春秧街91A 號明秀大廈地下D至E舖","07:00-20:00","NA"],
+            [273,"佳宝食品超級市場","田灣","南區","香港香港仔田灣街11 號田灣畔地下4-5 號舖","07:00-20:00","NA"],
+            [274,"佳宝食品超級市場","美菲閣","中西區","香港堅尼地城士美菲路43 號美菲閣地下15 及16 號舖","07:00-20:00","NA"],
+            [275,"佳宝食品超級市場","鰂魚涌(下)","東區","香港鰂魚涌英皇道997號惠利大廈地下N 號鋪","07:00-20:00","NA"],
+            [276,"佳宝食品超級市場","第三街","中西區","香港西營盤第三街43-47號東南大廈地下B 舖","07:00-20:00","NA"],
+            [277,"佳宝食品超級市場","小西灣","東區","香港小西灣小西灣道9號富欣花園1及3號舖","07:00-20:00","NA"],
+            [278,"佳宝食品超級市場","華富邨","南區","香港香港仔華富(一)邨華富(一)商場11號舖","07:00-20:00","NA"],
+            [279,"佳宝食品超級市場","興華新鋪","東區","香港柴灣柴灣道220 號華泰大廈地下C, D, E, F鋪","07:00-20:00","NA"],
+            [280,"佳宝食品超級市場","跑馬地","灣仔區","香港跑馬地黃泥涌道23號旭逸閣地下A及B號舖","07:00-20:00","NA"],
+            [281,"佳宝食品超級市場","石塘咀","中西區","香港石塘咀香港西環石塘咀翰林匯地下2 & 3號舖","07:00-20:00","NA"],
+            [282,"佳宝食品超級市場","海怡半島","南區","香港鴨脷洲海怡路12A號海怡半島西翼商場地下G37, G37A, G38, G39, G40舖","07:00-20:00","NA"],
+            [283,"佳宝食品超級市場","天后","灣仔區","香港北角銀幕街1號海景軒地下","07:00-20:00","NA"],
+            [284,"佳宝食品超級市場","上環","中西區","香港上環皇后大道中359至361號南島商業大廈地下","07:00-20:00","NA"],
+            [285,"佳宝食品超級市場","西灣河新舖","東區","香港西灣河西灣河街129-133號利基大廈地下2號舖A部分","07:00-20:00","NA"],
+            [286,"佳宝食品超級市場","太古城","東區","香港太古城英皇道1025-1037號, 惠安路2-10, 12A-12H惠安苑地下低層SLG2","07:00-20:00","NA"],
+            [287,"佳宝食品超級市場","翠灣邨","東區","香港柴灣翠灣邨商場地下2號舖","07:00-20:00","NA"],
+            [288,"佳宝食品超級市場","灣仔莊士敦道","灣仔區","香港灣仔莊士敦道152-158號中南樓G/F-3/F","07:00-20:00","NA"],
+            [289,"佳宝食品超級市場","東大街","東區","香港筲箕灣筲箕灣東大街165號東輝大廈地下2&3號舖","07:00-20:00","NA"],
+            [290,"佳宝食品超級市場","樂華","觀塘區","九龍牛頭角樂華南邨展華樓地下130, 132 及134 號舖","07:00-20:00","NA"],
+            [291,"佳宝食品超級市場","愛民","九龍城區","九龍何文田愛民邨昭民樓地下1-2 號舖","07:00-20:00","NA"],
+            [292,"佳宝食品超級市場","金山樓","油尖旺區","九龍油麻地新填地街78-86 號金山樓地下","07:00-20:30","NA"],
+            [293,"佳宝食品超級市場","富山","黃大仙區","九龍鑽石山蒲崗村道富山邨街市1號舖","07:00-20:00","NA"],
+            [294,"佳宝食品超級市場","彩德","觀塘區","九龍牛頭角彩德邨彩德商場地下G01-03號舖","07:00-20:00","NA"],
+            [295,"佳宝食品超級市場","大角咀","油尖旺區","九龍大角咀大角咀道71號地下","07:00-20:00","NA"],
+            [296,"佳宝食品超級市場","瑞和街","觀塘區","九龍觀塘瑞和街70-86號長安大廈地下F & G舖","07:00-20:00","NA"],
+            [297,"佳宝食品超級市場","順寧道","深水埗區","九龍長沙灣順寧道253-263號恆寧閣地下","07:00-20:00","NA"],
+            [298,"佳宝食品超級市場","啟德","九龍城區","九龍黃大仙彩虹道121號啟德花園購物商場1樓105號舖","07:00-20:00","NA"],
+            [299,"佳宝食品超級市場","順安","觀塘區","九龍順利利安道1號順安邨順安商場地下2號舖","07:00-20:00","NA"],
+            [300,"佳宝食品超級市場","九龍城","九龍城區","九龍九龍城衙前塱道56-66號御門前地下A舖","07:00-20:00","NA"],
+            [301,"佳宝食品超級市場","土瓜灣","九龍城區","九龍土瓜灣下鄉道67-77號嘉寶大廈地下A及B號舖","07:00-20:00","NA"],
+            [302,"佳宝食品超級市場","旺角","油尖旺區","九龍旺角深圳街1-6號,新泰大廈地下5 及6號舖","07:00-20:00","NA"],
+            [303,"佳宝食品超級市場","桂林街","深水埗區","九龍深水埗汝州街281號桂林街99,101,103號地下","07:00-20:00","NA"],
+            [304,"佳宝食品超級市場","慈雲山","黃大仙區","九龍慈雲山毓華里1-23號華基大樓地下C鋪","07:00-20:00","NA"],
+            [305,"佳宝食品超級市場","翠屏邨","觀塘區","九龍觀塘翠屏道19號翠屏北邨翠桃樓M2樓街市W01號檔","07:00-20:00","NA"],
+            [306,"佳宝食品超級市場","登打士街","油尖旺區","九龍旺角登打士街37號地舖","07:00-20:00","NA"],
+            [307,"佳宝食品超級市場","紅磡","九龍城區","九龍紅磡德民街2-34E,船澳街99-109號地下1A9, 1A10及1A17B號舖","07:00-20:00","NA"],
+            [308,"佳宝食品超級市場","美孚新鋪","深水埗區","九龍美孚百老匯街1-12,14-25,27,29及31號地下2及11,3及10號舖","07:00-20:00","NA"],
+            [309,"佳宝食品超級市場","兆景樓","觀塘區","九龍牛頭角牛頭角道177號兆景樓地下9-15號舖","07:00-20:00","NA"],
+            [310,"佳宝食品超級市場","藍田新舖","觀塘區","九龍藍田啟田道47號康田苑35,37,39,41及43號舖","07:00-20:30","NA"],
+            [311,"佳宝食品超級市場","彩雲邨","黃大仙區","九龍牛池灣清水灣道45號彩雲商場2期3樓A324舖","07:00-20:00","NA"],
+            [312,"佳宝食品超級市場","巴域街","深水埗區","九龍深水埗巴域街53-55號地下","07:00-20:00","NA"],
+            [313,"佳宝食品超級市場","衙前塱","九龍城區","九龍九龍城衙前塱道56-66號御門前地下C舖","07:00-20:00","NA"],
+            [314,"佳宝食品超級市場","樂富","黃大仙區","九龍橫頭磡富茂街街市地下1-2號舖","07:00-20:00","NA"],
+            [315,"佳宝食品超級市場","油塘","觀塘區","九龍油塘高超道38號大本型G42號舖Zone K","07:00-20:00","NA"],
+            [316,"佳宝食品超級市場","花園街","油尖旺區","九龍旺角花園街128A地下","07:00-20:00","NA"],
+            [317,"佳宝食品超級市場","福耀新舖","油尖旺區","九龍旺角大埔道6至8號福耀大廈地下","07:00-20:00","NA"],
+            [318,"佳宝食品超級市場","牛池灣新鋪","黃大仙區","九龍牛池灣清水灣道21號文德樓地下","07:00-20:00","NA"],
+            [319,"佳宝食品超級市場","宜安中心","觀塘區","九龍觀塘康寧道45號宜安中心地下4至9號","07:00-20:00","NA"],
+            [320,"佳宝食品超級市場","汝州街","深水埗區","九龍深水埗汝州街201至207號保良局少清大廈地下A及B鋪","07:00-20:00","NA"],
+            [321,"佳宝食品超級市場","石硤尾","深水埗區","九龍深水埗巴域街1號地舖22號及閣樓","07:00-20:00","NA"],
+            [322,"佳宝食品超級市場","何文田","九龍城區","九龍何文田何文田邨何文田商場3樓322及323 號舖","07:00-20:00","NA"],
+            [323,"佳宝食品超級市場","麗閣邨","深水埗區","九龍深水埗東京街12號麗閣邨麗閣商場二期地下M01號商舖","07:00-20:00","NA"],
+            [324,"佳宝食品超級市場","黃大仙","黃大仙區","九龍黃大仙黃大仙中心南翼LG1舖","07:00-20:00","NA"],
+            [325,"佳宝食品超級市場","天華樓","荃灣區","新界荃灣川龍街38-44 號天華樓地下B, C及D舖","07:00-20:00","NA"],
+            [326,"佳宝食品超級市場","富健","屯門區","新界屯門龍門路45 號富健花園地下53, 54 號舖","07:00-20:00","NA"],
+            [327,"佳宝食品超級市場","石蔭","葵青區","新界葵涌石蔭路135-147 號梨木道102-116 號葵寶大廈地下1A-17A舖","07:00-20:00","NA"],
+            [328,"佳宝食品超級市場","俊宏軒","元朗區","新界天水圍天瑞路88 號俊宏軒地下L31 舖","07:00-20:00","NA"],
+            [329,"佳宝食品超級市場","利安村","沙田區","新界馬鞍山利安邨利安商場低層地下115 號舖","07:00-20:00","NA"],
+            [330,"佳宝食品超級市場","瀝源","沙田區","新界沙田瀝源商場1 樓110 號舖","07:00-20:00","NA"],
+            [331,"佳宝食品超級市場","海麗","深水埗區","新界屯門良德街12 號海麗花園地下18 號舖","07:00-20:00","NA"],
+            [332,"佳宝食品超級市場","長康","葵青區","新界青衣長康邨康泰樓地下6 號舖","07:00-20:00","NA"],
+            [333,"佳宝食品超級市場","將軍澳廣場","西貢區","新界將軍澳唐德街1號將軍澳廣場街市49-50號舖地下","07:00-20:00","NA"],
+            [334,"佳宝食品超級市場","盛芳街","葵青區","新界葵涌盛芳街15號運芳洋樓地下4號舖","07:00-20:00","NA"],
+            [335,"佳宝食品超級市場","置樂","屯門區","新界屯門青山坊2號華樂大廈地下13, 14, 21C-E 及39, 40號舖","07:00-20:00","NA"],
+            [336,"佳宝食品超級市場","光輝圍","葵青區","新界葵涌禾塘咀街87&89號地下5-6號舖","07:00-20:00","NA"],
+            [337,"佳宝食品超級市場","海濱花園","荃灣區","新界荃灣怡樂街2-12號海濱花園D平台高層地下街市部份","07:00-20:00","NA"],
+            [338,"佳宝食品超級市場","百悅坊","荃灣區","新界荃灣川龍街118號百悅坊地下G02,G03及G04號舖","07:00-20:00","NA"],
+            [339,"佳宝食品超級市場","同樂街","元朗區","新界元朗同樂街19-21號地下及閣樓","07:00-20:00","NA"],
+            [340,"佳宝食品超級市場","大埔","大埔區","新界大埔大榮里21-23號康樂大廈地下A及B舖","07:00-20:00","NA"],
+            [341,"佳宝食品超級市場","麗城","荃灣區","新界荃灣青山公路625號麗城花園3期麗城薈麗城街市地下M6-M7號檔","07:00-19:30","NA"],
+            [342,"佳宝食品超級市場","深井","中西區","新界荃灣青山道38號深井海韻花園地舖H1","07:00-20:00","NA"],
+            [343,"佳宝食品超級市場","天秀路","元朗區","新界天水圍天秀路8號天一商城地下G002號舖","07:00-20:00","NA"],
+            [344,"佳宝食品超級市場","蝴蝶邨","屯門區","新界屯門湖翠路1號蝴蝶商埸地下街市M107號檔","07:00-20:00","NA"],
+            [345,"佳宝食品超級市場","美林邨","沙田區","新界大圍美田路30號美林邨美林商場街市地下MS2號舖","07:00-20:00","NA"],
+            [346,"佳宝食品超級市場","大興邨","屯門區","新界屯門大興街1號大興邨大興商埸1樓L201號舖","07:00-20:00","NA"],
+            [347,"佳宝食品超級市場","廣源邨","沙田區","新界小瀝源小瀝源路68號廣源邨廣源商埸地下2號舖","07:00-20:00","NA"],
+            [348,"佳宝食品超級市場","運頭塘","大埔區","新界大埔曉運路10號運頭塘邨運頭塘商場地下13B號舖","07:00-20:00","NA"],
+            [349,"佳宝食品超級市場","京瑞廣場","沙田區","新界石門安群街3號京瑞廣場一期地下G15-G17號舖","07:00-20:00","NA"],
+            [350,"佳宝食品超級市場","梨木樹","荃灣區","新界梨木樹梨木樹邨梨木樹商場1樓122 號鋪","07:00-20:00","NA"],
+            [351,"佳宝食品超級市場","葵盛東","葵青區","新界葵盛葵盛東邨1樓115號舖","07:00-20:00","NA"],
+            [352,"佳宝食品超級市場","同益","元朗區","新界元朗裕景坊8號同益大廈地下1號舖","07:00-20:00","NA"],
+            [353,"佳宝食品超級市場","粉嶺新舖","北區","新界粉嶺聯捷街2-10號榮輝中心地舖1號","07:00-20:00","NA"],
+            [354,"佳宝食品超級市場","華明","北區","新界粉嶺華明路21號華明邨華明商場地下G39,G40,G41 及G42號舖","07:00-20:00","NA"],
+            [355,"佳宝食品超級市場","大窩口","葵青區","新界大窩口大窩口路15號大窩口邨大窩口商場一期2樓C16及C17號舖","07:00-20:00","NA"],
+            [356,"佳宝食品超級市場","石籬新鋪","葵青區","新界葵涌大隴街110號石籬邨石籬商場2期1樓B112號舖4 號舖","07:00-20:00","NA"],
+            [357,"佳宝食品超級市場","祖堯","葵青區","新界葵涌念祖街1號祖堯邨C座地下1-2號舖","07:00-20:00","NA"],
+            [358,"佳宝食品超級市場","長亨","葵青區","新界青衣寮肚路6號長亨邨長亨商場5樓510及513號舖","07:00-20:00","NA"],
+            [359,"佳宝食品超級市場","乙明新鋪","沙田區","新界沙田乙明邨乙明邨街7號地下A舖","07:00-20:00","NA"],
+            [360,"佳宝食品超級市場","大元邨新舖","大埔區","新界大埔汀角路10號大元邨商場地下423號鋪","07:00-20:00","NA"],
+            [361,"佳宝食品超級市場","屯門仁政街","屯門區","新界屯門屯門仁政街26號A富華大廈地下, I &F 全店及G&H 部分店","07:00-20:00","NA"],
+            [362,"佳宝食品超級市場","天平邨","北區","新界上水天平路48 號天平邨商場地下124 及124A號舖","07:00-20:00","NA"],
+            [363,"佳宝食品超級市場","馬鞍山","沙田區","新界沙田馬鞍山鞍駿街11號褔安花園地下63,64及64A鋪","07:00-20:00","NA"],
+            [364,"佳宝食品超級市場","湖安街","屯門區","新界屯門湖安街8號雙寓1樓101號鋪","07:00-20:00","NA"],
+            [365,"佳宝食品超級市場","大埔墟","大埔區","新界大埔鄉事會街9-15號寶蓮樓地下3號鋪","07:00-20:00","NA"],
+            [366,"佳宝食品超級市場","花都廣場","北區","新界粉嶺花都廣場地舖84A及84B號","07:00-20:00","NA"],
+            [367,"佳宝食品超級市場","茵怡花園","西貢區","新界將軍澳茵怡花園地下8及9號舖","07:00-20:00","NA"],
+            [368,"佳宝食品超級市場","耀安邨","沙田區","新界沙田恆康街2號耀安邨商場地舖G103B","07:00-20:00","NA"],
+            [369,"佳宝食品超級市場","明德邨","西貢區","新界將軍澳培成里10號明德邨明德商場地下16號舖","07:00-20:00","NA"],
+            [370,"佳宝食品超級市場","屯門御海灣","屯門區","新界屯門海皇路23號御海灣地下34-37號地舖","07:00-20:00","NA"],
+            [371,"佳宝食品超級市場","三聖邨","屯門區","新界屯門三聖邨6號三聖商場地下3號商舖","07:00-20:00","NA"],
+            [372,"佳宝食品超級市場","新翠邨","沙田區","新界沙田新翠邨商業大樓5-8號熟食檔位","07:00-20:00","NA"],
+            [373,"佳宝食品超級市場","元朗萬昌樓","元朗區","新界元朗青山公路239-247號萬昌樓地下B,C, D舖","07:00-20:00","NA"],
+            [374,"佳宝食品超級市場","牡丹街","元朗區","新界元朗牡丹街23號康德閣地下1-3, 5-8, 21及22號舖","07:00-20:00","NA"],
+            [375,"惠康超級市場","卑路乍街","中西區","香港卑路乍街46A隆基大厦G/F","08:00-22:30","2818 5277"],
+            [376,"惠康超級市場","寶翠園","中西區","香港卑路乍街8號西寶城3樓","08:00-23:00","2542 7174"],
+            [377,"惠康超級市場","石塘咀","中西區","香港皇后大道西562-566號厚福大廈地下","08:00-22:00","2817 4797"],
+            [378,"惠康超級市場","士美菲","中西區","香港堅尼地城士美菲路71-77號嘉輝花園地下","08:00-22:30","2882 1309"],
+            [379,"惠康超級市場","域多利道","中西區","香港堅尼地城域多利道1號百年大廈2座3-7號","08:00-22:00","2817 2502"],
+            [380,"惠康超級市場","永興樓","中西區","香港石塘咀皇后大道西476-482號永興樓地下B,C舖及部分D,E舖","08:00-22:00","2801 5728"],
+            [381,"惠康超級市場","正德大廈","中西區","香港德輔道西260-264號正德大廈地下","08:00-22:00","2975 8155"],
+            [382,"惠康超級市場","西營盤","中西區","香港西營盤第一街63-65號地下","08:00-23:00","2549 3561"],
+            [383,"惠康超級市場","怡基閣","中西區","香港半山般咸道62號怡基閣地下","08:00-21:00","2803 7571"],
+            [384,"惠康超級市場","普頓臺","中西區","香港上環德輔道西88號普頓臺地下1號舖","08:00-22:00","2517 7586"],
+            [385,"惠康超級市場","嘉威花園","中西區","香港般咸道1號嘉威花園地下","08:00-21:00","3422 3635"],
+            [386,"惠康超級市場","上環","中西區","香港皇后大道西2 -12 號地下","08:00-22:00","3421 1252"],
+            [387,"惠康超級市場","美景臺","中西區","香港域多利道18-20號美景臺地下","08:30-20:00","2819 3427"],
+            [388,"惠康超級市場","龍記大廈","中西區","香港上環德輔道中267-275號龍記大廈地下","08:00-21:30","3584 7951"],
+            [389,"惠康超級市場","金利大廈","中西區","香港中環皇后大道中142-146號金利商業大廈","08:30-21:30","3580 2706"],
+            [390,"惠康超級市場","中環","中西區","香港皇后大道中84-90號華光勵精中心地庫","08:00-22:00","2529 1357"],
+            [391,"惠康超級市場","華富1","南區","香港華富村商場第一期120-140號","08:00-22:00","2550 6795"],
+            [392,"惠康超級市場","華景","南區","香港華富村商業中心25-27室","08:30-22:00","2550 8740"],
+            [393,"惠康超級市場","和福道","中西區","香港山頂和福道2-4號1樓","09:30-19:00","2849 7576"],
+            [394,"惠康超級市場","嘉禾大廈","南區","香港田灣嘉禾街14-22號嘉禾大厦地下6B-6C","08:30-22:00","2427 4839"],
+            [395,"惠康超級市場","海景閣","油尖旺區","九龍上海街55 號海景閣地下A舖","09:00-21:00","2375 5174"],
+            [396,"惠康超級市場","柯士甸道","油尖旺區","九龍柯士甸道45-53號地庫","08:30-23:00","2730 2501"],
+            [397,"惠康超級市場","其發大廈","灣仔區","香港灣仔石水渠街1-13 號其發大廈地下全層","08:00-22:00","2671 2703"],
+            [398,"惠康超級市場","佐敦道","油尖旺區","九龍佐敦道26E號寶輝閣地下","08:00-23:00","2110 4454"],
+            [399,"惠康超級市場","富嘉","南區","香港香港仔大道234號富嘉工業大廈地下","08:30-21:00","3755 4974"],
+            [400,"惠康超級市場","其士大廈","油尖旺區","九龍尖沙咀漆咸道南45-51號其士大廈地下C號舖及部份D號舖","08:30-22:00","2713 2178"],
+            [401,"惠康超級市場","利港中心","南區","香港香港仔成都道38號利港中心地庫A號舖","08:00-23:00","2814 0612"],
+            [402,"惠康超級市場","遠東","油尖旺區","九龍彌敦道204-206號遠東商業大廈地庫","08:30-22:30","2199 7923"],
+            [403,"惠康超級市場","灣仔","灣仔區","香港灣仔莊士敦道194-204號地庫","09:00-22:00","2893 0215"],
+            [404,"惠康超級市場","帝后廣場","油尖旺區","九龍漆咸道南17-19號帝后廣埸地舖","08:30-22:30","3971 0291"],
+            [405,"惠康超級市場","油麻地-金漢大廈","油尖旺區","九龍彌敦道319號金漢大廈地庫","08:30-24:00","2780 4669"],
+            [406,"惠康超級市場","海富苑","油尖旺區","九龍旺角海庭道海富購物中心地面23號舖","07:30-22:30","3580 8158"],
+            [407,"惠康超級市場","油麻地-駿發花園","油尖旺區","九龍眾坊街3號駿發花園5座地下1-11號","08:30-22:30","2332 6158"],
+            [408,"惠康超級市場","金巴利道","油尖旺區","九龍尖沙金咀金巴利道53-54號地下","08:00-01:00","3105 2457"],
+            [409,"惠康超級市場","大同","油尖旺區","九龍大角咀道117號大同新村大公樓一樓","08:00-22:00","2789 4020"],
+            [410,"惠康超級市場","寶翠","油尖旺區","九龍油麻地窩打老道40號地庫","08:00-22:30","2780 2455"],
+            [411,"惠康超級市場","上海街","油尖旺區","九龍上海街438-444號地下","08:00-02:00","2388 1430"],
+            [412,"惠康超級市場","軒尼詩道","灣仔區","香港灣仔軒尼詩道418-428號地庫","08:00-23:00","2838 2145"],
+            [413,"惠康超級市場","鴨脷洲","南區","香港鴨利洲大街127-139號高寶閣地下","08:00-22:00","3571 9563"],
+            [414,"惠康超級市場","南昌邨","深水埗區","九龍深水埗南昌村昌逸樓地下14-22 號舖","09:30-20:30","2958 9074"],
+            [415,"惠康超級市場","南昌薈","深水埗區","香港九龍深水埗西邨路富昌邨南昌薈1樓F104號舖","08:00-22:30","2783 8685"],
+            [416,"惠康超級市場","港灣豪庭","油尖旺區","九龍大角咀福利街8 號港灣豪庭廣場1 樓125 舖","08:00-23:00","3144 3783"],
+            [417,"惠康超級市場","大角咀","油尖旺區","九龍大角咀塘尾道52號地下","08:30-22:00","2789 4008"],
+            [418,"惠康超級市場","謝斐道","灣仔區","香港銅鑼灣謝斐道503-505號地下","08:00-23:00","2574 6437"],
+            [419,"惠康超級市場","星際城市","油尖旺區","九龍旺角山東街47-51號中僑商業中心星際城市商場地下","08:30-23:00","3755 4416"],
+            [420,"惠康超級市場","仁安","油尖旺區","九龍旺角廣華街1號仁安大廈地下6號舖","08:30-23:00","3586 9160"],
+            [421,"惠康超級市場","百匯軒","深水埗區","九龍荔枝角道33號百匯軒地下3-4號舖","08:00-22:00","2521 6328"],
+            [422,"惠康超級市場","萬盛閣","深水埗區","九龍荔枝角道168號萬盛閣地下4-6舖","08:30-23:00","2396 2368"],
+            [423,"惠康超級市場","美孚2","深水埗區","九龍美孚新村百老匯街69-71號地下","07:30-23:00","2370 4893"],
+            [424,"惠康超級市場","荔枝角","深水埗區","九龍荔枝角道324-330號地下","08:00-22:30","2725 0441"],
+            [425,"惠康超級市場","記利佐治街","灣仔區","2577 3215 / 2577 4958","00:00-24:00","NA"],
+            [426,"惠康超級市場","華懋王子大廈","油尖旺區","九龍旺角道93-95號華懋王子大廈地下4-5舖","08:30-24:00","2394 3230"],
+            [427,"惠康超級市場","美孚","深水埗區","九龍美孚新村第二期吉利徑39-45號7A舖","08:00-22:30","2742 0961"],
+            [428,"惠康超級市場","昇悅居","深水埗區","九龍長沙灣荔枝角道833號昇悅居購物商場1樓","07:30-22:00","2204 4791"],
+            [429,"惠康超級市場","富威花園","油尖旺區","九龍自由道7號富威花園地下C舖","08:30-21:30","2776 5822"],
+            [430,"惠康超級市場","柏宜中心","油尖旺區","九龍旺角彌敦道771-775柏宜中心2號地舖及地庫","09:00-22:00","2154 1367"],
+            [431,"惠康超級市場","跑馬地","灣仔區","香港跑馬地載德街雅怡閣2-4號地下","08:00-22:00","2575 8982"],
+            [432,"惠康超級市場","麗翠苑","深水埗區","九龍深水埗麗翠苑麗翠商埸地下5號舖","08:30-21:30","2756 5728"],
+            [433,"惠康超級市場","彌敦道","油尖旺區","九龍彌敦道794-802號協成行太子中心地庫","08:30-22:30","2397 1148"],
+            [434,"惠康超級市場","石安大廈","深水埗區","九龍深水埗長沙灣道102-108號石安大厦地下C-E號舖","09:00-22:00","2861 0203"],
+            [435,"惠康超級市場","金碧閣","油尖旺區","九龍窩打老道84號E金碧閣","07:30-24:00","2760 0356"],
+            [436,"惠康超級市場","維多利亞","東區","香港北角屈臣道15號維多利中心地下25號店舖","10:00-20:00","3105 1578"],
+            [437,"惠康超級市場","黃金中心","深水埗區","九龍深水埗欽州街94號黃金中心地庫","08:30-23:00","2728 5275"],
+            [438,"惠康超級市場","紅磡","九龍城區","九龍紅磡湖光街1-7號聯盛大廈地下10C-10G","08:00-24:00","2333 9205"],
+            [439,"惠康超級市場","南都大廈","深水埗區","九龍大埔道168-178號南都大廈1樓","08:30-22:00","2715 1192"],
+            [440,"惠康超級市場","德民","九龍城區","九龍紅磡德民街1-15號繽紛購物城一樓F舖","08:30-21:00","2334 6276"],
+            [441,"惠康超級市場","水星街","東區","香港北角水星街2-9號耀星華庭地下2-9號舖","08:00-22:00","2571 4869"],
+            [442,"惠康超級市場","元州2","深水埗區","九龍長沙灣元州街元州村元州商場二樓F01號舖","07:30-23:00","2783 0718"],
+            [443,"惠康超級市場","宇宙商場","中西區","九龍長沙灣青山道164-170號宇宙大廈宇宙商場地庫","09:00-21:30","2344 6866"],
+            [444,"惠康超級市場","深水埗","深水埗區","九龍深水埗福榮街520-530號地下","08:00-23:00","2742 6685"],
+            [445,"惠康超級市場","康澤花園","東區","香港北角英皇道238號康澤花園地下","08:00-23:00","2571 6421"],
+            [446,"惠康超級市場","紅磡中心","九龍城區","九龍紅磡馬頭圍道37 -39號紅磡商業中心地下一號","08:00-22:30","2764 3119"],
+            [447,"惠康超級市場","南昌街","深水埗區","九龍南昌街223-237號地下102室","07:30-23:00","2779 2515"],
+            [448,"惠康超級市場","順寧道","深水埗區","九龍順寧道麗寶花園地下4號","08:30-22:30","2743 7438"],
+            [449,"惠康超級市場","大坑東","灣仔區","九龍大坑東村東龍樓地下4-10號","08:30-21:30","2776 2922"],
+            [450,"惠康超級市場","城市花園","東區","香港電器道233號,城市花園商場第七座地下,20,21,23,24,26-28,30-33號舖","08:30-22:00","3580 7319"],
+            [451,"惠康超級市場","勵德","灣仔區","香港大坑勵德村道4-14號勵德村村榮樓地下","08:30-22:00","2503 4218"],
+            [452,"惠康超級市場","白田邨","深水埗區","九龍白田邨白田商場地下低層第二層LG201號舖","09:00-22:00","2335 9738"],
+            [453,"惠康超級市場","唯一","九龍城區","九龍土瓜灣道66號唯一大廈地下A及B號舖","08:00-23:00","2142 9324"],
+            [454,"惠康超級市場","北角","中西區","香港北角英皇道338 號華懋交易廣場二期地下","08:00-24:00","2508 6197"],
+            [455,"惠康超級市場","又一村","油尖旺區","九龍又一村又一樓雀橋街地下4 & 6號","08:00-22:00","2393 8216"],
+            [456,"惠康超級市場","長青","葵青區","新界青衣長青村長青商業中心地下T1-T5號","09:00-20:00","2495 2413"],
+            [457,"惠康超級市場","美景","葵青區","新界青衣美景花園商業中心北座第2期26-27號","08:30-22:00","2432 0241"],
+            [458,"惠康超級市場","賢麗苑","葵青區","新界葵涌麗景山路賢麗苑商場3A號舖","08:00-22:30","3580 0277"],
+            [459,"惠康超級市場","中華","南區","九龍馬頭角馬坑涌道5D-5F中華商場地下5號舖","08:00-23:00","2712 4429"],
+            [460,"惠康超級市場","土瓜灣","九龍城區","九龍土瓜灣道331-361號, 新碼頭街2-6號, 美景街79-111號, 昌景閣地下3, 4 及22 號舖","08:00-22:00","2793 6708"],
+            [461,"惠康超級市場","畢架山","九龍城區","九龍畢架山龍平路9-13號購物中心E","08:30-20:30","2779 6624"],
+            [462,"惠康超級市場","港濤軒","東區","香港北角馬寶道61-63 號港濤軒地下3,4,6 及7 號舖","08:00-22:00","2814 8365"],
+            [463,"惠康超級市場","馬頭角道","九龍城區","九龍土瓜灣馬頭角道40號東南工廠大廈地下A舖","08:00-23:00","3426 4023"],
+            [464,"惠康超級市場","真善美","九龍城區","九龍土瓜灣真善美村志真樓地下29-37號舖","08:30-21:30","2712 5316"],
+            [465,"惠康超級市場","金山","葵青區","新界葵涌華景山莊商業中心1樓2號","09:00-21:30","2785 2846"],
+            [466,"惠康超級市場","長康","葵青區","新界青衣長康村長康商場地下103 號舖","07:30-22:00","2436 4257"],
+            [467,"惠康超級市場","翔龍灣","九龍城區","九龍土瓜灣新碼頭街38號翔龍灣廣場1樓127-130B舖","08:00-22:00","3665 0709"],
+            [468,"惠康超級市場","健威花園","東區","香港北角英皇道560號健威商場UG層14號舖","08:00-22:00","3583 4260"],
+            [469,"惠康超級市場","太子","油尖旺區","九龍太子道西388-390號地下","08:00-23:00","2718 4096"],
+            [470,"惠康超級市場","獅子石道","九龍城區","九龍九龍城獅子石道45 & 47 號地下","08:00-22:00","2382 7918"],
+            [471,"惠康超級市場","健康","東區","香港北角七姊妹道188號健康村B號","08:00-22:00","2214 0344"],
+            [472,"惠康超級市場","宏福花園","葵青區","新界青衣青敬路75號宏福花園地下7號舖","08:00-21:00","2757 0317"],
+            [473,"惠康超級市場","葵芳","葵青區","新界葵涌興芳路177號葵芳廣場一樓116D號舖","08:30-22:30","2458 0152"],
+            [474,"惠康超級市場","君豪峰","東區","香港鰂魚涌英皇道852-858號及民新街21-39號君豪峰地下3地舖","07:30-22:00","2539 7128"],
+            [475,"惠康超級市場","青衣","葵青區","新界青衣青衣村青衣商場2樓4號舖","08:00-21:30","2376 3753"],
+            [476,"惠康超級市場","偉景花園","葵青區","新界青衣青綠街偉景花園商業中心1-7號地下","08:00-21:00","2435 6564"],
+            [477,"惠康超級市場","金福","東區","香港北角英皇道鰂魚涌新威園地下989-992號B舖","08:00-23:00","2115 9934"],
+            [478,"惠康超級市場","長亨","葵青區","新界青衣長亨村長亨商場LG202號","08:00-22:00","2434 0459"],
+            [479,"惠康超級市場","葵盛西","葵青區","新界葵涌葵盛(西)村商場2 樓29-31號舖","08:30-21:30","2149 6874"],
+            [480,"惠康超級市場","栢蕙苑","東區","香港鰂魚涌英皇道1060號栢蕙苑高層地下A舖","08:00-23:00","2109 3393"],
+            [481,"惠康超級市場","石籬","葵青區","新界葵涌石籬(第一)村石秀樓2號地下","09:00-21:00","2422 1543"],
+            [482,"惠康超級市場","寧遠街","黃大仙區","九龍新蒲崗寧遠街10-20號地下A-D舖","08:00-22:00","2642 8033"],
+            [483,"惠康超級市場","海濱花園","荃灣區","新界荃灣海濱花園商場地下8號舖","09:00-21:00","2944 9760"],
+            [484,"惠康超級市場","新葵興","葵青區","新界葵涌興芳道166-174號新葵興商場9-22, 26-34號","08:00-21:00","2485 0582"],
+            [485,"惠康超級市場","天馬","黃大仙區","九龍黃大仙天馬苑商場一樓F9號舖","08:30-22:00","2326 9085"],
+            [486,"惠康超級市場","康怡","東區","香港鰂魚涌康怡花園第1期1室","08:00-21:00","2885 0337"],
+            [487,"惠康超級市場","錦榮","黃大仙區","九龍新蒲崗崇齡街2-12號","08:30-22:00","2350 2784"],
+            [488,"惠康超級市場","葵盛","葵青區","新界葵涌葵盛東村葵盛購物商場1樓114 號舖","08:00-22:00","2463 5509"],
+            [489,"惠康超級市場","石籬2","葵青區","新界葵涌石籬村第2期石籬購物商場地下11號舖","08:00-22:30","2421 5290"],
+            [490,"惠康超級市場","和宜合道","葵青區","新界葵涌和宜合道26-30號地下","08:30-22:30","2422 6069"],
+            [491,"惠康超級市場","翠竹花園","黃大仙區","九龍黃大仙翠竹街8號翠竹花園商場4樓408號商舖","10:00-21:00","2887 7067"],
+            [492,"惠康超級市場","葵興","葵青區","新界葵涌葵興村葵興購物中心15號地舖","08:00-22:00","3586 1462"],
+            [493,"惠康超級市場","樂悠居","荃灣區","新界荃灣楊屋道138號樂悠居1樓20號舖","09:00-21:00","2439 1050"],
+            [494,"惠康超級市場","葵涌","葵青區","新界葵涌葵涌商場2樓213號舖","08:00-22:30","2279 4034"],
+            [495,"惠康超級市場","大窩口","葵青區","新界荃灣大窩口村商場2 樓C7 號舖","08:30-22:30","2410 8015"],
+            [496,"惠康超級市場","泰山","東區","香港太古城天山閣地下G3 & G4室","08:00-22:00","2885 3216"],
+            [497,"惠康超級市場","竹園","黃大仙區","九龍竹園廣場1樓S101號","07:30-23:00","2352 1326"],
+            [498,"惠康超級市場","麗晶花園","觀塘區","九龍九龍灣麗晶花園21座地下C1號","08:00-22:00","2305 9043"],
+            [499,"惠康超級市場","港島‧東","東區","香港西灣河成安街18號港島‧東18地下G03B, G04B, G05, G06A號舖","08:30-21:30","2567 1021"],
+            [500,"惠康超級市場","太安樓","東區","香港筲箕灣道57-87號太安樓地下G26-G31號舖","08:00-22:00","2576 5708"],
+            [501,"惠康超級市場","宏緻苑","觀塘區","觀塘九龍灣宏緻苑宏緻苑商場地下2號舖","08:00-22:00","2345 3290"],
+            [502,"惠康超級市場","如心廣場","荃灣區","新界荃灣楊屋道8號如心廣場一期2樓222號舖","09:00-22:00","2422 2371"],
+            [503,"惠康超級市場","彩虹","黃大仙區","九龍彩虹村金碧樓地下5-9號","08:00-22:00","2350 4526"],
+            [504,"惠康超級市場","坪洲","離島區","新界坪洲寶坪街12號嘉輝花園地下11-13, 15-16, 31-33號舖","08:00-22:00","2983 9285"],
+            [505,"惠康超級市場","多喜大廈","觀塘區","九龍牛頭角定富街9-17號及定安街86-88號多喜大廈地下2-3號商舖","09:00-21:00","2628 4308"],
+            [506,"惠康超級市場","英皇娛樂廣場","荃灣區","新界荃灣眾安街55號大鴻輝(荃灣)中心地庫第一層","08:30-22:30","2439 4481"],
+            [507,"惠康超級市場","鯉景灣","東區","香港西灣河太康街35號鯉景灣C 期GC19-21號舖","08:00-21:00","2815 6029"],
+            [508,"惠康超級市場","龍蟠苑","黃大仙區","九龍鑽石山龍蟠苑購物中心地下110號","08:00-22:00","2351 7838"],
+            [509,"惠康超級市場","安蔭","葵青區","新界葵涌安蔭村安蔭購物中心地下","08:00-21:00","2429 0850"],
+            [510,"惠康超級市場","石蔭","葵青區","新界葵涌石蔭梨木村道118號地下","08:00-21:00","2424 2015"],
+            [511,"惠康超級市場","華都中心","荃灣區","新界荃灣西樓角路華都中心地下","08:00-21:00","3580 8420"],
+            [512,"惠康超級市場","耀東","東區","香港筲箕灣耀興道12號耀東村耀東商場地下S6A,S6B & S6C號舖","08:00-21:30","2663 4818"],
+            [513,"惠康超級市場","匯八坊","西貢區","九龍清水灣道八號匯八坊地庫一層","08:00-22:00","3586 9414"],
+            [514,"惠康超級市場","得寶花園","觀塘區","九龍牛頭角道3 號得寶花園商場地下138 號舖","08:30-22:00","2382 3453"],
+            [515,"惠康超級市場","新成","東區","香港筲箕灣筲箕灣道241-249號地下","08:30-22:00","2567 1325"],
+            [516,"惠康超級市場","安基","觀塘區","九龍牛頭角安基苑商業中心L1 G01 舖","08:00-22:00","2799 9218"],
+            [517,"惠康超級市場","花園大廈","觀塘區","九龍觀塘牛頭角道297號花園大廈玉蓮臺第三座地下15-18號舖","08:00-22:00","2372 0213"],
+            [518,"惠康超級市場","瑞峰花園","沙田區","新界沙田大圍瑞峰花園旭達商場13,15-19號舖","09:00-20:00","2601 9881"],
+            [519,"惠康超級市場","荃灣","荃灣區","新界荃灣路德圍57-61號地下","07:30-24:00","2411 6796"],
+            [520,"惠康超級市場","石圍角","荃灣區","新界荃灣石圍角村停車場大樓地下","08:00-22:00","2411 6797"],
+            [521,"惠康超級市場","慈雲山1","黃大仙區","九龍慈雲山永發大廈地下","07:30-22:30","2352 4925"],
+            [522,"惠康超級市場","樂融軒","東區","香港筲箕灣道333號樂融軒商場2樓","08:30-21:00","2997 9423"],
+            [523,"惠康超級市場","彩雲","黃大仙區","九龍牛池灣清水灣道45號彩雲一村三期商場三樓B301號舖","08:00-22:00","2701 1244"],
+            [524,"惠康超級市場","愛蝶灣","東區","香港筲箕灣愛禮街2 號愛蝶灣商場一樓60 號舖","08:00-21:30","2818 5837"],
+            [525,"惠康超級市場","觀塘","觀塘區","九龍觀塘宜安街22-26號地下","07:00-02:00","2797 9012"],
+            [526,"惠康超級市場","峻峰花園","東區","香港筲箕灣峻峰花園地下3號舖","08:00-23:00","2567 1549"],
+            [527,"惠康超級市場","蔚景花園","中西區","新界荃灣青山道520 號蔚景園地下1及2號舖","08:00-21:00","2492 4696"],
+            [528,"惠康超級市場","富山邨","黃大仙區","九龍富山邨富禮樓地下3號舖","08:30-22:00","2690 1093"],
+            [529,"惠康超級市場","電訊一代廣場","觀塘區","九龍觀塘成業街10 號電訊一代廣場地下2 號舖","08:00-22:00","2792 7868"],
+            [530,"惠康超級市場","新麗","黃大仙區","九龍牛池灣瓊東街2號新麗花園地下","08:30-21:30","2352 0483"],
+            [531,"惠康超級市場","梨木樹","葵青區","新界荃灣葵涌梨木樹村商場1樓127號舖","08:00-22:00","3580 1844"],
+            [532,"惠康超級市場","興田2","觀塘區","香港九龍藍田興田邨興田商場地下101號舖","08:00-22:00","2757 2378"],
+            [533,"惠康超級市場","興田2-分店B","觀塘區","香港九龍藍田興田邨興田商場地下101號舖","08:00-22:00","2757 2378"],
+            [534,"惠康超級市場","舂磡角","油尖旺區","香港舂磡角道39號地下","08:30-19:30","2813 8919"],
+            [535,"惠康超級市場","隆亨","沙田區","新界沙田隆亨村商業中心3樓215室","08:00-22:00","2254 6185"],
+            [536,"惠康超級市場","荃灣中心","荃灣區","新界荃灣荃景圍87-105號荃灣中心商場II期地下8-13號舖","08:00-21:00","3105 0753"],
+            [537,"惠康超級市場","荃威花園","荃灣區","新界荃灣荃威花園1期9A舖","08:30-22:00","3580 7942"],
+            [538,"惠康超級市場","峰華","東區","香港柴灣峰華村曉峰樓地下1-4 號舖","08:00-20:30","2505 2734"],
+            [539,"惠康超級市場","翠屏","觀塘區","九龍觀塘翠屏道19號翠屏北邨翠屏商場1F號舖","08:00-23:00","2792 6533"],
+            [540,"惠康超級市場","順天","觀塘區","九龍順天村天啟樓208-211室","08:00-22:00","2790 1145"],
+            [541,"惠康超級市場","興華","東區","香港柴灣興華村第二期地下","09:00-20:30","2558 2909"],
+            [542,"惠康超級市場","高威","東區","香港柴灣道111號東港城廣場一楼","08:30-21:30","2558 9728"],
+            [543,"惠康超級市場","匯景廣場","觀塘區","九龍藍田匯景道8號匯景廣場4樓2F 號舖","08:00-22:30","2205 6532"],
+            [544,"惠康超級市場","美田","沙田區","新界沙田大圍美田邨購物商場1樓101號","08:00-22:00","2634 5452"],
+            [545,"惠康超級市場","紅山半島","中西區","香港大譚紅山道3號紅山半島地下G25號舖","08:30-20:00","2813 1783"],
+            [546,"惠康超級市場","藍田","觀塘區","九龍藍田啟田邨啟田商場1樓104號","08:00-23:00","2347 9635"],
+            [547,"惠康超級市場","悅安","沙田區","新界大圍大圍道49-53號悅安大厦地下及地下1號舖","08:00-22:00","2408 6209"],
+            [548,"惠康超級市場","秀茂坪商場","觀塘區","九龍觀塘秀茂坪村秀茂坪購物商場1樓102 舖","08:00-23:00","2354 8534"],
+            [549,"惠康超級市場","平田","觀塘區","九龍藍田安田街23號平田商場1樓101號舖","08:30-22:00","2191 3513"],
+            [550,"惠康超級市場","鯉魚門","觀塘區","九龍油塘鯉魚門道鯉魚門廣場1樓123&124舖","08:00-23:00","2174 5146"],
+            [551,"惠康超級市場","美林","沙田區","新界沙田美林村商場地下29-32室","08:00-22:30","2605 0593"],
+            [552,"惠康超級市場","永利","東區","香港柴灣道333號永利中心地下46-78, 80-87室","09:00-20:00","2896 3032"],
+            [553,"惠康超級市場","秦石","沙田區","新界沙田秦石村購物中心1樓28號","08:30-21:30","2647 2598"],
+            [554,"惠康超級市場","廣田","觀塘區","九龍藍田廣田村廣田商場地下6室","08:00-22:00","2717 1246"],
+            [555,"惠康超級市場","環翠","東區","香港柴灣環翠村環翠商場3 樓","08:00-22:00","2505 1446"],
+            [556,"惠康超級市場","深井","荃灣區","新界深井青山公路陳記商業大廈地下至2樓","08:00-22:00","2491 1348"],
+            [557,"惠康超級市場","水泉澳2","沙田區","新界沙田水泉澳邨地下201舖","10:00-20:00","2899 0413"],
+            [558,"惠康超級市場","水泉澳","沙田區","新界沙田水泉澳廣場2樓221舖","08:00-22:30","2411 6930"],
+            [559,"惠康超級市場","博康","沙田區","新界沙田博康村第一期商業中心126室","08:00-22:00","2649 5936"],
+            [560,"惠康超級市場","沙角","沙田區","新界沙田沙角邨商場3樓302號","08:00-22:30","2952 9300"],
+            [561,"惠康超級市場","小西灣","東區","香港柴灣小西灣路小西灣邨小西灣廣場2樓211A","08:00-23:00","3755 0471"],
+            [562,"惠康超級市場","怡成坊","沙田區","新界沙田大涌橋路20號河畔花園商場地下21-23號舖","08:30-22:00","2787 5527"],
+            [563,"惠康超級市場","彩明","西貢區","新界將軍澳彩明街1號彩明苑彩明商場3樓307 B舖","08:00-22:00","3104 4991"],
+            [564,"惠康超級市場","瀝源","沙田區","新界沙田瀝源村瀝源廣場2樓1至3號舖","08:00-22:00","3428 5958"],
+            [565,"惠康超級市場","愉田苑","沙田區","新界沙田愉田苑11-23號地下","08:30-22:00","2635 2092"],
+            [566,"惠康超級市場","禾輋","沙田區","新界沙田禾輋村禾輋廣場二樓206B號舖","08:00-22:30","2699 0351"],
+            [567,"惠康超級市場","長洲","離島區","新界長洲新興街89-91號1樓ABC座地下","08:00-22:00","2981 5280"],
+            [568,"惠康超級市場","銀礦灣","離島區","新界大嶼山梅窩銀灣道2號家樂閣地下","08:00-22:00","2984 7884"],
+            [569,"惠康超級市場","天晉滙","西貢區","新界將軍澳至善街19號天晉滙三期1樓103號","08:30-22:00","2750 5503"],
+            [570,"惠康超級市場","慧安園","西貢區","新界將軍澳毓雅里9號慧安園商場A20-34號舖","09:00-21:30","2558 1799"],
+            [571,"惠康超級市場","新都城三期","西貢區","新界將軍澳新都城中心三期1 樓132D, OSA 132D, 132E, 134A & 134B 舖","08:00-23:00","2371 3510"],
+            [572,"惠康超級市場","廣源","沙田區","新界沙田廣源村廣源購物中心1樓CB4/13室","08:00-22:30","2635 6710"],
+            [573,"惠康超級市場","長洲2","離島區","新界長洲海傍街95-97號地下","08:00-22:00","2981 4538"],
+            [574,"惠康超級市場","翩滙坊","西貢區","新界將軍澳唐俊街21號翩滙坊地庫1樓8-9號舖","08:30-21:00","2278 0961"],
+            [575,"惠康超級市場","碩門邨","沙田區","新界沙田碩門商場P1層4號舖","08:00-22:00","2640 0093"],
+            [576,"惠康超級市場","富康花園","西貢區","新界將軍澳唐明街1號富康花園一樓112-113號舖","08:00-21:00","2242 5018"],
+            [577,"惠康超級市場","火炭","沙田區","新界沙田火炭山尾街18-24號沙田商業中心6-7號舖","08:00-20:00","2886 5385"],
+            [578,"惠康超級市場","石門","沙田區","沙田安平街1號地下28號","08:00-22:00","2854 1027"],
+            [579,"惠康超級市場","海悅豪園","西貢區","新界將軍澳海悅豪園購物中心地下2號舖","08:00-24:00","2246 3249"],
+            [580,"惠康超級市場","富寧花園","西貢區","新界將軍澳坑口富寧花園商場地下16號舖","08:00-22:00","2609 1508"],
+            [581,"惠康超級市場","錦泰","沙田區","新界馬鞍山錦泰苑錦泰商場1樓101號舖","08:00-22:00","2778 5398"],
+            [582,"惠康超級市場","恒安","沙田區","新界馬鞍山恒安村恆安商場2號227-231舖","08:00-22:30","2642 9848"],
+            [583,"惠康超級市場","翠塘","西貢區","新界西貢翠塘路1號翠塘花園地下1-9號","08:30-22:00","2194 4291"],
+            [584,"惠康超級市場","運頭塘","大埔區","新界大埔運頭塘村30號地下","08:00-22:00","2651 4548"],
+            [585,"惠康超級市場","頌安","沙田區","新界沙田馬鞍山頌安村頌安購物中心地下8號","08:00-22:30","2633 9027"],
+            [586,"惠康超級市場","西貢大廈","西貢區","新界福民路42-56號西貢大廈地下8-10號舖","08:00-22:00","2393 5728"],
+            [587,"惠康超級市場","迎東","離島區","新界東涌迎東邨迎東商場地下4號舖","08:00-22:00","2322 0397"],
+            [588,"惠康超級市場","大光里","大埔區","新界大埔大光里10-16 & 20-22號大運大廈地下B,B1,C1號舖","07:30-20:30","2653 1378"],
+            [589,"惠康超級市場","錦田","元朗區","新界元朗錦田錦田戲院大廈地下","08:00-22:30","2470 0673"],
+            [590,"惠康超級市場","雅濤居","沙田區","新界馬鞍山鞍駿街15號雅濤居地下01C號舖","08:30-21:30","2622 2326"],
+            [591,"惠康超級市場","廣褔道","大埔區","新界大埔廣福道26-50號大埔大廈地下4-6號舖","08:30-21:00","2653 2391"],
+            [592,"惠康超級市場","大埔廣福","大埔區","新界大埔寶湖道28號廣福商場R2號舖","08:30-22:00","2513 7699"],
+            [593,"惠康超級市場","錦英","沙田區","新界馬鞍山錦英苑商場低層1摟12號","08:30-21:30","2617 2086"],
+            [594,"惠康超級市場","富寶花園","沙田區","新界沙田馬鞍山富寶花園購物商場1樓F14室","08:30-21:30","2631 2793"],
+            [595,"惠康超級市場","恒福花園","屯門區","新界屯門三聖村恒福花園商場二樓204號","08:30-21:30","2451 8505"],
+            [596,"惠康超級市場","大埔廣埸","觀塘區","新界大埔安泰路1號大埔廣場二樓32號舖","08:00-22:00","2667 7951"],
+            [597,"惠康超級市場","置樂","屯門區","新界屯門置樂花園商場地下","08:00-22:00","2452 5535"],
+            [598,"惠康超級市場","新興花園","大埔區","新界大埔新興花園地下S1-28室","08:30-21:30","2664 0245"],
+            [599,"惠康超級市場","兆麟苑","屯門區","新界屯門兆興里3號兆麟商埸地下13A號舖","09:00-21:30","2637 7937"],
+            [600,"惠康超級市場","富善邨","大埔區","新界大埔富善邨富善商場2樓201號舖","08:00-22:00","2491 9538"],
+            [601,"惠康超級市場","安定","屯門區","新界屯門鄉事會路2A安定邨酒樓大厦3樓M301舖","08:00-22:30","2690 4668"],
+            [602,"惠康超級市場","海典軒","屯門區","新界屯門海珠路2號海典軒購物商場地下20-25號舖","08:00-22:30","2457 8923"],
+            [603,"惠康超級市場","銀湖天峰","沙田區","新界烏溪沙西沙路599號銀湖天峰1號","08:00-22:00","2640 0591"],
+            [604,"惠康超級市場","蝴蝶","屯門區","新界屯門蝴蝶村廣場3樓311號舖","08:00-22:30","2461 0214"],
+            [605,"惠康超級市場","尚悅方","元朗區","新界元朗十八鄉路33號尚悅方地下1, 2 及3號舖","09:30-20:30","2436 9278"],
+            [606,"惠康超級市場","屯門時代廣場2","灣仔區","新界屯門時代廣場北翼L2樓1-21 及24-28號舖","08:30-22:30","2375 9518"],
+            [607,"惠康超級市場","仁政街","屯門區","新界屯門仁政街富華中心26號A二樓","08:00-21:30","2440 9837"],
+            [608,"惠康超級市場","逸東","離島區","新界大嶼山東涌逸東商場1樓110 舖","07:30-22:30","3141 7059"],
+            [609,"惠康超級市場","合益","元朗區","新界元朗合益道31-47號合益中心","08:30-22:00","2476 1853"],
+            [610,"惠康超級市場","富健花園","屯門區","新界屯門龍門路富健花園地下88 號舖","08:00-22:30","2453 9310"],
+            [611,"惠康超級市場","康麗","屯門區","屯門河傍街鄉事會屯門巴黎倫敦紐約電影中心48號地下","08:00-22:00","2452 3252"],
+            [612,"惠康超級市場","新墟","屯門區","新界屯門金堡大廈地下9室","08:30-22:00","2457 0238"],
+            [613,"惠康超級市場","光華","元朗區","新界元郎阜財街38 號光華中心1樓","08:00-22:30","2442 1297"],
+            [614,"惠康超級市場","嘉誠","元朗區","新界元朗元朗市274地段教育路嘉誠大廈地下","08:00-24:00","2474 3965"],
+            [615,"惠康超級市場","萬金","元朗區","新界元朗水車館街28號萬金中心地下3, 5, 6-7, 8-9, 10-11, 12-13, 15 & 17-18號舖","08:30-22:00","2479 6723"],
+            [616,"惠康超級市場","祥發","元朗區","新界元朗裕景坊祥發大厦地下14號","08:00-22:00","2944 0270"],
+            [617,"惠康超級市場","寶城","元朗區","新界元朗教育路88-102號寶城大廈地下9-10號舖","09:00-21:30","2868 9783"],
+            [618,"惠康超級市場","大興花園1","屯門區","新界屯門大興花園2期購物商場地下1號","08:30-22:30","2461 4929"],
+            [619,"惠康超級市場","冠煌樓","元朗區","新界元朗安寧路2-18號冠煌樓地下D, I及部份J號舖","09:30-20:00","2157 0812"],
+            [620,"惠康超級市場","世宙","元朗區","新界元朗安寧路38號世宙地下36號","09:00-21:00","2674 3798"],
+            [621,"惠康超級市場","山景2","屯門區","新界屯門鳴琴路1號山景商場街市地下T-SK73號舖","08:00-22:30","2653 2718"],
+            [622,"惠康超級市場","大興","屯門區","新界屯門大興村第二期商場43-53號1樓","08:00-22:30","2463 6269"],
+            [623,"惠康超級市場","嘉豐花園","大埔區","新界大埔露輝路33號嘉豐花園地庫","10:00-20:30","2663 4145"],
+            [624,"惠康超級市場","屏薈","元朗區","新界元朗屏薈中心地下31室","08:00-23:00","2476 2470"],
+            [625,"惠康超級市場","藍地","屯門區","新界屯門藍地福亨村路8號豫豐花園商場地下A及B號舖","08:30-22:00","2328 7511"],
+            [626,"惠康超級市場","建生","屯門區","新界屯門建生購物中心207室1樓","08:30-22:00","2456 3270"],
+            [627,"惠康超級市場","翠珊閣","屯門區","新界元朗洪水橋翠珊園124地段2-3號地下","08:00-22:30","2479 0867"],
+            [628,"惠康超級市場","朗屏","元朗區","新界元朗朗屏邨商場2樓203舖","08:00-22:30","3580 7356"],
+            [629,"惠康超級市場","雅珊園","屯門區","新界元朗洪水橋雅珊園商場1樓","09:00-22:00","2576 5218"],
+            [630,"惠康超級市場","菁田","屯門區","新界屯門菁田邨菁田購物中心地下G6室","08:00-22:30","2317 6863"],
+            [631,"惠康超級市場","良景","屯門區","新界屯門良景村良景樓購物中心401號","08:00-22:30","2454 0550"],
+            [632,"惠康超級市場","屏欣","元朗區","新界屏山屏廈路65號屏欣苑商場地下2號舖","08:00-22:30","2613 1710"],
+            [633,"惠康超級市場","花都廣場","北區","新界粉嶺花都廣場地下132號舖","08:00-23:00","2682 1458"],
+            [634,"惠康超級市場","碧湖花園","北區","新界粉嶺碧湖花園上層31號","08:30-21:30","2677 9324"],
+            [635,"惠康超級市場","天慈","元朗區","新界元朗天水圍天慈村天慈商場一樓101及102號舖","08:00-22:30","2873 3177"],
+            [636,"惠康超級市場","粉嶺中心","北區","新界粉嶺中心2期1樓243-244號","09:00-21:30","2677 1206"],
+            [637,"惠康超級市場","祥華","北區","新界粉嶺新運路38號祥華邨祥華商場二樓L210號舖","08:30-21:30","2455 7298"],
+            [638,"惠康超級市場","翠湖居","元朗區","新界元朗天水圍天瑞路8號翠湖居地下1-4號","08:30-21:30","2446 9116"],
+            [639,"惠康超級市場","天晴","元朗區","新界天水圍天晴邨天晴商場地下6號舖","08:00-23:00","2351 8267"],
+            [640,"惠康超級市場","海聯廣場","北區","新界粉嶺聯和墟和睦路9號海聯廣場地下1,2C及2D號舖","10:00-20:00","2601 2528"],
+            [641,"惠康超級市場","帝庭軒","北區","新界粉嶺帝庭軒第1期1樓35號舖","08:00-22:00","3125 4105"],
+            [642,"惠康超級市場","上水名都","北區","新界上水上水名都中心第一層3, 15至16, 18, 20至21號舖和入口大堂","08:00-22:30","2639 0174"],
+            [643,"惠康超級市場","彩園","北區","新界上水彩園村彩園購物中心地下G6號舖","08:00-23:00","3124 0140"],
+            [644,"惠康超級市場","新豐","北區","新界上水新豐路130-132號地庫","10:00-20:00","2673 2127"],
+            [645,"惠康超級市場","新康街","北區","新界上水新康街67號行樂坊地下10至12號舖","08:30-21:30","2415 0792"],
+            [646,"惠康超級市場","新豐3","北區","新界上水新豐路100號地下","08:30-22:00","2465 3083"],
+            [647,"惠康超級市場","天澤","元朗區","新界天水圍天澤商場2樓204號舖","08:00-23:00","2486 3501"],
+            [648,"惠康超級市場","翠麗","北區","新界上水新豐路翠麗花園商場25-29室","09:00-21:00","2679 3914"],
+            [649,"惠康超級市場","落馬州","油尖旺區","新界落馬州鐵路站1樓離境大堂132號舖","10:00-21:30","3404 6532"],
+            [650,"惠康超級市場","落馬州3","油尖旺區","新界落馬州鐵路站1樓離境大堂102-105號舖","12:00-20:00","2981 1498"],
+            [651,"惠康超級市場","沙頭角","北區","新界沙頭角村25-27座地下1-4號","08:30-20:30","2674 4608"],
+            [652,"惠康超級市場","佐敦道2","油尖旺區","九龍佐敦道26E 寶輝閣地下","08:00-01:00","2791 0365"],
+            [653,"惠康超級市場","東頭邨","黃大仙區","九龍東頭村道183 號東頭(二)邨東頭商場地下SU1號舖","08:00-22:00","2736 3237"],
+            [654,"惠康超級市場","啟鑽苑","黃大仙區","九龍黃大仙鑽石山啟鑽苑啟鑽商場地庫B11號舖","08:00-22:00","2381 5177"],
+            [655,"惠康超級市場","明苑中心","東區","香港北角英皇道402-404 號及明園西街6號，明苑中心部份地下入口及一樓","08:00-22:00","2547 6055"],
+            [656,"惠康超級市場","太古城2","東區","香港太古城太古城道25號富山閣地下G15-G16及怡山閣地下G18號舖","08:00-22:00","2558 0208"],
+            [657,"惠康超級市場","利安","沙田區","九龍官塘利安道32號利安商場第二層平台15號舖","08:00-22:00","2305 4068"],
+            [658,"惠康超級市場","家安大廈","中西區","香港德輔道西374至376號家安大廈地下","08:00-22:00","NA"]
+        ];
+
+        // ==================== TAB 3 DATA: COFFEE SHOPS (129 STORES) ====================
+        const rawCoffeeText = `Pacific Coffee|中環新紀元廣場分店|中西區|香港上環皇后大道中181號新紀元廣場低座地下G06號舖|07:30-20:00|2851 6090
+Pacific Coffee|中環萬宜大廈分店|中西區|香港中環德輔道中68號萬宜大廈商場2樓208號舖|07:30-19:30|2259 5128
+Pacific Coffee|中環花園道三號分店|中西區|香港中環花園道3號冠君大廈1樓102號舖|07:30-19:00|2878 8632
+Pacific Coffee|中環中銀大廈分店|中西區|香港中環花園道1號中銀大廈地下|07:30-19:00|2820 0078
+Pacific Coffee|金鐘海富中心分店|中西區|香港金鐘夏慤道18號海富中心1樓75號舖|07:30-20:00|2529 0118
+Pacific Coffee|金鐘力寶中心分店|中西區|香港金鐘金鐘道89號力寶中心1樓2A號舖|07:30-19:00|2522 1031
+Pacific Coffee|山頂凌霄閣分店|中西區|香港山頂山頂道128號凌霄閣1樓102號舖|09:00-21:00|2849 2399
+Pacific Coffee|西環西寶城分店|中西區|香港西環卑路乍街8號西寶城1樓115號舖|08:00-21:00|2818 6838
+Pacific Coffee|灣仔中環廣場分店|灣仔區|香港灣仔港灣道18號中環廣場2樓|07:30-19:30|2598 1080
+Pacific Coffee|灣仔東城大廈分店|灣仔區|香港灣仔駱克道41號東城大廈地下UG4-5號舖|07:30-21:00|2866 9559
+Pacific Coffee|灣仔新鴻基中心分店|灣仔區|香港灣仔港灣道30號新鴻基中心1樓134-135號舖|07:30-19:30|2827 4232
+Pacific Coffee|灣仔合和中心分店|灣仔區|香港灣仔皇后大道東183號合和中心地下G01號舖|07:30-20:30|2527 2718
+Pacific Coffee|銅鑼灣利園二期分店|灣仔區|香港銅鑼灣恩平道28號利園二期1樓118號舖|08:00-20:30|2882 6138
+Pacific Coffee|銅鑼灣皇室堡分店|灣仔區|香港銅鑼灣告士打道311號皇室堡1樓122號舖|08:00-21:30|2895 1128
+Pacific Coffee|跑馬地成和道分店|灣仔區|香港跑馬地成和道49號地下|07:30-20:30|2836 5128
+Pacific Coffee|北角友邦廣場分店|東區|香港北角電氣道183號友邦廣場地下8號舖|07:30-19:30|2571 6618
+Pacific Coffee|鰂魚涌太古坊濠豐大廈分店|東區|香港鰂魚涌英皇道979號太古坊濠豐大廈地下|07:30-19:00|2968 1882
+Pacific Coffee|太古城中心分店|東區|香港太古城太古城道18號太古城中心1樓133號舖|08:00-21:30|2567 1668
+Pacific Coffee|小西灣藍灣廣場分店|東區|香港小西灣小西灣道28號藍灣廣場地下G18號舖|08:00-21:00|2505 2328
+Pacific Coffee|赤柱廣場分店|南區|香港赤柱佳美道23號赤柱廣場1樓108號舖|08:00-20:30|2813 7688
+Pacific Coffee|數碼港商場分店|南區|香港薄扶林數碼港道100號數碼港商場2樓203號舖|08:00-20:00|2989 6060
+Pacific Coffee|尖沙咀美麗華廣場分店|油尖旺區|九龍尖沙咀彌敦道132號美麗華廣場一期地下G31-G32A號舖|08:00-22:00|2735 0112
+Pacific Coffee|尖沙咀海港城港威商場分店|油尖旺區|九龍尖沙咀廣東道25號海港城港威商場3樓3321號舖|08:00-21:30|2118 2288
+Pacific Coffee|尖沙咀中港城分店|油尖旺區|九龍尖沙咀廣東道33號中港城高層地下UG28號舖|07:30-20:00|2736 3098
+Pacific Coffee|旺角朗豪坊分店|油尖旺區|九龍旺角亞皆老街8號朗豪坊4樓7號舖|08:00-22:30|3514 9328
+Pacific Coffee|旺角MOKO新世紀廣場分店|油尖旺區|九龍旺角太子道西193號MOKO新世紀廣場2樓251號舖|08:00-21:30|2395 2118
+Pacific Coffee|大角咀奧海城二期分店|油尖旺區|九龍大角咀海庭道18號奧海城二期地下G36號舖|08:00-21:30|2273 4388
+Pacific Coffee|荔枝角宇晴滙分店|深水埗區|九龍荔枝角深盛路9號宇晴滙2樓28號舖|08:00-21:00|2370 9128
+Pacific Coffee|九龍塘又一城分店|深水埗區|九龍九龍塘達之路80號又一城LG2樓26號舖|08:00-22:00|2265 7128
+Pacific Coffee|紅磡置富都會分店|九龍城區|九龍紅磡都會道6號置富都會7樓749號舖|08:00-21:00|2363 8128
+Pacific Coffee|九龍城廣場分店|九龍城區|九龍九龍城賈炳達道128號九龍城廣場地下G12號舖|08:00-21:30|2382 6128
+Pacific Coffee|黃大仙中心南館分店|黃大仙區|九龍黃大仙正德街103號黃大仙中心南館地下G08號舖|08:00-21:00|2320 5128
+Pacific Coffee|鑽石山荷里活廣場分店|黃大仙區|九龍鑽石山龍蟠街3號荷里活廣場2樓213號舖|08:00-21:30|2955 5128
+Pacific Coffee|九龍灣德福廣場分店|觀塘區|九龍九龍灣偉業街33號德福廣場一期1樓F22號舖|07:30-21:30|2750 8128
+Pacific Coffee|觀塘創紀之城五期apm分店|觀塘區|九龍觀塘觀塘道418號創紀之城五期apm 1樓L1-12號舖|08:00-22:30|3148 1128
+Pacific Coffee|藍田啟田商場分店|觀塘區|九龍藍田啟田道50號啟田商場2樓218號舖|08:00-21:00|2709 6128
+Pacific Coffee|葵芳新都會廣場分店|葵青區|新界葵芳興芳路223號新都會廣場2樓278號舖|08:00-21:30|2429 8128
+Pacific Coffee|青衣城分店|葵青區|新界青衣青敬路33號青衣城1樓172號舖|08:00-21:30|2436 9128
+Pacific Coffee|荃灣愉景新城分店|荃灣區|新界荃灣青山公路荃灣段398號愉景新城1樓1028號舖|08:00-21:30|2940 1128
+Pacific Coffee|屯門市廣場分店|屯門區|新界屯門屯順街1號屯門市廣場一期2樓2021號舖|08:00-21:30|2450 8128
+Pacific Coffee|元朗形點II分店|元朗區|新界元朗朗日路8號形點II 1樓A112號舖|08:00-21:30|2476 8128
+Pacific Coffee|沙田連城廣場分店|沙田區|新界沙田沙田車站圍1號連城廣場零售層28號舖|07:30-21:30|2697 8128
+Pacific Coffee|將軍澳東港城分店|西貢區|新界將軍澳重華路8號東港城1樓188號舖|08:00-21:30|2628 7128
+Pacific Coffee|東涌東薈城名店倉分店|離島區|新界大嶼山東涌達東路20號東薈城名店倉2樓298號舖|08:00-21:30|2109 2128
+星巴克 Starbucks|中環國際金融中心商場分店|中西區|香港中環金融街8號國際金融中心商場2樓2097-2098號舖|07:00-21:00|2295 3685
+星巴克 Starbucks|中環交易廣場分店|中西區|香港中環康樂廣場8號交易廣場三期3樓302-304號舖|07:00-20:00|2526 2698
+星巴克 Starbucks|中環歷山大廈分店|中西區|香港中環遮打道18號歷山大廈地庫B2號舖|07:30-20:00|2521 5688
+星巴克 Starbucks|中環蘭桂坊分店|中西區|香港中環德己立街30-32號加州大廈地下|07:30-22:00|2523 5688
+星巴克 Starbucks|中環街市分店|中西區|香港中環皇后大道中93號中環街市2樓216號舖|08:00-21:00|2613 1128
+星巴克 Starbucks|金鐘太古廣場分店|中西區|香港金鐘金鐘道88號太古廣場1樓100A號舖|07:30-21:00|2918 9985
+星巴克 Starbucks|金鐘添美道中信大廈分店|中西區|香港金鐘添美道1號中信大廈2樓202號舖|07:30-19:30|2522 8128
+星巴克 Starbucks|上環信德中心分店|中西區|香港上環干諾道中200號信德中心2樓211號舖|07:00-21:30|2546 1128
+星巴克 Starbucks|西環堅尼地城卑路乍街分店|中西區|香港西環堅尼地城卑路乍街72號地下|07:30-21:00|2817 1128
+星巴克 Starbucks|山頂廣場分店|中西區|香港山頂山頂道118號山頂廣場1樓115號舖|08:00-20:30|2849 6128
+星巴克 Starbucks|灣仔合和中心分店|灣仔區|香港灣仔皇后大道東183號合和中心3樓316號舖|07:30-21:00|2528 1128
+星巴克 Starbucks|灣仔利東街分店|灣仔區|香港灣仔皇后大道東200號利東街地下G39號舖|07:30-21:30|2865 1128
+星巴克 Starbucks|灣仔鷹君中心分店|灣仔區|香港灣仔港灣道23號鷹君中心1樓102號舖|07:30-20:00|2827 1128
+星巴克 Starbucks|銅鑼灣希慎廣場分店|灣仔區|香港銅鑼灣軒尼詩道500號希慎廣場2樓201號舖|08:00-22:00|2525 1128
+星巴克 Starbucks|銅鑼灣時代廣場分店|灣仔區|香港銅鑼灣勿地臣街1號時代廣場9樓916號舖|08:00-22:00|2506 1128
+星巴克 Starbucks|銅鑼灣百德新街旗艦店|灣仔區|香港銅鑼灣百德新街2-20號恒隆中心地庫|08:00-22:00|2890 1128
+星巴克 Starbucks|跑馬地成和道分店|灣仔區|香港跑馬地成和道69號地下|07:30-21:00|2838 1128
+星巴克 Starbucks|北角匯二期分店|東區|香港北角渣華道123號北角匯二期地下G09號舖|07:30-21:30|2570 1128
+星巴克 Starbucks|鰂魚涌太古城中心分店|東區|香港鰂魚涌太古城道18號太古城中心地下G068號舖|07:30-21:30|2568 1128
+星巴克 Starbucks|鰂魚涌康怡廣場分店|東區|香港鰂魚涌康山道1號康怡廣場北座地下G11號舖|07:30-21:30|2886 1128
+星巴克 Starbucks|柴灣新翠商場分店|東區|香港柴灣柴灣道233號新翠商場1樓115號舖|07:30-21:00|2896 1128
+星巴克 Starbucks|香港仔中心分店|南區|香港香港仔南寧街香港仔中心二期1樓2號舖|07:30-21:00|2552 1128
+星巴克 Starbucks|黃竹坑THE SOUTHSIDE分店|南區|香港黃竹坑香葉道11號THE SOUTHSIDE 1樓122號舖|08:00-21:30|2555 1128
+星巴克 Starbucks|赤柱大街分店|南區|香港赤柱赤柱大街86號地下|08:00-20:00|2813 1128
+星巴克 Starbucks|尖沙咀海港城海運大廈分店|油尖旺區|九龍尖沙咀廣東道3-27號海港城海運大廈地下OT G04A號舖|08:00-22:00|2118 1128
+星巴克 Starbucks|尖沙咀K11購物藝術館分店|油尖旺區|九龍尖沙咀河內道18號K11購物藝術館地下G22號舖|08:00-22:00|3122 4128
+星巴克 Starbucks|尖沙咀K11 MUSEA分店|油尖旺區|九龍尖沙咀梳士巴利道18號K11 MUSEA 2樓204A號舖|08:00-22:00|2613 1288
+星巴克 Starbucks|尖沙咀漢口道分店|油尖旺區|九龍尖沙咀漢口道38-40號漢興大廈地下|07:30-22:00|2366 1128
+星巴克 Starbucks|尖沙咀星光行分店|油尖旺區|九龍尖沙咀梳士巴利道3號星光行地下|07:30-22:00|2730 1128
+星巴克 Starbucks|尖沙咀圓方ELEMENTS分店|油尖旺區|九龍尖沙咀柯士甸道西1號圓方1樓1030號舖|07:30-21:30|2196 8128
+星巴克 Starbucks|旺角洗衣街分店|油尖旺區|九龍旺角洗衣街89-91號偉基樓1樓及2樓|08:00-23:00|2789 1128
+星巴克 Starbucks|旺角朗豪坊分店|油尖旺區|九龍旺角亞皆老街8號朗豪坊2樓32-33號舖|08:00-22:30|3514 4128
+星巴克 Starbucks|旺角MOKO新世紀廣場分店|油尖旺區|九龍旺角太子道西193號MOKO新世紀廣場MTR層M51號舖|07:30-22:00|2392 1128
+星巴克 Starbucks|大角咀奧海城二期分店|油尖旺區|九龍大角咀海庭道18號奧海城二期1樓112號舖|07:30-21:30|2740 4128
+星巴克 Starbucks|深水埗V Walk分店|深水埗區|九龍深水埗深旺道28號V Walk 2樓L2-116a號舖|07:30-21:30|2613 1388
+星巴克 Starbucks|荔枝角D2 Place ONE分店|深水埗區|九龍荔枝角長義街9號D2 Place ONE 1樓114號舖|07:30-21:00|2743 1128
+星巴克 Starbucks|九龍塘又一城分店|深水埗區|九龍九龍塘達之路80號又一城LG1樓40號舖|07:30-22:00|2265 8128
+星巴克 Starbucks|紅磡黃埔天地時尚坊分店|九龍城區|九龍紅磡黃埔天地時尚坊地下G18號舖|07:30-21:30|2364 1128
+星巴克 Starbucks|啟德AIRSIDE分店|九龍城區|九龍啟德協調道2號AIRSIDE 2樓L216號舖|08:00-21:30|2613 1588
+星巴克 Starbucks|鑽石山荷里活廣場分店|黃大仙區|九龍鑽石山龍蟠街3號荷里活廣場1樓141號舖|07:30-21:30|2955 8128
+星巴克 Starbucks|樂富廣場分店|黃大仙區|九龍樂富聯合道198號樂富廣場A區1樓1108號舖|07:30-21:30|2338 1128
+星巴克 Starbucks|九龍灣德福廣場分店|觀塘區|九龍九龍灣偉業街33號德福廣場一期地下G1A號舖|07:30-22:00|2759 1128
+星巴克 Starbucks|九龍灣MegaBox分店|觀塘區|九龍九龍灣宏照道38號企業廣場五期MegaBox 2樓29號舖|08:00-21:30|2359 1128
+星巴克 Starbucks|觀塘創紀之城五期apm分店|觀塘區|九龍觀塘觀塘道418號創紀之城五期apm大堂層C-39號舖|07:30-22:30|3148 9128
+星巴克 Starbucks|葵芳新都會廣場分店|葵青區|新界葵芳興芳路223號新都會廣場3樓375號舖|07:30-22:00|2428 1128
+星巴克 Starbucks|青衣城分店|葵青區|新界青衣青敬路33號青衣城1樓115號舖|07:30-22:00|2435 1128
+星巴克 Starbucks|荃灣廣場分店|荃灣區|新界荃灣大壩街4-30號荃灣廣場2樓250號舖|08:00-22:00|2498 1128
+星巴克 Starbucks|荃灣如心廣場二期分店|荃灣區|新界荃灣大河道98號如心廣場二期1樓118號舖|07:30-21:30|2416 1128
+星巴克 Starbucks|屯門市廣場分店|屯門區|新界屯門屯順街1號屯門市廣場一期1樓1128號舖|07:30-22:00|2459 1128
+星巴克 Starbucks|屯門V city分店|屯門區|新界屯門鄉事會路83號V city地下G-11號舖|07:30-22:00|2457 1128
+星巴克 Starbucks|元朗形點I分店|元朗區|新界元朗朗日路9號形點I 1樓1066號舖|07:30-22:00|2475 1128
+星巴克 Starbucks|上水廣場分店|北區|新界上水龍琛路39號上水廣場3樓301號舖|07:30-21:30|2671 1128
+星巴克 Starbucks|大埔超級城分店|大埔區|新界大埔安邦路8及10號大埔超級城B區2樓218號舖|07:30-21:30|2664 1128
+星巴克 Starbucks|沙田新城市廣場一期分店|沙田區|新界沙田正街18號新城市廣場一期1樓129號舖|07:30-22:30|2699 1128
+星巴克 Starbucks|大圍圍方The Wai分店|沙田區|新界大圍車公廟路18號圍方2樓232號舖|07:30-22:00|2613 1688
+星巴克 Starbucks|將軍澳PopCorn分店|西貢區|新界將軍澳唐俊街9號PopCorn一期1樓F40號舖|07:30-22:00|2628 1128
+星巴克 Starbucks|東涌東薈城名店倉分店|離島區|新界大嶼山東涌文東路20號東薈城名店倉地下G19號舖|07:00-22:00|2109 1128
+星巴克 Starbucks|香港國際機場一號客運大樓分店|離島區|新界大嶼山赤鱲角香港國際機場一號客運大樓離港層7樓7E105號舖|06:30-23:30|2261 0128
+瑞幸咖啡 Luckin Coffee|上環德輔道中店|中西區|香港上環德輔道中308號富衛金融中心地下B及C號舖|07:30-20:00|NA
+瑞幸咖啡 Luckin Coffee|中環威靈頓街店|中西區|香港中環威靈頓街50號華威大廈地下|07:30-20:30|NA
+瑞幸咖啡 Luckin Coffee|灣仔軒尼詩道店|灣仔區|香港灣仔軒尼詩道139號中國海外大廈地下|07:30-20:30|NA
+瑞幸咖啡 Luckin Coffee|北角英皇道店|東區|香港北角英皇道318-328號恒生北角大廈地下|08:00-20:30|NA
+瑞幸咖啡 Luckin Coffee|小西灣廣場店|東區|香港小西灣小西灣道10號小西灣廣場2樓212號舖|08:00-20:30|NA
+瑞幸咖啡 Luckin Coffee|柴灣新翠商場店|東區|香港柴灣柴灣道233號新翠商場3樓348號舖|08:00-20:30|NA
+瑞幸咖啡 Luckin Coffee|尖沙咀美麗華廣場店|油尖旺區|九龍尖沙咀彌敦道132號美麗華廣場一期地下G16號舖|08:00-22:00|NA
+瑞幸咖啡 Luckin Coffee|尖沙咀漆咸道南店|油尖旺區|九龍尖沙咀漆咸道南45-51號其士大廈地下C號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|尖沙咀加連威老道店|油尖旺區|九龍尖沙咀加連威老道2-6號愛賓商業大廈地下|08:00-22:00|NA
+瑞幸咖啡 Luckin Coffee|旺角新之城店|油尖旺區|九龍旺角亞皆老街65號旺角新之城地下G11-G15號舖|08:00-22:30|NA
+瑞幸咖啡 Luckin Coffee|旺角MOKO新世紀廣場店|油尖旺區|九龍旺角太子道西193號MOKO新世紀廣場1樓138號舖|08:00-22:00|NA
+瑞幸咖啡 Luckin Coffee|旺角西洋菜南街店|油尖旺區|九龍旺角西洋菜南街2J-2Q號新江大樓地下|08:00-22:30|NA
+瑞幸咖啡 Luckin Coffee|佐敦吳松街店|油尖旺區|九龍佐敦吳松街122號利際商業大廈地下|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|大角咀海富商場店|油尖旺區|九龍大角咀海庭道2號海富商場地下G06號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|深水埗西九龍中心店|深水埗區|九龍深水埗欽州街37K號西九龍中心1樓128號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|長沙灣廣場店|深水埗區|九龍長沙灣長沙灣道833號長沙灣廣場1樓112號舖|07:30-20:30|NA
+瑞幸咖啡 Luckin Coffee|紅磡黃埔天地店|九龍城區|九龍紅磡黃埔天地百寶坊地下G15號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|九龍城廣場店|九龍城區|九龍九龍城賈炳達道128號九龍城廣場LG樓LG12號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|何文田廣場店|九龍城區|九龍何文田佛光街80號何文田廣場3樓312號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|慈雲山中心店|黃大仙區|九龍慈雲山毓華街23號慈雲山中心3樓318號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|牛頭角淘大商場店|觀塘區|九龍九龍灣牛頭角道77號淘大商場一期地下G18號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|藍田啟田商場店|觀塘區|九龍藍田啟田道50號啟田商場2樓212B號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|葵芳新都會廣場店|葵青區|新界葵芳興芳路223號新都會廣場2樓262號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|屯門屯門市廣場店|屯門區|新界屯門屯順街1號屯門市廣場一期2樓2068號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|上水中心店|北區|新界上水智昌路3號上水中心2樓2056號舖|08:00-21:00|NA
+瑞幸咖啡 Luckin Coffee|沙田好運中心店|沙田區|新界沙田橫壆街1-15號好運中心3樓3082號舖|08:00-21:30|NA
+瑞幸咖啡 Luckin Coffee|將軍澳MCP新都城中心店|西貢區|新界將軍澳欣景路8號MCP CENTRAL新都城中心二期1樓1065號舖|08:00-21:30|NA`;
+
+        // ==================== TAB 4 DATA: MCDONALD'S (269 STORES) ====================
+        const rawMcdText = `英皇道|東區|北角英皇道353-361號益新大廈地下A-C舖
+街市街|荃灣區|荃灣街市街10-16號地下與一樓
+土瓜灣道|九龍城區|九龍土瓜灣道35- 37號及浙江街31號C 地下
+嘉業大廈|油尖旺區|旺角荔枝角道1號嘉業大廈一樓及地下
+香港仔中心|南區|香港仔中心第四期6A-6B地下
+余道生行|中西區|皇后大道中37號余道生大廈地庫
+北京道|油尖旺區|尖沙咀北京道12號新聲大廈地庫與地下
+軒尼詩道|灣仔區|灣仔軒尼詩道302-308號集成中心地下G11-17號舖
+銅鑼灣怡和街|灣仔區|銅鑼灣怡和街46-54號地下至二樓
+莊士大廈|中西區|中環干諾道中30-32號莊士大廈地下高層與地下底層
+百誠大廈|油尖旺區|九龍佐敦道31-37號百誠大廈地庫及地下(部份)
+德士古道|荃灣區|荃灣德士古道富麗商場地舖1-9號
+成城大廈|葵青區|葵涌和宜合道90-114號成誠大廈地下(9&10舖)
+美居中心|深水埗區|深水埗元州街213號美居中心9-19號舖與23-26地舖
+好望角大廈|油尖旺區|旺角彌敦道612-618號好望角大廈地下及地庫
+元朗貿易中心|中西區|元朗青山道99-109號元朗貿易中心地下五號舖及一樓二樓
+山道|中西區|西營盤皇后大道西484-496號地下及閣樓
+欽州街|深水埗區|深水埗欽州街78-86號地下及閣樓
+昌運中心|大埔區|大埔安慈路4號昌運中心57-66號地下
+美孚新邨|深水埗區|美孚新邨萬事達廣場地下N60A號店
+樂嘉中心|東區|北角英皇道460-470號樂嘉中心地庫
+竹園邨|黃大仙區|黃大仙竹園南邨竹園商場S219A號舖
+太和邨|大埔區|大埔太和邨太和商場102號舖
+筲箕灣東大街|東區|筲箕灣東大街159號東輝大廈地下至二樓
+星光行|油尖旺區|尖沙咀梳士巴利道三號星光行地下及地庫
+長發邨|葵青區|青衣長發邨長發商場四樓407號舖
+大角咀道|油尖旺區|大角咀道97-105大同新邨大方樓地下J1,J2號舖
+柏蕙苑|東區|鰂魚涌英皇道1060號柏蕙苑地下C舖
+鄉事會道|屯門區|屯門市地段280號河傍街鄉事會道康麗花園14號地舖
+廣福道|大埔區|大埔墟廣福道70號寶康大廈地庫
+黃埔花園|九龍城區|九龍紅磡黃埔花園聚寶坊地面G7A號舖及地庫1 樓1B12-14號舖
+教育路|元朗區|元朗教育路9-13號興發大廈地下1&11舖
+士美菲|中西區|堅尼地城士美菲路12F-G文光閣地下
+良景邨|屯門區|屯門良景邨良景商場L223 , 212A 及328A號舖
+匯景廣場|觀塘區|藍田匯景道8號匯景廣場3樓1號舖
+西貢花園|西貢區|西貢親民街西貢花園地下1-3號舖
+蝴蝶邨|屯門區|新界屯門湖翠路1號蝴蝶邨蝶心樓地下R131-136 號舖
+沙咀道|荃灣區|荃灣沙咀道270-276號廣發大廈一樓及地下
+天瑞邨|元朗區|天水圍天瑞邨天瑞商場地下一號舖
+黃金海岸|屯門區|新界屯門青山公路香港黃金海岸購物商場R6及F9地舖及露天茶座
+毓華街|黃大仙區|慈雲山毓華街68號萬年戲院大廈地下
+愉景灣|離島區|大嶼山愉景灣愉景灣廣場A座地下G02號舖
+利東邨|南區|鴨利洲利東邨利東商場第二期212號舖
+港灣道|灣仔區|灣仔港灣道30號新鴻基中心地下G1號店
+榮芳路|葵青區|葵涌榮芳路1-5號地下舖
+粉嶺|北區|新界粉嶺名都商場二樓22號舖
+九龍公園|油尖旺區|尖沙咀柯士甸道22號九龍公園
+海洋公園|中西區|香港仔海洋公園山頂小食亭
+鳳德邨|黃大仙區|鑽石山鳳德邨鳳德商場202A號舖
+富運商業中心|油尖旺區|油麻地彌敦道569-573A號富運商業中心地下B舖
+希爾頓中心|沙田區|沙田希爾頓中心三樓8及20號舖
+莊士敦道|灣仔區|灣仔莊士敦道178-186號舖華懋莊士敦廣場地下2號舖
+亞皆老街|油尖旺區|旺角亞皆老街105號地下及閣樓
+皇后大道西|中西區|香港皇后大道西265號地下
+越秀廣場|黃大仙區|新蒲崗寧遠街3-23號越秀廣場地下G02-G05舖
+富怡花園|東區|小西灣富怡花園地下C10-C19
+美林邨|沙田區|大圍美林商場一樓96號舖
+景光街|灣仔區|跑馬地景光街19-21號珍慶閣地下A舖
+青山道|中西區|深水埗青山道212-214號瑞麗閣地下及一樓
+太安|東區|筲箕灣太安街15號太安樓地下G32-G34號舖
+梅窩|離島區|大嶼山梅窩銀礦灣銀運路3號梅窩中心地下1,3及5號舖
+興華街|東區|深水埗元州街416號地下
+299QRC|中西區|上環皇后大道中287號永傑中心地下
+花都廣場|北區|新界粉嶺百和路88號花都廣場地下91A, 93-95號舖
+新豐路|北區|上水石湖墟新豐路106-110號金城大廈地下
+華樂大廈|屯門區|屯門青山坊2號華樂大廈地下
+麗港城|觀塘區|觀塘麗港城商場地下6-9號舖
+亞州貨櫃物流中心|葵青區|葵涌三號碼頭亞州貨櫃大廈B座12字樓
+家維邨|九龍城區|紅磡馬頭圍道46-48號家維邨家廉樓地下上層19-20號舖
+荃灣中心|荃灣區|荃灣荃景圍94-98號荃灣中心第二期地下6號舖
+駿發花園|油尖旺區|油麻地眾坊街3號駿發花園G2號舖
+健康邨|東區|北角七姊妹道194號健康邨第一期地下C舖
+頌安邨|沙田區|馬鞍山頌安邨頌安商場6號舖
+茵怡花園|西貢區|將軍澳茵怡花園地下1號舖
+寶怡花園|屯門區|屯門良德街11號寶怡花園商場地下1-2號舖
+置富|南區|薄扶林置富南區廣場四樓426-432號舖
+長洲|離島區|長洲新興街103號地下及一樓
+海聯廣場|北區|粉嶺聯和墟和睦路9號海聯廣場地下2A及2B
+衛城道|中西區|半山衛城道3號至3號A地下下層
+沙田馬場|沙田區|沙田馬場2號公眾看台
+跑馬地馬場|灣仔區|跑馬地馬場2號公眾看台
+荷里活廣場|黃大仙區|鑽石山荷里活廣場二樓216號舖
+大埔道|深水埗區|深水埗大埔道132-134號康寶大廈地下
+田灣|南區|香港仔石排灣道81號兆暉大廈地下1及2號舖
+慈雲山中心|黃大仙區|慈雲山毓華街23號慈雲山中心333號舖
+信德中心|中西區|上環干諾道中200號信德中心二樓267號舖
+恆安邨|沙田區|馬鞍山恆安邨恆安商場二樓201至202A
+新翠邨|沙田區|大圍新翠邨新翠商場地下1B舖
+景星中心|東區|北角英皇道25-27號景星商業中心地下2號舖及一樓
+萬勝閣|深水埗區|深水埗荔枝角道150-174號萬盛閣地下1號舖
+般咸道|中西區|西區般咸道51-53號好景洋樓地下A-C及低層地下
+TKO Spot|西貢區|將軍澳尚德邨TKO Spot 2樓216號舖
+俊薈土瓜灣|九龍城區|土瓜灣馬頭圍道207-211號俊薈土瓜灣地下1號舖
+南康街|東區|筲箕灣南康街18號康華大廈地下低層4號舖
+新屯門中心|屯門區|屯門龍門路55-65號新屯門中心商場2樓9-11號舖
+長康邨|葵青區|青衣長康邨長康商場一期地下101號舖
+富榮花園|油尖旺區|九龍旺角西富榮花園地下66A號舖
+九龍站|油尖旺區|九龍機鐵九龍站到境大堂12號B舖
+華富邨|南區|香港仔華富村華富商場1A號舖
+寶林邨|西貢區|將軍澳寶林邨寶林商場地下103號舖
+窩打老道|油尖旺區|旺角窩打老道57-59號柏齡大廈地下BCD號舖閣樓及1樓全層
+石圍角邨|荃灣區|荃灣石圍角邨石圍角商場平台324號舖
+創紀之城|觀塘區|觀塘道388號創紀之城1A地下
+葵盛東邨|葵青區|葵涌葵盛東商場1樓105號舖
+黃大仙中心南館|黃大仙區|九龍黃大仙中心南館1樓123號鋪
+灣仔駱克道|灣仔區|灣仔駱克道151號2樓
+博康邨|沙田區|沙田博康邨博康商場2樓210號舖
+香港科技大學|沙田區|香港科技大學學術樓LG5餐廳
+南豐中心|中西區|荃灣青山道264-298號南豐中心三樓301號舖
+新都城中心二期商場|西貢區|將軍澳欣景路八號新都城中心二期商場一樓1017號舖
+翠屏邨|觀塘區|觀塘翠屏邨翠屏商場地下5號舖
+樂華邨|觀塘區|牛頭角樂華邨樂華商場310號舖
+海逸豪園|九龍城區|紅磡海逸道8號漁人碼頭UG層30-32號舖
+富泰邨|屯門區|屯門富泰邨富泰商場2樓215號舖
+何文田廣場|九龍城區|何文田邨何文田廣場3樓319號舖
+愛東邨|東區|筲箕灣愛東邨愛東商場地下11號舖
+廣福邨|大埔區|大埔廣福邨廣福商場P316號舖
+鯉魚門廣場|觀塘區|油塘鯉魚門廣場二樓201號舖
+上水名都商場|北區|上水智昌路九號上水名都商場二樓12至16號舖
+西寶城|中西區|西環卑路乍街8號西寶城低層地下LG07號舖
+德田邨|觀塘區|藍田德田商場一樓104A號舖
+駿景廣場|沙田區|沙田火炭駿景路1號駿景廣場地下G83A, G84-G85號舖
+沙田商業中心|沙田區|沙田火炭山尾街18-24號沙田商業中心地下1及2號舖
+紅磡灣中心|九龍城區|紅磡灣中心地下8號舖
+翠林邨|西貢區|將軍澳翠林邨翠林新城126號舖
+真善美邨|九龍城區|土瓜灣真善美邨富寧街5, 7, 9號地舖
+山景邨|屯門區|屯門山景邨山景商場124號舖
+美孚廣場|深水埗區|美孚廣場地下G03號舖及一樓119號舖
+藍灣半島|東區|小西灣道28號藍灣半島廣場地下11B號舖
+葵昌路|葵青區|葵涌葵昌路56號貿易之都1樓1號舖
+麗晶花園|觀塘區|九龍灣宏光道80號麗晶花園商場及停車場218-1號舖
+翠怡花園|葵青區|青衣楓樹窩路翠怡花園商場地下G2號舖
+愉翠苑|沙田區|沙田小瀝源愉翠苑愉翠商場1樓101號舖
+寶達邨|觀塘區|觀塘寶達邨寶達商場2樓206號舖
+富善邨|大埔區|大埔富善邨富善商場地下G25號舖
+天平邨|北區|上水天平邨天平商場地下122號舖
+秀茂坪邨|觀塘區|觀塘秀茂坪邨秀茂坪商場地下1號舖
+富昌邨|深水埗區|深水埗富昌商場1樓128至129號舖
+逸東邨|離島區|東涌逸東邨逸東商場1樓104號舖
+淘大商場|觀塘區|牛頭角道77號淘大花園商場第二期地下G246-253號舖
+海富中心|中西區|金鐘夏愨道18號海富中心地下1-41號舖
+彩明商場|西貢區|將軍澳調景嶺彩明苑彩明商場271及272號舖
+新港城中心|沙田區|新界沙田鞍祿街新港城中心二樓2138號舖
+宇晴匯|深水埗區|荔枝角深盛路9號宇晴匯2樓13A,15及16號舖
+彩園邨|北區|上水彩園商場三樓R36及R37號舖
+石蔭邨|葵青區|葵涌石蔭邨石蔭商場LG二樓LG213及214號舖
+東薈城|離島區|東涌達東路20號東薈城一樓112號舖
+禾輋邨|沙田區|沙田德厚街禾輋邨禾輋商場二樓245-247號舖
+顯徑邨|沙田區|沙田大圍顯徑邨顯徑商場
+利安邨|沙田區|馬鞍山利安邨利安商場地庫三樓304號舖
+太子匯|油尖旺區|九龍城太子道西448號太子匯地下1-3, 5號舖
+旺角道|油尖旺區|旺角道30-36號寶安大廈一樓全層及地下F舖
+綠楊坊|荃灣區|荃灣綠楊坊二樓S1-2號舖
+錦泰苑|沙田區|馬鞍山錦泰商場一樓102號舖
+廣源邨|沙田區|沙田廣源商場二樓13號舖
+海悅豪園|西貢區|將軍澳坑口培成路18號海悅豪園購物商場地下9號舖
+囍寓|灣仔區|灣仔莊士敦道74-80號地庫及地下
+新達廣場|大埔區|大埔南運路9號新達廣場1樓083-085號舖
+屯門時代廣場|灣仔區|屯門屯合街2號時代廣場南翼第三層13及14號舖(近大會堂)
+鴨寮街|深水埗區|深水埗北河街104號新北河大廈閣樓A-F單位
+牛頭角道|觀塘區|觀塘牛頭角道327-333號瓊林大廈地庫及地下
+銅鑼灣道|灣仔區|銅鑼灣道11-17A國泰大廈一樓A
+油麗邨|觀塘區|油塘油麗邨油麗商場地下5-6號舖
+寶勒巷|油尖旺區|尖沙咀寶勒巷3-7A號萬事昌廣場地下1號舖
+德福廣場|觀塘區|九龍灣德福廣場I 期第F21號舖
+置富第一城|南區|沙田第一城銀城街1號置富第一城地下G78-G81 & G82C號舖
+奧海城二期|油尖旺區|大角咀海庭道18號奧海城二期地下G40-G42 號舖
+赤柱廣場|南區|赤柱佳美道23號赤柱廣場地下G02及G03號舖
+兆康苑|屯門區|屯門兆康苑兆康商場109號舖
+長沙灣廣場|深水埗區|長沙灣道833號長沙灣廣場二樓286B-289, 291 & 293及三樓325-328號舖
+康澤花園|東區|北角英皇道238號康澤花園地下B2及B3號舖
+俊宏軒|元朗區|元朗天瑞路88號俊宏軒地下G5-G7號舖
+樂意居|九龍城區|土瓜灣馬頭圍道418號樂意居地下1號舖及一樓
+窩仔街|深水埗區|深水埗石硤尾窩仔街1-13號仁寶大廈B2及B3地舖
+海灣街|東區|鰂魚涌海灣街4-6號嘉榮大廈地下11-13號舖
+九龍城廣埸|九龍城區|九龍城賈炳達道128號九龍城廣場地下上層UG02B, UG03 & UG05號舖
+彌敦行|油尖旺區|油麻地彌敦道518-520號彌敦行地下A及C舖
+新望大廈|油尖旺區|旺角彌敦道763-767號新望大廈地庫及地下
+新港豪庭|油尖旺區|大角咀塘尾道51號新港豪庭地下F-H號舖及一樓
+數碼港|南區|數碼港道100號, (The Annex) 地面商舖1-2號
+景峰花園|屯門區|屯門景峰徑2號景峰花園地下G23,G25-G27號舖
+T Town南館|元朗區|天水圍天頌苑T Town南館2樓S206號舖
+禮頓中心|灣仔區|銅鑼灣禮頓道77號禮頓中心地庫B02
+杏花邨|東區|柴灣盛泰道100號杏花邨杏花新城地下G46舖
+彩雲邨|黃大仙區|九龍牛池灣清水灣道45號彩雲邨彩雲商場第二期地下上層A104及A115號店
+國際金融中心商場|中西區|中環港景街1號國際金融中心商場2樓2022號舖
+晴朗商場|九龍城區|九龍城沐翠街晴朗商場地下B001號舖
+沙角邨|沙田區|沙田沙角商場2樓239號舖
+天耀邨|元朗區|天水圍天耀邨天耀商場地下L011號舖
+沙田萬怡酒店|沙田區|沙田安平街1號地下1號舖
+坪石邨|黃大仙區|牛池灣坪石村停車場G1號舖
+海怡半島|南區|鴨脷洲海怡路12A海怡廣場(西翼)205號舖
+德昌大廈|葵青區|葵涌葵涌道1001號德昌大廈一樓3號舖
+愉景新城|荃灣區|荃灣青山公路398號愉景新城購物商場第二層2022-2023號舖
+朗屏邨|元朗區|元朗朗屏邨朗屏商場1樓L116號鋪
+麗城花園|荃灣區|荃灣青山公路625號麗城花園第三期麗城薈地下48及49A號舖及外座區A01
+元朗廣場|元朗區|元朗青山公路元朗廣場地下071-078號鋪
+TKO Gateway|西貢區|將軍澳坑口常寧路TKO Gatway西翼一樓W102號鋪
+長亨邨|葵青區|青衣長亨邨長亨商場LG1樓115-117號舖
+洪福邨|屯門區|元朗洪水橋田心路洪福邨洪福商場地下1號鋪
+形點|元朗區|元朗朗日路8號形點II 3樓A312號舖
+太古城中心|東區|太古城道18號太古城中心五樓505號舖
+碧湖花園商場|北區|新界粉嶺一鳴路15號碧湖花園商場UG樓層34B號舖
+大興邨|屯門區|屯門大興街1號大興商場地下L101號舖
+新文華中心|油尖旺區|尖沙咀科學館道14號新文華中心地下G27-29號鋪及1樓127-138號鋪
+天一商城|元朗區|天水圍天秀路8號天一商城1樓1018-1019號舖
+秦石邨|沙田區|沙田盛田街1號秦石邨秦石商場地下8-9號舖
+MegaBox|觀塘區|九龍灣宏照道38號企業廣場五期MegaBox L2 34號舖
+荃灣廣場|荃灣區|荃灣大壩街4-30號荃灣廣場第五層511-512及511-512A號鋪
+樂富廣場|九龍城區|聯合道198號樂富廣場3樓3112-3114號舖
+新都會廣場|葵青區|新界葵涌新都會廣場五樓541號舖
+水泉澳邨|沙田區|沙田水泉澳邨水泉澳廣場G12號舖
+鱷魚恤中心|觀塘區|觀塘開源道79號鱷魚恤中心一樓2, 3a & 3b號舖
+萬迪廣場|黃大仙區|新蒲崗大有街3號萬廸廣場地下F與G舖
+將軍澳廣場|西貢區|新界將軍澳唐德街1 號將軍澳廣場商業部份二樓2-018-020 號舖
+青衣城II 期|葵青區|新界青衣青敬路31 號青衣城地下G36-37 號鋪
+嘉湖|元朗區|新界天水圍嘉湖1期地下57 A – C號舖
+大圍|沙田區|新界大圍大圍道37-47 號耀寶大廈地下1 號鋪及1 樓全層
+機場T1離境大堂（非禁區）|離島區|香港國際機場一號客運大樓離港層(L8) 近F行段
+波斯富街|灣仔區|香港銅鑼灣波斯富街24-30 號寶漢大廈地下C2 & C3 號舖部分及地庫全層
+恆成大廈|油尖旺區|九龍油麻地彌敦道363-373號恆成大廈地下B舖
+青衣商場|葵青區|香港新界青衣楓樹窩路10號青衣邨青衣商場地下S1-S2號舖
+The Wave|觀塘區|九龍觀塘興業街4 號1 樓102 號舖
+順利邨|觀塘區|九龍觀塘利安道15 號順利邨利業樓及順利商場F2 樓201A 號舖
+將軍澳中心|西貢區|新界西貢將軍澳唐德街9 號將軍澳中心地下G33 號舖
+愛民廣場|九龍城區|九龍何文田忠孝街60號愛民邨愛民廣場G38A號地下
+蘇屋商場|深水埗區|深水埗蘇屋邨蘇屋商場地下G09號及G10號舖
+紅磡站|九龍城區|九龍紅磡站閣樓層HUH R2 號舖
+宏開道|觀塘區|九龍九龍灣宏開道8 號其士商業中心地下1 及2 號舖
+山頂廣場|中西區|香港山頂道118 號山頂廣場2 樓11-12 號鋪
+海之戀商場|荃灣區|新界荃灣大河道100號海之戀商場2樓2029號舖
+海韻花園|荃灣區|新界荃灣深井青山公路38 號海韻花園D 及部份餐廳A 舖
+幸福商場|深水埗區|九龍長沙灣幸祥街8號幸福邨幸福商場1樓111舖
+又一城|深水埗區|九龍九龍塘達之路80 號又一城LG1 樓LG1-01A 號舖
+日出康城|西貢區|新界西貢將軍澳康城路1 號The LOHAS 康城4 樓431A 號鋪
+石籬商場|葵青區|新界葵涌大隴街110號石籬邨石籬商場二期地下B013-B016號舖
+映灣薈|離島區|香港大嶼山東涌健東路1號映灣園映灣薈平台1樓29及30號舖
+興華邨|東區|香港柴灣環翠道11號興華(一)邨興華廣場1樓109A號舖
+白田邨|深水埗區|深水埗白田邨( 第七期及第八期)白田商場LG403 號
+新城市廣場|沙田區|新界沙田沙田正街新城市廣場一期2樓221-223號鋪
+MPM|油尖旺區|九龍旺角奶路臣街11號及240-244號砵蘭街文華商場1樓A舖
+海港城|油尖旺區|港威大廈四階4002 號舖
+皇后山邨|北區|新界粉嶺皇后山邨皇后山商場地下11 號舖
+海達邨|深水埗區|深水埗海達邨三期平台1 樓1-03 號舖
+駿業街|觀塘區|九龍觀塘駿業街56號中海日升中心1樓K號鋪
+科學園|大埔區|新界沙田白石角香港科學園第二期8W大樓地下S037, S038及S039號鋪
+合和中心|灣仔區|香港灣仔皇后大道東183號合和中心3樓309-314號舖
+機場中央客運廊（禁區）|離島區|香港國際機場一號客運大樓離港層(L6)近11號登機閘口
+海趣坊|屯門區|香港新界屯門湖翠路168-236號海趣坊一樓55-60號
+圍方|沙田區|香港新界大圍車公廟路18號圍方5樓520號鋪
+AIRSIDE|九龍城區|香港九龍啟德協調道2 號AIRSIDE 地庫B1 層B117 號舖
+裕民坊|觀塘區|九龍觀塘協和街33號裕民坊商場1樓176舖
+THE SOUTHSIDE|南區|香港黃竹坑香葉道11 號THE SOUTHSIDE 地下G01 號舖
+好運中心|沙田區|新界沙田橫壆街1-15號好運中心3樓3014-3015號舖
+屯門市廣場II|屯門區|屯門屯隆街3號屯門市廣場(II)地下17-22號(近杯渡輕鐵站)
+NOVO WALK|屯門區|新界屯門欣寶路8號NOVO LAND,NOVO WALK地下39號舖
+星凱堤岸|沙田區|新界沙田火炭坳背灣街1號星凱堤岸2樓201號鋪
+Monterey Place|西貢區|新界西貢將軍澳唐俊街23號Monterey Place地下G16號鋪
+安定邨|屯門區|新界屯門屯門鄉事會路2A號安定邨安定商場A區A-128 號舖
+清濤商場|北區|新界粉嶺清曉路1號清濤苑清濤商場一樓101號舖
+朗景臺|元朗區|新界元朗馬田路50號朗景臺第二座地下13-19號舖
+宏德居|東區|香港柴灣柴灣道341-343號及怡順街1-3號宏德居A座地下1號舖
+MOKO|油尖旺區|九龍旺角太子道西193號MOKO新世紀廣場MTR樓層M19號舖
+滙都|屯門區|新界元朗洪水橋洪安里1號滙都地下A1-A3號鋪
+錦繡花園|元朗區|新界元朗錦繡花園市中心E座地下8-14及14A號鋪
+翔東邨|離島區|香港離島大嶼山東涌翔東邨翔東潮薈地下02號舖
+上水廣場|北區|新界上水石湖墟龍琛路39號上水廣場3樓312-320號舖
+機場T2離境大堂（非禁區）|離島區|香港大嶼山赤鱲角香港國際機場2號客運大樓擴展部份主樓7樓7TL050,7TL056,7TL057,7TL402&7TL406號舖
+The Anderson|西貢區|新界西貢安健道9號領達廣場1樓110號舖`;
+
+        // ==================== HALLMARK CONTROLLER & ARCHITECTURAL ENGINE ====================
+
+        // Format Groceries
+        const defaultGroceries = rawGroceriesArray.map(item => ({
+            id: item[0],
+            brand: item[1],
+            name: `${item[1]} - ${item[2]}`,
+            district: item[3],
+            address: item[4],
+            hours: item[5],
+            phone: item[6]
+        }));
+
+        // Format Coffee
+        const defaultCoffee = rawCoffeeText.trim().split("\n").map((line, idx) => {
+            const p = line.split("|").map(s => s.trim());
+            return {
+                id: idx + 1,
+                brand: p[0],
+                name: `${p[0]} - ${p[1]}`,
+                district: p[2],
+                address: p[3],
+                hours: p[4] || "08:00-21:00",
+                phone: p[5] || "NA"
+            };
+        });
+
+        // Format McDonald's
+        const defaultMcd = rawMcdText.trim().split("\n").map((line, idx) => {
+            const p = line.split("|").map(s => s.trim());
+            return {
+                id: idx + 1,
+                brand: "麥當勞",
+                name: `麥當勞 - ${p[0]}`,
+                district: p[1],
+                address: p[2],
+                hours: "24小時 / 早至晚",
+                phone: "NA"
+            };
+        });
+
+        const defaultDatabases = {
+            fitness: rawDiningData,
+            groceries: defaultGroceries,
+            coffee: defaultCoffee,
+            mcdonalds: defaultMcd
+        };
+
+        // LocalStorage Loader
+        function getDatabase(tabKey) {
+            try {
+                const custom = localStorage.getItem(`hk_retail_data_${tabKey}`);
+                if (custom) return JSON.parse(custom);
+            } catch(e) {}
+            return [...defaultDatabases[tabKey]];
+        }
+
+        // Active State
+        let currentTab = "fitness";
+        let activeData = [];
+        let filteredData = [];
+        let curPage = 1;
+        let pageSize = 15;
+        let sortCol = "id";
+        let sortAsc = true;
+
+        // Column Visibility (店名 is hidden by default as requested)
+        const colDefinitions = [
+            { key: "id", label: "序號", default: true },
+            { key: "name", label: "店名", default: false },
+            { key: "brand", label: "品牌 / 類別", default: true },
+            { key: "district", label: "行政區", default: true },
+            { key: "address", label: "詳細地址", default: true },
+            { key: "hours", label: "營業時間", default: true },
+            { key: "phone", label: "電話", default: true },
+            { key: "route", label: "導航", default: true }
+        ];
+
+        let colVisibility = {};
+        colDefinitions.forEach(c => colVisibility[c.key] = c.default);
+        try {
+            const savedVis = localStorage.getItem("hk_retail_col_vis_v2");
+            if (savedVis) colVisibility = { ...colVisibility, ...JSON.parse(savedVis) };
+        } catch(e) {}
+
+        // DOM elements
+        const tabNavBtns = document.querySelectorAll(".tab-nav-btn");
+        const searchBox = document.getElementById("searchBox");
+        const brandSelect = document.getElementById("brandSelect");
+        const districtSelect = document.getElementById("districtSelect");
+        const viewModeSelect = document.getElementById("viewModeSelect");
+        const pageSizeSelect = document.getElementById("pageSizeSelect");
+        const resetFiltersBtn = document.getElementById("resetFiltersBtn");
+        const exportCsvBtn = document.getElementById("exportCsvBtn");
+        const openMdImportBtn = document.getElementById("openMdImportBtn");
+        const colToggleBtn = document.getElementById("colToggleBtn");
+
+        const directoryTbody = document.getElementById("directoryTbody");
+        const cardsDeck = document.getElementById("cardsDeck");
+        const dirTableShell = document.getElementById("dirTableShell");
+        const pageBtnList = document.getElementById("pageBtnList");
+        const pageProgressText = document.getElementById("pageProgressText");
+        const jumpPageInput = document.getElementById("jumpPageInput");
+        const jumpPageBtn = document.getElementById("jumpPageBtn");
+        const metaShowingRange = document.getElementById("metaShowingRange");
+        const metaFilteredCount = document.getElementById("metaFilteredCount");
+        const brandChipsStrip = document.getElementById("brandChipsStrip");
+
+        const kpiTotalNum = document.getElementById("kpiTotalNum");
+        const kpiDistrictNum = document.getElementById("kpiDistrictNum");
+        const kpiBrandNum = document.getElementById("kpiBrandNum");
+        const kpiHoursText = document.getElementById("kpiHoursText");
+
+        // Helper: brand badges
+        function getBrandChipClass(brand) {
+            if (brand.includes("24/7")) return "chip-247";
+            if (brand.includes("Anytime")) return "chip-anytime";
+            if (brand.includes("chocoZAP")) return "chip-choco";
+            if (brand.includes("康文署") || brand.includes("體育館")) return "chip-lcsd";
+            if (brand.includes("麥當勞")) return "chip-mcd";
+            return "";
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById("toastMessage");
+            t.textContent = msg;
+            t.style.display = "block";
+            setTimeout(() => { t.style.display = "none"; }, 2500);
+        }
+
+        function updateTabBadgeCounters() {
+            document.getElementById("badgeCountFitness").textContent = getDatabase("fitness").length;
+            document.getElementById("badgeCountGroceries").textContent = getDatabase("groceries").length;
+            document.getElementById("badgeCountCoffee").textContent = getDatabase("coffee").length;
+            document.getElementById("badgeCountMcd").textContent = getDatabase("mcdonalds").length;
+        }
+
+        function populateFilters() {
+            const brands = [...new Set(activeData.map(d => d.brand))].filter(Boolean);
+            const districts = [...new Set(activeData.map(d => d.district))].filter(Boolean).sort();
+
+            brandSelect.innerHTML = '<option value="">全部品牌</option>';
+            brands.forEach(b => {
+                const opt = document.createElement("option");
+                opt.value = b;
+                opt.textContent = `${b} (${activeData.filter(d => d.brand === b).length})`;
+                brandSelect.appendChild(opt);
+            });
+
+            districtSelect.innerHTML = '<option value="">全部行政區 (18區)</option>';
+            districts.forEach(d => {
+                const opt = document.createElement("option");
+                opt.value = d;
+                opt.textContent = `${d} (${activeData.filter(x => x.district === d).length})`;
+                districtSelect.appendChild(opt);
+            });
+
+            // KPI update
+            kpiTotalNum.textContent = activeData.length;
+            kpiDistrictNum.textContent = `${districts.length} 區`;
+            kpiBrandNum.textContent = `${brands.length} 品牌`;
+            if (currentTab === "fitness") kpiHoursText.textContent = "24小時及07:00起";
+            else if (currentTab === "groceries") kpiHoursText.textContent = "07:00起至23:00";
+            else if (currentTab === "coffee") kpiHoursText.textContent = "清晨06:30起營業";
+            else kpiHoursText.textContent = "24小時 / 早至晚";
+
+            // Brand chips
+            brandChipsStrip.innerHTML = "";
+            brands.forEach(b => {
+                const count = activeData.filter(d => d.brand === b).length;
+                const chip = document.createElement("span");
+                chip.className = `chip ${getBrandChipClass(b)}`;
+                chip.textContent = `${b} · ${count}`;
+                brandChipsStrip.appendChild(chip);
+            });
+        }
+
+        function filterAndSortData() {
+            const query = searchBox.value.trim().toLowerCase();
+            const selectedBrand = brandSelect.value;
+            const selectedDistrict = districtSelect.value;
+
+            filteredData = activeData.filter(row => {
+                if (selectedBrand && row.brand !== selectedBrand) return false;
+                if (selectedDistrict && row.district !== selectedDistrict) return false;
+                if (query) {
+                    const haystack = `${row.id} ${row.name} ${row.brand} ${row.district} ${row.address} ${row.hours} ${row.phone}`.toLowerCase();
+                    if (!haystack.includes(query)) return false;
+                }
+                return true;
+            });
+
+            filteredData.sort((a, b) => {
+                if (sortCol === "id") {
+                    return sortAsc ? (a.id - b.id) : (b.id - a.id);
+                }
+                const va = (a[sortCol] || "").toString();
+                const vb = (b[sortCol] || "").toString();
+                return sortAsc ? va.localeCompare(vb, "zh-HK") : vb.localeCompare(va, "zh-HK");
+            });
+
+            curPage = 1;
+            renderDirectoryView();
+        }
+
+        function renderDirectoryView() {
+            const total = filteredData.length;
+            const limit = pageSize === "all" ? total : pageSize;
+            const startIdx = total === 0 ? 0 : (curPage - 1) * limit;
+            const pagedRows = pageSize === "all" ? filteredData : filteredData.slice(startIdx, startIdx + limit);
+
+            metaShowingRange.textContent = total === 0 ? "0-0" : `${startIdx + 1}-${Math.min(startIdx + limit, total)}`;
+            metaFilteredCount.textContent = total;
+
+            // Apply column visibility to TH
+            document.querySelectorAll("#mainDirectoryTable th[data-col]").forEach(th => {
+                const key = th.dataset.col;
+                th.classList.toggle("col-hidden", colVisibility[key] === false);
+            });
+
+            // Table Body
+            directoryTbody.innerHTML = "";
+            if (pagedRows.length === 0) {
+                directoryTbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:3rem; color:var(--ink-muted);">查無符合的門市或場館資料</td></tr>';
+            } else {
+                pagedRows.forEach(row => {
+                    const tr = document.createElement("tr");
+                    const dirUrl = `https://www.google.com/maps/dir/My+Location/${encodeURIComponent(row.address)}/?hl=zh-HK`;
+                    tr.innerHTML = `
+                        <td class="col-w-id mono ${colVisibility.id === false ? 'col-hidden' : ''}"><strong>${row.id}</strong></td>
+                        <td class="col-w-name ${colVisibility.name === false ? 'col-hidden' : ''}"><strong>${escapeXml(row.name)}</strong></td>
+                        <td class="col-w-brand ${colVisibility.brand === false ? 'col-hidden' : ''}"><span class="chip ${getBrandChipClass(row.brand)}">${escapeXml(row.brand)}</span></td>
+                        <td class="col-w-district ${colVisibility.district === false ? 'col-hidden' : ''}"><span class="chip">${escapeXml(row.district)}</span></td>
+                        <td class="col-w-addr ${colVisibility.address === false ? 'col-hidden' : ''}">
+                            <a href="${dirUrl}" target="_blank" rel="noopener noreferrer" class="route-link" title="以您的位置規劃前往 Google Maps 路線">
+                                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                                <span>${escapeXml(row.address)}</span>
+                            </a>
+                        </td>
+                        <td class="col-w-hours mono ${colVisibility.hours === false ? 'col-hidden' : ''}">${escapeXml(row.hours)}</td>
+                        <td class="col-w-phone mono ${colVisibility.phone === false ? 'col-hidden' : ''}">${escapeXml(row.phone)}</td>
+                        <td class="col-w-action ${colVisibility.route === false ? 'col-hidden' : ''}">
+                            <a href="${dirUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-sm" title="即時導航">
+                                路線
+                                <svg class="svg-icon" style="width:11px; height:11px;" viewBox="0 0 24 24"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                            </a>
+                        </td>
+                    `;
+                    directoryTbody.appendChild(tr);
+                });
+            }
+
+            // Cards Body
+            cardsDeck.innerHTML = "";
+            pagedRows.forEach(row => {
+                const dirUrl = `https://www.google.com/maps/dir/My+Location/${encodeURIComponent(row.address)}/?hl=zh-HK`;
+                const card = document.createElement("div");
+                card.className = "branch-card";
+                card.innerHTML = `
+                    <div class="branch-card-header">
+                        <div>
+                            <div style="display:flex; align-items:center; gap:0.35rem; margin-bottom:0.25rem;">
+                                <span class="mono" style="font-size:0.75rem; font-weight:700; color:var(--ink-muted);">#${row.id}</span>
+                                <span class="chip ${getBrandChipClass(row.brand)}">${escapeXml(row.brand)}</span>
+                                <span class="chip">${escapeXml(row.district)}</span>
+                            </div>
+                            <h3 class="branch-card-title">${escapeXml(row.name)}</h3>
+                        </div>
+                        <a href="${dirUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-accent" title="以您的位置規劃路線">路線導航</a>
+                    </div>
+                    <div class="branch-card-body">
+                        <div class="branch-card-row">
+                            <span class="branch-card-label">地址</span>
+                            <span>
+                                <a href="${dirUrl}" target="_blank" rel="noopener noreferrer" class="route-link">
+                                    ${escapeXml(row.address)}
+                                </a>
+                            </span>
+                        </div>
+                        <div class="branch-card-row">
+                            <span class="branch-card-label">時間</span>
+                            <span class="mono">${escapeXml(row.hours)}</span>
+                        </div>
+                        <div class="branch-card-row">
+                            <span class="branch-card-label">電話</span>
+                            <span class="mono">${escapeXml(row.phone)}</span>
+                        </div>
+                    </div>
+                `;
+                cardsDeck.appendChild(card);
+            });
+
+            renderPaginationStrip(total, limit);
+        }
+
+        function renderPaginationStrip(total, limit) {
+            pageBtnList.innerHTML = "";
+            if (pageSize === "all" || total === 0) {
+                pageProgressText.textContent = total === 0 ? "0 / 0" : `全部 ${total} 筆`;
+                jumpPageInput.disabled = true;
+                jumpPageBtn.disabled = true;
+                return;
+            }
+
+            const totalPages = Math.ceil(total / limit);
+            pageProgressText.textContent = `${curPage} / ${totalPages}`;
+            jumpPageInput.disabled = false;
+            jumpPageBtn.disabled = false;
+            jumpPageInput.max = totalPages;
+            jumpPageInput.placeholder = `1-${totalPages}`;
+
+            const prevBtn = document.createElement("button");
+            prevBtn.className = "page-num-btn";
+            prevBtn.innerHTML = "‹";
+            prevBtn.disabled = curPage === 1;
+            prevBtn.onclick = () => { curPage--; renderDirectoryView(); };
+            pageBtnList.appendChild(prevBtn);
+
+            let s = Math.max(1, curPage - 2);
+            let e = Math.min(totalPages, curPage + 2);
+            if (curPage <= 3) e = Math.min(totalPages, 5);
+            if (curPage >= totalPages - 2) s = Math.max(1, totalPages - 4);
+
+            for (let i = s; i <= e; i++) {
+                const b = document.createElement("button");
+                b.className = `page-num-btn ${i === curPage ? 'active' : ''}`;
+                b.textContent = i;
+                b.onclick = () => { curPage = i; renderDirectoryView(); };
+                pageBtnList.appendChild(b);
+            }
+
+            const nextBtn = document.createElement("button");
+            nextBtn.className = "page-num-btn";
+            nextBtn.innerHTML = "›";
+            nextBtn.disabled = curPage === totalPages;
+            nextBtn.onclick = () => { curPage++; renderDirectoryView(); };
+            pageBtnList.appendChild(nextBtn);
+        }
+
+        function executePageJump() {
+            const val = parseInt(jumpPageInput.value, 10);
+            const total = filteredData.length;
+            const limit = pageSize === "all" ? total : pageSize;
+            const totalPages = Math.ceil(total / limit);
+            if (!isNaN(val) && val >= 1 && val <= totalPages) {
+                curPage = val;
+                renderDirectoryView();
+            } else {
+                jumpPageInput.value = curPage;
+            }
+        }
+
+        function escapeXml(unsafe) {
+            if (unsafe == null) return "";
+            return String(unsafe).replace(/[<>&'"]/g, c => {
+                switch (c) {
+                    case '<': return '&lt;';
+                    case '>': return '&gt;';
+                    case '&': return '&amp;';
+                    case '\'': return '&apos;';
+                    case '"': return '&quot;';
+                }
+            });
+        }
+
+        function switchTab(tabKey) {
+            currentTab = tabKey;
+            tabNavBtns.forEach(b => b.classList.toggle("active", b.dataset.tab === tabKey));
+            activeData = getDatabase(tabKey);
+            searchBox.value = "";
+            sortCol = "id";
+            sortAsc = true;
+            populateFilters();
+            filterAndSortData();
+        }
+
+        // Tab events
+        tabNavBtns.forEach(btn => {
+            btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+        });
+
+        searchBox.addEventListener("input", filterAndSortData);
+        brandSelect.addEventListener("change", filterAndSortData);
+        districtSelect.addEventListener("change", filterAndSortData);
+
+        viewModeSelect.addEventListener("change", () => {
+            const isCards = viewModeSelect.value === "cards";
+            dirTableShell.classList.toggle("view-cards", isCards);
+        });
+
+        pageSizeSelect.addEventListener("change", () => {
+            pageSize = pageSizeSelect.value === "all" ? "all" : parseInt(pageSizeSelect.value, 10);
+            curPage = 1;
+            renderDirectoryView();
+        });
+
+        resetFiltersBtn.addEventListener("click", () => {
+            searchBox.value = "";
+            brandSelect.value = "";
+            districtSelect.value = "";
+            sortCol = "id";
+            sortAsc = true;
+            pageSizeSelect.value = "15";
+            pageSize = 15;
+            filterAndSortData();
+        });
+
+        jumpPageBtn.addEventListener("click", executePageJump);
+        jumpPageInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                e.preventDefault();
+                executePageJump();
+            }
+        });
+
+        // Table column sorting
+        document.querySelectorAll("#mainDirectoryTable th[data-col]").forEach(th => {
+            if (th.classList.contains("no-sort")) return;
+            th.addEventListener("click", () => {
+                const col = th.dataset.col;
+                if (sortCol === col) {
+                    sortAsc = !sortAsc;
+                } else {
+                    sortCol = col;
+                    sortAsc = true;
+                }
+                filterAndSortData();
+            });
+        });
+
+        // CSV Export
+        exportCsvBtn.addEventListener("click", () => {
+            if (filteredData.length === 0) {
+                showToast("無資料可供匯出");
+                return;
+            }
+            const headers = ["序號", "店名", "品牌", "地區", "地址", "營業時間", "電話", "Google導航連結"];
+            const escapeCsv = v => (v == null ? "" : /[",\n\r]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v));
+
+            const rows = filteredData.map(r => [
+                escapeCsv(r.id),
+                escapeCsv(r.name),
+                escapeCsv(r.brand),
+                escapeCsv(r.district),
+                escapeCsv(r.address),
+                escapeCsv(r.hours),
+                escapeCsv(r.phone),
+                escapeCsv(`https://www.google.com/maps/dir/My+Location/${encodeURIComponent(r.address)}/?hl=zh-HK`)
+            ].join(","));
+
+            const csvContent = "\uFEFF" + headers.join(",") + "\n" + rows.join("\n");
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `HK-${currentTab}-${new Date().toISOString().slice(0, 10)}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("成功匯出 CSV 檔案！");
+        });
+
+        // Column Customizer
+        const colCustomizerModal = document.getElementById("colCustomizerModal");
+        const colCustomizerBody = document.getElementById("colCustomizerBody");
+        const closeColModalBtn = document.getElementById("closeColModalBtn");
+        const saveColModalBtn = document.getElementById("saveColModalBtn");
+
+        function openColumnModal() {
+            colCustomizerBody.innerHTML = "";
+            colDefinitions.forEach(col => {
+                const row = document.createElement("div");
+                row.className = "toggle-item";
+                row.innerHTML = `
+                    <span style="font-size:0.86rem; font-weight:600;">${col.label}</span>
+                    <label class="switch-toggle">
+                        <input type="checkbox" data-key="${col.key}" ${colVisibility[col.key] !== false ? "checked" : ""}>
+                        <span class="switch-track"></span>
+                    </label>
+                `;
+                colCustomizerBody.appendChild(row);
+            });
+            colCustomizerModal.classList.add("open");
+        }
+
+        colToggleBtn.addEventListener("click", openColumnModal);
+        closeColModalBtn.addEventListener("click", () => colCustomizerModal.classList.remove("open"));
+        saveColModalBtn.addEventListener("click", () => {
+            colCustomizerBody.querySelectorAll("input[data-key]").forEach(inp => {
+                colVisibility[inp.dataset.key] = inp.checked;
+            });
+            try {
+                localStorage.setItem("hk_retail_col_vis_v2", JSON.stringify(colVisibility));
+            } catch(e) {}
+            renderDirectoryView();
+            colCustomizerModal.classList.remove("open");
+            showToast("已更新表格欄位設定");
+        });
+
+        // Markdown Importer Engine
+        const mdImportModal = document.getElementById("mdImportModal");
+        const closeMdModalBtn = document.getElementById("closeMdModalBtn");
+        const executeImportBtn = document.getElementById("executeImportBtn");
+        const resetTabDefaultBtn = document.getElementById("resetTabDefaultBtn");
+        const importTargetTab = document.getElementById("importTargetTab");
+        const importModeSelect = document.getElementById("importModeSelect");
+        const mdRawInput = document.getElementById("mdRawInput");
+
+        openMdImportBtn.addEventListener("click", () => {
+            importTargetTab.value = currentTab;
+            mdRawInput.value = "";
+            mdImportModal.classList.add("open");
+        });
+
+        closeMdModalBtn.addEventListener("click", () => mdImportModal.classList.remove("open"));
+
+        function parseMarkdownTableText(text, targetKey) {
+            const lines = text.trim().split("\n").filter(l => l.includes("|"));
+            if (lines.length < 2) return [];
+
+            let headerCols = [];
+            const results = [];
+            let startIndex = 0;
+
+            // Detect header row
+            if (lines[0].includes("店名") || lines[0].includes("地址") || lines[0].includes("地區")) {
+                headerCols = lines[0].split("|").map(s => s.trim().replace(/\*/g, "")).filter(Boolean);
+                startIndex = lines[1].includes("---") ? 2 : 1;
+            }
+
+            for (let i = startIndex; i < lines.length; i++) {
+                const line = lines[i];
+                if (line.includes("---")) continue;
+                const cells = line.split("|").map(c => c.trim()).filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+                if (cells.length < 3) continue;
+
+                let rowName = cells[1] || "";
+                let rowDistrict = cells[2] || "";
+                let rowAddress = cells[3] || "";
+                let rowHours = cells[4] || "08:00-22:00";
+                let rowPhone = cells[5] || "NA";
+
+                // Brand deduction
+                let rowBrand = "門市設施";
+                if (targetKey === "fitness") {
+                    if (rowName.includes("24/7")) rowBrand = "24/7 FITNESS";
+                    else if (rowName.includes("Anytime")) rowBrand = "Anytime Fitness";
+                    else if (rowName.includes("chocoZAP")) rowBrand = "chocoZAP";
+                    else rowBrand = "康文署體育館/設施";
+                } else if (targetKey === "groceries") {
+                    if (rowName.includes("萬寧")) rowBrand = "萬寧";
+                    else if (rowName.includes("佳宝")) rowBrand = "佳宝食品超級市場";
+                    else if (rowName.includes("惠康")) rowBrand = "惠康超級市場";
+                } else if (targetKey === "coffee") {
+                    if (rowName.includes("Pacific")) rowBrand = "Pacific Coffee";
+                    else if (rowName.includes("星巴克") || rowName.includes("Starbucks")) rowBrand = "星巴克 Starbucks";
+                    else if (rowName.includes("瑞幸") || rowName.includes("Luckin")) rowBrand = "瑞幸咖啡 Luckin Coffee";
+                } else if (targetKey === "mcdonalds") {
+                    rowBrand = "麥當勞";
+                }
+
+                results.push({
+                    id: results.length + 1,
+                    brand: rowBrand,
+                    name: rowName,
+                    district: rowDistrict,
+                    address: rowAddress,
+                    hours: rowHours,
+                    phone: rowPhone
+                });
+            }
+            return results;
+        }
+
+        executeImportBtn.addEventListener("click", () => {
+            const raw = mdRawInput.value.trim();
+            const targetKey = importTargetTab.value;
+            const mode = importModeSelect.value;
+
+            if (!raw) {
+                showToast("請貼上 Markdown 格式表格");
+                return;
+            }
+
+            const parsed = parseMarkdownTableText(raw, targetKey);
+            if (parsed.length === 0) {
+                showToast("解析失敗，請確認表格包含 | 分隔符號");
+                return;
+            }
+
+            let finalData = [];
+            if (mode === "append") {
+                const existing = getDatabase(targetKey);
+                parsed.forEach(p => { p.id = existing.length + 1; existing.push(p); });
+                finalData = existing;
+            } else {
+                parsed.forEach((p, idx) => { p.id = idx + 1; });
+                finalData = parsed;
+            }
+
+            try {
+                localStorage.setItem(`hk_retail_data_${targetKey}`, JSON.stringify(finalData));
+            } catch(e) {}
+
+            updateTabBadgeCounters();
+            if (currentTab === targetKey) {
+                activeData = finalData;
+                populateFilters();
+                filterAndSortData();
+            }
+
+            mdImportModal.classList.remove("open");
+            showToast(`成功匯入 ${parsed.length} 筆資料！`);
+        });
+
+        resetTabDefaultBtn.addEventListener("click", () => {
+            const targetKey = importTargetTab.value;
+            localStorage.removeItem(`hk_retail_data_${targetKey}`);
+            updateTabBadgeCounters();
+            if (currentTab === targetKey) {
+                activeData = getDatabase(targetKey);
+                populateFilters();
+                filterAndSortData();
+            }
+            mdImportModal.classList.remove("open");
+            showToast("已回復為系統預設名錄");
+        });
+
+        // Initialize application
+        updateTabBadgeCounters();
+        switchTab("fitness");
+    </script>
+</body>
+</html>

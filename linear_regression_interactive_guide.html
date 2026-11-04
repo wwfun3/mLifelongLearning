@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>line.fit — linear regression explained for everyone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Onest:wght@400;500;600&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+/* Hallmark · v2.0.0 · theme: ultraviolet (lavender) · genre: modern-minimal · posture: committed · shape: Workbench · hero: Stage · nav: edge-aligned · footer: colophon · deal: manual · data: sample */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 · weakest: V, interactive workbench layout adapted for dense mobile information display */
+/* Hallmark · waive 75 · mobile font sizes and padding scaled down per explicit user requirement to fit more information on mobile viewports */
+
+:root {
+  --color-paper: oklch(95% 0.025 300);
+  --color-paper-2: oklch(91.5% 0.035 300);
+  --color-paper-3: oklch(88% 0.045 300);
+  --color-ink: oklch(18% 0.025 300);
+  --color-ink-2: oklch(29% 0.035 300);
+  --color-muted: oklch(45% 0.05 300);
+  --color-rule: oklch(83% 0.045 300);
+  --color-rule-2: oklch(68% 0.08 295);
+  --color-accent: oklch(50% 0.25 290);
+  --color-accent-deep: oklch(43% 0.22 290);
+  --color-accent-soft: oklch(85% 0.085 295);
+  --color-accent-ink: oklch(97% 0.01 300);
+  --color-focus: oklch(50% 0.25 290);
+  --color-good: oklch(48% 0.16 155);
+  --color-good-soft: oklch(90% 0.06 155);
+  --color-warn: oklch(52% 0.19 35);
+  --color-warn-soft: oklch(90% 0.06 35);
+
+  --font-display: "Outfit", "Noto Sans TC", sans-serif;
+  --font-sans: "Onest", "Noto Sans TC", sans-serif;
+  --font-mono: "JetBrains Mono", "Noto Sans TC", monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur-med: 240ms;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: clip;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.58;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Layout Containers */
+.shell {
+  max-width: 82rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
+}
+
+/* Sticky Edge-Aligned Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background-color: var(--color-paper);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3.4rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  display: inline-block;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--color-ink-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.nav-links a:hover {
+  color: var(--color-accent);
+}
+
+.lang-btn {
+  appearance: none;
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.85rem;
+  padding: 0.38rem 0.85rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.lang-btn:hover {
+  background-color: var(--color-accent-deep);
+}
+
+.lang-btn:active {
+  transform: scale(0.97);
+}
+
+/* Sections & Typography */
+.section-block {
+  padding-block: clamp(2.2rem, 4.5vw, 4rem);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.65rem;
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.9rem, 3.8vw, 3.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin-bottom: 0.85rem;
+}
+
+.display-title strong {
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.45rem, 2.5vw, 2.15rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin-bottom: 0.5rem;
+}
+
+.lead-copy {
+  color: var(--color-ink-2);
+  font-size: 1.02rem;
+  max-width: 64ch;
+  margin-bottom: 1.15rem;
+}
+
+/* Stage Hero Grid */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: clamp(1.25rem, 2.8vw, 2.5rem);
+  align-items: start;
+}
+
+/* Formula Card */
+.formula-card {
+  background-color: var(--color-paper-2);
+  border: 1px solid var(--color-rule-2);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  margin-bottom: 1rem;
+}
+
+.formula-main {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.token-pill {
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-deep);
+  font-weight: 500;
+}
+
+.formula-legend {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  font-size: 0.86rem;
+  color: var(--color-ink-2);
+}
+
+.legend-item {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.6rem;
+}
+
+.legend-item code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-accent);
+}
+
+/* Analogy Note */
+.analogy-box {
+  background-color: var(--color-paper-2);
+  border-left: 3px solid var(--color-accent);
+  padding: 0.75rem 0.95rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  color: var(--color-ink-2);
+}
+
+/* Workbench Stage Card */
+.workbench-card {
+  background-color: var(--color-paper-2);
+  border: 1px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem;
+}
+
+.toolbar-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+}
+
+.btn-pill {
+  appearance: none;
+  border: 1px solid var(--color-rule-2);
+  background-color: var(--color-paper);
+  color: var(--color-ink-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.82rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.btn-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.btn-pill.active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+.btn-action {
+  appearance: none;
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.82rem;
+  padding: 0.38rem 0.8rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.btn-action:hover {
+  background-color: var(--color-accent-deep);
+}
+
+.btn-action:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  appearance: none;
+  border: 1px solid var(--color-rule-2);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.8rem;
+  padding: 0.36rem 0.7rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-paper-3);
+  border-color: var(--color-accent);
+}
+
+.btn-secondary.toggled {
+  background-color: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent-deep);
+}
+
+/* SVG Plot Container */
+.svg-wrap {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.plot-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: crosshair;
+  touch-action: manipulation;
+}
+
+.plot-hint {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35rem 0.65rem;
+  background-color: var(--color-paper-3);
+  border-top: 1px solid var(--color-rule);
+  font-size: 0.76rem;
+  color: var(--color-muted);
+}
+
+/* Controls & Sliders Grid */
+.controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.control-box {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.75rem;
+}
+
+.control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.82rem;
+  margin-bottom: 0.3rem;
+}
+
+.control-label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.control-val {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+  height: 1.2rem;
+}
+
+/* Live Metrics Strip */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 0.55rem;
+  margin-bottom: 0.6rem;
+}
+
+.metric-tile {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.65rem;
+}
+
+.metric-name {
+  font-size: 0.74rem;
+  color: var(--color-muted);
+  display: block;
+}
+
+.metric-num {
+  font-family: var(--font-mono);
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--color-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.verdict-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-accent-soft);
+  color: var(--color-ink);
+  font-size: 0.84rem;
+  font-weight: 500;
+}
+
+/* Concept Cards Grid */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.concept-card {
+  background-color: var(--color-paper-2);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.concept-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--radius-sm);
+  display: inline-block;
+  width: fit-content;
+}
+
+.concept-card h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.08rem;
+  color: var(--color-ink);
+}
+
+.concept-card p {
+  font-size: 0.88rem;
+  color: var(--color-ink-2);
+}
+
+.concept-example {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8rem;
+  color: var(--color-ink-2);
+}
+
+.concept-example strong {
+  color: var(--color-accent-deep);
+}
+
+/* Gradient Descent Interactive Simulator */
+.gd-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+
+.gd-log {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-ink-2);
+  margin-top: 0.65rem;
+}
+
+/* Real-World Scenarios Walkthrough + Calculator */
+.scenario-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.predictor-box {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.predicted-output {
+  background-color: var(--color-accent-soft);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.predicted-output .big-val {
+  font-family: var(--font-mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-accent-deep);
+  display: block;
+}
+
+/* Multiple Linear Regression Section */
+.multi-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.breakdown-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.65rem;
+}
+
+.breakdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.42rem 0.65rem;
+  background-color: var(--color-paper-2);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.breakdown-item code {
+  font-family: var(--font-mono);
+  font-weight: 500;
+}
+
+/* Glossary Table & Self-Check Quiz */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-rule-2);
+  border-radius: var(--radius-md);
+  background-color: var(--color-paper);
+  margin-top: 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.88rem;
+}
+
+th, td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+th {
+  background-color: var(--color-paper-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+td code {
+  font-family: var(--font-mono);
+  color: var(--color-accent-deep);
+  background-color: var(--color-accent-soft);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm);
+}
+
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+.quiz-card {
+  background-color: var(--color-paper-2);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-md);
+  padding: 0.9rem;
+}
+
+.quiz-q {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.92rem;
+  margin-bottom: 0.6rem;
+}
+
+.quiz-opts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.38rem;
+}
+
+.quiz-opt {
+  appearance: none;
+  text-align: left;
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-rule-2);
+  border-radius: var(--radius-sm);
+  padding: 0.42rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+
+.quiz-opt:hover {
+  border-color: var(--color-accent);
+}
+
+.quiz-opt.correct {
+  background-color: var(--color-good-soft);
+  border-color: var(--color-good);
+  font-weight: 600;
+}
+
+.quiz-opt.wrong {
+  background-color: var(--color-warn-soft);
+  border-color: var(--color-warn);
+}
+
+.quiz-feedback {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--color-ink-2);
+  min-height: 1.2em;
+}
+
+/* Colophon Footer */
+.site-footer {
+  padding-block: 1.8rem;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ==========================================================================
+   COMPACT MOBILE DENSITY OVERRIDES (Explicitly smaller fonts & tight spacing
+   so significantly more content & interactive charts fit on 1 mobile screen)
+   ========================================================================== */
+@media (max-width: 56rem) {
+  .hero-grid,
+  .gd-layout,
+  .scenario-layout,
+  .multi-grid {
+    grid-template-columns: 1fr;
+  }
+  .concepts-grid,
+  .quiz-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 40rem) {
+  html, body {
+    font-size: 12.5px;
+    line-height: 1.42;
+  }
+
+  .shell {
+    padding-inline: 0.65rem;
+  }
+
+  .nav-bar {
+    min-height: 2.65rem;
+    gap: 0.35rem;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    gap: 0.55rem;
+  }
+
+  .nav-links a {
+    font-size: 0.76rem;
+  }
+
+  .lang-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+  }
+
+  .section-block {
+    padding-block: 1.15rem;
+  }
+
+  .section-tag {
+    font-size: 0.72rem;
+    padding: 0.12rem 0.48rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .display-title {
+    font-size: 1.42rem;
+    line-height: 1.14;
+    margin-bottom: 0.45rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .lead-copy {
+    font-size: 0.86rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .formula-card {
+    padding: 0.6rem 0.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .formula-main {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .formula-legend {
+    gap: 0.35rem;
+    font-size: 0.74rem;
+  }
+
+  .legend-item {
+    padding: 0.3rem 0.45rem;
+  }
+
+  .analogy-box {
+    padding: 0.48rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .workbench-card {
+    padding: 0.65rem;
+  }
+
+  .toolbar-row {
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .btn-pill,
+  .btn-action,
+  .btn-secondary {
+    font-size: 0.72rem;
+    padding: 0.24rem 0.52rem;
+  }
+
+  .controls-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    margin-bottom: 0.45rem;
+  }
+
+  .control-box {
+    padding: 0.38rem 0.5rem;
+  }
+
+  .control-header {
+    font-size: 0.72rem;
+    margin-bottom: 0.15rem;
+  }
+
+  input[type="range"] {
+    height: 0.95rem;
+  }
+
+  .metrics-strip {
+    grid-template-columns: 1.2fr 0.9fr 0.9fr;
+    gap: 0.35rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .metric-tile {
+    padding: 0.35rem 0.45rem;
+  }
+
+  .metric-name {
+    font-size: 0.66rem;
+  }
+
+  .metric-num {
+    font-size: 0.8rem;
+  }
+
+  .verdict-banner {
+    padding: 0.35rem 0.55rem;
+    font-size: 0.74rem;
+  }
+
+  /* Two-column compact cards on mobile so user sees twice as much info at once */
+  .concepts-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+  }
+
+  .concept-card {
+    padding: 0.6rem;
+    gap: 0.4rem;
+  }
+
+  .concept-card h3 {
+    font-size: 0.88rem;
+  }
+
+  .concept-card p {
+    font-size: 0.74rem;
+  }
+
+  .concept-example {
+    padding: 0.38rem 0.45rem;
+    font-size: 0.7rem;
+  }
+
+  .quiz-grid {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .quiz-card {
+    padding: 0.65rem;
+  }
+
+  th, td {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.74rem;
+  }
+}
+  </style>
+</head>
+<body>
+
+  <!-- Edge-aligned Sticky Header with 1-Click Traditional Chinese Toggle -->
+  <header class="site-header">
+    <div class="shell nav-bar">
+      <a href="#top" class="brand" aria-label="line.fit home">
+        <span class="brand-dot"></span>
+        <span>line.fit</span>
+      </a>
+      <nav aria-label="Primary Navigation">
+        <ul class="nav-links">
+          <li><a href="#sandbox" data-i18n="nav_sandbox">sandbox</a></li>
+          <li><a href="#concepts" data-i18n="nav_concepts">core concepts</a></li>
+          <li><a href="#gradient" data-i18n="nav_gradient">how it learns</a></li>
+          <li><a href="#examples" data-i18n="nav_examples">real examples</a></li>
+          <li><a href="#multi" data-i18n="nav_multi">multi-factor</a></li>
+          <li><a href="#glossary" data-i18n="nav_glossary">cheat sheet</a></li>
+        </ul>
+      </nav>
+      <button type="button" id="langToggleBtn" class="lang-btn" aria-label="Switch language between English and Traditional Chinese">
+        <span id="langBtnLabel">繁體中文</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top" class="shell">
+
+    <!-- SECTION 1: STAGE HERO & INTERACTIVE LINE-FITTING SANDBOX -->
+    <section id="sandbox" class="section-block">
+      <div class="hero-grid">
+        <!-- Left Intro & Formula Breakdown -->
+        <div>
+          <span class="section-tag" data-i18n="hero_tag">machine learning 101 · layman interactive guide</span>
+          <h1 class="display-title" data-i18n="hero_title">
+            What is <strong>Linear Regression</strong>? Drawing the fairest straight line through data to predict the future.
+          </h1>
+          <p class="lead-copy" data-i18n="hero_lead">
+            Imagine looking at 12 apartments in Hong Kong and plotting their size against monthly rent. The dots don't form a perfect line, but there is a clear upward trend. <strong>Linear Regression</strong> is the machine learning method that finds the single best-fitting straight line through those dots—so you can estimate the price of a brand-new apartment you've never seen before.
+          </p>
+
+          <!-- Plain-English Formula Card -->
+          <div class="formula-card">
+            <div class="formula-main" aria-label="Linear Regression Equation">
+              <span class="token-pill">ŷ</span>
+              <span>=</span>
+              <span class="token-pill">w</span>
+              <span>·</span>
+              <span class="token-pill">x</span>
+              <span>+</span>
+              <span class="token-pill">b</span>
+            </div>
+            <div class="formula-legend">
+              <div class="legend-item">
+                <code>ŷ</code> <strong data-i18n="leg_yhat_title">(Prediction)</strong>
+                <div data-i18n="leg_yhat_desc">The machine's estimated answer (e.g., predicted rent).</div>
+              </div>
+              <div class="legend-item">
+                <code>x</code> <strong data-i18n="leg_x_title">(Feature / Input)</strong>
+                <div data-i18n="leg_x_desc">The clue you already know (e.g., flat size in sq.ft).</div>
+              </div>
+              <div class="legend-item">
+                <code>w</code> <strong data-i18n="leg_w_title">(Weight / Slope)</strong>
+                <div data-i18n="leg_w_desc">How steep the line is: how much ŷ changes when x goes up by 1.</div>
+              </div>
+              <div class="legend-item">
+                <code>b</code> <strong data-i18n="leg_b_title">(Bias / Intercept)</strong>
+                <div data-i18n="leg_b_desc">The starting baseline value when x is zero.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="analogy-box" data-i18n="hero_analogy">
+            <strong>Everyday Taxi Analogy:</strong> A taxi meter is literally a linear regression formula! The flag-fall starting fare ($29) is the <strong>Bias (b)</strong>, the price per kilometer ($10/km) is the <strong>Weight (w)</strong>, the distance traveled is <strong>Input (x)</strong>, and the total fare is <strong>Prediction (ŷ)</strong>.
+          </div>
+        </div>
+
+        <!-- Right Interactive SVG Line-Fitting Workbench -->
+        <div class="workbench-card" aria-label="Interactive Linear Regression Playground">
+          <div class="toolbar-row">
+            <div class="pill-group" role="tablist" aria-label="Select Dataset">
+              <button type="button" class="btn-pill active" data-dataset="rent" data-i18n="ds_rent">1. HK Flat Rent</button>
+              <button type="button" class="btn-pill" data-dataset="coffee" data-i18n="ds_coffee">2. Iced Coffee Sales</button>
+              <button type="button" class="btn-pill" data-dataset="study" data-i18n="ds_study">3. Study vs. Exam</button>
+              <button type="button" class="btn-pill" data-dataset="car" data-i18n="ds_car">4. Car Depreciation</button>
+            </div>
+          </div>
+
+          <div class="toolbar-row">
+            <div class="pill-group">
+              <button type="button" id="autoFitBtn" class="btn-action" data-i18n="btn_autofit">Auto-Fit Best Line (OLS)</button>
+              <button type="button" id="toggleResidualsBtn" class="btn-secondary toggled" data-i18n="btn_residuals">Error Lines: ON</button>
+              <button type="button" id="toggleSquaresBtn" class="btn-secondary" data-i18n="btn_squares">Squared Errors: OFF</button>
+              <button type="button" id="addOutlierBtn" class="btn-secondary" data-i18n="btn_outlier">+ Add Outlier</button>
+              <button type="button" id="resetDataBtn" class="btn-secondary" data-i18n="btn_reset">Reset Dots</button>
+            </div>
+          </div>
+
+          <!-- Interactive SVG Canvas -->
+          <div class="svg-wrap">
+            <svg id="regressionSvg" class="plot-svg" viewBox="0 0 560 300" role="img" aria-label="Scatter plot with adjustable linear regression line"></svg>
+            <div class="plot-hint">
+              <span data-i18n="plot_hint_left">Click anywhere on chart to add a dot · Click an existing dot to delete it</span>
+              <span id="pointCountLabel">10 pts</span>
+            </div>
+          </div>
+
+          <!-- Manual Slope & Intercept Sliders -->
+          <div class="controls-grid">
+            <div class="control-box">
+              <div class="control-header">
+                <label for="slopeSlider" class="control-label" data-i18n="slider_w">Slope / Weight (w)</label>
+                <span id="slopeValDisplay" class="control-val">35.0</span>
+              </div>
+              <input type="range" id="slopeSlider" min="-50" max="100" step="0.5" value="35" />
+            </div>
+            <div class="control-box">
+              <div class="control-header">
+                <label for="interceptSlider" class="control-label" data-i18n="slider_b">Intercept / Bias (b)</label>
+                <span id="interceptValDisplay" class="control-val">5000</span>
+              </div>
+              <input type="range" id="interceptSlider" min="0" max="25000" step="100" value="5000" />
+            </div>
+          </div>
+
+          <!-- Live Readout Strip -->
+          <div class="metrics-strip">
+            <div class="metric-tile">
+              <span class="metric-name" data-i18n="metric_eq">Live Formula (ŷ = wx + b)</span>
+              <span id="liveEquationText" class="metric-num">ŷ = 35.0x + 5000</span>
+            </div>
+            <div class="metric-tile">
+              <span class="metric-name" data-i18n="metric_mse">Avg Squared Error (MSE)</span>
+              <span id="liveMseText" class="metric-num">1,240,000</span>
+            </div>
+            <div class="metric-tile">
+              <span class="metric-name" data-i18n="metric_r2">Fit Accuracy (R² Score)</span>
+              <span id="liveR2Text" class="metric-num">89.4%</span>
+            </div>
+          </div>
+
+          <div id="verdictBanner" class="verdict-banner">
+            <span id="verdictText">Move the sliders to minimize the vertical error bars, or click Auto-Fit!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CORE CONCEPTS FOR A LAYMAN -->
+    <section id="concepts" class="section-block">
+      <span class="section-tag" data-i18n="concepts_tag">core building blocks · zero jargon</span>
+      <h2 class="section-title" data-i18n="concepts_title">6 Essential Concepts Behind Linear Regression</h2>
+      <p class="lead-copy" data-i18n="concepts_lead">
+        You don't need advanced calculus to understand how machines learn from numbers. Every linear regression model revolves around these six simple ideas.
+      </p>
+
+      <div class="concepts-grid">
+        <!-- Card 1 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">01 · x &amp; y</span>
+            <h3 data-i18n="c1_title">Feature (x) vs. Target (y)</h3>
+            <p data-i18n="c1_body">
+              In Machine Learning, a <strong>Feature (x)</strong> is the input clue you measure, and the <strong>Target (y)</strong> is the real-world outcome you want to predict. During training, we show the computer historical pairs of (x, y).
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c1_ex">
+            <strong>Example:</strong> Input <em>x</em> = Daily temperature (32°C). Target <em>y</em> = Actual cups of iced coffee sold (210 cups).
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">02 · w &amp; b</span>
+            <h3 data-i18n="c2_title">Weight (w) &amp; Bias (b)</h3>
+            <p data-i18n="c2_body">
+              Think of <strong>w</strong> and <strong>b</strong> as the two tuning knobs inside the machine. <strong>Weight (w)</strong> controls the tilt (how much each extra unit of x adds or subtracts), while <strong>Bias (b)</strong> shifts the entire line up or down.
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c2_ex">
+            <strong>Negative Weight:</strong> If <em>w</em> is negative (e.g., car age vs. price), the line slopes downward—older cars cost less!
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">03 · y − ŷ</span>
+            <h3 data-i18n="c3_title">Residuals (Prediction Errors)</h3>
+            <p data-i18n="c3_body">
+              Real life is messy, so almost no dot sits perfectly on the line. The vertical gap between an actual dot (<strong>y</strong>) and the line's prediction (<strong>ŷ</strong>) is called a <strong>Residual</strong> or Error: <code>e = y − ŷ</code>.
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c3_ex">
+            <strong>Visual Cue:</strong> Turn on "Error Lines" in the chart above—those dashed vertical stems are the residuals!
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">04 · MSE</span>
+            <h3 data-i18n="c4_title">Mean Squared Error (Loss Function)</h3>
+            <p data-i18n="c4_body">
+              Some dots are above the line (+5 error) and some are below (−5 error). If we just added them up, they'd cancel out to 0! So we <strong>square</strong> every error first (5² = 25, (−5)² = 25) and take the average.
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c4_ex">
+            <strong>Bonus of Squaring:</strong> A mistake twice as big gets penalized <em>four times</em> as hard (2² = 4, 4² = 16).
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">05 · R²</span>
+            <h3 data-i18n="c5_title">R² Score (Goodness of Fit)</h3>
+            <p data-i18n="c5_body">
+              How do we know if our line is actually useful? <strong>R-squared (R²)</strong> scores your line from <strong>0% to 100%</strong> compared to simply guessing the average every time.
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c5_ex">
+            <strong>Rule of Thumb:</strong> 85%+ means a strong linear trend; near 0% means the dots are random scatter.
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="concept-card">
+          <div>
+            <span class="concept-num">06 · Pitfalls</span>
+            <h3 data-i18n="c6_title">Outliers &amp; Overfitting</h3>
+            <p data-i18n="c6_body">
+              An <strong>Outlier</strong> is a freak data point far away from the rest. Because MSE squares errors, a single outlier can yank the whole line toward it! Meanwhile, zig-zagging through every dot is <strong>Overfitting</strong> (memorizing noise instead of learning the trend).
+            </p>
+          </div>
+          <div class="concept-example" data-i18n="c6_ex">
+            <strong>Try It:</strong> Click "+ Add Outlier" in the sandbox above to watch one extreme dot pull the line!
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 3: HOW THE MACHINE ACTUALLY LEARNS (GRADIENT DESCENT SIMULATOR) -->
+    <section id="gradient" class="section-block">
+      <span class="section-tag" data-i18n="gd_tag">optimization · step-by-step animation</span>
+      <h2 class="section-title" data-i18n="gd_title">How the Computer Finds the Best Line: Gradient Descent</h2>
+      <p class="lead-copy" data-i18n="gd_lead">
+        Imagine standing blindfolded on a foggy mountain valley where <strong>height = total error (MSE)</strong> and <strong>left/right position = slope weight (w)</strong>. To reach the lowest point of the valley (minimum error), you feel which way the ground slopes under your feet and take a step downhill. That algorithm is called <strong>Gradient Descent</strong>.
+      </p>
+
+      <div class="gd-layout">
+        <!-- Left SVG Parabola Loss Curve -->
+        <div class="workbench-card">
+          <div class="toolbar-row">
+            <div class="pill-group">
+              <button type="button" id="gdStepBtn" class="btn-action" data-i18n="gd_btn_step">Take 1 Step Downhill</button>
+              <button type="button" id="gdAutoBtn" class="btn-secondary" data-i18n="gd_btn_auto">Auto-Train</button>
+              <button type="button" id="gdResetBtn" class="btn-secondary" data-i18n="gd_btn_reset">Reset to Top of Hill</button>
+            </div>
+          </div>
+
+          <div class="svg-wrap">
+            <svg id="gdSvg" class="plot-svg" viewBox="0 0 520 250" role="img" aria-label="Gradient descent U-shaped loss curve simulator"></svg>
+          </div>
+
+          <div class="controls-grid">
+            <div class="control-box">
+              <div class="control-header">
+                <label for="lrSlider" class="control-label" data-i18n="gd_lr_label">Learning Rate (Step Size)</label>
+                <span id="lrValDisplay" class="control-val">0.18</span>
+              </div>
+              <input type="range" id="lrSlider" min="0.03" max="0.98" step="0.01" value="0.18" />
+            </div>
+            <div class="control-box">
+              <div class="control-header">
+                <span class="control-label" data-i18n="gd_iter_label">Training Steps Taken</span>
+                <span id="gdStepCount" class="control-val">0</span>
+              </div>
+              <div id="gdRateHint" style="font-size:0.78rem; color:var(--color-muted);" data-i18n="gd_lr_good">
+                Balanced step size: smooth convergence!
+              </div>
+            </div>
+          </div>
+
+          <div id="gdLogBox" class="gd-log">
+            Step 0: Starting guess w = 5.0 · Loss (MSE) = 900.0 · Slope gradient = -60.0
+          </div>
+        </div>
+
+        <!-- Right Layman Explanation of Learning Rate -->
+        <div style="display:flex; flex-direction:column; gap:0.85rem;">
+          <div class="concept-card">
+            <span class="concept-num" data-i18n="gd_card1_tag">Step 1 · Random Guess</span>
+            <h3 data-i18n="gd_card1_title">Start Anywhere on the Hill</h3>
+            <p data-i18n="gd_card1_body">
+              The computer starts with a rough guess for the weight (e.g., <code>w = 5</code> when the true best weight is <code>w = 35</code>). At first, the prediction error is huge, so the ball starts high up on the valley wall.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <span class="concept-num" data-i18n="gd_card2_tag">Step 2 · Measure the Slope (Gradient)</span>
+            <h3 data-i18n="gd_card2_title">Which Way is Downhill?</h3>
+            <p data-i18n="gd_card2_body">
+              The machine calculates the <strong>Gradient</strong> (the steepness of the error curve at the current spot). If the slope is negative, moving right reduces error; if positive, moving left reduces error.
+            </p>
+          </div>
+
+          <div class="concept-card">
+            <span class="concept-num" data-i18n="gd_card3_tag">Step 3 · The Learning Rate Trap</span>
+            <h3 data-i18n="gd_card3_title">Why "Step Size" Matters So Much</h3>
+            <p data-i18n="gd_card3_body">
+              Try dragging the <strong>Learning Rate slider</strong> on the left!
+              <br>• <strong>Too Small (0.03):</strong> Tiny baby steps—takes forever to reach the bottom.
+              <br>• <strong>Just Right (0.18):</strong> Reaches the bottom smoothly in 8–10 steps.
+              <br>• <strong>Too High (0.92+):</strong> Giant leaps that overshoot across the valley walls back and forth!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: REAL-WORLD EXAMPLES & LIVE PREDICTOR CALCULATOR -->
+    <section id="examples" class="section-block">
+      <span class="section-tag" data-i18n="ex_tag">everyday applications · interactive calculator</span>
+      <h2 class="section-title" data-i18n="ex_title">4 Real-World Examples &amp; Live "What-If" Predictor</h2>
+      <p class="lead-copy" data-i18n="ex_lead">
+        Select a real-world case below to see how a trained Linear Regression model turns raw history into instant predictions—and drag the input slider to test your own numbers.
+      </p>
+
+      <div class="pill-group" style="margin-bottom:1rem;" role="tablist" aria-label="Select Real World Case">
+        <button type="button" class="btn-pill active" data-case="rent" data-i18n="ds_rent">1. HK Flat Rent</button>
+        <button type="button" class="btn-pill" data-case="coffee" data-i18n="ds_coffee">2. Iced Coffee Sales</button>
+        <button type="button" class="btn-pill" data-case="study" data-i18n="ds_study">3. Study vs. Exam</button>
+        <button type="button" class="btn-pill" data-case="car" data-i18n="ds_car">4. Car Depreciation</button>
+      </div>
+
+      <div class="scenario-layout">
+        <!-- Story & Breakdown -->
+        <div class="concept-card" style="justify-content:flex-start;">
+          <span id="caseTag" class="concept-num">Case 01 · Real Estate Pricing</span>
+          <h3 id="caseHeading" style="font-size:1.25rem;">Estimating Hong Kong Monthly Rent from Saleable Area</h3>
+          <p id="caseStory">
+            A property portal collects recent lease records for 10 flats in Kowloon. Even though floor level and view cause slight variations, saleable square footage drives over 90% of the rent difference.
+          </p>
+          <div class="formula-legend" style="margin-top:0.4rem;">
+            <div class="legend-item">
+              <strong data-i18n="case_learned_w">Learned Weight (w):</strong>
+              <div id="caseWeightExplain">+HK$36 per sq.ft</div>
+            </div>
+            <div class="legend-item">
+              <strong data-i18n="case_learned_b">Learned Baseline (b):</strong>
+              <div id="caseBiasExplain">HK$5,200 base rent</div>
+            </div>
+          </div>
+          <div id="caseTakeaway" class="analogy-box" style="margin-top:0.4rem;">
+            Every additional 100 sq.ft of space adds roughly HK$3,600 to the monthly rent on average.
+          </div>
+        </div>
+
+        <!-- Interactive Live Predictor -->
+        <div class="predictor-box">
+          <span class="concept-num" data-i18n="calc_badge">Live Prediction Calculator</span>
+          <h3 id="calcTitle" style="font-family:var(--font-display); font-weight:500; margin:0.4rem 0 0.7rem;">
+            Test the Model with Your Own Input (x)
+          </h3>
+
+          <div class="control-box">
+            <div class="control-header">
+              <label for="caseInputSlider" id="calcInputLabel" class="control-label">Flat Size (x)</label>
+              <span id="calcInputVal" class="control-val">450 sq.ft</span>
+            </div>
+            <input type="range" id="caseInputSlider" min="150" max="1000" step="10" value="450" />
+          </div>
+
+          <div class="predicted-output">
+            <span style="font-size:0.78rem; color:var(--color-ink-2);" data-i18n="calc_result_label">Model Predicted Outcome (ŷ):</span>
+            <span id="calcOutputBig" class="big-val">HK$ 21,400 / month</span>
+            <div id="calcStepMath" style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-ink-2); margin-top:0.35rem;">
+              ŷ = (36 × 450) + 5,200 = 21,400
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: MULTIPLE LINEAR REGRESSION (BEYOND ONE CLUE) -->
+    <section id="multi" class="section-block">
+      <span class="section-tag" data-i18n="multi_tag">real-world machine learning · multiple features</span>
+      <h2 class="section-title" data-i18n="multi_title">Beyond One Line: Multiple Linear Regression</h2>
+      <p class="lead-copy" data-i18n="multi_lead">
+        In the real world, rent doesn't depend <em>only</em> on flat size. It also depends on how close the MTR station is and how old the building is! When we combine multiple clues (<code>x₁, x₂, x₃</code>), each with its own weight (<code>w₁, w₂, w₃</code>), it is called <strong>Multiple Linear Regression</strong>:
+        <code>ŷ = w₁x₁ + w₂x₂ + w₃x₃ + b</code>.
+      </p>
+
+      <div class="multi-grid">
+        <!-- Sliders for 3 Features -->
+        <div class="workbench-card">
+          <h3 style="font-family:var(--font-display); font-weight:500; margin-bottom:0.75rem;" data-i18n="multi_sim_title">
+            Interactive 3-Factor Hong Kong Rent Estimator
+          </h3>
+
+          <div style="display:flex; flex-direction:column; gap:0.65rem;">
+            <div class="control-box">
+              <div class="control-header">
+                <label for="mAreaSlider" class="control-label" data-i18n="m_f1_label">x₁ · Saleable Area (sq.ft) [Weight: +$38/sq.ft]</label>
+                <span id="mAreaVal" class="control-val">420 sq.ft</span>
+              </div>
+              <input type="range" id="mAreaSlider" min="180" max="900" step="10" value="420" />
+            </div>
+
+            <div class="control-box">
+              <div class="control-header">
+                <label for="mMtrSlider" class="control-label" data-i18n="m_f2_label">x₂ · Walk to MTR (mins) [Weight: −$320/min]</label>
+                <span id="mMtrVal" class="control-val">6 mins</span>
+              </div>
+              <input type="range" id="mMtrSlider" min="1" max="25" step="1" value="6" />
+            </div>
+
+            <div class="control-box">
+              <div class="control-header">
+                <label for="mAgeSlider" class="control-label" data-i18n="m_f3_label">x₃ · Building Age (years) [Weight: −$140/yr]</label>
+                <span id="mAgeVal" class="control-val">15 yrs</span>
+              </div>
+              <input type="range" id="mAgeSlider" min="1" max="50" step="1" value="15" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Additive & Subtractive Breakdown -->
+        <div class="predictor-box" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <span class="concept-num" data-i18n="multi_break_tag">Step-by-Step Weight Contribution</span>
+            <ul class="breakdown-list">
+              <li class="breakdown-item">
+                <span data-i18n="m_row_base">Base Intercept (b)</span>
+                <code id="mBaseCode">+ HK$ 9,000</code>
+              </li>
+              <li class="breakdown-item">
+                <span data-i18n="m_row_area">Size Effect (w₁ · x₁)</span>
+                <code id="mAreaCode" style="color:var(--color-good);">+ HK$ 15,960</code>
+              </li>
+              <li class="breakdown-item">
+                <span data-i18n="m_row_mtr">MTR Distance Penalty (w₂ · x₂)</span>
+                <code id="mMtrCode" style="color:var(--color-warn);">− HK$ 1,920</code>
+              </li>
+              <li class="breakdown-item">
+                <span data-i18n="m_row_age">Building Age Penalty (w₃ · x₃)</span>
+                <code id="mAgeCode" style="color:var(--color-warn);">− HK$ 2,100</code>
+              </li>
+            </ul>
+          </div>
+
+          <div class="predicted-output">
+            <span style="font-size:0.78rem; color:var(--color-ink-2);" data-i18n="m_total_label">Combined Predicted Monthly Rent (ŷ):</span>
+            <span id="mTotalOut" class="big-val">HK$ 20,940 / month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CHEAT SHEET TABLE & 3-QUESTION SELF-CHECK QUIZ -->
+    <section id="glossary" class="section-block">
+      <span class="section-tag" data-i18n="gloss_tag">summary · reference &amp; quick check</span>
+      <h2 class="section-title" data-i18n="gloss_title">Layman's Cheat Sheet &amp; 30-Second Quiz</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="th_sym">Symbol</th>
+              <th data-i18n="th_term">Machine Learning Term</th>
+              <th data-i18n="th_plain">Plain Layman Meaning</th>
+              <th data-i18n="th_ex">Everyday Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>x</code></td>
+              <td data-i18n="tr1_t">Feature / Independent Variable</td>
+              <td data-i18n="tr1_p">The known input clue used to make a prediction</td>
+              <td data-i18n="tr1_e">Apartment size (450 sq.ft)</td>
+            </tr>
+            <tr>
+              <td><code>y</code></td>
+              <td data-i18n="tr2_t">Target / Ground Truth</td>
+              <td data-i18n="tr2_p">The actual real-world number recorded in data</td>
+              <td data-i18n="tr2_e">Actual signed lease ($22,000)</td>
+            </tr>
+            <tr>
+              <td><code>ŷ</code></td>
+              <td data-i18n="tr3_t">Predicted Value (y-hat)</td>
+              <td data-i18n="tr3_p">The point sitting on the straight line for a given x</td>
+              <td data-i18n="tr3_e">Model's estimate ($21,400)</td>
+            </tr>
+            <tr>
+              <td><code>w</code></td>
+              <td data-i18n="tr4_t">Weight / Slope / Coefficient</td>
+              <td data-i18n="tr4_p">How much ŷ changes when x increases by 1 unit</td>
+              <td data-i18n="tr4_e">+$36 per extra sq.ft</td>
+            </tr>
+            <tr>
+              <td><code>b</code></td>
+              <td data-i18n="tr5_t">Bias / Intercept</td>
+              <td data-i18n="tr5_p">The starting value when input x equals 0</td>
+              <td data-i18n="tr5_e">Base starting price ($5,200)</td>
+            </tr>
+            <tr>
+              <td><code>MSE</code></td>
+              <td data-i18n="tr6_t">Mean Squared Error (Loss)</td>
+              <td data-i18n="tr6_p">Average of squared vertical gaps between dots &amp; line</td>
+              <td data-i18n="tr6_e">Smaller MSE = tighter line fit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3-Question Interactive Quiz -->
+      <div class="quiz-grid" aria-label="Quick Self-Check Quiz">
+        <div class="quiz-card" data-q="0">
+          <div class="quiz-q" data-i18n="q1_title">Q1. In ŷ = −12,000x + 180,000 (where x is car age in years), what does −12,000 mean?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-correct="true" data-i18n="q1_o1">Each extra year of age reduces the car's predicted value by $12,000.</button>
+            <button type="button" class="quiz-opt" data-correct="false" data-i18n="q1_o2">A brand-new car starts at −$12,000.</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-card" data-q="1">
+          <div class="quiz-q" data-i18n="q2_title">Q2. Why do we square the errors (Residuals) when calculating MSE?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-correct="false" data-i18n="q2_o1">To make the computer run faster.</button>
+            <button type="button" class="quiz-opt" data-correct="true" data-i18n="q2_o2">So positive (+5) and negative (−5) errors don't cancel out, and big errors get penalized heavily.</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+
+        <div class="quiz-card" data-q="2">
+          <div class="quiz-q" data-i18n="q3_title">Q3. What happens in Gradient Descent if the Learning Rate is set way too high?</div>
+          <div class="quiz-opts">
+            <button type="button" class="quiz-opt" data-correct="true" data-i18n="q3_o1">The steps overshoot across the valley and fail to settle at the bottom.</button>
+            <button type="button" class="quiz-opt" data-correct="false" data-i18n="q3_o2">It stops moving completely on step 1.</button>
+          </div>
+          <div class="quiz-feedback"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Colophon Footer -->
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span data-i18n="footer_left">line.fit · interactive machine learning guide built for laypeople · desktop &amp; compact mobile edition</span>
+      <span data-i18n="footer_right">1-click English / 繁體中文 · ordinary least squares &amp; gradient descent</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ==========================================================================
+       BILINGUAL DICTIONARY (English <-> Natural HK Traditional Chinese 繁體中文)
+       ========================================================================== */
+    const I18N = {
+      en: {
+        nav_sandbox: "sandbox",
+        nav_concepts: "core concepts",
+        nav_gradient: "how it learns",
+        nav_examples: "real examples",
+        nav_multi: "multi-factor",
+        nav_glossary: "cheat sheet",
+        hero_tag: "machine learning 101 · layman interactive guide",
+        hero_title: "What is <strong>Linear Regression</strong>? Drawing the fairest straight line through data to predict the future.",
+        hero_lead: "Imagine looking at 12 apartments in Hong Kong and plotting their size against monthly rent. The dots don't form a perfect line, but there is a clear upward trend. <strong>Linear Regression</strong> is the machine learning method that finds the single best-fitting straight line through those dots—so you can estimate the price of a brand-new apartment you've never seen before.",
+        leg_yhat_title: "(Prediction)",
+        leg_yhat_desc: "The machine's estimated answer (e.g., predicted rent).",
+        leg_x_title: "(Feature / Input)",
+        leg_x_desc: "The clue you already know (e.g., flat size in sq.ft).",
+        leg_w_title: "(Weight / Slope)",
+        leg_w_desc: "How steep the line is: how much ŷ changes when x goes up by 1.",
+        leg_b_title: "(Bias / Intercept)",
+        leg_b_desc: "The starting baseline value when x is zero.",
+        hero_analogy: "<strong>Everyday Taxi Analogy:</strong> A taxi meter is literally a linear regression formula! The flag-fall starting fare ($29) is the <strong>Bias (b)</strong>, the price per kilometer ($10/km) is the <strong>Weight (w)</strong>, the distance traveled is <strong>Input (x)</strong>, and the total fare is <strong>Prediction (ŷ)</strong>.",
+        ds_rent: "1. HK Flat Rent",
+        ds_coffee: "2. Iced Coffee Sales",
+        ds_study: "3. Study vs. Exam",
+        ds_car: "4. Car Depreciation",
+        btn_autofit: "Auto-Fit Best Line (OLS)",
+        btn_residuals_on: "Error Lines: ON",
+        btn_residuals_off: "Error Lines: OFF",
+        btn_squares_on: "Squared Errors: ON",
+        btn_squares_off: "Squared Errors: OFF",
+        btn_outlier: "+ Add Outlier",
+        btn_reset: "Reset Dots",
+        plot_hint_left: "Click anywhere on chart to add a dot · Click an existing dot to delete it",
+        slider_w: "Slope / Weight (w)",
+        slider_b: "Intercept / Bias (b)",
+        metric_eq: "Live Formula (ŷ = wx + b)",
+        metric_mse: "Avg Squared Error (MSE)",
+        metric_r2: "Fit Accuracy (R² Score)",
+        concepts_tag: "core building blocks · zero jargon",
+        concepts_title: "6 Essential Concepts Behind Linear Regression",
+        concepts_lead: "You don't need advanced calculus to understand how machines learn from numbers. Every linear regression model revolves around these six simple ideas.",
+        c1_title: "Feature (x) vs. Target (y)",
+        c1_body: "In Machine Learning, a <strong>Feature (x)</strong> is the input clue you measure, and the <strong>Target (y)</strong> is the real-world outcome you want to predict. During training, we show the computer historical pairs of (x, y).",
+        c1_ex: "<strong>Example:</strong> Input <em>x</em> = Daily temperature (32°C). Target <em>y</em> = Actual cups of iced coffee sold (210 cups).",
+        c2_title: "Weight (w) & Bias (b)",
+        c2_body: "Think of <strong>w</strong> and <strong>b</strong> as the two tuning knobs inside the machine. <strong>Weight (w)</strong> controls the tilt (how much each extra unit of x adds or subtracts), while <strong>Bias (b)</strong> shifts the entire line up or down.",
+        c2_ex: "<strong>Negative Weight:</strong> If <em>w</em> is negative (e.g., car age vs. price), the line slopes downward—older cars cost less!",
+        c3_title: "Residuals (Prediction Errors)",
+        c3_body: "Real life is messy, so almost no dot sits perfectly on the line. The vertical gap between an actual dot (<strong>y</strong>) and the line's prediction (<strong>ŷ</strong>) is called a <strong>Residual</strong> or Error: <code>e = y − ŷ</code>.",
+        c3_ex: "<strong>Visual Cue:</strong> Turn on \"Error Lines\" in the chart above—those dashed vertical stems are the residuals!",
+        c4_title: "Mean Squared Error (Loss Function)",
+        c4_body: "Some dots are above the line (+5 error) and some are below (−5 error). If we just added them up, they'd cancel out to 0! So we <strong>square</strong> every error first (5² = 25, (−5)² = 25) and take the average.",
+        c4_ex: "<strong>Bonus of Squaring:</strong> A mistake twice as big gets penalized <em>four times</em> as hard (2² = 4, 4² = 16).",
+        c5_title: "R² Score (Goodness of Fit)",
+        c5_body: "How do we know if our line is actually useful? <strong>R-squared (R²)</strong> scores your line from <strong>0% to 100%</strong> compared to simply guessing the average every time.",
+        c5_ex: "<strong>Rule of Thumb:</strong> 85%+ means a strong linear trend; near 0% means the dots are random scatter.",
+        c6_title: "Outliers & Overfitting",
+        c6_body: "An <strong>Outlier</strong> is a freak data point far away from the rest. Because MSE squares errors, a single outlier can yank the whole line toward it! Meanwhile, zig-zagging through every dot is <strong>Overfitting</strong> (memorizing noise instead of learning the trend).",
+        c6_ex: "<strong>Try It:</strong> Click \"+ Add Outlier\" in the sandbox above to watch one extreme dot pull the line!",
+        gd_tag: "optimization · step-by-step animation",
+        gd_title: "How the Computer Finds the Best Line: Gradient Descent",
+        gd_lead: "Imagine standing blindfolded on a foggy mountain valley where <strong>height = total error (MSE)</strong> and <strong>left/right position = slope weight (w)</strong>. To reach the lowest point of the valley (minimum error), you feel which way the ground slopes under your feet and take a step downhill. That algorithm is called <strong>Gradient Descent</strong>.",
+        gd_btn_step: "Take 1 Step Downhill",
+        gd_btn_auto: "Auto-Train",
+        gd_btn_stop: "Pause",
+        gd_btn_reset: "Reset to Top of Hill",
+        gd_lr_label: "Learning Rate (Step Size)",
+        gd_iter_label: "Training Steps Taken",
+        gd_lr_slow: "Small step size: very slow baby steps.",
+        gd_lr_good: "Balanced step size: smooth convergence!",
+        gd_lr_high: "High step size: overshooting across the valley!",
+        gd_card1_tag: "Step 1 · Random Guess",
+        gd_card1_title: "Start Anywhere on the Hill",
+        gd_card1_body: "The computer starts with a rough guess for the weight (e.g., <code>w = 5</code> when the true best weight is <code>w = 35</code>). At first, the prediction error is huge, so the ball starts high up on the valley wall.",
+        gd_card2_tag: "Step 2 · Measure the Slope (Gradient)",
+        gd_card2_title: "Which Way is Downhill?",
+        gd_card2_body: "The machine calculates the <strong>Gradient</strong> (the steepness of the error curve at the current spot). If the slope is negative, moving right reduces error; if positive, moving left reduces error.",
+        gd_card3_tag: "Step 3 · The Learning Rate Trap",
+        gd_card3_title: "Why \"Step Size\" Matters So Much",
+        gd_card3_body: "Try dragging the <strong>Learning Rate slider</strong> on the left!<br>• <strong>Too Small (0.03):</strong> Tiny baby steps—takes forever to reach the bottom.<br>• <strong>Just Right (0.18):</strong> Reaches the bottom smoothly in 8–10 steps.<br>• <strong>Too High (0.92+):</strong> Giant leaps that overshoot across the valley walls back and forth!",
+        ex_tag: "everyday applications · interactive calculator",
+        ex_title: "4 Real-World Examples & Live \"What-If\" Predictor",
+        ex_lead: "Select a real-world case below to see how a trained Linear Regression model turns raw history into instant predictions—and drag the input slider to test your own numbers.",
+        case_learned_w: "Learned Weight (w):",
+        case_learned_b: "Learned Baseline (b):",
+        calc_badge: "Live Prediction Calculator",
+        calc_Title: "Test the Model with Your Own Input (x)",
+        calc_result_label: "Model Predicted Outcome (ŷ):",
+        multi_tag: "real-world machine learning · multiple features",
+        multi_title: "Beyond One Line: Multiple Linear Regression",
+        multi_lead: "In the real world, rent doesn't depend <em>only</em> on flat size. It also depends on how close the MTR station is and how old the building is! When we combine multiple clues (<code>x₁, x₂, x₃</code>), each with its own weight (<code>w₁, w₂, w₃</code>), it is called <strong>Multiple Linear Regression</strong>: <code>ŷ = w₁x₁ + w₂x₂ + w₃x₃ + b</code>.",
+        multi_sim_title: "Interactive 3-Factor Hong Kong Rent Estimator",
+        m_f1_label: "x₁ · Saleable Area (sq.ft) [Weight: +$38/sq.ft]",
+        m_f2_label: "x₂ · Walk to MTR (mins) [Weight: −$320/min]",
+        m_f3_label: "x₃ · Building Age (years) [Weight: −$140/yr]",
+        multi_break_tag: "Step-by-Step Weight Contribution",
+        m_row_base: "Base Intercept (b)",
+        m_row_area: "Size Effect (w₁ · x₁)",
+        m_row_mtr: "MTR Distance Penalty (w₂ · x₂)",
+        m_row_age: "Building Age Penalty (w₃ · x₃)",
+        m_total_label: "Combined Predicted Monthly Rent (ŷ):",
+        gloss_tag: "summary · reference & quick check",
+        gloss_title: "Layman's Cheat Sheet & 30-Second Quiz",
+        th_sym: "Symbol",
+        th_term: "Machine Learning Term",
+        th_plain: "Plain Layman Meaning",
+        th_ex: "Everyday Example",
+        tr1_t: "Feature / Independent Variable",
+        tr1_p: "The known input clue used to make a prediction",
+        tr1_e: "Apartment size (450 sq.ft)",
+        tr2_t: "Target / Ground Truth",
+        tr2_p: "The actual real-world number recorded in data",
+        tr2_e: "Actual signed lease ($22,000)",
+        tr3_t: "Predicted Value (y-hat)",
+        tr3_p: "The point sitting on the straight line for a given x",
+        tr3_e: "Model's estimate ($21,400)",
+        tr4_t: "Weight / Slope / Coefficient",
+        tr4_p: "How much ŷ changes when x increases by 1 unit",
+        tr4_e: "+$36 per extra sq.ft",
+        tr5_t: "Bias / Intercept",
+        tr5_p: "The starting value when input x equals 0",
+        tr5_e: "Base starting price ($5,200)",
+        tr6_t: "Mean Squared Error (Loss)",
+        tr6_p: "Average of squared vertical gaps between dots & line",
+        tr6_e: "Smaller MSE = tighter line fit",
+        q1_title: "Q1. In ŷ = −12,000x + 180,000 (where x is car age in years), what does −12,000 mean?",
+        q1_o1: "Each extra year of age reduces the car's predicted value by $12,000.",
+        q1_o2: "A brand-new car starts at −$12,000.",
+        q2_title: "Q2. Why do we square the errors (Residuals) when calculating MSE?",
+        q2_o1: "To make the computer run faster.",
+        q2_o2: "So positive (+5) and negative (−5) errors don't cancel out, and big errors get penalized heavily.",
+        q3_title: "Q3. What happens in Gradient Descent if the Learning Rate is set way too high?",
+        q3_o1: "The steps overshoot across the valley and fail to settle at the bottom.",
+        q3_o2: "It stops moving completely on step 1.",
+        quiz_correct_msg: "Correct! You've got the intuition.",
+        quiz_wrong_msg: "Not quite—try the other option!",
+        footer_left: "line.fit · interactive machine learning guide built for laypeople · desktop & compact mobile edition",
+        footer_right: "1-click English / 繁體中文 · ordinary least squares & gradient descent"
+      },
+      zh: {
+        nav_sandbox: "互動畫線",
+        nav_concepts: "核心概念",
+        nav_gradient: "機器如何學習",
+        nav_examples: "生活實例",
+        nav_multi: "多變數預測",
+        nav_glossary: "懶人包總結",
+        hero_tag: "機器學習入門 · 零數學門檻互動指南",
+        hero_title: "什麼是<strong>線性回歸 (Linear Regression)</strong>？在散亂數據中畫出最公平的直線，從過去預測未來。",
+        hero_lead: "想像你在香港看了 12 個租盤，把「實用面積」與「月租」畫在圖表上。這些圓點不會排成完美直線，但有明顯向上的趨勢。<strong>線性回歸 (Linear Regression)</strong> 就是讓電腦找出一條最貼近所有圓點的「最佳擬合直線」——從此只要輸入任何新單位的面積，就能即時推算合理租金。",
+        leg_yhat_title: "(預測結果 Prediction)",
+        leg_yhat_desc: "電腦推算出來的答案（例如：預測月租）。",
+        leg_x_title: "(特徵輸入 Feature)",
+        leg_x_desc: "你手頭上已知的線索（例如：實用面積平方呎）。",
+        leg_w_title: "(權重 / 斜率 Weight)",
+        leg_w_desc: "直線有多斜：當 x 每增加 1 單位，ŷ 會改變多少。",
+        leg_b_title: "(偏差 / 截距 Bias)",
+        leg_b_desc: "當輸入 x 為 0 時的基本起跳底價。",
+        hero_analogy: "<strong>日常生活的士咪錶比喻：</strong>香港紅色的士咪錶就是一條活生生的線性回歸公式！落旗起錶價（$29）就是<strong>截距底價 (b)</strong>，每公里跳錶收費（$10/km）就是<strong>斜率權重 (w)</strong>，行車里數是<strong>特徵輸入 (x)</strong>，而總車資就是<strong>預測結果 (ŷ)</strong>。",
+        ds_rent: "1. 香港住宅租金",
+        ds_coffee: "2. 氣溫與凍咖啡銷量",
+        ds_study: "3. 溫習時間與成績",
+        ds_car: "4. 二手車車齡折舊",
+        btn_autofit: "自動找出最佳直線 (OLS)",
+        btn_residuals_on: "誤差垂直線: 開啟",
+        btn_residuals_off: "誤差垂直線: 關閉",
+        btn_squares_on: "誤差正方形: 開啟",
+        btn_squares_off: "誤差正方形: 關閉",
+        btn_outlier: "+ 加入極端離群值",
+        btn_reset: "重設數據點",
+        plot_hint_left: "點擊圖表空白處可新增數據點 · 點擊現有圓點即可刪除",
+        slider_w: "斜率 / 權重 (w)",
+        slider_b: "截距 / 底價 (b)",
+        metric_eq: "即時公式 (ŷ = wx + b)",
+        metric_mse: "平均平方誤差 (MSE)",
+        metric_r2: "擬合準確度 (R² 分數)",
+        concepts_tag: "核心基礎概念 · 白話文圖解",
+        concepts_title: "輕鬆看懂線性回歸的 6 大核心概念",
+        concepts_lead: "你完全不需要懂微積分，也能徹底明白電腦如何從數據中學習。所有線性回歸模型都建立在以下 6 個簡單概念之上：",
+        c1_title: "特徵 (x) 與 目標 (y)",
+        c1_body: "在機器學習中，<strong>特徵 (Feature, x)</strong> 是你用來推測的已知線索，而<strong>目標 (Target, y)</strong> 是你想預測的真實結果。訓練時，我們會把過往大量的 (x, y) 配對餵給電腦。",
+        c1_ex: "<strong>例子：</strong>輸入線索 <em>x</em> = 當日氣溫 (32°C)；真實目標 <em>y</em> = 當日實際賣出的凍咖啡杯數 (210 杯)。",
+        c2_title: "權重斜率 (w) 與 截距底價 (b)",
+        c2_body: "可以把 <strong>w</strong> 和 <strong>b</strong> 想像成機器內部的兩個調校旋鈕。<strong>權重 (w)</strong> 控制直線傾斜角度（每多 1 單位 x 會加或減多少），而<strong>截距 (b)</strong> 則控制整條線向上或向下平移。",
+        c2_ex: "<strong>負數斜率：</strong>如果 <em>w</em> 是負數（例如車齡 vs 二手價），直線會向下斜——代表車越舊越便宜！",
+        c3_title: "殘差 (Residuals / 預測誤差)",
+        c3_body: "現實數據總有波動，幾乎沒有圓點會完全貼在直線上。真實數據點 (<strong>y</strong>) 與直線預測位置 (<strong>ŷ</strong>) 之間的垂直距離，就叫做<strong>殘差 (Residual)</strong> 或誤差：<code>e = y − ŷ</code>。",
+        c3_ex: "<strong>視覺觀察：</strong>在上方互動圖表開啟「誤差垂直線」，那些虛線段就是每一點與直線的殘差！",
+        c4_title: "均方誤差 (MSE / 損失函數)",
+        c4_body: "有些點在直線上方（誤差 +5），有些在下方（誤差 −5）。如果直接相加會互相抵消變成 0！因此電腦會先把所有誤差<strong>平方</strong>（5² = 25, (−5)² = 25），再計算平均值。",
+        c4_ex: "<strong>平方的好處：</strong>可以在上方開啟「誤差正方形」——離直線越遠的大失誤，正方形面積會以平方倍數暴增，迫使電腦優先修正大誤差！",
+        c5_title: "R² 決定係數 (直線有多準？)",
+        c5_body: "怎樣判斷畫出來的直線有沒有參考價值？<strong>R² (R-Squared)</strong> 會給直線打出 <strong>0% 至 100%</strong> 的評分，代表直線能解釋多少百分比的數據變化。",
+        c5_ex: "<strong>實用標準：</strong>85% 以上代表線性規律極強；接近 0% 代表圓點只是毫無規律的隨機散佈。",
+        c6_title: "離群值 (Outliers) 與 過度擬合",
+        c6_body: "<strong>離群值 (Outlier)</strong> 是遠離群體的極端異常數據。因為 MSE 會將誤差平方，單單一粒離群點就能把整條直線拉歪！相反，如果強行用彎曲折線穿過每一粒點，就叫<strong>過度擬合 (Overfitting)</strong>（死背雜訊而失去預測能力）。",
+        c6_ex: "<strong>親手測試：</strong>點擊上方圖表的「+ 加入極端離群值」，看看一粒異常數據如何拉扯整條直線！",
+        gd_tag: "優化演算法 · 逐步動態演示",
+        gd_title: "電腦如何自己找出最佳直線？梯度下降法 (Gradient Descent)",
+        gd_lead: "想像你蒙著眼站在濃霧籠罩的山谷斜坡上，<strong>高度代表總誤差 (MSE)</strong>，<strong>左右位置代表斜率設定 (w)</strong>。為了走到山谷最低點（誤差最小的位置），你用腳感受地面往哪邊傾斜，然後一步步往下坡走。這個自動尋底的過程就叫做<strong>梯度下降法 (Gradient Descent)</strong>。",
+        gd_btn_step: "往下坡走 1 步",
+        gd_btn_auto: "自動連續訓練",
+        gd_btn_stop: "暫停訓練",
+        gd_btn_reset: "重設回山坡起點",
+        gd_lr_label: "學習率 Learning Rate (步伐大小)",
+        gd_iter_label: "已訓練步數 (Steps)",
+        gd_lr_slow: "步伐太小：像螞蟻搬家，要走很久才到谷底。",
+        gd_lr_good: "步伐適中：平穩快速地滑落到誤差最低點！",
+        gd_lr_high: "步伐太大：在山谷兩側來回跳躍過頭 (Overshoot)！",
+        gd_card1_tag: "第 1 步 · 隨機起點",
+        gd_card1_title: "在山坡隨便猜一個起點",
+        gd_card1_body: "電腦一開始不知道最佳權重是多少，會先隨便猜一個數字（例如最佳值是 <code>w = 35</code>，電腦先猜 <code>w = 5</code>）。這時預測誤差極大，所以圓球位於山谷高處。",
+        gd_card2_tag: "第 2 步 · 計算斜率方向 (Gradient)",
+        gd_card2_title: "用腳感受哪邊是下坡",
+        gd_card2_body: "電腦會計算當前位置的<strong>梯度 (Gradient / 切線斜率)</strong>。如果斜率是負數，代表往右走能減少誤差；如果是正數，代表往左走才能減少誤差。",
+        gd_card3_tag: "第 3 步 · 學習率 (Learning Rate) 的陷阱",
+        gd_card3_title: "為什麼「每一步跨多大」這麼重要？",
+        gd_card3_body: "試試拖動左方的<strong>學習率滑桿</strong>：<br>• <strong>太小 (0.03)：</strong>碎步慢行，耗費大量時間才走到谷底。<br>• <strong>適中 (0.18)：</strong>只需 8–10 步就能精準停在谷底。<br>• <strong>太大 (0.92+)：</strong>一步跨太大直接衝過頭飛到對面山壁，來回震盪無法收斂！",
+        ex_tag: "日常生活應用 · 即時互動計算機",
+        ex_title: "4 個真實生活案例 與 即時預測計算機",
+        ex_lead: "點選下方 4 個生活情境，看看訓練好的線性回歸模型如何把歷史數據轉化為實用公式，並拖動滑桿輸入你的數字即時預測結果。",
+        case_learned_w: "機器學到的權重 (w)：",
+        case_learned_b: "機器學到的底價 (b)：",
+        calc_badge: "即時預測計算機",
+        calc_Title: "親手拖動輸入值 (x) 測試模型預測",
+        calc_result_label: "模型預測結果 (ŷ)：",
+        multi_tag: "進階真實機器學習 · 多重特徵線索",
+        multi_title: "不只一個線索：多元線性回歸 (Multiple Linear Regression)",
+        multi_lead: "在現實世界中，香港租金不可能<em>只</em>看面積，還會受「行去地鐵站要幾分鐘」及「樓齡幾多年」影響！當電腦同時結合多個線索 (<code>x₁, x₂, x₃</code>)，並為每個線索分配專屬權重 (<code>w₁, w₂, w₃</code>)，就稱為<strong>多元線性回歸</strong>：<code>ŷ = w₁x₁ + w₂x₂ + w₃x₃ + b</code>。",
+        multi_sim_title: "互動式香港租盤 3 大因素估價模擬器",
+        m_f1_label: "x₁ · 實用面積 (平方呎) [權重: +$38/呎]",
+        m_f2_label: "x₂ · 步行往港鐵站 (分鐘) [權重: −$320/分鐘]",
+        m_f3_label: "x₃ · 物業樓齡 (年) [權重: −$140/年]",
+        multi_break_tag: "各項特徵權重加減明細",
+        m_row_base: "基本起跳底價 (b)",
+        m_row_area: "面積正面加成 (w₁ · x₁)",
+        m_row_mtr: "地鐵距離扣減 (w₂ · x₂)",
+        m_row_age: "物業樓齡扣減 (w₃ · x₃)",
+        m_total_label: "綜合預測合理月租 (ŷ)：",
+        gloss_tag: "重點整理 · 符號對照表與小測驗",
+        gloss_title: "外行人一頁懶人包 & 30 秒觀念自測",
+        th_sym: "數學符號",
+        th_term: "機器學習術語",
+        th_plain: "白話文解釋",
+        th_ex: "生活例子",
+        tr1_t: "Feature (特徵 / 自變數)",
+        tr1_p: "用來推算答案的已知輸入線索",
+        tr1_e: "單位實用面積 (450 平方呎)",
+        tr2_t: "Target (目標值 / 真實答案)",
+        tr2_p: "歷史紀錄中實際發生的真實數字",
+        tr2_e: "實際簽約月租 ($22,000)",
+        tr3_t: "Prediction (預測值 y-hat)",
+        tr3_p: "直線上對應某個 x 所算出來的估算值",
+        tr3_e: "模型推算月租 ($21,400)",
+        tr4_t: "Weight (權重 / 斜率)",
+        tr4_p: "當 x 每增加 1 單位時，ŷ 隨之變動的幅度",
+        tr4_e: "每多 1 呎租金 +$36",
+        tr5_t: "Bias (偏差 / 截距底價)",
+        tr5_p: "當輸入 x 等於 0 時的基準起點數值",
+        tr5_e: "基本起跳租金 ($5,200)",
+        tr6_t: "Mean Squared Error (均方誤差)",
+        tr6_p: "所有圓點與直線垂直距離平方後的平均值",
+        tr6_e: "MSE 越小代表直線越貼合數據",
+        q1_title: "問題 1：在二手車公式 ŷ = −12,000x + 180,000（x 為車齡年數）中，−12,000 代表什麼？",
+        q1_o1: "車齡每老 1 年，預測二手車價就會減少 $12,000。",
+        q1_o2: "一部全新落地車的售價是 −$12,000。",
+        q2_title: "問題 2：計算均方誤差 (MSE) 時，為什麼要先將每個誤差「平方」？",
+        q2_o1: "為了讓電腦晶片運算速度變快。",
+        q2_o2: "避免正誤差 (+5) 與負誤差 (−5) 互相抵消，並對嚴重誤差給予加倍懲罰。",
+        q3_title: "問題 3：在梯度下降法中，如果把學習率 (Learning Rate) 設得太大會怎樣？",
+        q3_o1: "步伐跨太大會在山谷兩側來回跳躍過頭，無法穩定停在最低點。",
+        q3_o2: "第一步就會完全卡住不動。",
+        quiz_correct_msg: "答對了！你已經完全掌握直覺概念。",
+        quiz_wrong_msg: "差一點點——試試另一個選項！",
+        footer_left: "line.fit · 專為非理工背景設計的機器學習互動指南 · 支援桌面與高密度手機介面",
+        footer_right: "一鍵切換 繁體中文 / English · 最小二乘法與梯度下降視覺化"
+      }
+    };
+
+    /* ==========================================================================
+       4 REAL-WORLD DATASETS FOR SANDBOX & WALKTHROUGH CALCULATOR
+       ========================================================================== */
+    const DATASETS = {
+      rent: {
+        xMin: 150, xMax: 850,
+        yMin: 8000, yMax: 38000,
+        wMin: -10, wMax: 65, wStep: 0.5,
+        bMin: 0, bMax: 18000, bStep: 200,
+        defaultInput: 450, inputStep: 10,
+        outlier: { x: 260, y: 36200 },
+        points: [
+          { x: 210, y: 12500 },
+          { x: 260, y: 14800 },
+          { x: 310, y: 16200 },
+          { x: 360, y: 18900 },
+          { x: 420, y: 20100 },
+          { x: 480, y: 22800 },
+          { x: 540, y: 24500 },
+          { x: 610, y: 27900 },
+          { x: 690, y: 29800 },
+          { x: 760, y: 33200 }
+        ],
+        en: {
+          xAxis: "Saleable Area (sq.ft)",
+          yAxis: "Monthly Rent (HK$)",
+          unitX: "sq.ft",
+          unitY: "HK$",
+          tag: "Case 01 · Hong Kong Real Estate",
+          heading: "Estimating Hong Kong Monthly Rent from Saleable Area",
+          story: "A property portal collects recent lease records for 10 flats in Kowloon. Even though floor level and view cause slight variations, saleable square footage drives over 90% of the rent difference.",
+          wExplain: "+HK$ 36.5 per sq.ft",
+          bExplain: "HK$ 5,100 base rent",
+          takeaway: "Every additional 100 sq.ft of space adds roughly HK$ 3,650 to the monthly rent on average.",
+          inputLabel: "Flat Saleable Area (x)"
+        },
+        zh: {
+          xAxis: "實用面積 (平方呎)",
+          yAxis: "每月租金 (HK$)",
+          unitX: "平方呎",
+          unitY: "HK$",
+          tag: "案例 01 · 香港租屋市場",
+          heading: "根據實用面積推算香港住宅合理月租",
+          story: "租屋平台收集了九龍區 10 個住宅單位的最新成交租約。雖然樓層高低與景觀會帶來輕微差距，但「實用面積」解釋了超過 90% 的租金變化。",
+          wExplain: "每平方呎 +HK$ 36.5",
+          bExplain: "基本起跳底價 HK$ 5,100",
+          takeaway: "平均而言，實用面積每增加 100 平方呎，月租大約上升 HK$ 3,650。",
+          inputLabel: "輸入單位實用面積 (x)"
+        }
+      },
+      coffee: {
+        xMin: 14, xMax: 36,
+        yMin: 40, yMax: 280,
+        wMin: -5, wMax: 16, wStep: 0.2,
+        bMin: -60, bMax: 120, bStep: 2,
+        defaultInput: 29, inputStep: 1,
+        outlier: { x: 18, y: 260 },
+        points: [
+          { x: 16, y: 72 },
+          { x: 18, y: 90 },
+          { x: 20, y: 112 },
+          { x: 22, y: 125 },
+          { x: 24, y: 148 },
+          { x: 26, y: 165 },
+          { x: 28, y: 188 },
+          { x: 30, y: 204 },
+          { x: 32, y: 228 },
+          { x: 34, y: 246 }
+        ],
+        en: {
+          xAxis: "Daily High Temp (°C)",
+          yAxis: "Iced Coffees Sold (Cups)",
+          unitX: "°C",
+          unitY: "cups",
+          tag: "Case 02 · Retail Demand Forecasting",
+          heading: "Predicting Daily Iced Coffee Sales from Weather Forecast",
+          story: "A café owner in Central tracks daily maximum temperature against cups of iced latte sold. With Linear Regression, checking tomorrow's weather forecast tells the barista how much cold brew to prep.",
+          wExplain: "+9.6 cups per 1°C rise",
+          bExplain: "−81 cups baseline offset",
+          takeaway: "When summer temperature jumps by 5°C, the café sells nearly 48 extra cups of iced coffee that day.",
+          inputLabel: "Forecast Temperature (x)"
+        },
+        zh: {
+          xAxis: "當日最高氣溫 (°C)",
+          yAxis: "凍咖啡銷量 (杯)",
+          unitX: "°C",
+          unitY: "杯",
+          tag: "案例 02 · 餐飲零售銷量預測",
+          heading: "根據天氣預報氣溫推算明日凍咖啡銷量",
+          story: "中環一間咖啡店紀錄了每日最高氣溫與凍咖啡銷量。透過線性回歸公式，店員只要看一眼天文台明日氣溫預報，就知道要提早準備多少凍飲材料。",
+          wExplain: "氣溫每升 1°C 多賣 +9.6 杯",
+          bExplain: "基準常數 −81 杯",
+          takeaway: "每當夏日氣溫上升 5°C，咖啡店當日平均會多賣出約 48 杯凍咖啡。",
+          inputLabel: "輸入預報最高氣溫 (x)"
+        }
+      },
+      study: {
+        xMin: 0, xMax: 10,
+        yMin: 30, yMax: 100,
+        wMin: -4, wMax: 12, wStep: 0.2,
+        bMin: 20, bMax: 80, bStep: 1,
+        defaultInput: 6.5, inputStep: 0.5,
+        outlier: { x: 8.5, y: 42 },
+        points: [
+          { x: 1.0, y: 46 },
+          { x: 2.0, y: 53 },
+          { x: 3.0, y: 58 },
+          { x: 4.0, y: 64 },
+          { x: 5.0, y: 71 },
+          { x: 6.0, y: 75 },
+          { x: 7.0, y: 82 },
+          { x: 8.0, y: 88 },
+          { x: 9.0, y: 93 }
+        ],
+        en: {
+          xAxis: "Weekly Study Hours (hrs)",
+          yAxis: "Exam Score (out of 100)",
+          unitX: "hrs",
+          unitY: "pts",
+          tag: "Case 03 · Education Analytics",
+          heading: "How Weekly Revision Hours Impact Final Exam Score",
+          story: "Plotting 9 students' weekly revision hours against their final test score shows a clear positive slope—plus a baseline score even with minimal revision.",
+          wExplain: "+5.9 points per study hour",
+          bExplain: "40.5 points starting baseline",
+          takeaway: "Each extra hour of focused weekly study boosts the expected exam score by almost 6 marks.",
+          inputLabel: "Weekly Study Hours (x)"
+        },
+        zh: {
+          xAxis: "每週溫習時數 (小時)",
+          yAxis: "考試分數 (滿分 100)",
+          unitX: "小時",
+          unitY: "分",
+          tag: "案例 03 · 教育與學習數據分析",
+          heading: "分析每週溫習時間對期末考成績的影響",
+          story: "將 9 位學生的每週溫習時數與考試得分畫成散點圖，可以看到明顯的正向斜率，同時截距 (b) 代表即使零溫習也能靠基礎常識拿到的基本分。",
+          wExplain: "每多溫習 1 小時 +5.9 分",
+          bExplain: "零溫習基本底分 40.5 分",
+          takeaway: "每週只要多花 1 小時專心溫習，預期考試成績就能穩定提升近 6 分。",
+          inputLabel: "輸入每週溫習時數 (x)"
+        }
+      },
+      car: {
+        xMin: 0, xMax: 12,
+        yMin: 20, yMax: 220,
+        wMin: -25, wMax: 10, wStep: 0.5,
+        bMin: 60, bMax: 240, bStep: 2,
+        defaultInput: 5, inputStep: 0.5,
+        outlier: { x: 10, y: 195 },
+        points: [
+          { x: 1, y: 185 },
+          { x: 2, y: 172 },
+          { x: 3, y: 155 },
+          { x: 4, y: 144 },
+          { x: 5, y: 128 },
+          { x: 6, y: 115 },
+          { x: 7, y: 98 },
+          { x: 8, y: 86 },
+          { x: 9, y: 72 },
+          { x: 10, y: 58 }
+        ],
+        en: {
+          xAxis: "Car Age (Years)",
+          yAxis: "Resale Value (HK$ '000)",
+          unitX: "yrs",
+          unitY: "k HK$",
+          tag: "Case 04 · Negative Slope (Depreciation)",
+          heading: "Used Car Age vs. Second-Hand Market Price",
+          story: "Not all linear regression lines go up! As a car gets older, its resale value drops. That means the learned slope weight (w) is negative.",
+          wExplain: "−HK$ 14,100 per year of age",
+          bExplain: "HK$ 199,000 new-car baseline",
+          takeaway: "A negative weight (w < 0) means an inverse relationship: as x increases, predicted ŷ decreases.",
+          inputLabel: "Used Car Age (x)"
+        },
+        zh: {
+          xAxis: "汽車車齡 (年)",
+          yAxis: "二手市值 (千港元 HK$k)",
+          unitX: "年",
+          unitY: "千港元",
+          tag: "案例 04 · 負斜率實例 (資產折舊)",
+          heading: "二手車車齡與市場轉售價值的反向關係",
+          story: "線性回歸的直線不一定向上！隨著汽車車齡增加，二手回收價會逐年下跌，因此機器學出來的斜率權重 (w) 會是一個負數。",
+          wExplain: "車齡每多 1 年跌價 −HK$ 14.1k",
+          bExplain: "新車落地基準價 HK$ 199.0k",
+          takeaway: "當權重 w 為負數 (w < 0)，代表反向關係：輸入 x 越大，預測結果 ŷ 反而越小。",
+          inputLabel: "輸入汽車車齡 (x)"
+        }
+      }
+    };
+
+    /* ==========================================================================
+       APPLICATION STATE
+       ========================================================================== */
+    let currentLang = "en";
+    let activeDatasetKey = "rent";
+    let points = [];
+    let currentW = 36.5;
+    let currentB = 5100;
+    let showResiduals = true;
+    let showSquares = false;
+
+    // Gradient Descent Simulator State
+    let gdW = 5.0;
+    const gdTargetW = 35.0;
+    let gdSteps = 0;
+    let gdHistory = [5.0];
+    let gdTimer = null;
+
+    // Real-World Case Calculator State
+    let activeCaseKey = "rent";
+
+    /* ==========================================================================
+       ORDINARY LEAST SQUARES (OLS) MATH ENGINE
+       ========================================================================== */
+    function computeOLS(pts) {
+      const n = pts.length;
+      if (n < 2) return { w: 0, b: n === 1 ? pts[0].y : 0 };
+      let sumX = 0, sumY = 0;
+      for (const p of pts) {
+        sumX += p.x;
+        sumY += p.y;
+      }
+      const meanX = sumX / n;
+      const meanY = sumY / n;
+      let num = 0, den = 0;
+      for (const p of pts) {
+        num += (p.x - meanX) * (p.y - meanY);
+        den += (p.x - meanX) * (p.x - meanX);
+      }
+      const w = den === 0 ? 0 : num / den;
+      const b = meanY - w * meanX;
+      return { w, b };
+    }
+
+    function computeMetrics(pts, w, b) {
+      const n = pts.length;
+      if (n === 0) return { mse: 0, r2: 0 };
+      let sumY = 0;
+      for (const p of pts) sumY += p.y;
+      const meanY = sumY / n;
+
+      let ssRes = 0;
+      let ssTot = 0;
+      for (const p of pts) {
+        const yHat = w * p.x + b;
+        const err = p.y - yHat;
+        ssRes += err * err;
+        ssTot += (p.y - meanY) * (p.y - meanY);
+      }
+      const mse = ssRes / n;
+      const r2 = ssTot === 0 ? 1 : Math.max(0, 1 - ssRes / ssTot);
+      return { mse, r2 };
+    }
+
+    /* ==========================================================================
+       SANDBOX INTERACTIVE SVG CHART RENDERER
+       ========================================================================== */
+    const svgEl = document.getElementById("regressionSvg");
+    const slopeSlider = document.getElementById("slopeSlider");
+    const interceptSlider = document.getElementById("interceptSlider");
+    const slopeValDisplay = document.getElementById("slopeValDisplay");
+    const interceptValDisplay = document.getElementById("interceptValDisplay");
+
+    function loadDataset(key) {
+      activeDatasetKey = key;
+      const ds = DATASETS[key];
+      points = ds.points.map(p => ({ x: p.x, y: p.y }));
+
+      slopeSlider.min = ds.wMin;
+      slopeSlider.max = ds.wMax;
+      slopeSlider.step = ds.wStep;
+
+      interceptSlider.min = ds.bMin;
+      interceptSlider.max = ds.bMax;
+      interceptSlider.step = ds.bStep;
+
+      const ols = computeOLS(points);
+      currentW = Number(ols.w.toFixed(2));
+      currentB = Number(ols.b.toFixed(0));
+
+      slopeSlider.value = currentW;
+      interceptSlider.value = currentB;
+
+      renderSandbox();
+    }
+
+    function renderSandbox() {
+      const ds = DATASETS[activeDatasetKey];
+      const meta = ds[currentLang];
+      const W = 560, H = 300;
+      const padL = 58, padR = 22, padT = 20, padB = 38;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      const xToPx = x => padL + ((x - ds.xMin) / (ds.xMax - ds.xMin)) * plotW;
+      const yToPx = y => padT + plotH - ((y - ds.yMin) / (ds.yMax - ds.yMin)) * plotH;
+
+      let svgContent = "";
+
+      // Grid lines & ticks
+      const ticks = 4;
+      for (let i = 0; i <= ticks; i++) {
+        const frac = i / ticks;
+        const gx = padL + frac * plotW;
+        const gy = padT + (1 - frac) * plotH;
+        const valX = Math.round(ds.xMin + frac * (ds.xMax - ds.xMin));
+        const valY = Math.round(ds.yMin + frac * (ds.yMax - ds.yMin));
+
+        svgContent += `<line x1="${gx}" y1="${padT}" x2="${gx}" y2="${padT + plotH}" stroke="var(--color-rule)" stroke-width="1" />`;
+        svgContent += `<line x1="${padL}" y1="${gy}" x2="${padL + plotW}" y2="${gy}" stroke="var(--color-rule)" stroke-width="1" />`;
+        svgContent += `<text x="${gx}" y="${H - 18}" text-anchor="middle" fill="var(--color-muted)" font-size="10" font-family="var(--font-mono)">${valX}</text>`;
+        svgContent += `<text x="${padL - 7}" y="${gy + 3}" text-anchor="end" fill="var(--color-muted)" font-size="10" font-family="var(--font-mono)">${valY}</text>`;
+      }
+
+      // Axis labels
+      svgContent += `<text x="${padL + plotW / 2}" y="${H - 4}" text-anchor="middle" fill="var(--color-ink-2)" font-size="11" font-family="var(--font-display)" font-weight="500">${meta.xAxis}</text>`;
+      svgContent += `<text x="14" y="${padT + plotH / 2}" text-anchor="middle" fill="var(--color-ink-2)" font-size="11" font-family="var(--font-display)" font-weight="500" transform="rotate(-90 14 ${padT + plotH / 2})">${meta.yAxis}</text>`;
+
+      // Residual squares & vertical error bars
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        const px = xToPx(p.x);
+        const py = yToPx(p.y);
+        const yHat = currentW * p.x + currentB;
+        const pyHat = yToPx(yHat);
+        const errPx = Math.abs(py - pyHat);
+
+        if (showSquares && errPx > 1) {
+          const sqX = px;
+          const sqY = Math.min(py, pyHat);
+          const clampedW = Math.min(errPx, padL + plotW - sqX);
+          if (clampedW > 0) {
+            svgContent += `<rect x="${sqX}" y="${sqY}" width="${clampedW}" height="${errPx}" fill="var(--color-accent)" fill-opacity="0.14" stroke="var(--color-accent)" stroke-opacity="0.4" stroke-width="1" />`;
+          }
+        }
+
+        if (showResiduals) {
+          svgContent += `<line x1="${px}" y1="${py}" x2="${px}" y2="${pyHat}" stroke="var(--color-warn)" stroke-width="1.5" stroke-dasharray="3,3" />`;
+        }
+      }
+
+      // Optimal OLS ghost line for reference
+      const ols = computeOLS(points);
+      const olsY1 = ols.w * ds.xMin + ols.b;
+      const olsY2 = ols.w * ds.xMax + ols.b;
+      svgContent += `<line x1="${xToPx(ds.xMin)}" y1="${yToPx(olsY1)}" x2="${xToPx(ds.xMax)}" y2="${yToPx(olsY2)}" stroke="var(--color-rule-2)" stroke-width="1.5" stroke-dasharray="5,5" />`;
+
+      // User's active regression line
+      const lineY1 = currentW * ds.xMin + currentB;
+      const lineY2 = currentW * ds.xMax + currentB;
+      svgContent += `<line x1="${xToPx(ds.xMin)}" y1="${yToPx(lineY1)}" x2="${xToPx(ds.xMax)}" y2="${yToPx(lineY2)}" stroke="var(--color-accent)" stroke-width="3" stroke-linecap="round" />`;
+
+      // Scatter points
+      for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        const px = xToPx(p.x);
+        const py = yToPx(p.y);
+        svgContent += `<circle cx="${px}" cy="${py}" r="6" fill="var(--color-paper)" stroke="var(--color-ink)" stroke-width="2.2" data-pt-index="${i}" style="cursor:pointer;" />`;
+        svgContent += `<circle cx="${px}" cy="${py}" r="2.5" fill="var(--color-accent)" data-pt-index="${i}" style="cursor:pointer;" />`;
+      }
+
+      svgEl.innerHTML = svgContent;
+
+      // Update numeric displays
+      slopeValDisplay.textContent = currentW.toFixed(1);
+      interceptValDisplay.textContent = Math.round(currentB).toLocaleString();
+
+      const signStr = currentB >= 0 ? `+ ${Math.round(currentB).toLocaleString()}` : `− ${Math.abs(Math.round(currentB)).toLocaleString()}`;
+      document.getElementById("liveEquationText").textContent = `ŷ = ${currentW.toFixed(1)}x ${signStr}`;
+
+      const { mse, r2 } = computeMetrics(points, currentW, currentB);
+      const olsMetrics = computeMetrics(points, ols.w, ols.b);
+
+      document.getElementById("liveMseText").textContent = mse > 100 ? Math.round(mse).toLocaleString() : mse.toFixed(1);
+      document.getElementById("liveR2Text").textContent = `${(r2 * 100).toFixed(1)}%`;
+      document.getElementById("pointCountLabel").textContent = currentLang === "zh" ? `共 ${points.length} 個數據點` : `${points.length} data pts`;
+
+      // Verdict message
+      const verdictEl = document.getElementById("verdictText");
+      const isNearOptimal = Math.abs(mse - olsMetrics.mse) <= Math.max(1, olsMetrics.mse * 0.04);
+      if (isNearOptimal) {
+        verdictEl.textContent = currentLang === "zh"
+          ? `最佳擬合狀態！這條直線已將誤差平方和 (MSE) 壓到最低，成功捕捉 ${(r2 * 100).toFixed(0)}% 的數據趨勢。`
+          : `Optimal Least-Squares Fit! Your line minimizes total squared error and captures ${(r2 * 100).toFixed(0)}% of the trend.`;
+      } else {
+        verdictEl.textContent = currentLang === "zh"
+          ? `目前誤差偏高 —— 試試拖動滑桿縮小虛線長度，或按「自動找出最佳直線 (OLS)」！`
+          : `Manual fit active — adjust the sliders to shrink the dashed error lines, or click "Auto-Fit Best Line (OLS)"!`;
+      }
+    }
+
+    // Click on SVG to add or remove a point
+    svgEl.addEventListener("click", (e) => {
+      const target = e.target;
+      const ptIdx = target.getAttribute("data-pt-index");
+      if (ptIdx !== null) {
+        if (points.length > 2) {
+          points.splice(Number(ptIdx), 1);
+          renderSandbox();
+        }
+        return;
+      }
+
+      const ds = DATASETS[activeDatasetKey];
+      const rect = svgEl.getBoundingClientRect();
+      const scaleX = 560 / rect.width;
+      const scaleY = 300 / rect.height;
+      const clickX = (e.clientX - rect.left) * scaleX;
+      const clickY = (e.clientY - rect.top) * scaleY;
+
+      const padL = 58, padR = 22, padT = 20, padB = 38;
+      const plotW = 560 - padL - padR;
+      const plotH = 300 - padT - padB;
+
+      if (clickX < padL || clickX > padL + plotW || clickY < padT || clickY > padT + plotH) return;
+
+      const dataX = ds.xMin + ((clickX - padL) / plotW) * (ds.xMax - ds.xMin);
+      const dataY = ds.yMin + ((padT + plotH - clickY) / plotH) * (ds.yMax - ds.yMin);
+
+      points.push({ x: Number(dataX.toFixed(1)), y: Number(dataY.toFixed(1)) });
+      renderSandbox();
+    });
+
+    slopeSlider.addEventListener("input", () => {
+      currentW = parseFloat(slopeSlider.value);
+      renderSandbox();
+    });
+
+    interceptSlider.addEventListener("input", () => {
+      currentB = parseFloat(interceptSlider.value);
+      renderSandbox();
+    });
+
+    document.getElementById("autoFitBtn").addEventListener("click", () => {
+      const ols = computeOLS(points);
+      currentW = Number(ols.w.toFixed(2));
+      currentB = Number(ols.b.toFixed(0));
+      slopeSlider.value = currentW;
+      interceptSlider.value = currentB;
+      renderSandbox();
+    });
+
+    document.getElementById("toggleResidualsBtn").addEventListener("click", (e) => {
+      showResiduals = !showResiduals;
+      e.currentTarget.classList.toggle("toggled", showResiduals);
+      updateDynamicButtonsText();
+      renderSandbox();
+    });
+
+    document.getElementById("toggleSquaresBtn").addEventListener("click", (e) => {
+      showSquares = !showSquares;
+      e.currentTarget.classList.toggle("toggled", showSquares);
+      updateDynamicButtonsText();
+      renderSandbox();
+    });
+
+    document.getElementById("addOutlierBtn").addEventListener("click", () => {
+      const ds = DATASETS[activeDatasetKey];
+      points.push({ x: ds.outlier.x, y: ds.outlier.y });
+      const ols = computeOLS(points);
+      currentW = Number(ols.w.toFixed(2));
+      currentB = Number(ols.b.toFixed(0));
+      slopeSlider.value = currentW;
+      interceptSlider.value = currentB;
+      renderSandbox();
+    });
+
+    document.getElementById("resetDataBtn").addEventListener("click", () => {
+      loadDataset(activeDatasetKey);
+    });
+
+    document.querySelectorAll("[data-dataset]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-dataset]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadDataset(btn.getAttribute("data-dataset"));
+      });
+    });
+
+    /* ==========================================================================
+       GRADIENT DESCENT PARABOLA SIMULATOR
+       ========================================================================== */
+    const gdSvg = document.getElementById("gdSvg");
+    const lrSlider = document.getElementById("lrSlider");
+    const lrValDisplay = document.getElementById("lrValDisplay");
+    const gdStepCount = document.getElementById("gdStepCount");
+    const gdLogBox = document.getElementById("gdLogBox");
+    const gdRateHint = document.getElementById("gdRateHint");
+
+    function gdLoss(w) {
+      return (w - gdTargetW) * (w - gdTargetW);
+    }
+
+    function renderGradientDescent() {
+      const W = 520, H = 250;
+      const padL = 50, padR = 25, padT = 20, padB = 36;
+      const plotW = W - padL - padR;
+      const plotH = H - padT - padB;
+
+      const wMin = 0, wMax = 70;
+      const lossMax = 1250;
+
+      const wToPx = w => padL + ((w - wMin) / (wMax - wMin)) * plotW;
+      const lossToPx = l => padT + plotH - (Math.min(l, lossMax) / lossMax) * plotH;
+
+      let svg = "";
+
+      // Axes
+      svg += `<line x1="${padL}" y1="${padT + plotH}" x2="${padL + plotW}" y2="${padT + plotH}" stroke="var(--color-rule-2)" stroke-width="1.5" />`;
+      svg += `<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="var(--color-rule-2)" stroke-width="1.5" />`;
+
+      // Axis labels
+      const xLabel = currentLang === "zh" ? "權重設定值 Weight (w) · 最佳目標 = 35" : "Slope Weight (w) · Optimal Target = 35";
+      const yLabel = currentLang === "zh" ? "預測誤差 (Loss)" : "Total Error (Loss)";
+      svg += `<text x="${padL + plotW / 2}" y="${H - 6}" text-anchor="middle" fill="var(--color-ink-2)" font-size="11" font-family="var(--font-display)" font-weight="500">${xLabel}</text>`;
+      svg += `<text x="14" y="${padT + plotH / 2}" text-anchor="middle" fill="var(--color-ink-2)" font-size="11" font-family="var(--font-display)" font-weight="500" transform="rotate(-90 14 ${padT + plotH / 2})">${yLabel}</text>`;
+
+      // Parabola path
+      let pathD = "";
+      for (let w = wMin; w <= wMax; w += 1) {
+        const px = wToPx(w);
+        const py = lossToPx(gdLoss(w));
+        pathD += (w === wMin ? "M" : "L") + `${px.toFixed(1)},${py.toFixed(1)} `;
+      }
+      svg += `<path d="${pathD}" fill="none" stroke="var(--color-ink-2)" stroke-width="2.2" />`;
+
+      // Minimum target marker at w = 35
+      const minPx = wToPx(gdTargetW);
+      const minPy = lossToPx(0);
+      svg += `<line x1="${minPx}" y1="${padT}" x2="${minPx}" y2="${minPy}" stroke="var(--color-good)" stroke-dasharray="4,4" stroke-width="1.5" />`;
+      svg += `<circle cx="${minPx}" cy="${minPy}" r="5" fill="var(--color-good)" />`;
+
+      // History trail & connecting arrows
+      for (let i = 0; i < gdHistory.length - 1; i++) {
+        const w1 = gdHistory[i];
+        const w2 = gdHistory[i + 1];
+        svg += `<line x1="${wToPx(w1)}" y1="${lossToPx(gdLoss(w1))}" x2="${wToPx(w2)}" y2="${lossToPx(gdLoss(w2))}" stroke="var(--color-accent)" stroke-width="1.8" stroke-dasharray="3,2" />`;
+        svg += `<circle cx="${wToPx(w1)}" cy="${lossToPx(gdLoss(w1))}" r="3.5" fill="var(--color-accent-soft)" stroke="var(--color-accent)" stroke-width="1.5" />`;
+      }
+
+      // Current ball position
+      const curPx = wToPx(gdW);
+      const curPy = lossToPx(gdLoss(gdW));
+      svg += `<circle cx="${curPx}" cy="${curPy}" r="7.5" fill="var(--color-accent)" stroke="var(--color-paper)" stroke-width="2" />`;
+
+      gdSvg.innerHTML = svg;
+
+      // Update readouts
+      const lr = parseFloat(lrSlider.value);
+      lrValDisplay.textContent = lr.toFixed(2);
+      gdStepCount.textContent = gdSteps;
+
+      if (lr < 0.08) {
+        gdRateHint.textContent = I18N[currentLang].gd_lr_slow;
+      } else if (lr > 0.78) {
+        gdRateHint.textContent = I18N[currentLang].gd_lr_high;
+      } else {
+        gdRateHint.textContent = I18N[currentLang].gd_lr_good;
+      }
+
+      const lossVal = gdLoss(gdW);
+      const gradVal = 2 * (gdW - gdTargetW);
+      gdLogBox.textContent = currentLang === "zh"
+        ? `第 ${gdSteps} 步：目前權重 w = ${gdW.toFixed(2)} · 誤差 Loss = ${lossVal.toFixed(1)} · 坡度斜率 Gradient = ${gradVal.toFixed(1)}`
+        : `Step ${gdSteps}: Current w = ${gdW.toFixed(2)} · Loss (MSE) = ${lossVal.toFixed(1)} · Slope Gradient = ${gradVal.toFixed(1)}`;
+    }
+
+    function takeGdStep() {
+      const lr = parseFloat(lrSlider.value);
+      const grad = 2 * (gdW - gdTargetW);
+      gdW = gdW - lr * (grad * 0.5);
+      gdW = Math.max(0.5, Math.min(69.5, gdW));
+      gdSteps += 1;
+      gdHistory.push(gdW);
+      if (gdHistory.length > 18) gdHistory.shift();
+      renderGradientDescent();
+    }
+
+    document.getElementById("gdStepBtn").addEventListener("click", takeGdStep);
+
+    document.getElementById("gdAutoBtn").addEventListener("click", (e) => {
+      if (gdTimer) {
+        clearInterval(gdTimer);
+        gdTimer = null;
+        e.currentTarget.textContent = I18N[currentLang].gd_btn_auto;
+        return;
+      }
+      e.currentTarget.textContent = I18N[currentLang].gd_btn_stop;
+      gdTimer = setInterval(() => {
+        takeGdStep();
+        if (Math.abs(gdW - gdTargetW) < 0.08 || gdSteps >= 30) {
+          clearInterval(gdTimer);
+          gdTimer = null;
+          document.getElementById("gdAutoBtn").textContent = I18N[currentLang].gd_btn_auto;
+        }
+      }, 280);
+    });
+
+    document.getElementById("gdResetBtn").addEventListener("click", () => {
+      if (gdTimer) {
+        clearInterval(gdTimer);
+        gdTimer = null;
+        document.getElementById("gdAutoBtn").textContent = I18N[currentLang].gd_btn_auto;
+      }
+      gdW = 5.0;
+      gdSteps = 0;
+      gdHistory = [5.0];
+      renderGradientDescent();
+    });
+
+    lrSlider.addEventListener("input", renderGradientDescent);
+
+    /* ==========================================================================
+       SECTION 4: REAL-WORLD EXAMPLES & LIVE PREDICTOR CALCULATOR
+       ========================================================================== */
+    const caseInputSlider = document.getElementById("caseInputSlider");
+
+    function loadCaseWalkthrough(key) {
+      activeCaseKey = key;
+      const ds = DATASETS[key];
+      caseInputSlider.min = ds.xMin;
+      caseInputSlider.max = ds.xMax;
+      caseInputSlider.step = ds.inputStep;
+      caseInputSlider.value = ds.defaultInput;
+      renderCaseWalkthrough();
+    }
+
+    function renderCaseWalkthrough() {
+      const ds = DATASETS[activeCaseKey];
+      const meta = ds[currentLang];
+      const ols = computeOLS(ds.points);
+      const w = Number(ols.w.toFixed(1));
+      const b = Math.round(ols.b);
+
+      document.getElementById("caseTag").textContent = meta.tag;
+      document.getElementById("caseHeading").textContent = meta.heading;
+      document.getElementById("caseStory").textContent = meta.story;
+      document.getElementById("caseWeightExplain").textContent = meta.wExplain;
+      document.getElementById("caseBiasExplain").textContent = meta.bExplain;
+      document.getElementById("caseTakeaway").textContent = meta.takeaway;
+      document.getElementById("calcInputLabel").textContent = meta.inputLabel;
+
+      const xVal = parseFloat(caseInputSlider.value);
+      document.getElementById("calcInputVal").textContent = `${xVal} ${meta.unitX}`;
+
+      const yPred = w * xVal + b;
+      const formattedPred = activeCaseKey === "rent"
+        ? `HK$ ${Math.round(yPred).toLocaleString()}`
+        : `${yPred.toFixed(1)} ${meta.unitY}`;
+
+      document.getElementById("calcOutputBig").textContent = formattedPred;
+      const signB = b >= 0 ? `+ ${b.toLocaleString()}` : `− ${Math.abs(b).toLocaleString()}`;
+      document.getElementById("calcStepMath").textContent = `ŷ = (${w} × ${xVal}) ${signB} = ${Math.round(yPred).toLocaleString()}`;
+    }
+
+    caseInputSlider.addEventListener("input", renderCaseWalkthrough);
+
+    document.querySelectorAll("[data-case]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("[data-case]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        loadCaseWalkthrough(btn.getAttribute("data-case"));
+      });
+    });
+
+    /* ==========================================================================
+       SECTION 5: MULTIPLE LINEAR REGRESSION SIMULATOR
+       ========================================================================== */
+    const mAreaSlider = document.getElementById("mAreaSlider");
+    const mMtrSlider = document.getElementById("mMtrSlider");
+    const mAgeSlider = document.getElementById("mAgeSlider");
+
+    function renderMultiRegression() {
+      const area = parseInt(mAreaSlider.value, 10);
+      const mtr = parseInt(mMtrSlider.value, 10);
+      const age = parseInt(mAgeSlider.value, 10);
+
+      const base = 9000;
+      const areaEffect = 38 * area;
+      const mtrEffect = -320 * mtr;
+      const ageEffect = -140 * age;
+      const total = Math.max(4500, base + areaEffect + mtrEffect + ageEffect);
+
+      document.getElementById("mAreaVal").textContent = currentLang === "zh" ? `${area} 平方呎` : `${area} sq.ft`;
+      document.getElementById("mMtrVal").textContent = currentLang === "zh" ? `${mtr} 分鐘` : `${mtr} mins`;
+      document.getElementById("mAgeVal").textContent = currentLang === "zh" ? `${age} 年` : `${age} yrs`;
+
+      document.getElementById("mBaseCode").textContent = `+ HK$ ${base.toLocaleString()}`;
+      document.getElementById("mAreaCode").textContent = `+ HK$ ${areaEffect.toLocaleString()}`;
+      document.getElementById("mMtrCode").textContent = `− HK$ ${Math.abs(mtrEffect).toLocaleString()}`;
+      document.getElementById("mAgeCode").textContent = `− HK$ ${Math.abs(ageEffect).toLocaleString()}`;
+      document.getElementById("mTotalOut").textContent = currentLang === "zh"
+        ? `HK$ ${total.toLocaleString()} / 月`
+        : `HK$ ${total.toLocaleString()} / month`;
+    }
+
+    [mAreaSlider, mMtrSlider, mAgeSlider].forEach(s => s.addEventListener("input", renderMultiRegression));
+
+    /* ==========================================================================
+       SECTION 6: SELF-CHECK QUIZ LOGIC
+       ========================================================================== */
+    document.querySelectorAll(".quiz-card").forEach(card => {
+      const opts = card.querySelectorAll(".quiz-opt");
+      const feedback = card.querySelector(".quiz-feedback");
+      opts.forEach(opt => {
+        opt.addEventListener("click", () => {
+          opts.forEach(o => o.classList.remove("correct", "wrong"));
+          const isCorrect = opt.getAttribute("data-correct") === "true";
+          opt.classList.add(isCorrect ? "correct" : "wrong");
+          feedback.textContent = isCorrect
+            ? I18N[currentLang].quiz_correct_msg
+            : I18N[currentLang].quiz_wrong_msg;
+        });
+      });
+    });
+
+    /* ==========================================================================
+       1-CLICK LANGUAGE SWITCHER (ENGLISH <-> 繁體中文)
+       ========================================================================== */
+    function updateDynamicButtonsText() {
+      const dict = I18N[currentLang];
+      document.getElementById("toggleResidualsBtn").textContent = showResiduals
+        ? dict.btn_residuals_on
+        : dict.btn_residuals_off;
+      document.getElementById("toggleSquaresBtn").textContent = showSquares
+        ? dict.btn_squares_on
+        : dict.btn_squares_off;
+      document.getElementById("gdAutoBtn").textContent = gdTimer
+        ? dict.gd_btn_stop
+        : dict.gd_btn_auto;
+    }
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang === "zh" ? "zh-HK" : "en";
+      document.getElementById("langBtnLabel").textContent = lang === "zh" ? "English" : "繁體中文";
+
+      const dict = I18N[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+
+      updateDynamicButtonsText();
+      renderSandbox();
+      renderGradientDescent();
+      renderCaseWalkthrough();
+      renderMultiRegression();
+    }
+
+    document.getElementById("langToggleBtn").addEventListener("click", () => {
+      applyLanguage(currentLang === "en" ? "zh" : "en");
+    });
+
+    // Initialize all interactive modules on load
+    window.addEventListener("DOMContentLoaded", () => {
+      loadDataset("rent");
+      renderGradientDescent();
+      loadCaseWalkthrough("rent");
+      renderMultiRegression();
+    });
+  </script>
+</body>
+</html>
