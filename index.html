@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexus Hub — Knowledge & Working Tools</title>
+
+  <!-- Typography: Outfit for display, Onest for body, JetBrains Mono for system values -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Onest:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Hallmark · theme: ultraviolet-light · posture: committed · genre: modern-minimal */
+    :root {
+      --color-paper: oklch(96.4% 0.014 286);        /* #f5f4fc - Light tinted lavender-blue paper */
+      --color-paper-subtle: oklch(94.6% 0.018 286); /* #eeecfa - Secondary surface */
+      --color-surface: oklch(99.2% 0.004 286);      /* #ffffff - Card background */
+      --color-surface-hover: oklch(97.8% 0.012 286);
+      
+      --color-ink: oklch(18% 0.035 285);            /* #1b172a - Deep violet-slate ink */
+      --color-ink-2: oklch(32% 0.032 285);          /* #36324a - Intermediate readability */
+      --color-muted: oklch(52% 0.024 285);          /* #66637b - Secondary descriptions & meta */
+      
+      --color-rule: oklch(89% 0.02 286);            /* Crisp hairlines */
+      --color-rule-subtle: oklch(92.5% 0.012 286);
+      --color-accent: oklch(47% 0.23 285);          /* Electric violet signal */
+      --color-accent-hover: oklch(40% 0.24 285);
+      --color-accent-wash: oklch(94% 0.04 286);
+      --color-accent-ink: oklch(98.5% 0.005 286);
+      --color-tag-ai-bg: oklch(93.5% 0.045 295);
+      --color-tag-ai-ink: oklch(35% 0.18 290);
+      
+      --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+      --font-body: "Onest", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-pill: 9999px;
+      --shadow-sm: 0 1px 3px oklch(18% 0.035 285 / 0.04), 0 1px 2px oklch(18% 0.035 285 / 0.03);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: clip;
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      line-height: 1.45;
+    }
+
+    ::selection {
+      background: var(--color-accent-wash);
+      color: var(--color-ink);
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Top Masthead & Status */
+    .site-header {
+      border-bottom: 1px solid var(--color-rule);
+      background: var(--color-paper);
+      padding: 1.25rem 0 1rem 0;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--color-ink);
+      color: var(--color-accent-ink);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: -0.04em;
+      flex-shrink: 0;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--color-ink);
+      line-height: 1.15;
+    }
+
+    .brand-subtitle {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-pill);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      display: inline-block;
+    }
+
+    /* Interactive Command Bar: Search, Category Filters, Density Switch */
+    .controls-panel {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: color-mix(in oklch, var(--color-paper) 92%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--color-rule);
+      padding: 0.85rem 0;
+    }
+
+    .controls-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 0.35rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 2px 0;
+    }
+
+    .filter-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      appearance: none;
+      border: 1px solid var(--color-rule);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      padding: 0.38rem 0.75rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 500;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 120ms ease;
+    }
+
+    .tab-btn:hover {
+      background: var(--color-paper-subtle);
+      color: var(--color-ink);
+    }
+
+    .tab-btn.active {
+      background: var(--color-ink);
+      color: var(--color-accent-ink);
+      border-color: var(--color-ink);
+    }
+
+    .tab-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      opacity: 0.85;
+    }
+
+    .search-and-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-grow: 1;
+      max-width: 420px;
+    }
+
+    .search-box {
+      position: relative;
+      flex-grow: 1;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 36px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-pill);
+      padding: 0 2rem 0 2.2rem;
+      font-family: var(--font-body);
+      font-size: 0.825rem;
+      color: var(--color-ink);
+      transition: border-color 140ms ease, box-shadow 140ms ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px var(--color-accent-wash);
+      outline: none;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--color-muted);
+      font-size: 0.85rem;
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 0.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      font-size: 0.8rem;
+      color: var(--color-muted);
+      cursor: pointer;
+      display: none;
+      padding: 0.2rem;
+      line-height: 1;
+    }
+
+    .density-toggle {
+      height: 36px;
+      padding: 0 0.65rem;
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+      color: var(--color-muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 120ms ease;
+    }
+
+    .density-toggle:hover {
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+
+    /* Main Directory Section */
+    .main-content {
+      padding: 1.5rem 0 3.5rem 0;
+    }
+
+    .category-group {
+      margin-bottom: 2rem;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--color-ink);
+      padding-bottom: 0.45rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .category-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+
+    .category-counter {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Resource Cards & High-Density Rows */
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .resource-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-rule);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.9rem;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 130ms ease, background-color 130ms ease, transform 130ms ease;
+    }
+
+    .resource-card:hover {
+      border-color: var(--color-accent);
+      background-color: var(--color-surface-hover);
+      transform: translateY(-1px);
+    }
+
+    .resource-card.hidden {
+      display: none !important;
+    }
+
+    .item-index {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      min-width: 20px;
+    }
+
+    .item-body {
+      min-width: 0;
+    }
+
+    .item-topline {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .item-title-link {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      text-decoration: none;
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      transition: color 120ms ease;
+    }
+
+    .item-title-link:hover {
+      color: var(--color-accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .item-tag {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      padding: 0.12rem 0.45rem;
+      border-radius: var(--radius-pill);
+      background: var(--color-paper-subtle);
+      color: var(--color-ink-2);
+      border: 1px solid var(--color-rule-subtle);
+    }
+
+    .item-tag.tag-ai {
+      background: var(--color-tag-ai-bg);
+      color: var(--color-tag-ai-ink);
+      border-color: transparent;
+      font-weight: 600;
+    }
+
+    .item-desc {
+      font-size: 0.81rem;
+      color: var(--color-muted);
+      line-height: 1.4;
+      white-space: normal;
+    }
+
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-shrink: 0;
+    }
+
+    .action-btn {
+      appearance: none;
+      height: 31px;
+      padding: 0 0.65rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.3rem;
+      cursor: pointer;
+      border: 1px solid var(--color-rule);
+      background: var(--color-surface);
+      color: var(--color-ink-2);
+      transition: all 120ms ease;
+    }
+
+    .action-btn:hover {
+      background: var(--color-paper-subtle);
+      color: var(--color-ink);
+      border-color: var(--color-ink-2);
+    }
+
+    .action-btn.btn-primary {
+      background: var(--color-ink);
+      color: var(--color-accent-ink);
+      border-color: var(--color-ink);
+    }
+
+    .action-btn.btn-primary:hover {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    /* Compact View Mode (Applies on toggle or ultra-dense view) */
+    body.density-compact .resource-card {
+      padding: 0.45rem 0.75rem;
+      border-radius: var(--radius-sm);
+      gap: 0.6rem;
+    }
+
+    body.density-compact .item-desc {
+      display: none; /* In compact density mode, hide long description to maximize screen density */
+    }
+
+    body.density-compact .item-topline {
+      margin-bottom: 0;
+    }
+
+    body.density-compact .action-btn {
+      height: 27px;
+      padding: 0 0.5rem;
+      font-size: 0.7rem;
+    }
+
+    /* Zero Results State */
+    .empty-state {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      background: var(--color-surface);
+      border: 1px dashed var(--color-rule);
+      border-radius: var(--radius-md);
+      display: none;
+      margin: 1.5rem 0;
+    }
+
+    .empty-state.visible {
+      display: block;
+    }
+
+    .empty-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .empty-msg {
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    /* Transient Feedback Banner */
+    .toast-notice {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--color-ink);
+      color: var(--color-accent-ink);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      box-shadow: 0 8px 24px -4px oklch(18% 0.035 285 / 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .toast-notice.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Simple Clean Footer */
+    .site-footer {
+      border-top: 1px solid var(--color-rule);
+      padding: 1.5rem 0;
+      background: var(--color-paper);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--color-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    /* ======================================================== */
+    /* MOBILE ARCHITECTURE: ULTRA HIGH DENSITY & COMPACT SPACING */
+    /* Ensures maximum items fit comfortably within mobile view */
+    /* ======================================================== */
+    @media (max-width: 640px) {
+      .site-header {
+        padding: 0.75rem 0 0.5rem 0;
+      }
+
+      .brand-title {
+        font-size: 1.05rem;
+      }
+
+      .brand-logo {
+        width: 26px;
+        height: 26px;
+        font-size: 0.85rem;
+      }
+
+      .brand-subtitle {
+        display: none; /* Preserve vertical space on phones */
+      }
+
+      .header-status {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.65rem;
+      }
+
+      .controls-panel {
+        padding: 0.5rem 0;
+      }
+
+      .controls-grid {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.45rem;
+      }
+
+      .search-and-actions {
+        max-width: 100%;
+        gap: 0.35rem;
+      }
+
+      .search-input {
+        height: 32px;
+        font-size: 0.78rem;
+        padding-left: 2rem;
+      }
+
+      .density-toggle {
+        height: 32px;
+        padding: 0 0.5rem;
+        font-size: 0.68rem;
+      }
+
+      .tab-btn {
+        padding: 0.25rem 0.55rem;
+        font-size: 0.72rem;
+      }
+
+      .main-content {
+        padding: 0.85rem 0 2rem 0;
+      }
+
+      .category-group {
+        margin-bottom: 1.25rem;
+      }
+
+      .category-header {
+        margin-bottom: 0.4rem;
+        padding-bottom: 0.3rem;
+      }
+
+      .category-title {
+        font-size: 0.88rem;
+      }
+
+      .category-counter {
+        font-size: 0.65rem;
+      }
+
+      .resource-list {
+        gap: 0.35rem;
+      }
+
+      /* Compact card anatomy for mobile */
+      .resource-card {
+        padding: 0.5rem 0.65rem;
+        gap: 0.5rem;
+        border-radius: var(--radius-sm);
+      }
+
+      .item-index {
+        display: none; /* Hide numerical column to dedicate full width to text & actions */
+      }
+
+      .item-title-link {
+        font-size: 0.85rem; /* Compact 13.5px */
+        line-height: 1.2;
+      }
+
+      .item-tag {
+        font-size: 0.6rem;
+        padding: 0.08rem 0.35rem;
+      }
+
+      .item-desc {
+        font-size: 0.72rem; /* Compact 11.5px */
+        line-height: 1.35;
+        margin-top: 0.15rem;
+      }
+
+      .item-actions {
+        gap: 0.25rem;
+      }
+
+      .action-btn {
+        height: 27px;
+        padding: 0 0.45rem;
+        font-size: 0.68rem;
+      }
+
+      .site-footer {
+        padding: 1rem 0;
+      }
+
+      .footer-inner {
+        font-size: 0.65rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead Header -->
+  <header class="site-header">
+    <div class="wrapper">
+      <div class="header-row">
+        <div class="brand-wrap">
+          <div class="brand-logo" aria-hidden="true">N</div>
+          <div>
+            <h1 class="brand-title">Nexus Hub</h1>
+            <p class="brand-subtitle">Curated Tools, Models &amp; Interactive Webpages</p>
+          </div>
+        </div>
+
+        <div class="header-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="activeCountDisplay">10 Resources Active</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sticky Quick-Filter Command Bar -->
+  <nav class="controls-panel" aria-label="Directory Navigation">
+    <div class="wrapper">
+      <div class="controls-grid">
+        
+        <!-- Category Filter Pills -->
+        <div class="filter-tabs" role="tablist">
+          <button class="tab-btn active" data-filter="ALL" role="tab" aria-selected="true">
+            All <span class="tab-badge">(10)</span>
+          </button>
+          <button class="tab-btn" data-filter="Tools and Webpages" role="tab" aria-selected="false">
+            Tools &amp; Webpages <span class="tab-badge">(6)</span>
+          </button>
+          <button class="tab-btn" data-filter="Tools and Webpages with AI features" role="tab" aria-selected="false">
+            AI Features <span class="tab-badge">(4)</span>
+          </button>
+        </div>
+
+        <!-- Real-Time Search & Density Switch -->
+        <div class="search-and-actions">
+          <div class="search-box">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <input type="text" id="liveSearchInput" class="search-input" placeholder="Search by name, tag, or topic..." aria-label="Search resources">
+            <button id="clearSearchBtn" class="search-clear-btn" title="Clear query" aria-label="Clear query">✕</button>
+          </div>
+          <button id="densityToggleBtn" class="density-toggle" title="Toggle compact line density">
+            <span id="densityLabel">Dense</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Resource Directory Container -->
+  <main class="main-content">
+    <div class="wrapper">
+      
+      <!-- CATEGORY 1: Tools and Webpages -->
+      <section class="category-group" data-group-name="Tools and Webpages">
+        <div class="category-header">
+          <h2 class="category-title">Tools and Webpages</h2>
+          <span class="category-counter group-badge">6 Resources</span>
+        </div>
+
+        <div class="resource-list">
+          <!-- Item 1 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="ielts academic reading practice assessment mock test questions comprehension">
+            <span class="item-index" aria-hidden="true">01</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/GCWujj9Rb7xs" target="_blank" rel="noopener noreferrer" class="item-title-link">Ielts Academic Reading Practice</a>
+                <span class="item-tag">Assessment</span>
+              </div>
+              <p class="item-desc">Timed reading comprehension simulator with IELTS-style question types, inline passage highlighter, and score bands.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/GCWujj9Rb7xs" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/GCWujj9Rb7xs" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 2 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="if confidational privacy secure documents redaction security notes confidential">
+            <span class="item-index" aria-hidden="true">02</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/fUSGEDFHVdZ1" target="_blank" rel="noopener noreferrer" class="item-title-link">If Confidational</a>
+                <span class="item-tag">Confidentiality</span>
+              </div>
+              <p class="item-desc">Confidential document and private workspace tool with local safety handling and structured sensitive record processing.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/fUSGEDFHVdZ1" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/fUSGEDFHVdZ1" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 3 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="field guide to machine learning ml ai algorithms models math foundations handbook">
+            <span class="item-index" aria-hidden="true">03</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/bRaNUu0bAzZl" target="_blank" rel="noopener noreferrer" class="item-title-link">Field Guide To Machine Learning</a>
+                <span class="item-tag">Data Science</span>
+              </div>
+              <p class="item-desc">Visual pedagogical handbook breaking down core machine learning concepts, optimization, and neural foundations.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/bRaNUu0bAzZl" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/bRaNUu0bAzZl" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 4 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="linear regression interactive guide statistics data science machine learning math gradient slope">
+            <span class="item-index" aria-hidden="true">04</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/iOXJSVkQ6kYp" target="_blank" rel="noopener noreferrer" class="item-title-link">Linear Regression Interactive Guide</a>
+                <span class="item-tag">Interactive Math</span>
+              </div>
+              <p class="item-desc">Step-by-step mathematical guide and visual sandbox illustrating least-squares fitting, cost gradients, and model evaluation.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/iOXJSVkQ6kYp" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/iOXJSVkQ6kYp" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 5 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="hong kong living retail index consumer groceries shopping hk market economics">
+            <span class="item-index" aria-hidden="true">05</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/FCGEgiWACbaw" target="_blank" rel="noopener noreferrer" class="item-title-link">Hong Kong Living Retail Index</a>
+                <span class="item-tag">Hong Kong</span>
+              </div>
+              <p class="item-desc">Curated directory and retail lifestyle tracker mapping consumer staples, chain dynamics, and everyday indices in HK.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/FCGEgiWACbaw" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/FCGEgiWACbaw" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 6 -->
+          <article class="resource-card" data-category="Tools and Webpages" data-search-text="mand t cha chaan teng app dining restaurant hong kong tea cafe food menu guide">
+            <span class="item-index" aria-hidden="true">06</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/LX8gjyHpPXXh" target="_blank" rel="noopener noreferrer" class="item-title-link">Mand T Cha Chaan Teng App</a>
+                <span class="item-tag">Lifestyle</span>
+              </div>
+              <p class="item-desc">Hong Kong dining navigator and tea restaurant menu guide optimized for rapid dish discovery and set meal ordering.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/LX8gjyHpPXXh" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/LX8gjyHpPXXh" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- CATEGORY 2: Tools and Webpages with AI features -->
+      <section class="category-group" data-group-name="Tools and Webpages with AI features">
+        <div class="category-header">
+          <h2 class="category-title">Tools and Webpages with AI features</h2>
+          <span class="category-counter group-badge">4 Resources</span>
+        </div>
+
+        <div class="resource-list">
+          <!-- Item 7 -->
+          <article class="resource-card" data-category="Tools and Webpages with AI features" data-search-text="proofreader ai language grammar correction writing assistant translation editor">
+            <span class="item-index" aria-hidden="true">07</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/n47Mo1Jhjd3w" target="_blank" rel="noopener noreferrer" class="item-title-link">Proofreader</a>
+                <span class="item-tag tag-ai">AI Language</span>
+              </div>
+              <p class="item-desc">Intelligent bilingual editor delivering natural cadence, grammar correction, and dynamic translation according to equivalence principles.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/n47Mo1Jhjd3w" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/n47Mo1Jhjd3w" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 8 -->
+          <article class="resource-card" data-category="Tools and Webpages with AI features" data-search-text="proofreader own api direct custom endpoint integration language writing">
+            <span class="item-index" aria-hidden="true">08</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <span class="item-title-link" style="cursor: default;">Proofreader (Own API)</span>
+                <span class="item-tag tag-ai">AI Language</span>
+                <span class="item-tag">Pending Link</span>
+              </div>
+              <p class="item-desc">Direct custom API endpoint integration for self-hosted bilingual proofreading and linguistic editing without third-party redirects.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn" style="opacity: 0.6; cursor: not-allowed;" title="No redirect link available yet" disabled>Pending</button>
+            </div>
+          </article>
+
+          <!-- Item 9 -->
+          <article class="resource-card" data-category="Tools and Webpages with AI features" data-search-text="ielts academic writing examiner ai essay grader evaluation assessment task 1 task 2">
+            <span class="item-index" aria-hidden="true">09</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <a href="https://share.gemini.google/xhVco5mSAhDZ" target="_blank" rel="noopener noreferrer" class="item-title-link">Ielts Academic Writing Examiner</a>
+                <span class="item-tag tag-ai">AI Evaluation</span>
+              </div>
+              <p class="item-desc">Automated IELTS Task 1 and Task 2 writing evaluator providing criterion-by-criterion rubrics, coherence scoring, and lexique polish.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn copy-action-btn" data-url="https://share.gemini.google/xhVco5mSAhDZ" title="Copy direct link">Copy</button>
+              <a href="https://share.gemini.google/xhVco5mSAhDZ" target="_blank" rel="noopener noreferrer" class="action-btn btn-primary">Open ↗</a>
+            </div>
+          </article>
+
+          <!-- Item 10 -->
+          <article class="resource-card" data-category="Tools and Webpages with AI features" data-search-text="ielts academic writing examiner own api custom endpoint rubrics evaluation assessment">
+            <span class="item-index" aria-hidden="true">10</span>
+            <div class="item-body">
+              <div class="item-topline">
+                <span class="item-title-link" style="cursor: default;">Ielts Academic Writing Examiner (Own API)</span>
+                <span class="item-tag tag-ai">AI Evaluation</span>
+                <span class="item-tag">Pending Link</span>
+              </div>
+              <p class="item-desc">Dedicated private API service pipeline evaluating IELTS task essays against band scoring criteria without third-party redirects.</p>
+            </div>
+            <div class="item-actions">
+              <button class="action-btn" style="opacity: 0.6; cursor: not-allowed;" title="No redirect link available yet" disabled>Pending</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Empty State Indicator -->
+      <div id="noResultsAlert" class="empty-state">
+        <h3 class="empty-title">No resources match your search</h3>
+        <p class="empty-msg">Try adjusting your keywords or clearing the category filter.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div id="toastNotification" class="toast-notice" role="status" aria-live="polite">
+    <span>✓ Link copied to clipboard</span>
+  </div>
+
+  <!-- Page Footer -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <div class="footer-inner">
+        <div>NEXUS HUB // ULTRAVIOLET LIGHT SYSTEM</div>
+        <div>OPTIMIZED FOR MOBILE DENSITY</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const searchInput = document.getElementById('liveSearchInput');
+      const clearSearchBtn = document.getElementById('clearSearchBtn');
+      const filterTabs = document.querySelectorAll('.tab-btn');
+      const cards = document.querySelectorAll('.resource-card');
+      const groups = document.querySelectorAll('.category-group');
+      const noResultsAlert = document.getElementById('noResultsAlert');
+      const activeCountDisplay = document.getElementById('activeCountDisplay');
+      const densityToggleBtn = document.getElementById('densityToggleBtn');
+      const densityLabel = document.getElementById('densityLabel');
+      const toast = document.getElementById('toastNotification');
+
+      let activeCategory = 'ALL';
+      let activeQuery = '';
+      let toastTimer = null;
+
+      // Toast feedback helper
+      function showToast(message) {
+        if (toastTimer) clearTimeout(toastTimer);
+        toast.querySelector('span').textContent = message;
+        toast.classList.add('show');
+        toastTimer = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 1700);
+      }
+
+      // Safe clipboard copy
+      function copyUrl(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          showToast('✓ Link copied to clipboard');
+        } catch (err) {
+          showToast('Failed to copy link');
+        }
+        document.body.removeChild(textarea);
+      }
+
+      // Wire copy buttons
+      document.querySelectorAll('.copy-action-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const url = btn.getAttribute('data-url');
+          copyUrl(url);
+        });
+      });
+
+      // Filter and Search Engine
+      function runFilter() {
+        const q = activeQuery.trim().toLowerCase();
+        let totalVisible = 0;
+
+        groups.forEach(group => {
+          const groupName = group.getAttribute('data-group-name');
+          const groupCards = group.querySelectorAll('.resource-card');
+          let groupVisibleCount = 0;
+
+          const categoryPass = (activeCategory === 'ALL' || activeCategory === groupName);
+
+          groupCards.forEach(card => {
+            if (!categoryPass) {
+              card.classList.add('hidden');
+              return;
+            }
+
+            const title = card.querySelector('.item-title-link').textContent.toLowerCase();
+            const desc = card.querySelector('.item-desc').textContent.toLowerCase();
+            const tag = card.querySelector('.item-tag').textContent.toLowerCase();
+            const keywords = (card.getAttribute('data-search-text') || '').toLowerCase();
+
+            const match = !q || title.includes(q) || desc.includes(q) || tag.includes(q) || keywords.includes(q);
+
+            if (match) {
+              card.classList.remove('hidden');
+              groupVisibleCount++;
+              totalVisible++;
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+
+          // Toggle group header & count
+          const groupBadge = group.querySelector('.group-badge');
+          if (groupVisibleCount === 0 || !categoryPass) {
+            group.style.display = 'none';
+          } else {
+            group.style.display = '';
+            if (groupBadge) {
+              groupBadge.textContent = groupVisibleCount + (groupVisibleCount === 1 ? ' Resource' : ' Resources');
+            }
+          }
+        });
+
+        // Update overall active counter
+        activeCountDisplay.textContent = totalVisible + (totalVisible === 1 ? ' Resource Active' : ' Resources Active');
+
+        // Toggle zero-results view
+        if (totalVisible === 0) {
+          noResultsAlert.classList.add('visible');
+        } else {
+          noResultsAlert.classList.remove('visible');
+        }
+      }
+
+      // Tab switcher
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          activeCategory = tab.getAttribute('data-filter');
+          runFilter();
+        });
+      });
+
+      // Live search input
+      searchInput.addEventListener('input', (e) => {
+        activeQuery = e.target.value;
+        clearSearchBtn.style.display = activeQuery.length > 0 ? 'block' : 'none';
+        runFilter();
+      });
+
+      // Clear search
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        activeQuery = '';
+        clearSearchBtn.style.display = 'none';
+        searchInput.focus();
+        runFilter();
+      });
+
+      // Density mode toggle
+      densityToggleBtn.addEventListener('click', () => {
+        const isCompact = document.body.classList.toggle('density-compact');
+        densityLabel.textContent = isCompact ? 'Expanded' : 'Dense';
+      });
+
+      // Run initial pass
+      runFilter();
+    })();
+  </script>
+</body>
+</html>
