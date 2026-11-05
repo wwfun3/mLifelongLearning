@@ -884,12 +884,295 @@ button {
 }
 
 @media (max-width: 768px) {
+  /* High-density mobile UI: smaller base size & tighter paddings to show more info per screen */
+  html, body {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .shell-container {
+    padding-inline: 0.75rem;
+  }
+
+  .site-header {
+    top: 0;
+  }
+
+  .header-inner {
+    padding-block: 0.35rem;
+  }
+
+  .brand-stamp {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95rem;
+  }
+
+  .brand-cn {
+    font-size: 1.05rem;
+  }
+
+  .brand-en {
+    font-size: 0.68rem;
+  }
+
+  .lang-toggle-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .mobile-menu-btn {
+    width: 34px;
+    height: 34px;
+    padding: 6px;
+  }
+
   .nav-desktop { display: none; }
   .mobile-menu-btn { display: flex; }
-  .specialties-grid, .timeline-scrubber, .crafts-nav-row, .archive-grid, .postcards-grid, .session-panel-content.active {
-    grid-template-columns: 1fr;
+
+  /* Compact Hero */
+  .hero-stage {
+    padding-block: 1rem 1.5rem;
+    gap: 1rem;
   }
-  .footer-inner { grid-template-columns: 1fr; }
+
+  .hero-tag {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .hero-heading {
+    font-size: 1.95rem;
+    line-height: 1.15;
+    margin-block: 0.4rem;
+  }
+
+  .hero-lede {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .hero-stats-bar {
+    padding-top: 0.6rem;
+    gap: 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+
+  .stat-desc {
+    font-size: 0.68rem;
+  }
+
+  .stage-card {
+    padding: 0.85rem;
+    box-shadow: 4px 4px 0 var(--color-jade-dark);
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .section-head {
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+  }
+
+  /* Compact Grids for Mobile: show 2 columns instead of 1 so information is dense & visible */
+  .specialties-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.55rem;
+    padding-block: 0.75rem 1.25rem;
+  }
+
+  .food-card {
+    padding: 0.7rem;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .card-food-title {
+    font-size: 0.95rem;
+  }
+
+  .card-food-price {
+    font-size: 1.05rem;
+  }
+
+  /* Session Switcher compact */
+  .switcher-shell {
+    padding: 0.85rem;
+    margin-block: 1rem;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .switcher-controls {
+    gap: 0.35rem;
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.45rem;
+  }
+
+  .tab-btn {
+    padding: 0.4rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .session-panel-content.active {
+    grid-template-columns: 1fr;
+    gap: 0.45rem;
+  }
+
+  /* Menu Page compact */
+  .menu-toolbar {
+    padding-block: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .menu-search-input {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.82rem;
+  }
+
+  .category-sticky-bar {
+    top: 50px;
+    padding-block: 0.3rem;
+  }
+
+  .cat-tab {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .menu-main-wrap {
+    padding-block: 0.75rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .dishes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .dish-card {
+    padding: 0.65rem;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .bill-slip {
+    padding: 0.85rem;
+    box-shadow: 3px 3px 0 var(--color-ink);
+    line-height: 22px;
+  }
+
+  /* Story Page compact */
+  .timeline-scrubber {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .era-button {
+    padding: 0.45rem 0.4rem;
+  }
+
+  .era-button strong {
+    font-size: 0.75rem !important;
+  }
+
+  .era-button span {
+    font-size: 1.1rem !important;
+  }
+
+  .era-stage-card {
+    padding: 0.85rem;
+    gap: 0.85rem;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .crafts-interactive-wrap {
+    padding: 0.85rem;
+    margin-block: 1rem;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .crafts-nav-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .craft-nav-btn {
+    padding: 0.4rem 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  /* Gallery compact */
+  .archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.55rem;
+    padding-block: 0.5rem;
+  }
+
+  .card-visual-frame {
+    height: 120px;
+    padding: 0.5rem;
+  }
+
+  .archive-card {
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .postcards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding-block: 0.5rem;
+  }
+
+  .memory-postcard {
+    padding: 0.75rem;
+    box-shadow: 2px 2px 0 var(--color-ink);
+    line-height: 22px;
+    font-size: 0.8rem;
+  }
+
+  /* Visit compact */
+  .estimator-card {
+    padding: 0.85rem;
+    box-shadow: 3px 3px 0 var(--color-ink);
+  }
+
+  .live-slip-pod {
+    padding: 0.75rem;
+  }
+
+  #calcTicketNum {
+    font-size: 2.2rem !important;
+  }
+
+  .transit-pill-box {
+    padding: 0.65rem 0.75rem;
+    gap: 0.65rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 2px 2px 0 var(--color-ink);
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .site-footer {
+    padding: 2rem 0.75rem 1.5rem;
+    margin-top: 1.5rem;
+  }
 }
   </style>
 </head>
