@@ -739,15 +739,53 @@ input:checked + .switch-track::before {
 }
 
 @media (max-width: 768px) {
-    .app-wrapper { padding: 0.75rem 0.65rem 2.5rem; }
-    .masthead { gap: 0.75rem; margin-bottom: 1rem; }
-    .control-hub-grid { grid-template-columns: 1fr; }
+    .app-wrapper { padding: 0.45rem 0.4rem 2rem; }
+    .masthead { gap: 0.45rem; margin-bottom: 0.65rem; padding-bottom: 0.65rem; }
+    .masthead-kicker { font-size: 0.62rem; margin-bottom: 0.15rem; }
+    .masthead-title { font-size: 1.15rem; line-height: 1.2; }
+    .masthead-desc { font-size: 0.72rem; line-height: 1.35; margin-top: 0.25rem; }
+    .masthead-actions { gap: 0.3rem; width: 100%; justify-content: flex-start; }
+    .masthead-actions .btn { padding: 0.32rem 0.55rem; font-size: 0.72rem; }
+    .tab-strip { gap: 0.15rem; margin-bottom: 0.65rem; padding-bottom: 0; }
+    .tab-nav-btn { padding: 0.42rem 0.6rem; font-size: 0.74rem; gap: 0.3rem; }
+    .tab-badge { font-size: 0.62rem; padding: 0.05rem 0.35rem; }
+    .kpi-row { grid-template-columns: repeat(2, 1fr); gap: 1px; margin-bottom: 0.65rem; }
+    .kpi-cell { padding: 0.45rem 0.65rem; }
+    .kpi-tag { font-size: 0.6rem; margin-bottom: 0.1rem; }
+    .kpi-num { font-size: 1.05rem; }
+    .control-hub { padding: 0.65rem 0.75rem; margin-bottom: 0.65rem; }
+    .control-hub-grid { grid-template-columns: 1fr 1fr; gap: 0.45rem; }
+    .control-hub-grid > .input-group:first-child { grid-column: 1 / -1; }
+    .input-label { font-size: 0.65rem; }
+    .input-field { height: 32px; padding: 0 0.5rem; font-size: 0.76rem; }
+    .filter-actions { grid-column: 1 / -1; }
+    .filter-actions .btn { width: 100%; height: 32px; font-size: 0.74rem; }
+    .query-meta-strip { font-size: 0.72rem; margin-bottom: 0.5rem; gap: 0.4rem; }
+    .brand-chips-strip { gap: 0.25rem; }
+    .chip { font-size: 0.66rem; padding: 0.1rem 0.4rem; gap: 0.2rem; }
+    .cards-deck { padding: 0.5rem; gap: 0.45rem; }
+    .branch-card { padding: 0.55rem 0.65rem; }
+    .branch-card-header { gap: 0.4rem; }
+    .branch-card-title { font-size: 0.84rem; line-height: 1.25; margin-bottom: 0.15rem; }
+    .branch-card-body { margin-top: 0.35rem; gap: 0.2rem; font-size: 0.74rem; line-height: 1.35; }
+    .branch-card-row { gap: 0.35rem; }
+    .branch-card-label { width: 44px; font-size: 0.66rem; }
+    .route-link { font-size: 0.74rem; }
+    .btn-sm { padding: 0.24rem 0.48rem; font-size: 0.7rem; }
     .pagination-strip {
         grid-template-columns: 1fr;
+        gap: 0.45rem;
+        padding: 0.55rem 0.65rem;
+        font-size: 0.74rem;
         justify-items: center;
         text-align: center;
     }
-    .page-jump-cluster { justify-self: center; }
+    .page-btn-list { gap: 0.18rem; }
+    .page-num-btn { min-width: 27px; height: 27px; font-size: 0.72rem; padding: 0 0.25rem; }
+    .page-jump-cluster { justify-self: center; font-size: 0.72rem; gap: 0.25rem; }
+    .page-jump-input { width: 46px; height: 27px; font-size: 0.74rem; }
+    .dir-table { font-size: 0.72rem; }
+    .dir-table th, .dir-table td { padding: 0.45rem 0.5rem; }
 }
     </style>
 </head>
@@ -2719,6 +2757,12 @@ The Anderson|西貢區|新界西貢安健道9號領達廣場1樓110號舖`;
             filterAndSortData();
         }
 
+        function initDeviceViewMode() {
+            const isMob = window.matchMedia("(max-width: 768px)").matches;
+            viewModeSelect.value = isMob ? "cards" : "table";
+            dirTableShell.classList.toggle("view-cards", isMob);
+        }
+
         // Tab events
         tabNavBtns.forEach(btn => {
             btn.addEventListener("click", () => switchTab(btn.dataset.tab));
@@ -2747,6 +2791,7 @@ The Anderson|西貢區|新界西貢安健道9號領達廣場1樓110號舖`;
             sortAsc = true;
             pageSizeSelect.value = "15";
             pageSize = 15;
+            initDeviceViewMode();
             filterAndSortData();
         });
 
@@ -2973,6 +3018,7 @@ The Anderson|西貢區|新界西貢安健道9號領達廣場1樓110號舖`;
         });
 
         // Initialize application
+        initDeviceViewMode();
         updateTabBadgeCounters();
         switchTab("fitness");
     </script>
