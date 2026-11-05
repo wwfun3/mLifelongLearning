@@ -106,6 +106,38 @@ h1, h2, h3, h4, .font-display {
 .text-\[oklch\(97\%_0\.01_300\)\] { color: var(--accent-ink) !important; }
 .selection\:bg-\[oklch\(50\%_0\.25_290\)\] *::selection { background-color: var(--accent) !important; }
 
+/* Ultra-compact mobile typography & density */
+@media (max-width: 639px) {
+    html {
+        font-size: 13.5px;
+    }
+    .mobile-tight-pad {
+        padding: 0.65rem 0.75rem !important;
+    }
+    .mobile-dense-text {
+        font-size: 11px !important;
+        line-height: 1.35 !important;
+    }
+    .mobile-dense-btn {
+        padding: 0.3rem 0.5rem !important;
+        font-size: 10.5px !important;
+    }
+    .mobile-chip {
+        font-size: 9.5px !important;
+        padding: 0.15rem 0.4rem !important;
+    }
+    .candidate-textarea-stretch {
+        min-height: 200px !important;
+        font-size: 11.5px !important;
+        line-height: 1.45 !important;
+        padding: 0.6rem !important;
+    }
+    .radial-container-mob {
+        width: 4.5rem !important;
+        height: 4.5rem !important;
+    }
+}
+
 /* Desktop Equal-Height Grid & Aligned Panels */
 @media (min-width: 1024px) {
     .studio-workspace-grid {
@@ -222,38 +254,39 @@ h1, h2, h3, h4, .font-display {
 
     <!-- Top Application Navigation Header -->
     <header class="border-b border-[oklch(84%_0.04_300)] bg-[oklch(97%_0.015_300)] sticky top-0 z-30 no-print">
-        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-3 flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded-lg bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center font-display font-bold text-sm tracking-tight shadow-sm">
+        <div class="max-w-[1600px] w-full mx-auto px-3 sm:px-8 lg:px-[var(--gutter)] py-2 sm:py-3 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <div class="w-6 h-6 sm:w-8 sm:h-8 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center font-display font-bold text-xs sm:text-sm tracking-tight shadow-sm shrink-0">
                     ielts
                 </div>
                 <div>
-                    <h1 class="font-display font-semibold text-sm tracking-tight text-[oklch(18%_0.02_300)]">academic writing studio</h1>
-                    <p class="text-[11px] text-[oklch(46%_0.05_300)] font-mono">certified criteria-grounded diagnostic & band evaluation</p>
+                    <h1 class="font-display font-semibold text-xs sm:text-sm tracking-tight text-[oklch(18%_0.02_300)] leading-tight">academic writing studio</h1>
+                    <p class="text-[9.5px] sm:text-[11px] text-[oklch(46%_0.05_300)] font-mono leading-tight">criteria-grounded band evaluation</p>
                 </div>
             </div>
 
             <!-- Header Controls: API Configuration & Rubric Quick View -->
-            <div class="flex items-center space-x-2.5">
+            <div class="flex items-center space-x-1.5 sm:space-x-2.5">
                 <!-- Language Model Configuration Button / Trigger -->
-                <button onclick="openApiConfigModal()" id="apiStatusBadgeBtn" class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition group" title="Configure custom LLM provider or offline engine">
-                    <span id="apiStatusDot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-                    <span id="apiStatusLabel">language model configuration</span>
-                    <span id="apiActiveTag" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white text-[oklch(46%_0.05_300)] border border-[oklch(88%_0.03_300)]">built-in</span>
+                <button onclick="openApiConfigModal()" id="apiStatusBadgeBtn" class="inline-flex items-center space-x-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[10.5px] sm:text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition group" title="Configure custom LLM provider or offline engine">
+                    <span id="apiStatusDot" class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-slate-400"></span>
+                    <span id="apiStatusLabel" class="hidden xs:inline sm:inline">language model</span>
+                    <span id="apiActiveTag" class="text-[9px] sm:text-[10px] font-mono px-1 sm:px-1.5 py-0.2 rounded bg-white text-[oklch(46%_0.05_300)] border border-[oklch(88%_0.03_300)]">built-in</span>
                 </button>
 
-                <button onclick="toggleModal('rubricModal')" class="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-md text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition">
-                    <svg class="w-3.5 h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <button onclick="toggleModal('rubricModal')" class="inline-flex items-center space-x-1 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md text-[10.5px] sm:text-xs font-medium text-[oklch(18%_0.02_300)] bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] transition">
+                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                     </svg>
-                    <span>band descriptors</span>
+                    <span>rubric</span>
                 </button>
 
-                <div class="h-4 w-px bg-[oklch(84%_0.04_300)]"></div>
+                <div class="h-3.5 sm:h-4 w-px bg-[oklch(84%_0.04_300)]"></div>
 
-                <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] text-[11px] font-mono text-[oklch(46%_0.05_300)]">
+                <div class="flex items-center space-x-1 px-2 py-0.5 sm:py-1 rounded-md bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] text-[9.5px] sm:text-[11px] font-mono text-[oklch(46%_0.05_300)]">
                     <span class="w-1.5 h-1.5 rounded-full bg-[oklch(60%_0.2_145)]"></span>
-                    <span>examiner ready</span>
+                    <span class="hidden sm:inline">examiner ready</span>
+                    <span class="sm:hidden">ready</span>
                 </div>
             </div>
 
@@ -262,41 +295,41 @@ h1, h2, h3, h4, .font-display {
 
     <!-- Sub-Bar: Task Mode Selector, Sample Loader & Practice Timer -->
     <div class="border-b border-[oklch(84%_0.04_300)] bg-[oklch(95%_0.02_300)] no-print">
-        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-2.5 flex flex-wrap items-center justify-between gap-3">
+        <div class="max-w-[1600px] w-full mx-auto px-3 sm:px-8 lg:px-[var(--gutter)] py-2 sm:py-2.5 flex flex-wrap items-center justify-between gap-2 sm:gap-3">
             
             <!-- Task 1 / Task 2 Segmented Control -->
-            <div class="flex items-center p-1 rounded-lg bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)]">
-                <button id="taskBtn1" onclick="switchTask(1)" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)]">
-                    academic task 1 <span class="font-mono text-[10px] opacity-75 ml-1">≥150w · 20m</span>
+            <div class="flex items-center p-0.5 sm:p-1 rounded-lg bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)]">
+                <button id="taskBtn1" onclick="switchTask(1)" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-md text-[10.5px] sm:text-xs font-medium transition text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)]">
+                    task 1 <span class="font-mono text-[9px] sm:text-[10px] opacity-75 ml-0.5 sm:ml-1">≥150w</span>
                 </button>
-                <button id="taskBtn2" onclick="switchTask(2)" class="px-3.5 py-1.5 rounded-md text-xs font-medium transition bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] shadow-sm">
-                    academic task 2 <span class="font-mono text-[10px] opacity-80 ml-1">≥250w · 40m</span>
+                <button id="taskBtn2" onclick="switchTask(2)" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-md text-[10.5px] sm:text-xs font-medium transition bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] shadow-sm">
+                    task 2 <span class="font-mono text-[9px] sm:text-[10px] opacity-80 ml-0.5 sm:ml-1">≥250w</span>
                 </button>
             </div>
 
             <!-- Sample Loader & Practice Timer -->
-            <div class="flex items-center space-x-3">
+            <div class="flex items-center space-x-2 sm:space-x-3">
                 <!-- Preset Sample Selector -->
-                <div class="flex items-center space-x-2">
-                    <span class="text-xs text-[oklch(46%_0.05_300)] hidden sm:inline">sample:</span>
-                    <select id="sampleSelect" onchange="loadPresetSample(this.value)" class="text-xs font-medium bg-[oklch(97%_0.015_300)] border border-[oklch(84%_0.04_300)] rounded-md px-2.5 py-1.5 text-[oklch(18%_0.02_300)] focus:border-[oklch(50%_0.25_290)] cursor-pointer">
+                <div class="flex items-center space-x-1 sm:space-x-2">
+                    <span class="text-[10.5px] sm:text-xs text-[oklch(46%_0.05_300)] hidden sm:inline">sample:</span>
+                    <select id="sampleSelect" onchange="loadPresetSample(this.value)" class="text-[10px] sm:text-xs font-medium bg-[oklch(97%_0.015_300)] border border-[oklch(84%_0.04_300)] rounded px-1.5 sm:px-2.5 py-1 sm:py-1.5 text-[oklch(18%_0.02_300)] focus:border-[oklch(50%_0.25_290)] cursor-pointer max-w-[150px] sm:max-w-xs truncate">
                         <!-- Populated dynamically via JS -->
                     </select>
                 </div>
 
-                <div class="h-4 w-px bg-[oklch(84%_0.04_300)] hidden sm:block"></div>
+                <div class="h-3.5 sm:h-4 w-px bg-[oklch(84%_0.04_300)]"></div>
 
                 <!-- Timer Control -->
-                <div class="flex items-center space-x-2 bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] px-2.5 py-1 rounded-md">
-                    <button id="timerModeBtn" onclick="toggleTimerMode()" class="text-[11px] font-mono text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition" title="click to toggle countdown / stopwatch">
+                <div class="flex items-center space-x-1 sm:space-x-2 bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] px-2 py-0.5 sm:py-1 rounded-md">
+                    <button id="timerModeBtn" onclick="toggleTimerMode()" class="text-[9.5px] sm:text-[11px] font-mono text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition" title="click to toggle countdown / stopwatch">
                         countdown
                     </button>
-                    <span id="timerDisplay" class="font-mono text-xs font-semibold text-[oklch(18%_0.02_300)] min-w-[46px] text-center">40:00</span>
+                    <span id="timerDisplay" class="font-mono text-[11px] sm:text-xs font-semibold text-[oklch(18%_0.02_300)] min-w-[36px] sm:min-w-[46px] text-center">40:00</span>
                     <button id="timerToggleBtn" onclick="toggleTimer()" class="text-[oklch(50%_0.25_290)] hover:text-[oklch(44%_0.26_290)] transition p-0.5" title="start / pause">
-                        <svg class="w-3.5 h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
                     <button onclick="resetTimer()" class="text-[oklch(58%_0.04_300)] hover:text-[oklch(18%_0.02_300)] transition p-0.5" title="reset">
-                        <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
+                        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/></svg>
                     </button>
                 </div>
             </div>
@@ -305,23 +338,23 @@ h1, h2, h3, h4, .font-display {
     </div>
 
     <!-- Main Desktop Studio Split Workspace (1600px canvas) -->
-    <main class="flex-1 max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] py-6">
-        <div class="studio-workspace-grid flex flex-col lg:grid gap-6 items-stretch">
+    <main class="flex-1 max-w-[1600px] w-full mx-auto px-3 sm:px-8 lg:px-[var(--gutter)] py-3 sm:py-6">
+        <div class="studio-workspace-grid flex flex-col lg:grid gap-3.5 sm:gap-6 items-stretch">
 
             <!-- LEFT COLUMN: Workspace (Prompt Context + Essay Editor + Real-Time Telemetry) -->
-            <section class="left-studio-pane flex flex-col space-y-4 no-print">
+            <section class="left-studio-pane flex flex-col space-y-3 sm:space-y-4 no-print">
 
                 <!-- Prompt Specification Area (Compact & Controlled) -->
-                <div class="bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-4 space-y-2.5 shadow-sm shrink-0">
-                    <div class="flex items-center justify-between pb-2 border-b border-[oklch(88%_0.03_300)]">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-2 h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
-                            <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]" id="promptAreaTitle">task 2 essay prompt</h2>
+                <div class="bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-2.5 sm:p-4 space-y-2 sm:space-y-2.5 shadow-sm shrink-0">
+                    <div class="flex items-center justify-between pb-1.5 sm:pb-2 border-b border-[oklch(88%_0.03_300)]">
+                        <div class="flex items-center space-x-1.5 sm:space-x-2">
+                            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
+                            <h2 class="font-display font-medium text-[11px] sm:text-xs text-[oklch(18%_0.02_300)]" id="promptAreaTitle">task 2 essay prompt</h2>
                         </div>
                         
                         <!-- Task 2 Prompt Type Dropdown -->
                         <div id="t2TypeContainer" class="flex items-center">
-                            <select id="promptTypeSelect" class="text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-2 py-0.5 text-[oklch(18%_0.02_300)]">
+                            <select id="promptTypeSelect" class="text-[10px] sm:text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-1.5 sm:px-2 py-0.5 text-[oklch(18%_0.02_300)] max-w-[140px] sm:max-w-none truncate">
                                 <option value="discuss_both">discuss both views & opinion</option>
                                 <option value="opinion">agree / disagree (opinion)</option>
                                 <option value="problem_solution">problem & solution</option>
@@ -332,7 +365,7 @@ h1, h2, h3, h4, .font-display {
 
                         <!-- Task 1 Visual Type Dropdown -->
                         <div id="t1TypeContainer" class="hidden items-center">
-                            <select id="chartTypeSelect" class="text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-2 py-0.5 text-[oklch(18%_0.02_300)]">
+                            <select id="chartTypeSelect" class="text-[10px] sm:text-xs font-mono bg-[oklch(92%_0.03_300)] border border-[oklch(84%_0.04_300)] rounded px-1.5 sm:px-2 py-0.5 text-[oklch(18%_0.02_300)]">
                                 <option value="line_graph">line graph</option>
                                 <option value="bar_chart">bar chart</option>
                                 <option value="pie_chart">pie chart</option>
@@ -344,76 +377,76 @@ h1, h2, h3, h4, .font-display {
 
                     <!-- Editable Prompt Textarea -->
                     <div>
-                        <textarea id="promptTextInput" rows="2" class="w-full text-xs leading-relaxed bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded-lg p-2.5 text-[oklch(18%_0.02_300)] focus:bg-[oklch(97%_0.015_300)] transition resize-none" placeholder="Enter official task prompt here..."></textarea>
+                        <textarea id="promptTextInput" rows="2" class="w-full text-[11px] sm:text-xs leading-snug sm:leading-relaxed bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded-lg p-2 sm:p-2.5 text-[oklch(18%_0.02_300)] focus:bg-[oklch(97%_0.015_300)] transition resize-none" placeholder="Enter official task prompt here..."></textarea>
                     </div>
 
                     <!-- Task 1 Visual Graphic Preview (Embedded SVG or Uploaded Image) -->
-                    <div id="task1VisualArea" class="hidden space-y-2 pt-2 border-t border-[oklch(88%_0.03_300)]">
-                        <div class="flex items-center justify-between text-xs text-[oklch(46%_0.05_300)]">
-                            <span>visual reference context</span>
+                    <div id="task1VisualArea" class="hidden space-y-1.5 sm:space-y-2 pt-1.5 sm:pt-2 border-t border-[oklch(88%_0.03_300)]">
+                        <div class="flex items-center justify-between text-[10px] sm:text-xs text-[oklch(46%_0.05_300)]">
+                            <span>visual context</span>
                             <label class="text-[oklch(50%_0.25_290)] hover:underline cursor-pointer flex items-center space-x-1">
-                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
-                                <span>upload chart image</span>
+                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+                                <span>upload chart</span>
                                 <input type="file" id="chartImgUpload" accept="image/*" class="hidden" onchange="handleChartUpload(event)">
                             </label>
                         </div>
-                        <div id="visualPreviewBox" class="bg-white rounded-lg border border-[oklch(84%_0.04_300)] p-2.5 overflow-hidden flex items-center justify-center max-h-[140px]">
+                        <div id="visualPreviewBox" class="bg-white rounded-lg border border-[oklch(84%_0.04_300)] p-1.5 sm:p-2.5 overflow-hidden flex items-center justify-center max-h-[120px] sm:max-h-[140px]">
                             <!-- SVG chart or user image injected here -->
                         </div>
-                        <input type="text" id="task1DataSummary" class="w-full text-xs bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded px-2.5 py-1.5 text-[oklch(18%_0.02_300)]" placeholder="Optional data summary (e.g. 1990: coal 55%, renewables 10%...)">
+                        <input type="text" id="task1DataSummary" class="w-full text-[10.5px] sm:text-xs bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] rounded px-2 sm:px-2.5 py-1 sm:py-1.5 text-[oklch(18%_0.02_300)]" placeholder="Optional data summary (e.g. 1990: coal 55%...)">
                     </div>
                 </div>
 
                 <!-- Essay Input Workspace (Flex-grows to match right pane height) -->
-                <div class="candidate-editor-card bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-4 shadow-sm flex flex-col justify-between">
-                    <div class="space-y-3 flex-1 flex flex-col">
-                        <div class="flex items-center justify-between pb-2 border-b border-[oklch(88%_0.03_300)] shrink-0">
-                            <div class="flex items-center space-x-2">
-                                <span class="w-2 h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
-                                <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">candidate response</h2>
+                <div class="candidate-editor-card bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-3 sm:p-4 shadow-sm flex flex-col justify-between">
+                    <div class="space-y-2 sm:space-y-3 flex-1 flex flex-col">
+                        <div class="flex items-center justify-between pb-1.5 sm:pb-2 border-b border-[oklch(88%_0.03_300)] shrink-0">
+                            <div class="flex items-center space-x-1.5 sm:space-x-2">
+                                <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(50%_0.25_290)]"></span>
+                                <h2 class="font-display font-medium text-[11px] sm:text-xs text-[oklch(18%_0.02_300)]">candidate response</h2>
                             </div>
-                            <div class="flex items-center space-x-2">
-                                <button onclick="restoreCurrentSample()" class="text-xs px-2.5 py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)] border border-[oklch(84%_0.04_300)] transition">
+                            <div class="flex items-center space-x-1.5 sm:space-x-2">
+                                <button onclick="restoreCurrentSample()" class="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)] border border-[oklch(84%_0.04_300)] transition">
                                     paste sample
                                 </button>
-                                <button onclick="clearEssayInput()" class="text-xs px-2.5 py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-red-50 text-[oklch(46%_0.05_300)] hover:text-red-700 border border-[oklch(84%_0.04_300)] transition">
+                                <button onclick="clearEssayInput()" class="text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded bg-[oklch(92%_0.03_300)] hover:bg-red-50 text-[oklch(46%_0.05_300)] hover:text-red-700 border border-[oklch(84%_0.04_300)] transition">
                                     clear
                                 </button>
                             </div>
                         </div>
 
                         <!-- Main Auto-Stretching Textarea -->
-                        <div class="flex-1 flex flex-col min-h-[340px]">
-                            <textarea id="essayTextInput" oninput="handleEssayTyping()" class="candidate-textarea-stretch w-full flex-1 rounded-lg border border-[oklch(84%_0.04_300)] bg-[oklch(95%_0.02_300)] focus:bg-white p-3.5 text-xs text-[oklch(18%_0.02_300)] leading-relaxed resize-none transition" placeholder="Type or paste your candidate essay response here..."></textarea>
+                        <div class="flex-1 flex flex-col min-h-[200px] sm:min-h-[340px]">
+                            <textarea id="essayTextInput" oninput="handleEssayTyping()" class="candidate-textarea-stretch w-full flex-1 rounded-lg border border-[oklch(84%_0.04_300)] bg-[oklch(95%_0.02_300)] focus:bg-white p-2.5 sm:p-3.5 text-xs text-[oklch(18%_0.02_300)] leading-relaxed resize-none transition" placeholder="Type or paste your candidate essay response here..."></textarea>
                         </div>
                     </div>
 
                     <!-- Bottom Pinned Writing Counters & Action Bar -->
-                    <div class="space-y-2.5 pt-3 mt-2 border-t border-[oklch(88%_0.03_300)] shrink-0">
-                        <div class="flex items-center justify-between text-xs">
-                            <div class="flex items-center space-x-2">
-                                <span class="font-mono font-semibold text-xs text-[oklch(18%_0.02_300)]"><span id="metricWords">0</span> words</span>
-                                <span id="thresholdIndicator" class="text-[11px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(46%_0.05_300)]">
+                    <div class="space-y-2 sm:space-y-2.5 pt-2 sm:pt-3 mt-1.5 sm:mt-2 border-t border-[oklch(88%_0.03_300)] shrink-0">
+                        <div class="flex items-center justify-between text-[10.5px] sm:text-xs">
+                            <div class="flex items-center space-x-1.5 sm:space-x-2">
+                                <span class="font-mono font-semibold text-[11px] sm:text-xs text-[oklch(18%_0.02_300)]"><span id="metricWords">0</span> words</span>
+                                <span id="thresholdIndicator" class="text-[9.5px] sm:text-[11px] font-mono px-1.5 sm:px-2 py-0.2 sm:py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(46%_0.05_300)]">
                                     target: ≥250 words
                                 </span>
                             </div>
-                            <div class="flex items-center space-x-2 font-mono text-[11px] text-[oklch(46%_0.05_300)]">
-                                <span><strong id="metricParas" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> paras</span>
+                            <div class="flex items-center space-x-1 sm:space-x-2 font-mono text-[9.5px] sm:text-[11px] text-[oklch(46%_0.05_300)]">
+                                <span><strong id="metricParas" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong>p</span>
                                 <span>·</span>
-                                <span><strong id="metricSents" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> sents</span>
+                                <span><strong id="metricSents" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong>s</span>
                                 <span>·</span>
-                                <span><strong id="metricChars" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong> chars</span>
+                                <span><strong id="metricChars" class="font-semibold text-[oklch(18%_0.02_300)]">0</strong>c</span>
                             </div>
                         </div>
 
                         <!-- Progress Line -->
-                        <div class="w-full bg-[oklch(92%_0.03_300)] h-1.5 rounded-full overflow-hidden">
+                        <div class="w-full bg-[oklch(92%_0.03_300)] h-1 sm:h-1.5 rounded-full overflow-hidden">
                             <div id="wordProgressFill" class="bg-[oklch(50%_0.25_290)] h-full transition-all duration-200" style="width: 0%"></div>
                         </div>
 
                         <!-- Evaluation Action Button (Anchored flush to bottom) -->
-                        <button id="evaluateActionBtn" onclick="runEvaluation()" class="w-full bg-[oklch(50%_0.25_290)] hover:bg-[oklch(44%_0.26_290)] active:translate-y-0.5 text-[oklch(97%_0.01_300)] font-display font-medium text-xs py-2.5 rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
-                            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        <button id="evaluateActionBtn" onclick="runEvaluation()" class="w-full bg-[oklch(50%_0.25_290)] hover:bg-[oklch(44%_0.26_290)] active:translate-y-0.5 text-[oklch(97%_0.01_300)] font-display font-medium text-[11.5px] sm:text-xs py-2 sm:py-2.5 rounded-lg shadow-sm transition flex items-center justify-center space-x-1.5 sm:space-x-2">
+                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>evaluate submission against official rubric</span>
                         </button>
                     </div>
@@ -425,136 +458,136 @@ h1, h2, h3, h4, .font-display {
             <section class="flex flex-col h-full print-full" id="evaluationColumn">
 
                 <!-- Evaluating Skeleton State -->
-                <div id="evalLoadingCard" class="hidden bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-12 text-center space-y-3 shadow-sm h-full items-center justify-center flex-col">
-                    <div class="w-10 h-10 rounded-full border-2 border-[oklch(50%_0.25_290)] border-t-transparent animate-spin mx-auto"></div>
-                    <div class="font-display font-medium text-sm text-[oklch(18%_0.02_300)]">consulting official ielts writing band descriptors...</div>
-                    <div class="text-xs text-[oklch(46%_0.05_300)] font-mono">analyzing task achievement, coherence & cohesion, lexical resource, and grammatical accuracy</div>
+                <div id="evalLoadingCard" class="hidden bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] p-6 sm:p-12 text-center space-y-2.5 sm:space-y-3 shadow-sm h-full items-center justify-center flex-col">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[oklch(50%_0.25_290)] border-t-transparent animate-spin mx-auto"></div>
+                    <div class="font-display font-medium text-xs sm:text-sm text-[oklch(18%_0.02_300)]">consulting official ielts writing band descriptors...</div>
+                    <div class="text-[10px] sm:text-xs text-[oklch(46%_0.05_300)] font-mono">analyzing task achievement, coherence & cohesion, lexical resource, and grammatical accuracy</div>
                 </div>
 
                 <!-- Main Evaluation Results Container (Matches left column exactly) -->
                 <div id="evalResultsCard" class="right-diagnostic-card bg-[oklch(97%_0.015_300)] rounded-xl border border-[oklch(84%_0.04_300)] overflow-hidden shadow-sm flex flex-col h-full">
                     
                     <!-- Report Header Toolbar -->
-                    <div class="bg-[oklch(92%_0.03_300)] px-5 py-3 border-b border-[oklch(84%_0.04_300)] flex flex-wrap items-center justify-between gap-3 shrink-0">
-                        <div class="flex items-center space-x-2.5">
-                            <span id="reportTaskBadge" class="text-xs font-mono font-medium px-2 py-0.5 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)]">
+                    <div class="bg-[oklch(92%_0.03_300)] px-3 sm:px-5 py-2 sm:py-3 border-b border-[oklch(84%_0.04_300)] flex flex-wrap items-center justify-between gap-2 sm:gap-3 shrink-0">
+                        <div class="flex items-center space-x-1.5 sm:space-x-2.5">
+                            <span id="reportTaskBadge" class="text-[10px] sm:text-xs font-mono font-medium px-1.5 sm:px-2 py-0.2 sm:py-0.5 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)]">
                                 academic task 2
                             </span>
-                            <h2 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">official examiner assessment report</h2>
+                            <h2 class="font-display font-medium text-[11px] sm:text-xs text-[oklch(18%_0.02_300)]">official examiner assessment report</h2>
                         </div>
-                        <div class="flex items-center space-x-2 no-print">
-                            <button onclick="copyFeedbackReport()" class="text-xs font-medium px-3 py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
-                                <svg class="w-3.5 h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
+                        <div class="flex items-center space-x-1.5 sm:space-x-2 no-print">
+                            <button onclick="copyFeedbackReport()" class="text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1 sm:space-x-1.5">
+                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[oklch(50%_0.25_290)]" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"/></svg>
                                 <span id="copyBtnLabel">copy report</span>
                             </button>
-                            <button onclick="window.print()" class="text-xs font-medium px-3 py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
-                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24-1.076-.641-2.09-1.171-3.007M6.72 13.829A7.5 7.5 0 012.25 18M6.72 13.829H18m0 0a7.5 7.5 0 01-4.47 4.171M18 13.829c.24-1.076.641-2.09 1.171-3.007M18 13.829H6.72M12 3v10.5m-3.75-3.75l3.75 3.75 3.75-3.75"/></svg>
-                                <span>print / pdf</span>
+                            <button onclick="window.print()" class="text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-0.5 sm:py-1 rounded bg-[oklch(97%_0.015_300)] hover:bg-[oklch(90.5%_0.035_300)] border border-[oklch(84%_0.04_300)] text-[oklch(18%_0.02_300)] transition flex items-center space-x-1 sm:space-x-1.5">
+                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24-1.076-.641-2.09-1.171-3.007M6.72 13.829A7.5 7.5 0 012.25 18M6.72 13.829H18m0 0a7.5 7.5 0 01-4.47 4.171M18 13.829c.24-1.076.641-2.09 1.171-3.007M18 13.829H6.72M12 3v10.5m-3.75-3.75l3.75 3.75 3.75-3.75"/></svg>
+                                <span>print</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Top Score Summary: Radial Band Gauge & 4 Sub-Scores -->
-                    <div class="p-5 border-b border-[oklch(84%_0.04_300)] space-y-4 shrink-0">
-                        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div class="p-3 sm:p-5 border-b border-[oklch(84%_0.04_300)] space-y-3 sm:space-y-4 shrink-0">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-2.5 sm:gap-4 items-center">
                             
                             <!-- Overall Band Radial Display (4 Cols) -->
-                            <div class="md:col-span-4 flex flex-col items-center justify-center p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)]">
-                                <span class="text-[11px] font-display text-[oklch(46%_0.05_300)] mb-1">overall band score</span>
+                            <div class="md:col-span-4 flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)]">
+                                <span class="text-[10px] sm:text-[11px] font-display text-[oklch(46%_0.05_300)] mb-0.5 sm:mb-1">overall band score</span>
                                 
-                                <div class="relative w-24 h-24 my-0.5 flex items-center justify-center">
+                                <div class="relative w-20 h-20 sm:w-24 sm:h-24 my-0.5 flex items-center justify-center radial-container-mob">
                                     <svg class="w-full h-full -rotate-90" viewBox="0 0 100 100">
                                         <circle cx="50" cy="50" r="42" stroke="oklch(91.5% 0.035 236)" stroke-width="8" fill="transparent" />
                                         <circle id="overallMeterCircle" cx="50" cy="50" r="42" stroke="oklch(50% 0.20 248)" stroke-width="8" stroke-dasharray="263.89" stroke-dashoffset="65" stroke-linecap="round" fill="transparent" class="radial-meter" />
                                     </svg>
                                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span id="overallBandText" class="text-2xl font-display font-semibold text-[oklch(18%_0.02_300)] leading-none">7.5</span>
-                                        <span class="text-[9px] font-mono text-[oklch(46%_0.05_300)] mt-0.5">out of 9.0</span>
+                                        <span id="overallBandText" class="text-xl sm:text-2xl font-display font-semibold text-[oklch(18%_0.02_300)] leading-none">7.5</span>
+                                        <span class="text-[8.5px] sm:text-[9px] font-mono text-[oklch(46%_0.05_300)] mt-0.5">out of 9.0</span>
                                     </div>
                                 </div>
 
-                                <div class="text-center space-y-0.5 mt-1">
-                                    <span id="cefrBadge" class="inline-block text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)]">
+                                <div class="text-center space-y-0.5 mt-0.5 sm:mt-1">
+                                    <span id="cefrBadge" class="inline-block text-[9px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.2 sm:py-0.5 rounded bg-[oklch(90.5%_0.035_300)] text-[oklch(18%_0.02_300)] leading-tight">
                                         cefr c1 · effective operational proficiency
                                     </span>
-                                    <div id="roundingFormula" class="text-[9px] font-mono text-[oklch(46%_0.05_300)]">
+                                    <div id="roundingFormula" class="text-[8.5px] sm:text-[9px] font-mono text-[oklch(46%_0.05_300)] leading-tight">
                                         arithmetic mean: 7.375 → rounded to 7.5
                                     </div>
                                 </div>
                             </div>
 
                             <!-- 4 Criteria Sub-Score Cards (8 Cols) -->
-                            <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="criteriaSubscoreContainer">
+                            <div class="md:col-span-8 grid grid-cols-2 gap-1.5 sm:gap-2.5" id="criteriaSubscoreContainer">
                                 <!-- Populated dynamically via JS -->
                             </div>
 
                         </div>
 
                         <!-- Senior Examiner Holistic Summary -->
-                        <div class="p-3 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex items-start space-x-3">
-                            <div class="w-7 h-7 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center shrink-0 mt-0.5">
-                                <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+                        <div class="p-2.5 sm:p-3 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex items-start space-x-2 sm:space-x-3">
+                            <div class="w-6 h-6 sm:w-7 sm:h-7 rounded bg-[oklch(50%_0.25_290)] text-[oklch(97%_0.01_300)] flex items-center justify-center shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
                             </div>
-                            <div class="space-y-0.5">
-                                <div class="flex items-center space-x-2">
-                                    <h3 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">senior examiner assessment notes</h3>
-                                    <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">descriptor calibrated</span>
+                            <div class="space-y-0.5 min-w-0">
+                                <div class="flex items-center space-x-1.5 sm:space-x-2">
+                                    <h3 class="font-display font-medium text-[11px] sm:text-xs text-[oklch(18%_0.02_300)] truncate">senior examiner assessment notes</h3>
+                                    <span class="text-[9px] sm:text-[10px] font-mono text-[oklch(46%_0.05_300)] shrink-0">calibrated</span>
                                 </div>
-                                <p id="examinerCommentText" class="text-xs text-[oklch(18%_0.02_300)] leading-relaxed"></p>
+                                <p id="examinerCommentText" class="text-[11px] sm:text-xs text-[oklch(18%_0.02_300)] leading-snug sm:leading-relaxed"></p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Interactive 3-Tab Diagnostic Suite Bar -->
-                    <div class="bg-[oklch(92%_0.03_300)] border-b border-[oklch(84%_0.04_300)] px-5 pt-2.5 flex flex-wrap items-center space-x-1 shrink-0 no-print">
-                        <button onclick="switchDiagTab('annotated')" id="tabBtnAnnotated" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg bg-[oklch(97%_0.015_300)] text-[oklch(18%_0.02_300)] border-t border-x border-[oklch(84%_0.04_300)] -mb-px flex items-center space-x-1.5">
-                            <span>annotated text diagnostic</span>
-                            <span id="annotationCountBadge" class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[oklch(90.5%_0.035_300)]">4</span>
+                    <div class="bg-[oklch(92%_0.03_300)] border-b border-[oklch(84%_0.04_300)] px-3 sm:px-5 pt-1.5 sm:pt-2.5 flex flex-nowrap overflow-x-auto space-x-1 shrink-0 no-print">
+                        <button onclick="switchDiagTab('annotated')" id="tabBtnAnnotated" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10.5px] sm:text-xs font-display font-medium rounded-t-lg bg-[oklch(97%_0.015_300)] text-[oklch(18%_0.02_300)] border-t border-x border-[oklch(84%_0.04_300)] -mb-px flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+                            <span>annotated text</span>
+                            <span id="annotationCountBadge" class="text-[9px] sm:text-[10px] font-mono px-1 sm:px-1.5 py-0.2 rounded bg-[oklch(90.5%_0.035_300)]">4</span>
                         </button>
-                        <button onclick="switchDiagTab('rubric')" id="tabBtnRubric" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
-                            <span>band descriptors & criteria breakdown</span>
+                        <button onclick="switchDiagTab('rubric')" id="tabBtnRubric" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10.5px] sm:text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+                            <span>rubric & criteria</span>
                         </button>
-                        <button onclick="switchDiagTab('upgrades')" id="tabBtnUpgrades" class="px-3.5 py-1.5 text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1.5">
-                            <span>band 8.5+ sentence upgrades</span>
+                        <button onclick="switchDiagTab('upgrades')" id="tabBtnUpgrades" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 text-[10.5px] sm:text-xs font-display font-medium rounded-t-lg text-[oklch(46%_0.05_300)] hover:text-[oklch(18%_0.02_300)] transition flex items-center space-x-1 sm:space-x-1.5 shrink-0">
+                            <span>band 8.5+ upgrades</span>
                         </button>
                     </div>
 
                     <!-- TAB 1: Annotated Essay View & Inspector Drawer (Scrolls smoothly internally) -->
-                    <div id="tabPanelAnnotated" class="tab-viewport-stretch p-5 space-y-3">
+                    <div id="tabPanelAnnotated" class="tab-viewport-stretch p-3 sm:p-5 space-y-2.5 sm:space-y-3">
                         <!-- Legend -->
-                        <div class="flex flex-wrap items-center justify-between gap-2 pb-1.5 border-b border-[oklch(88%_0.03_300)] text-xs shrink-0">
-                            <div class="flex flex-wrap items-center gap-2.5">
-                                <span class="text-[oklch(46%_0.05_300)]">color key:</span>
+                        <div class="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 pb-1 sm:pb-1.5 border-b border-[oklch(88%_0.03_300)] text-[10px] sm:text-xs shrink-0">
+                            <div class="flex flex-wrap items-center gap-1.5 sm:gap-2.5">
+                                <span class="text-[oklch(46%_0.05_300)]">key:</span>
                                 <span class="inline-flex items-center space-x-1">
-                                    <span class="w-2 h-2 rounded-full bg-[oklch(55%_0.22_25)]"></span>
-                                    <span>grammar slips (gra)</span>
+                                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(55%_0.22_25)]"></span>
+                                    <span>grammar (gra)</span>
                                 </span>
                                 <span class="inline-flex items-center space-x-1">
-                                    <span class="w-2 h-2 rounded-full bg-[oklch(62%_0.18_85)]"></span>
-                                    <span>lexical upgrades (lr)</span>
+                                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(62%_0.18_85)]"></span>
+                                    <span>lexical (lr)</span>
                                 </span>
                                 <span class="inline-flex items-center space-x-1">
-                                    <span class="w-2 h-2 rounded-full bg-[oklch(56%_0.18_250)]"></span>
-                                    <span>cohesion markers (cc)</span>
+                                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(56%_0.18_250)]"></span>
+                                    <span>cohesion (cc)</span>
                                 </span>
                                 <span class="inline-flex items-center space-x-1">
-                                    <span class="w-2 h-2 rounded-full bg-[oklch(54%_0.18_155)]"></span>
-                                    <span>band 8+ feature</span>
+                                    <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[oklch(54%_0.18_155)]"></span>
+                                    <span>band 8+</span>
                                 </span>
                             </div>
-                            <span class="text-[10px] text-[oklch(46%_0.05_300)] italic">click highlighted segments to inspect</span>
+                            <span class="text-[9px] sm:text-[10px] text-[oklch(46%_0.05_300)] italic">tap highlight to inspect</span>
                         </div>
 
                         <!-- 2-Column Split: Annotated Paragraphs (Left) + Detailed Inspector Drawer (Right) -->
-                        <div class="tab-scroll-body grid grid-cols-1 xl:grid-cols-12 gap-4 items-start flex-1">
+                        <div class="tab-scroll-body grid grid-cols-1 xl:grid-cols-12 gap-3 sm:gap-4 items-start flex-1">
                             
                             <!-- Paragraphs with Inline Spans -->
-                            <div id="annotatedTextSurface" class="xl:col-span-7 bg-[oklch(95%_0.02_300)] rounded-lg border border-[oklch(84%_0.04_300)] p-4 text-xs leading-relaxed text-[oklch(18%_0.02_300)] space-y-3 overflow-y-auto max-h-[380px]">
+                            <div id="annotatedTextSurface" class="xl:col-span-7 bg-[oklch(95%_0.02_300)] rounded-lg border border-[oklch(84%_0.04_300)] p-2.5 sm:p-4 text-[11px] sm:text-xs leading-relaxed text-[oklch(18%_0.02_300)] space-y-2 sm:space-y-3 overflow-y-auto max-h-[300px] sm:max-h-[380px]">
                                 <!-- Injected dynamically -->
                             </div>
 
                             <!-- Annotation Detail Cards / Inspector -->
-                            <div id="annotationInspectorList" class="xl:col-span-5 space-y-2.5 overflow-y-auto max-h-[380px] pr-1">
+                            <div id="annotationInspectorList" class="xl:col-span-5 space-y-2 sm:space-y-2.5 overflow-y-auto max-h-[260px] sm:max-h-[380px] pr-0.5 sm:pr-1">
                                 <!-- Injected dynamically -->
                             </div>
 
@@ -562,35 +595,35 @@ h1, h2, h3, h4, .font-display {
                     </div>
 
                     <!-- TAB 2: Official Band Descriptors Breakdown (Strengths & Improvements) -->
-                    <div id="tabPanelRubric" class="hidden tab-viewport-stretch tab-scroll-body p-5 space-y-4">
+                    <div id="tabPanelRubric" class="hidden tab-viewport-stretch tab-scroll-body p-3 sm:p-5 space-y-3 sm:space-y-4">
                         
                         <!-- Strengths vs Improvements Two-Column Box -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 shrink-0">
-                            <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2">
-                                <div class="flex items-center space-x-2 text-[oklch(40%_0.15_150)]">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                    <h3 class="font-display font-medium text-xs">candidate strengths against rubric</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 shrink-0">
+                            <div class="p-2.5 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1.5 sm:space-y-2">
+                                <div class="flex items-center space-x-1.5 sm:space-x-2 text-[oklch(40%_0.15_150)]">
+                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    <h3 class="font-display font-medium text-[11px] sm:text-xs">candidate strengths against rubric</h3>
                                 </div>
-                                <ul id="rubricStrengthsList" class="space-y-1.5 text-xs text-[oklch(18%_0.02_300)]">
+                                <ul id="rubricStrengthsList" class="space-y-1 sm:space-y-1.5 text-[10.5px] sm:text-xs text-[oklch(18%_0.02_300)]">
                                     <!-- Dynamic -->
                                 </ul>
                             </div>
 
-                            <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2">
-                                <div class="flex items-center space-x-2 text-[oklch(50%_0.25_290)]">
-                                    <svg class="w-3.5 h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
-                                    <h3 class="font-display font-medium text-xs">actionable steps to reach next band</h3>
+                            <div class="p-2.5 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1.5 sm:space-y-2">
+                                <div class="flex items-center space-x-1.5 sm:space-x-2 text-[oklch(50%_0.25_290)]">
+                                    <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                                    <h3 class="font-display font-medium text-[11px] sm:text-xs">actionable steps to reach next band</h3>
                                 </div>
-                                <ul id="rubricImprovementsList" class="space-y-1.5 text-xs text-[oklch(18%_0.02_300)]">
+                                <ul id="rubricImprovementsList" class="space-y-1 sm:space-y-1.5 text-[10.5px] sm:text-xs text-[oklch(18%_0.02_300)]">
                                     <!-- Dynamic -->
                                 </ul>
                             </div>
                         </div>
 
                         <!-- 4 Criteria Detailed Justifications -->
-                        <div class="space-y-2.5">
-                            <h3 class="font-display font-medium text-xs text-[oklch(46%_0.05_300)]">detailed criteria justifications</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5" id="detailedCriteriaJustifications">
+                        <div class="space-y-2 sm:space-y-2.5">
+                            <h3 class="font-display font-medium text-[11px] sm:text-xs text-[oklch(46%_0.05_300)]">detailed criteria justifications</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-2.5" id="detailedCriteriaJustifications">
                                 <!-- Dynamic -->
                             </div>
                         </div>
@@ -598,12 +631,12 @@ h1, h2, h3, h4, .font-display {
                     </div>
 
                     <!-- TAB 3: Band 8.5+ Sentence Upgrades -->
-                    <div id="tabPanelUpgrades" class="hidden tab-viewport-stretch tab-scroll-body p-5 space-y-3">
-                        <div class="pb-1.5 border-b border-[oklch(88%_0.03_300)] flex items-center justify-between shrink-0">
-                            <span class="text-xs text-[oklch(46%_0.05_300)]">concrete syntactic & lexical elevation for academic writing</span>
-                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(18%_0.02_300)]">band 6.5/7.0 → band 8.5/9.0</span>
+                    <div id="tabPanelUpgrades" class="hidden tab-viewport-stretch tab-scroll-body p-3 sm:p-5 space-y-2.5 sm:space-y-3">
+                        <div class="pb-1 sm:pb-1.5 border-b border-[oklch(88%_0.03_300)] flex items-center justify-between shrink-0">
+                            <span class="text-[10.5px] sm:text-xs text-[oklch(46%_0.05_300)]">syntactic & lexical elevation</span>
+                            <span class="text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.2 sm:py-0.5 rounded bg-[oklch(92%_0.03_300)] text-[oklch(18%_0.02_300)]">b6.5/7.0 → b8.5/9.0</span>
                         </div>
-                        <div id="sentenceUpgradesContainer" class="space-y-2.5">
+                        <div id="sentenceUpgradesContainer" class="space-y-2 sm:space-y-2.5">
                             <!-- Dynamic -->
                         </div>
                     </div>
@@ -616,13 +649,13 @@ h1, h2, h3, h4, .font-display {
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-[oklch(84%_0.04_300)] bg-[oklch(97%_0.015_300)] py-4 mt-12 no-print text-xs text-[oklch(46%_0.05_300)]">
-        <div class="max-w-[1600px] w-full mx-auto px-4 sm:px-8 lg:px-[var(--gutter)] flex flex-wrap items-center justify-between gap-3">
+    <footer class="border-t border-[oklch(84%_0.04_300)] bg-[oklch(97%_0.015_300)] py-3 sm:py-4 mt-6 sm:mt-12 no-print text-[10px] sm:text-xs text-[oklch(46%_0.05_300)]">
+        <div class="max-w-[1600px] w-full mx-auto px-3 sm:px-8 lg:px-[var(--gutter)] flex flex-wrap items-center justify-between gap-2 sm:gap-3">
             <div>
-                ielts academic writing evaluation studio · aligned with official public band descriptors
+                ielts academic writing evaluation studio · official public band descriptors
             </div>
-            <div class="flex items-center space-x-4">
-                <a href="https://ielts.org/cdn/Guides/ielts-writing-band-descriptors.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(50%_0.25_290)] transition underline">official band descriptors</a>
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <a href="https://ielts.org/cdn/Guides/ielts-writing-band-descriptors.pdf" target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(50%_0.25_290)] transition underline">band descriptors</a>
                 <a href="https://ielts.org/take-a-test/your-results/ielts-scoring-in-detail" target="_blank" rel="noopener noreferrer" class="hover:text-[oklch(50%_0.25_290)] transition underline">scoring in detail</a>
             </div>
         </div>
@@ -1587,13 +1620,13 @@ ${essay}`;
             gridContainer.innerHTML = criteriaList.map(c => {
                 const fillPct = Math.round((c.score / 9.0) * 100);
                 return `
-                    <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex flex-col justify-between space-y-2">
+                    <div class="p-2 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] flex flex-col justify-between space-y-1.5 sm:space-y-2">
                         <div class="flex items-start justify-between">
-                            <div>
-                                <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">${c.code} · 25%</span>
-                                <h4 class="font-display font-medium text-xs text-[oklch(18%_0.02_300)]">${c.title}</h4>
+                            <div class="min-w-0 pr-1">
+                                <span class="text-[9px] sm:text-[10px] font-mono text-[oklch(46%_0.05_300)]">${c.code} · 25%</span>
+                                <h4 class="font-display font-medium text-[10.5px] sm:text-xs text-[oklch(18%_0.02_300)] truncate">${c.title}</h4>
                             </div>
-                            <span class="font-mono font-semibold text-base text-[oklch(50%_0.25_290)]">${c.score.toFixed(1)}</span>
+                            <span class="font-mono font-semibold text-sm sm:text-base text-[oklch(50%_0.25_290)] shrink-0">${c.score.toFixed(1)}</span>
                         </div>
                         <div class="w-full bg-[oklch(90.5%_0.035_300)] h-1 rounded-full overflow-hidden">
                             <div class="bg-[oklch(50%_0.25_290)] h-full transition-all duration-500" style="width: ${fillPct}%"></div>
@@ -1624,30 +1657,30 @@ ${essay}`;
             `).join('');
 
             document.getElementById('detailedCriteriaJustifications').innerHTML = criteriaList.map(c => `
-                <div class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1">
-                    <div class="flex items-center justify-between text-xs">
+                <div class="p-2.5 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-1">
+                    <div class="flex items-center justify-between text-[10.5px] sm:text-xs">
                         <span class="font-display font-medium text-[oklch(18%_0.02_300)]">${c.title} (${c.code})</span>
                         <span class="font-mono text-[oklch(50%_0.25_290)] font-semibold">band ${c.score.toFixed(1)}</span>
                     </div>
-                    <p class="text-[11px] text-[oklch(46%_0.05_300)] leading-relaxed">${escapeHtml(c.desc)}</p>
+                    <p class="text-[10px] sm:text-[11px] text-[oklch(46%_0.05_300)] leading-snug sm:leading-relaxed">${escapeHtml(c.desc)}</p>
                 </div>
             `).join('');
 
             // Tab 3: Band 8.5+ Sentence Upgrades
             const upgradesBox = document.getElementById('sentenceUpgradesContainer');
             upgradesBox.innerHTML = (evalData.upgrades || []).map((u, i) => `
-                <div class="p-4 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2.5">
-                    <div class="flex items-center justify-between text-[11px]">
+                <div class="p-2.5 sm:p-4 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] space-y-2 sm:space-y-2.5">
+                    <div class="flex items-center justify-between text-[10px] sm:text-[11px]">
                         <span class="font-mono text-[oklch(46%_0.05_300)]">upgrade item #${i + 1}</span>
-                        <span class="font-mono text-[oklch(50%_0.25_290)] font-medium">${escapeHtml(u.focus)}</span>
+                        <span class="font-mono text-[oklch(50%_0.25_290)] font-medium truncate ml-1">${escapeHtml(u.focus)}</span>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                        <div class="p-3 rounded bg-[oklch(92%_0.03_300)] space-y-1 border border-[oklch(88%_0.03_300)]">
-                            <span class="text-[10px] font-mono text-[oklch(46%_0.05_300)]">candidate original</span>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 text-[10.5px] sm:text-xs">
+                        <div class="p-2 sm:p-3 rounded bg-[oklch(92%_0.03_300)] space-y-0.5 sm:space-y-1 border border-[oklch(88%_0.03_300)]">
+                            <span class="text-[9px] sm:text-[10px] font-mono text-[oklch(46%_0.05_300)]">candidate original</span>
                             <p class="text-[oklch(18%_0.02_300)]">${escapeHtml(u.original)}</p>
                         </div>
-                        <div class="p-3 rounded bg-white space-y-1 border border-[oklch(84%_0.04_300)]">
-                            <span class="text-[10px] font-mono text-[oklch(50%_0.25_290)] font-medium">band 8.5+ rewrite</span>
+                        <div class="p-2 sm:p-3 rounded bg-white space-y-0.5 sm:space-y-1 border border-[oklch(84%_0.04_300)]">
+                            <span class="text-[9px] sm:text-[10px] font-mono text-[oklch(50%_0.25_290)] font-medium">band 8.5+ rewrite</span>
                             <p class="text-[oklch(18%_0.02_300)] font-medium">${escapeHtml(u.upgraded)}</p>
                         </div>
                     </div>
@@ -1689,17 +1722,17 @@ ${essay}`;
             }
 
             inspector.innerHTML = annotations.map((ann, idx) => `
-                <div id="ann-card-${idx}" onclick="inspectAnnotation(${idx})" class="p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] hover:border-[oklch(50%_0.25_290)] transition cursor-pointer space-y-1.5">
-                    <div class="flex items-center justify-between text-[11px]">
-                        <span class="font-mono font-medium text-[oklch(50%_0.25_290)]">${escapeHtml(ann.title)}</span>
-                        <span class="font-mono text-[oklch(46%_0.05_300)]">#${idx + 1}</span>
+                <div id="ann-card-${idx}" onclick="inspectAnnotation(${idx})" class="p-2.5 sm:p-3.5 rounded-lg bg-[oklch(95%_0.02_300)] border border-[oklch(84%_0.04_300)] hover:border-[oklch(50%_0.25_290)] transition cursor-pointer space-y-1 sm:space-y-1.5">
+                    <div class="flex items-center justify-between text-[10px] sm:text-[11px]">
+                        <span class="font-mono font-medium text-[oklch(50%_0.25_290)] truncate mr-1">${escapeHtml(ann.title)}</span>
+                        <span class="font-mono text-[oklch(46%_0.05_300)] shrink-0">#${idx + 1}</span>
                     </div>
-                    <div class="text-xs italic text-[oklch(18%_0.02_300)] bg-white p-2 rounded border border-[oklch(88%_0.03_300)]">
+                    <div class="text-[10.5px] sm:text-xs italic text-[oklch(18%_0.02_300)] bg-white p-1.5 sm:p-2 rounded border border-[oklch(88%_0.03_300)]">
                         "${escapeHtml(ann.phrase)}"
                     </div>
-                    <p class="text-xs text-[oklch(46%_0.05_300)] leading-relaxed">${escapeHtml(ann.explanation)}</p>
+                    <p class="text-[10px] sm:text-xs text-[oklch(46%_0.05_300)] leading-snug sm:leading-relaxed">${escapeHtml(ann.explanation)}</p>
                     ${ann.category !== 'strength' && ann.replacement ? `
-                        <div class="pt-1 text-[11px] font-mono text-[oklch(40%_0.15_150)]">
+                        <div class="pt-0.5 sm:pt-1 text-[9.5px] sm:text-[11px] font-mono text-[oklch(40%_0.15_150)]">
                             suggested: ${escapeHtml(ann.replacement)}
                         </div>
                     ` : ''}
